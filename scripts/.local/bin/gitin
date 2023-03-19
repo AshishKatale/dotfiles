@@ -1,0 +1,26 @@
+#!/bin/bash
+
+GitHub_USERNAME="AshishKatale"
+
+REPO_ROOT_DIR=$(git rev-parse --show-toplevel 2> /dev/null)
+if [ $? -ne 0 ]
+then
+	REPO_NAME=$(sed 's/\W\+/-/g' <<<$1)
+	if [ $# -eq 0 ]
+	then
+		read -r -p "Enter Repository Name: " REPO_NAME
+		if [ -z $REPO_NAME ]
+		then
+			echo -e '\033[00;31m\0Error: Invalid Repository Name'
+			return 1
+		else
+			REPO_NAME=$(sed 's/\W\+/-/g' <<<$REPO_NAME)
+		fi
+	fi
+	git init 
+	REMOTE_URL="https://github.com/${GitHub_USERNAME}/${REPO_NAME}.git"
+	git remote add origin $REMOTE_URL
+	echo -e '\033[00;32m\0Added remote origin -> \033[00;33m\0'$REMOTE_URL
+else
+	echo -e '\033[00;31m\0Git repository already exist at -> \033[00;33m\0'$REPO_ROOT_DIR'/.git'
+fi

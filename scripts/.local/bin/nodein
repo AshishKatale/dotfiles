@@ -1,0 +1,72 @@
+#!/bin/bash
+
+ValidateVersionString(){
+	if [[ $1 =~ ^([0-9]+\.){2}[0-9]+$ ]]
+	then
+		echo 1
+	else
+		echo 0
+	fi
+}
+
+NodeInstall(){
+	Previous=$(sudo node -v 2> /dev/null)
+	if [ $? -eq 0 ]
+	then
+		read -p "Remove Previous Version? [$Previous] (y/N) : " -n 1 CONFIRM
+		echo
+		if [[ $CONFIRM =~ ^[Yy]$ ]]
+		then
+			uninstallNode.sh
+			if [ $? -ne 0 ]
+			then
+				return 1
+			fi
+		else
+			echo -e '\033[00;31m\0Cancelled'
+			return 1
+		fi
+	fi
+
+	if [ $# -eq 0 ]
+	then
+		read -r -p "MAJOR: " MAJOR
+		read -r -p "MINOR: " MINOR
+		read -r -p "PATCH: " PATCH
+		NODE_VERSION="$MAJOR.$MINOR.$PATCH"
+	else
+		NODE_VERSION=$1
+	fi
+
+	Valid=$(ValidateVersionString $NODE_VERSION)
+
+	if [ $Valid -eq 0 ]
+	then 
+		echo -e '\033[00;31m\0Error: Invalid Version' 
+		return 1
+	fi
+
+	wget "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" -P ~/Downloads && 
+	tar -xf ~/Downloads/"node-v$NODE_VERSION-linux-x64.tar.xz" -C ~/Downloads && 
+
+	sudo cp -r ~/Downloads/"node-v$NODE_VERSION-linux-x64"/{bin,include,lib,share} /usr/local
+	sudo rm -r ~/Downloads/"node-v$NODE_VERSION-linux-x64"
+	sudo rm ~/Downloads/"node-v$NODE_VERSION-linux-x64.tar.xz"
+	echo -e '\033[00;32m\0Installed Node '"$NODE_VERSION Successfully"
+
+	curNpmV=$(npm -v 2> /dev/null)
+
+	read -p "Upgrade NPM Version? [current: $curNpmV] (y/N) : " -n 1 CONFIRM
+	echo
+	if [[ $CONFIRM =~ ^[Yy]$ ]]
+	then
+		echo -e '\033[00;33m\0Upgrading npm...'
+		sudo npm i -g npm
+	else
+		echo -e '\033[00;31m\0Cancelled NPM upgrade'
+		return 1
+	fi
+}
+
+NodeInstall $@
+

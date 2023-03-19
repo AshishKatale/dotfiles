@@ -1,0 +1,48 @@
+configuration {
+	display-run : "  ";
+	display-drun : "  ";
+	modi: "window,run,drun";
+	font: "JetBrainsMono Nerd Font 9";
+	drun-display-format: "{icon} {name}";
+	show-icon: true;
+}
+
+* {
+    background-color:      #353535;
+    border-color:          White;
+    text-color:           White;
+}
+window {
+    anchor:     north;
+    location:   north;
+    width:      100%;
+    padding:    3px;
+    children:   [ horibox ];
+}
+horibox {
+    orientation: horizontal;
+    children:   [ prompt, entry, listview ];
+}
+listview {
+    layout:     horizontal;
+    spacing:    0px;
+    lines:      100;
+}
+entry {
+    expand:     false;
+    width:      10em;
+}
+element {
+		height: 100%;
+    padding: 0px 10px;
+}
+element selected {
+    background-color: #0073E6;
+}
+
+element-text, element-icon {
+  background-color: inherit;
+  text-color: inherit;
+}
+/* @theme "/dev/null" */
+@theme "catppuccin-mocha"

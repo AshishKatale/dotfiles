@@ -1,0 +1,50 @@
+#!/bin/bash
+
+NodeRM(){
+
+	Previous=$(sudo node -v 2> /dev/null)
+
+	if [[ $? -eq 0 ]]
+	then
+		if [[ $1 != "--force" ]]
+		then
+			read -p "Remove Node $Previous (y/N): " -n 1 CONFIRM
+			echo
+		fi
+		if [[ $CONFIRM =~ ^[Yy]$ ]] || [[ $1 == "--force" ]]
+		then
+			echo "Removing Node $Previous"
+			echo 
+			echo "Removing /usr/local/bin/{node,npm,npx,corepack}"
+			sudo rm -rf /usr/local/bin/{node,npm,npx,corepack}
+			echo "Removed..."
+			echo "Removing /usr/local/include/node"
+			sudo rm -rf /usr/local/include/node
+			echo "Removed..."
+			echo "Removing /usr/local/lib/node_modules"
+			sudo rm -rf /usr/local/lib/node_modules
+			echo "Removed..."
+			echo "Removing /usr/local/share/doc/node"
+			sudo rm -rf /usr/local/share/doc/node
+			echo "Removed..."
+			echo "Removing /usr/local/share/man/man1"
+			sudo rm -rf /usr/local/share/man/man1
+			echo "Removed..."
+			echo "Removing /usr/local/share/systemtap/tapset"
+			sudo rm -rf /usr/local/share/systemtap/tapset
+			echo "Removed..."
+			echo "Removing ~/.npm"
+			sudo rm -rf ~/.npm
+			echo "Removed..."
+			echo -e '\033[00;32m\0Removed Node '"$Previous Successfully"
+		else
+			echo -e '\033[00;31m\0Cancelled'
+			return 1
+		fi
+	else
+		echo -e '\033[00;31m\0ERROR: Node is not installed'
+	fi
+
+}
+
+NodeRM $@

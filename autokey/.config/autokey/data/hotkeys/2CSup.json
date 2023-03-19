@@ -1,0 +1,31 @@
+{
+    "type": "script",
+    "description": "2CSup",
+    "store": {},
+    "modes": [
+        3
+    ],
+    "usageCount": 15,
+    "prompt": false,
+    "omitTrigger": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<shift>",
+            "<super>"
+        ],
+        "hotKey": "<up>"
+    },
+    "filter": {
+        "regex": "Alacritty.Alacritty",
+        "isRecursive": false
+    }
+}

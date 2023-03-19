@@ -1,0 +1,68 @@
+theme = "dark_plus"
+
+[editor]
+line-number = "relative"
+mouse = false
+cursorline = true
+bufferline = "multiple"
+
+[editor.cursor-shape]
+insert = "underline"
+normal = "block"
+select = "block"
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "▎"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+character =  "▎" 
+skip-levels = 1
+
+[keys.normal]
+esc = "keep_primary_selection" # Maps `Escape` to exit multi-cursor mode
+C-l = "keep_primary_selection" # Maps `Escape` to exit multi-cursor mode
+
+# move lines above and below
+A-j = ["extend_to_line_bounds", "delete_selection", "move_line_down", "paste_before"]
+A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+
+# move focus between splits
+A-h = "jump_view_left"
+A-l = "jump_view_right"
+
+# copy lines above and below
+S-F1 = ["extend_to_line_bounds", "yank", "open_below", "normal_mode", "replace_with_yanked"] #Ctrl+Shift+j / #Ctrl+Shift+down
+S-F2 = ["extend_to_line_bounds", "yank", "open_above", "normal_mode", "replace_with_yanked"] #Ctrl+Shift+k / #Ctrl+Shift+up
+
+H = "goto_previous_buffer"
+L = "goto_next_buffer"
+K = "hover"
+g = { c = "toggle_comments" }
+
+C-k = { x = ":buffer-close", C-x = ":buffer-close-all", w = ":buffer-close-others" }
+C-p = "file_picker"
+
+C-n = "goto_prev_change" 
+S-F5 = "goto_next_change" # Map C-m to S-F5 in autokey
+
+[keys.insert]
+j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+C-space = "completion"
+C-x = ["extend_to_line_bounds", "delete_selection", "open_above"]
+
+# move lines above and below
+A-j = ["extend_to_line_bounds", "delete_selection", "move_line_down", "paste_before", "move_line_up"]
+A-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before", "move_line_up"]
+
+[keys.select]
+i = { i = "normal_mode" } # Maps `ii` to exit insert mode

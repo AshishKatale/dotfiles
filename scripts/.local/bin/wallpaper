@@ -1,0 +1,82 @@
+#!/bin/bash
+change_wallpaper(){
+	new_file=$1
+
+	if [ -z "$1" ]; then
+		echo -e "\033[00;31mplease provide new wallpaper image file"
+		exit 1
+	fi
+
+	new_file_full_path=$(realpath $new_file)
+
+	[ -s "$new_file_full_path" ] || {
+		echo -e "\033[00;31mfile $new_file_full_path does not exist"
+		exit 1
+	}
+
+	export wallpaper_file=$new_file_full_path
+	
+	if grep -q "export wallpaper_file=" ~/.profile; then
+		sed -i "s|\(export wallpaper_file=\).*|\1$new_file_full_path|" ~/.profile
+	else
+		echo "export wallpaper_file=$new_file_full_path" >> ~/.profile
+	fi
+
+	feh --no-fehbg --bg-scale $new_file_full_path
+}
+
+change_greeter_wallpaper() {
+	new_file=$1
+
+	if [ -z "$1" ]; then
+		echo -e "\033[00;31mplease provide new wallpaper image file"
+		exit 1
+	fi
+
+	new_file_full_path=$(realpath $new_file)
+
+	[ -s "$new_file_full_path" ] || {
+		echo -e "\033[00;31mfile $new_file_full_path does not exist"
+		exit 1
+	}
+	
+	sudo cp $new_file_full_path /etc/lightdm/background/bg.jpg
+}
+
+change_lockscreen_wallpaper() {
+	new_file=$1
+
+	if [ -z "$1" ]; then
+		echo -e "\033[00;31mplease provide new wallpaper png image file"
+		exit 1
+	fi
+
+
+	if [[ $1 != *"png" ]]
+	then
+		echo -e "\033[00;31mplease provide png file"
+		exit 1
+	fi
+
+	new_file_full_path=$(realpath $new_file)
+
+	[ -s "$new_file_full_path" ] || {
+		echo -e "\033[00;31mfile $new_file_full_path does not exist"
+		exit 1
+	}
+	
+	cp $new_file_full_path ~/Pictures/lockscreen.png
+}
+
+case $1 in
+	"wallpaper")
+		change_wallpaper $2
+	;;
+	"greeter_wallpaper")
+		change_greeter_wallpaper $2
+	;;
+	"lockscreen_wallpaper")
+		change_lockscreen_wallpaper $2
+	;;
+esac
+
