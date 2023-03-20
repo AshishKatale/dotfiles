@@ -41,10 +41,10 @@ alias zlef='zellij edit --floating'
 alias zlcode='zellij --layout ~/dotfiles/zellij/code.kdl'
 
 ld(){
-	ll -pA --color=always | awk '$9 ~ /[\/]$/ {print $0}' | sed 's/\///'
+	ll -pA --color=always | grep '/$' | sed 's/\///'
 }
 lf(){
-	ll -pA --color=always | awk '$9 ~ /[^\/]$/ {print $0}'
+	ll -pA --color=always | grep -v '/$'
 }
 
 CopyPWDPath(){
