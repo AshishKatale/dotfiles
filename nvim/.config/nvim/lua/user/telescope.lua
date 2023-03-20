@@ -24,7 +24,8 @@ telescope.setup {
 		file_ignore_patterns = {
 			".git/", ".cache", "%.o", "%.a",
 			"%.out", "%.class","%.pdf",
-			"%.mkv", "%.mp4", "%.zip"
+			"%.mkv", "%.mp4", "%.zip",
+			"node_modules/",
 		},
     mappings = {
       i = {
@@ -107,7 +108,10 @@ telescope.setup {
     find_files = {
       theme = "dropdown",
 			previewer = false,
-    }
+    },
+		live_grep = {
+			additional_args = function () return {"--hidden"} end
+		}
   },
   extensions = {
     -- Your extension configuration goes here:
