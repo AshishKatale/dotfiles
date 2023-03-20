@@ -1,82 +1,69 @@
 #!/bin/bash
 change_wallpaper(){
-	new_file=$1
-
-	if [ -z "$1" ]; then
-		echo -e "\033[00;31mplease provide new wallpaper image file"
-		exit 1
-	fi
-
-	new_file_full_path=$(realpath $new_file)
-
-	[ -s "$new_file_full_path" ] || {
-		echo -e "\033[00;31mfile $new_file_full_path does not exist"
-		exit 1
-	}
-
-	export wallpaper_file=$new_file_full_path
-	
 	if grep -q "export wallpaper_file=" ~/.profile; then
-		sed -i "s|\(export wallpaper_file=\).*|\1$new_file_full_path|" ~/.profile
+		sed -i "s|\(export wallpaper_file=\).*|\1$1|" ~/.profile
 	else
-		echo "export wallpaper_file=$new_file_full_path" >> ~/.profile
+		echo "export wallpaper_file=$1" >> ~/.profile
 	fi
 
-	feh --no-fehbg --bg-scale $new_file_full_path
+	feh --no-fehbg --bg-scale $1
 }
 
 change_greeter_wallpaper() {
-	new_file=$1
-
-	if [ -z "$1" ]; then
-		echo -e "\033[00;31mplease provide new wallpaper image file"
+	if [[ $1 != *"jpg" ]]
+	then
+		echo -e "\033[00;31mplease provide jpg file"
 		exit 1
 	fi
 
-	new_file_full_path=$(realpath $new_file)
-
-	[ -s "$new_file_full_path" ] || {
-		echo -e "\033[00;31mfile $new_file_full_path does not exist"
-		exit 1
-	}
-	
 	sudo cp $new_file_full_path /etc/lightdm/background/bg.jpg
 }
 
 change_lockscreen_wallpaper() {
-	new_file=$1
-
-	if [ -z "$1" ]; then
-		echo -e "\033[00;31mplease provide new wallpaper png image file"
-		exit 1
-	fi
-
-
 	if [[ $1 != *"png" ]]
 	then
 		echo -e "\033[00;31mplease provide png file"
 		exit 1
 	fi
 
-	new_file_full_path=$(realpath $new_file)
-
-	[ -s "$new_file_full_path" ] || {
-		echo -e "\033[00;31mfile $new_file_full_path does not exist"
-		exit 1
-	}
-	
-	cp $new_file_full_path ~/Pictures/lockscreen.png
+	cp $1 ~/Pictures/lockscreen.png
 }
 
-case $1 in
-	"wallpaper")
-		change_wallpaper $2
-	;;
-	"greeter_wallpaper")
-		change_greeter_wallpaper $2
-	;;
-	"lockscreen_wallpaper")
-		change_lockscreen_wallpaper $2
-	;;
-esac
+new_file=$1
+if [ -z "$new_file" ]; then
+	echo -e "\033[00;31mplease provide new wallpaper image file"
+	exit 1
+fi
 
+new_file_full_path=$(realpath $new_file)
+
+[ -s "$new_file_full_path" ] || {
+	echo -e "\033[00;31mfile $new_file_full_path does not exist"
+	exit 1
+}
+
+options=("main wallpaper" "lockscreen wallpaper" "greeter wallpaper")
+
+for i in "${!options[@]}"
+do
+  printf "%s. %s  " "$((i+1))" "${options[$i]}"
+done
+
+printf "\n" 
+read -p "Select the wallpaper to change: " -n 1 OPTION
+echo
+
+# Check if any input was entered
+if [ -n "$OPTION" ]; then
+	case $OPTION in
+		"1")
+			change_wallpaper $1
+		;;
+		"2")
+			change_lockscreen_wallpaper $1
+		;;
+		"3")
+			change_greeter_wallpaper $1
+		;;
+	esac
+fi

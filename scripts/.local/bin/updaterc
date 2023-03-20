@@ -1,0 +1,72 @@
+#!/bin/bash
+
+DOTFILES=$(realpath $0 | sed 's/\(.*dotfiles\).*/\1/')
+
+update_dotbashrc() {
+	if grep -q "EDITOR=" ~/.bashrc; then
+		sed -i "s/\(EDITOR=\).*/EDITOR=vim/" ~/.bashrc
+	else
+		echo "EDITOR=vim" >> ~/.bashrc
+	fi
+
+	if grep -q "export DOTFILES=" ~/.bashrc; then
+		sed -i "s|\(export DOTFILES=\).*|export DOTFILES=$DOTFILES|" ~/.bashrc
+	else
+		echo "export DOTFILES=$DOTFILES" >> ~/.bashrc
+	fi
+
+	if grep -q "source.*bashrc.sh" ~/.bashrc; then
+		sed -i "s|source.*bashrc.sh|source $DOTFILES/shell/bashrc.sh|" ~/.bashrc
+	else
+		echo "source $DOTFILES/shell/bashrc.sh" >> ~/.bashrc
+	fi
+
+	cp "$DOTFILES/shell/.vimrc" ~/.vimrc
+}
+
+update_dotprofile() {
+	if grep -q "EDITOR=" ~/.profile; then
+		sed -i "s/\(EDITOR=\).*/EDITOR=vim/" ~/.profile
+	else
+		echo "EDITOR=vim" >> ~/.profile
+	fi
+
+	if grep -q "export DOTFILES=" ~/.profile; then
+		sed -i "s|\(export DOTFILES=\).*|export DOTFILES=$DOTFILES|" ~/.profile
+	else
+		echo "export DOTFILES=$DOTFILES" >> ~/.profile
+	fi
+
+	if grep -q "export TERM=" ~/.profile; then
+		sed -i "s|\(export TERM=\).*|export TERM=alacritty|" ~/.profile
+	else
+		echo "export TERM=alacritty" >> ~/.profile
+	fi
+
+	if grep -q ":/home/ashish/.local/bin" ~/.profile; then
+		echo -e "\033[00;32m\0/home/ashish/.local/bin already in path\033[0m"
+	else
+		echo 'export PATH="$PATH:/home/ashish/.local/bin"' >> ~/.profile
+	fi
+}
+
+read -p "Update bashrc? (y/N) : " -n 1 CONFIRM
+echo
+if [[ $CONFIRM =~ ^[Yy]$ ]]
+then
+	update_dotbashrc
+	echo -e "\033[00;32m\0.bashrc updated\033[0m"
+else
+	echo -e '\033[00;31m\0.bashrc update cancelled\033[0m'
+fi
+
+read -p "Update bashrc? (y/N) : " -n 1 CONFIRM
+echo
+if [[ $CONFIRM =~ ^[Yy]$ ]]
+then
+	update_dotprofile
+	echo -e "\033[00;32m\0.profile updated\033[0m"
+else
+	echo -e '\033[00;31m\0.profile update cancelled\033[0m'
+fi
+
