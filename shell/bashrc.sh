@@ -20,8 +20,6 @@ alias x='clear'
 alias xxx='exit'
 alias ls='ls --color=always'
 alias ll='ls -alh --color=always'
-alias opn='OpenPath'
-alias cppath='CopyPWDPath'
 alias hx='helix'
 alias zl='zellij'
 alias bashrc="hx ~/.bashrc"
@@ -30,6 +28,8 @@ alias refresh="source ~/.bashrc"
 alias gst='git status'
 alias glo='git log --oneline'
 alias gcl="git config --list"
+alias gcm="git commit -m"
+alias gamend="git commit --amend --no-edit"
 alias gcgl="git config --global --list"
 
 alias nst='npm start'
@@ -40,14 +40,16 @@ alias zle='zellij edit'
 alias zlef='zellij edit --floating'
 alias zlcode='zellij --layout ~/dotfiles/zellij/code.kdl'
 
+alias stow='stow --no-folding'
+
 ld(){
-	ll -pA --color=always | grep '/$' | sed 's/\///'
+	ll -pA $1 --color=always | grep '/$' | sed 's/\///'
 }
 lf(){
-	ll -pA --color=always | grep -v '/$'
+	ll -pA $1 --color=always | grep -v '/$'
 }
 
-CopyPWDPath(){
+cppath(){
 	if [ -z $1 ]
 	then
 		pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard
@@ -56,7 +58,7 @@ CopyPWDPath(){
 	fi
 }
 
-OpenPath(){
+opn(){
 	if [ -z $1 ]
 	then
 		xdg-open .
