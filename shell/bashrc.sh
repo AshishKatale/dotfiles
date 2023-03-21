@@ -13,7 +13,7 @@ HISTTIMEFORMAT='%d-%m-%y %T %p  '
 
 source ~/dotfiles/shell/prompts/prompt.sh
 
-set -o vi
+# set -o vi
 
 alias c='clear'
 alias x='clear'
