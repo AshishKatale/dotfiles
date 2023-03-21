@@ -4,8 +4,6 @@ if not status_ok then
   return
 end
 
-vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' }
-
 local keybind_list = {
 	{ key = { "<CR>", 'l', "o", "<2-LeftMouse>" }, action = "edit" },
 	{ key = "<C-e>",                               action = "edit_in_place" },
@@ -23,6 +21,7 @@ local keybind_list = {
 	{ key = "J",                                   action = "last_sibling" },
 	{ key = "I",                                   action = "toggle_git_ignored" },
 	{ key = "H",                                   action = "toggle_dotfiles" },
+	{ key = "H",                                   action = "toggle_custom" },
 	{ key = "R",                                   action = "refresh" },
 	{ key = "n",                                   action = "create" },
 	{ key = "d",                                   action = "remove" },
@@ -129,7 +128,7 @@ nvim_tree.setup {
   },
   filters = {
     dotfiles = false,
-    custom = {},
+    custom = { "^\\.git$", "^node_modules$" },
 		exclude = {},
   },
 	modified = {
