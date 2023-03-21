@@ -15,6 +15,12 @@ update_dotbashrc() {
 		echo "export DOTFILES=$DOTFILES" >> ~/.bashrc
 	fi
 
+	if grep -q ":/home/$USER/bin" ~/.bashrc; then
+		echo -e "\033[00;32m\0/home/$USER/bin already in path\033[0m"
+	else
+		echo "export PATH=\"\$PATH:/home/$USER/bin\"" >> ~/.bashrc
+	fi
+
 	if grep -q "source.*bashrc.sh" ~/.bashrc; then
 		sed -i "s|source.*bashrc.sh|source $DOTFILES/shell/bashrc.sh|" ~/.bashrc
 	else
@@ -43,10 +49,10 @@ update_dotprofile() {
 		echo "export TERM=alacritty" >> ~/.profile
 	fi
 
-	if grep -q ":/home/ashish/.local/bin" ~/.profile; then
-		echo -e "\033[00;32m\0/home/ashish/.local/bin already in path\033[0m"
+	if grep -q ":/home/$USER/bin" ~/.profile; then
+		echo -e "\033[00;32m\0/home/$USER/bin already in path\033[0m"
 	else
-		echo 'export PATH="$PATH:/home/ashish/.local/bin"' >> ~/.profile
+		echo "export PATH=\"\$PATH:/home/$USER/bin\"" >> ~/.profile
 	fi
 }
 

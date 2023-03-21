@@ -109,7 +109,7 @@ __powerline() {
           local FG_EXIT="\e[38;2;255;100;100m"
         fi
 				
-				local CD=$(echo $(pwd) | sed 's/\/home\/ashish/ /g' | sed 's/\///g')
+				local CD=$(echo $(pwd) | sed "s|/home/$USER| |g" | sed 's/\///g')
 
     		PS1="${BOLD}${FG_WHITE}${BG_BLUE} $CD"
     		PS1+="${RESET}${FG_BLUE}"
