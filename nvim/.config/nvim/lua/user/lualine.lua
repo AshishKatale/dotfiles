@@ -3,7 +3,8 @@ if not status_ok then
 	print("Unable to load: lualine")
   return
 end
-return
+
+local c = vim.g.colors
 lualine.setup {
   options = {
     icons_enabled = true,
@@ -19,13 +20,13 @@ lualine.setup {
     lualine_b = {
 			{
 				'branch',
-				color = { fg = '#1998FF'},
+				color = { fg = c.gitSignsBlue },
 				icon = {''}
 			},
 			{
 				'diff',
 				diff_color = {
-					modified = { fg="#1998FF" },
+					-- modified = { fg = c.gitSignsBlue },
 					-- added    = 'DiffAdd',
 					-- removed  = 'DiffDelete'
 				},
