@@ -52,6 +52,7 @@ return packer.startup(function(use)
 	use "akinsho/toggleterm.nvim"
 	use "folke/which-key.nvim"
 	use "nvim-lualine/lualine.nvim"
+  use "petertriho/nvim-scrollbar"
 	use "folke/trouble.nvim"
 
 	use "beauwilliams/focus.nvim"

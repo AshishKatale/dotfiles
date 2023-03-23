@@ -41,8 +41,8 @@ lualine.setup {
 			},
 			"searchcount",
 		},
-    lualine_x = {'encoding', 'filetype'},
-    lualine_y = {'progress'},
+		lualine_x = {},
+    lualine_y = {'encoding', 'filetype'},
     lualine_z = {'location'}
   },
   inactive_sections = {
