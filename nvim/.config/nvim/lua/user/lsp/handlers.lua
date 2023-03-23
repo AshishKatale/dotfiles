@@ -106,7 +106,6 @@ local function lsp_keymaps(bufnr)
 		["<leader>"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "LSP Hover" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "LSP rename" },
 		c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "LSP Code action" },
-		q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "LSP Set locklist" },
 	}
 
 	local leader_opts = {}

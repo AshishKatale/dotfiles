@@ -87,6 +87,17 @@ local mappings = {
 	j = { "<C-w>j", "Lower split" },
 	k = { "<C-w>k", "Upper split" },
 	u = { "<cmd>Telescope undo<cr>", "Undo history" },
+	q = {
+		name = "QuickFix List",
+		q = { "<cmd>Trouble quickfix<cr>", "Open Quickfix" },
+		n = { "<cmd>Trouble document_diagnostics<cr>", "File Diagnostics" },
+		m = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+		r = { "<cmd>Trouble lsp_references<cr>", "References" },
+		d = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+		i = { "<cmd>Trouble lsp_implementations<cr>", "References" },
+		t = { "<cmd>Trouble lsp_type_definitions<cr>", "Type Definitions" },
+		T = { "<cmd>Trouble todo<cr>", "Todos" },
+	},
 	g = {
 		name = "Git Stuff",
 		s = { "<cmd>Telescope git_status<cr>", "Git status" },
