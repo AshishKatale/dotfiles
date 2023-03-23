@@ -15,6 +15,7 @@ source ~/dotfiles/shell/prompts/prompt.sh
 alias c='clear'
 alias x='clear'
 alias xxx='exit'
+alias ccc='exit'
 alias ls='ls --color=always'
 alias ll='ls -alh --color=always'
 alias hx='helix'
