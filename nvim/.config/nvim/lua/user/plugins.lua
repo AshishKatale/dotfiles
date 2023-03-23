@@ -54,6 +54,7 @@ return packer.startup(function(use)
 	use "nvim-lualine/lualine.nvim"
   use "petertriho/nvim-scrollbar"
 	use "folke/trouble.nvim"
+	use "folke/todo-comments.nvim"
 
 	use "beauwilliams/focus.nvim"
 	use "windwp/nvim-autopairs"
