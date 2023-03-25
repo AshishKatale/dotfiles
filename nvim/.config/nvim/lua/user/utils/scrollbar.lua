@@ -24,7 +24,7 @@ scrollbar.setup({
     marks = {
 			Cursor = {
 				text = "-",
-				priority = 0,
+				priority = 100,
 				gui=nil,
 				color = "#999999",
 				cterm=nil,
