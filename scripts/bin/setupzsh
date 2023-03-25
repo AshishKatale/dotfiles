@@ -1,0 +1,27 @@
+#!/bin/bash
+
+DOTFILES=$(realpath $0 | sed 's/\(.*dotfiles\).*/\1/')
+
+setup_zsh() {
+	CWD=$PWD
+	cd $DOTFILES && stow zsh
+	cd $CWD
+
+	ZDOTDIR=~/.config/zsh
+	ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
+
+	git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS_DIR/zsh-autosuggestions
+	git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_PLUGINS_DIR/fast-syntax-highlighting
+
+	echo "ZDOTDIR=$ZDOTDIR" > ~/.zshenv
+}
+
+read -p "Setup zsh? (y/N) : " -n 1 CONFIRM
+echo
+if [[ $CONFIRM =~ ^[Yy]$ ]]
+then
+	setup_zsh
+	echo -e "\033[00;32m\0Zsh setup completed\033[0m"
+else
+	echo -e '\033[00;31m\0Cancelled\033[0m'
+fi
