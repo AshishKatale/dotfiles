@@ -58,7 +58,6 @@ vim.cmd("hi GitSignsDelete guifg=" .. c.gitSignsRed)
 vim.cmd("hi GitSignsAddPreview guifg=" .. c.gitSignsGreen)
 vim.cmd("hi GitSignsDeletePreview  guifg=" .. c.gitSignsRed)
 vim.cmd("hi GitSignsCurrentLineBlame guifg=" .. c.gitSignsBlameTextGray)
-vim.cmd("hi GitSignsCurrentLineBlame guifg=" .. c.gitSignsBlameTextGray)
 
 vim.cmd("hi DiagnosticWarn guifg=" .. c.warn)
 vim.cmd("hi DiagnosticError guifg=" .. c.error)

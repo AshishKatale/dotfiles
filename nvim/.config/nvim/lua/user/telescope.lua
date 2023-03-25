@@ -1,6 +1,6 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-	print("Unable to load: cmp")
+	print("Unable to load: telescope")
   return
 end
 

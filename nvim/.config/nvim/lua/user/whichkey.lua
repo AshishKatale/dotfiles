@@ -94,7 +94,7 @@ local mappings = {
 		m = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 		r = { "<cmd>Trouble lsp_references<cr>", "References" },
 		d = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-		i = { "<cmd>Trouble lsp_implementations<cr>", "References" },
+		i = { "<cmd>Trouble lsp_implementations<cr>", "Implementations" },
 		t = { "<cmd>Trouble lsp_type_definitions<cr>", "Type Definitions" },
 		T = { "<cmd>Trouble todo<cr>", "Todos" },
 	},
