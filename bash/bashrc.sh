@@ -8,7 +8,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 HISTTIMEFORMAT='%d-%m-%y %T %p  '
 
-source ~/dotfiles/shell/prompts/prompt.sh
+source ~/dotfiles/bash/prompts/prompt.sh
 
 # set -o vi
 

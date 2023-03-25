@@ -22,12 +22,12 @@ update_dotbashrc() {
 	fi
 
 	if grep -q "source.*bashrc.sh" ~/.bashrc; then
-		sed -i "s|source.*bashrc.sh|source $DOTFILES/shell/bashrc.sh|" ~/.bashrc
+		sed -i "s|source.*bashrc.sh|source $DOTFILES/bash/bashrc.sh|" ~/.bashrc
 	else
-		echo "source $DOTFILES/shell/bashrc.sh" >> ~/.bashrc
+		echo "source $DOTFILES/bash/bashrc.sh" >> ~/.bashrc
 	fi
 
-	cp "$DOTFILES/shell/.vimrc" ~/.vimrc
+	cp "$DOTFILES/bash/.vimrc" ~/.vimrc
 }
 
 update_dotprofile() {
