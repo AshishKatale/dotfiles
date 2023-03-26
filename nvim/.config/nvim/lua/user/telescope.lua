@@ -83,6 +83,20 @@ local mappings = {
 		["?"] = actions.which_key,
 	},
 }
+
+local git_commit = {
+	mappings = {
+		n = {
+			["<cr>"] = actions.select_default,
+			["<A-cr>"] = actions.git_checkout,
+		},
+		i = {
+			["<cr>"] = actions.move_selection_next,
+			["<A-cr>"] = actions.git_checkout,
+		},
+	},
+}
+
 telescope.setup {
   defaults = {
 		layout_config = {
@@ -116,7 +130,9 @@ telescope.setup {
     },
 		live_grep = {
 			additional_args = function () return {"--hidden"} end
-		}
+		},
+		git_commits = git_commit,
+		git_bcommits = git_commit
   },
   extensions = {
 		fzf = {

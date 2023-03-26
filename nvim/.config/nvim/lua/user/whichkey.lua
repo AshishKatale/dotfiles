@@ -100,6 +100,8 @@ local mappings = {
 	},
 	g = {
 		name = "Git Stuff",
+		C = { "<cmd>Telescope git_commits<cr>", "Commits" },
+		c = { "<cmd>Telescope git_bcommits<cr>", "File Commits" },
 		s = { "<cmd>Telescope git_status<cr>", "Git status" },
 		b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame line" },
 		B = { "<cmd>Telescope git_branches<cr>", "Branches" },
