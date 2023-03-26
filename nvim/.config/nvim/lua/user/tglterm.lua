@@ -73,8 +73,8 @@ local cwd_http_server = Terminal:new({ cmd = "http-server", count = 3, hidden = 
 local npm_start_runner = Terminal:new({ cmd = "npm start", count = 3, hidden = true })
 local npm_dev_runner = Terminal:new({ cmd = "npm run dev", count = 3, hidden = true })
 
-vim.api.nvim_create_user_command('Serve', function() cwd_http_server:toggle() end, {})
-vim.api.nvim_create_user_command('ServeStart', function() npm_start_runner:toggle() end, {})
-vim.api.nvim_create_user_command('ServeDev', function() npm_dev_runner:toggle() end, {})
+vim.api.nvim_create_user_command('HttpServer', function() cwd_http_server:toggle() end, {})
+vim.api.nvim_create_user_command('NpmStart', function() npm_start_runner:toggle() end, {})
+vim.api.nvim_create_user_command('NpmRunDev', function() npm_dev_runner:toggle() end, {})
 vim.api.nvim_create_user_command('LazyGit', function() lazygit:toggle() end, {})
 
