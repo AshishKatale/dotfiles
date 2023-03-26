@@ -18,7 +18,9 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt nocaseglob 		           # Case insensitive completion
 
-ZSH_AUTOSUGGEST_STRATEGY=completion
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#787878"
+fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
 
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
@@ -52,7 +54,8 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
-bindkey '^ ' expand-or-complete
+bindkey '^ ' autosuggest-fetch
+bindkey '^x' autosuggest-toggle
 
 source $ZDOTDIR/scripts/aliases.zsh 
 source $ZDOTDIR/scripts/prompt.zsh 

@@ -10,6 +10,7 @@ setup_zsh() {
 	ZDOTDIR=~/.config/zsh
 	ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
 
+	git clone https://github.com/zsh-users/zsh-completions $ZSH_PLUGINS_DIR/zsh-completions 
 	git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS_DIR/zsh-autosuggestions
 	git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_PLUGINS_DIR/fast-syntax-highlighting
 
