@@ -1,6 +1,6 @@
 readonly GIT_BRANCH_CHANGED_SYMBOL='+'
-readonly GIT_NEED_PUSH_SYMBOL='󰜷'
-readonly GIT_NEED_PULL_SYMBOL='󰜮'
+readonly GIT_NEED_PUSH_SYMBOL='↑'
+readonly GIT_NEED_PULL_SYMBOL='↓'
 readonly GRAY="#555555"
 readonly BLUE="#0A7BCB"
 
@@ -11,8 +11,24 @@ function gitinfo() {
 	[[ "$repo_exists" == "true" ]] || return
 
 	# get current branch name or short SHA1 hash for detached head
-	local branch="$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --always 2>/dev/null)"
-	[ -n "$branch" ] || return  # git branch not found
+	local checked_out
+	local git_checkout_symbol
+	local current_branch=$(git branch --show-current 2> /dev/null)
+	local current_tag=$(git tag --points-at=HEAD 2>/dev/null | tail -n1 )
+	local current_commit=$(git rev-parse --short HEAD 2>/dev/null)
+
+	[ -n $current_branch ] && {
+		checked_out=$current_branch
+		git_checkout_symbol='󰊢'
+	}
+	[ -n $current_tag ] && [ -z $current_branch ] && {
+		checked_out=$current_tag
+		git_checkout_symbol='󰓻'
+	}
+	[ -n $current_commit ] &&  [ -z $current_branch ] && [ -z $current_tag ] && {
+		checked_out=$current_commit
+		git_checkout_symbol=''
+	}
 
 	local git_status=$(git status --porcelain | wc -l)
 
@@ -26,7 +42,7 @@ function gitinfo() {
 	[ -n "$aheadN" ] && marks+=" $aheadN$GIT_NEED_PUSH_SYMBOL"
 	[ -n "$behindN" ] && marks+=" $behindN$GIT_NEED_PULL_SYMBOL"
 
-	echo "%K{$GRAY}%B%F{magenta}󰊢 ${branch}${marks}%F{$GRAY}"
+	echo "%K{$GRAY}%B%F{yellow}$git_checkout_symbol $checked_out$marks%F{$GRAY}"
 }
 
 prompt() {
