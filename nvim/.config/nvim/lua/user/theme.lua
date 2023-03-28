@@ -78,26 +78,3 @@ vim.cmd("hi rainbowcol4 guifg=#33CCFF")
 vim.cmd("hi rainbowcol5 guifg=#FF33FF")
 vim.cmd("hi rainbowcol6 guifg=#99FFCC")
 
-vim.api.nvim_create_user_command('ToggleBGOpacity', function()
-	local hl = vim.api.nvim_get_hl_by_name("Normal", {})
-	if hl.background == nil then
-		vim.cmd("hi Normal guifg=#d4d4d4 guibg=#181818")
-		vim.cmd("hi NormalFloat guifg=#bbbbbb guibg=#272727")
-		vim.cmd("hi NvimTreeNormal guifg=#d4d4d4 guibg=#1e1e1e")
-		vim.cmd("hi FocusedWindow guibg=#181818")
-		vim.cmd("hi LineNr guifg=#5a5a5a guibg=#181818")
-		vim.cmd("hi SignColumn guibg=#1e1e1e")
-		vim.cmd("hi MasonNormal guibg=" .. c.masonBG)
-		vim.cmd("hi VertSplit guifg=#444444 guibg=#1e1e1e")
-	else
-		vim.api.nvim_set_hl(0, "Normal", { bg = c.none })
-		vim.api.nvim_set_hl(0, "NormalFloat", { bg = c.none })
-		vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = c.none })
-		vim.api.nvim_set_hl(0, "FocusedWindow", { bg = c.none })
-		vim.cmd("hi LineNr guibg=" .. c.none)
-		vim.cmd("hi SignColumn guibg=" .. c.none)
-		vim.cmd("hi MasonNormal guibg=" .. c.masonBG)
-		vim.cmd("hi VertSplit guifg=" .. c.gitSignsBlameTextGray .. " guibg=" .. c.none)
-	end
-end, {})
-
