@@ -49,6 +49,20 @@ return packer.startup(function(use)
 
 	use "Mofiqul/vscode.nvim"
 
+	-- Packer
+	use({
+		"folke/noice.nvim",
+		config = function() end,
+		requires = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+			}
+	})
+
 	use "akinsho/toggleterm.nvim"
 	use "folke/which-key.nvim"
 	use "nvim-lualine/lualine.nvim"
