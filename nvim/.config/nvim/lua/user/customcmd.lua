@@ -23,10 +23,6 @@ vim.api.nvim_create_user_command('ToggleBGOpacity', function()
 		vim.cmd("hi SignColumn guibg=NONE")
 		vim.cmd("hi MasonNormal guibg=#0b001d")
 		vim.cmd("hi VertSplit guifg=#666666 guibg=NONE")
-		vim.cmd("hi NoiceMini guifg=#ffff00")
-		vim.cmd("hi NoiceLspProgressSpinner guifg=#00ffaa")
-		vim.cmd("hi NoiceLspProgressTitle guifg=#ff9e64")
-		vim.cmd("hi NoiceLspProgressClient guifg=#ff9e64")
 	end
 end, {})
 
