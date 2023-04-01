@@ -131,6 +131,9 @@ telescope.setup {
 		live_grep = {
 			additional_args = function () return {"--hidden"} end
 		},
+		git_status = {
+			initial_mode = "normal",
+		},
 		git_commits = git_commit,
 		git_bcommits = git_commit
   },
