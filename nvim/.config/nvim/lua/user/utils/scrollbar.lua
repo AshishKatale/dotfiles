@@ -32,7 +32,7 @@ scrollbar.setup({
 				highlight = "Normal",
 			},
 			Error = {
-				text = { "-", "" },
+				text = { "" },
 				priority = 2,
 				gui=nil,
 				color = nil,
@@ -41,7 +41,7 @@ scrollbar.setup({
 				highlight = "DiagnosticVirtualTextError",
 			},
 			Warn = {
-				text = { "-", "" },
+				text = { "" },
 				priority = 3,
 				gui=nil,
 				color = nil,
@@ -50,7 +50,7 @@ scrollbar.setup({
 				highlight = "DiagnosticVirtualTextWarn",
 			},
 			Info = {
-				text = { "-", "" },
+				text = { "" },
 				priority = 4,
 				gui=nil,
 				color = nil,
@@ -59,7 +59,7 @@ scrollbar.setup({
 				highlight = "DiagnosticVirtualTextInfo",
 			},
 			Hint = {
-				text = { "-", "󰌵" },
+				text = { "" },
 				priority = 5,
 				gui=nil,
 				color = nil,
