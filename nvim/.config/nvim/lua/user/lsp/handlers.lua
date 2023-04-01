@@ -98,8 +98,8 @@ local function lsp_keymaps(bufnr)
     r = { "<cmd>Telescope lsp_references<CR>", "References" },
 		s = { "<cmd>Telescope lsp_document_symbols<CR>", "File symbols" },
 		S = { "<cmd>Telescope lsp_workspace_symbols<CR>", "Workspace symbols" },
-		n = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Pervious diagnostic" },
-		m = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic" },
+		N = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Pervious diagnostic" },
+		n = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic" },
 	}
 
 	local leader_mappings = {
