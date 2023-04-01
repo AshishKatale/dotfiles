@@ -56,7 +56,9 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 	callback = function()
-		if vim.bo.filetype == "TelescopePrompt" or vim.bo.filetype == "NvimTree" then return end
+		if vim.bo.filetype == "Trouble" or
+			vim.bo.filetype == "TelescopePrompt" or
+			vim.bo.filetype == "NvimTree" then return end
 		vim.opt.relativenumber = true
 	end,
 	group = myAugroup
