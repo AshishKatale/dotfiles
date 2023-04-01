@@ -49,12 +49,6 @@ vim.keymap.set({ "v" }, "p", "\"_dP", { silent = true })
 vim.keymap.set({ "x" }, "<A-j>", ":move '>+1<CR>gv-gv", { silent = true })
 vim.keymap.set({ "x" }, "<A-k>", ":move '<-2<CR>gv-gv", { silent = true })
 
--- Copy lines
-vim.keymap.set({ "i" }, "<F13>", "<Esc>yypi", { silent = true })
-vim.keymap.set({ "i" }, "<F14>", "<Esc>yyPi", { silent = true })
-vim.keymap.set({ "n" }, "<F13>", "yyp", { silent = true })
-vim.keymap.set({ "n" }, "<F14>", "yyP", { silent = true })
-
 -- Close buffer without closing window
 vim.keymap.set({ "n", "i" }, "<C-k>x", "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", { silent = true })
 vim.keymap.set({ "n", "i" }, "<C-k><C-x>", "<cmd>1,$bd!<CR>", { silent = true })
