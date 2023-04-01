@@ -66,9 +66,14 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 
 -- open quickfix list item with 'l'
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = "qf",
+	pattern = { "qf", "Trouble" },
 	callback = function()
-		vim.api.nvim_buf_set_keymap(0, "n", "l", "<cr>", { noremap = true })
+		local match = vim.fn.expand("<amatch>")
+		if match == "qf" then
+			vim.api.nvim_buf_set_keymap(0, "n", "l", "<cr>", { noremap = true })
+		elseif match == "Trouble" then
+			vim.cmd("set nu signcolumn=yes")
+		end
 	end,
 	group = myAugroup
 })
