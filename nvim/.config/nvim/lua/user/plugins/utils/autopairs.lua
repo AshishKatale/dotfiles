@@ -1,10 +1,10 @@
-local status_ok, npairs = pcall(require, "nvim-autopairs")
-if not status_ok then
-	print("Unable to load: nvim-autopairs")
+local pairs_status_ok, pairs = pcall(require, "nvim-autopairs")
+if not pairs_status_ok then
+	print("unable to load: nvim-autopairs")
   return
 end
 
-npairs.setup {
+pairs.setup {
   check_ts = true,
 	map_cr = true,
   ts_config = {

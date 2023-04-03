@@ -6,7 +6,6 @@ vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the s
 vim.opt.cmdheight = 1                           -- space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
-vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.hlsearch = true                         -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true                       -- ignore case in search patterns
 vim.opt.mouse = nil                             -- allow the mouse to be used in neovim
@@ -26,6 +25,7 @@ vim.opt.timeout = true
 vim.opt.timeoutlen = 500
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
+-- vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 -- vim.opt.expandtab = true																	-- convert tabs to spaces
 vim.opt.shiftwidth = 2        -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2           -- insert 2 spaces for a tab

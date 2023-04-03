@@ -16,26 +16,29 @@ if not lspconfig_status_ok then
 	return
 end
 
-local nvimcmp_status_ok, _ = pcall(require, "user.lsp.nvimcmp")
-if not nvimcmp_status_ok then
-	print("Unable to load: user.lsp.nvimcmp")
-	return
-end
-
-local handlers_status_ok, handlers = pcall(require, "user.lsp.handlers")
+local handlers_status_ok, handlers = pcall(require, "user.plugins.lsp.handlers")
 if not handlers_status_ok then
-	print("Unable to load: user.lsp.handlers")
+	print("Unable to load: user.plugins.lsp.handlers")
 	return
 end
 
-local lsconfig_status_ok, lspsettings = pcall(require, "user.lsp.settingsls")
+local lsconfig_status_ok, lspsettings = pcall(require, "user.plugins.lsp.settingsls")
 if not lsconfig_status_ok then
-	print("Unable to load: user.lsp.settingsls")
+	print("Unable to load: user.plugins.lsp.settingsls")
 	return
 end
 
-mason.setup()
-mason_lspconfig.setup()
+mason.setup({
+	ui = {
+		check_outdated_packages_on_open = true,
+		border = "rounded",
+		width = 0.8,
+		height = 0.8,
+	}
+})
+mason_lspconfig.setup({
+	ensure_installed = { }
+})
 handlers.setup()
 
 mason_lspconfig.setup_handlers {

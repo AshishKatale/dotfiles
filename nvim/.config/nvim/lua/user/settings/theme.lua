@@ -71,15 +71,3 @@ vim.cmd("hi NvimTreeGitIgnored guifg=" .. c.gitSignsRed)
 vim.cmd("hi NvimTreeFolderIcon guifg=" .. c.nvimTreeIconColor)
 vim.cmd("hi NvimTreeExecFile gui=bold guifg=" .. c.gitSignsGreen)
 
-vim.cmd("hi NoiceMini guifg=#ffff00")
-vim.cmd("hi NoiceLspProgressSpinner guifg=#00ffaa")
-vim.cmd("hi NoiceLspProgressTitle guifg=#ff9e64")
-vim.cmd("hi NoiceLspProgressClient guifg=#ff9e64")
-
-vim.cmd("hi rainbowcol1 guifg=#0077FF")
-vim.cmd("hi rainbowcol2 guifg=#FF9933")
-vim.cmd("hi rainbowcol3 guifg=#9933CC")
-vim.cmd("hi rainbowcol4 guifg=#33CCFF")
-vim.cmd("hi rainbowcol5 guifg=#FF33FF")
-vim.cmd("hi rainbowcol6 guifg=#99FFCC")
-

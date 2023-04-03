@@ -9,19 +9,15 @@ vim.api.nvim_create_user_command('ToggleBGOpacity', function()
 		vim.cmd("hi Normal guifg=#d4d4d4 guibg=#181818")
 		vim.cmd("hi NormalFloat guifg=#bbbbbb guibg=#272727")
 		vim.cmd("hi NvimTreeNormal guifg=#d4d4d4 guibg=#1e1e1e")
-		vim.cmd("hi FocusedWindow guibg=#181818")
 		vim.cmd("hi LineNr guifg=#5a5a5a guibg=#181818")
 		vim.cmd("hi SignColumn guibg=#1e1e1e")
-		vim.cmd("hi MasonNormal guibg=#0b001d")
 		vim.cmd("hi VertSplit guifg=#444444 guibg=#1e1e1e")
 	else
-		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-		vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
-		vim.api.nvim_set_hl(0, "FocusedWindow", { bg = "none" })
+		vim.cmd("hi Normal guibg=NONE")
+		vim.cmd("hi NormalFloat guibg=NONE")
+		vim.cmd("hi NvimTreeNormal guibg=NONE")
 		vim.cmd("hi LineNr guibg=NONE")
 		vim.cmd("hi SignColumn guibg=NONE")
-		vim.cmd("hi MasonNormal guibg=#0b001d")
 		vim.cmd("hi VertSplit guifg=#666666 guibg=NONE")
 	end
 end, {})
@@ -57,8 +53,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 	callback = function()
 		if vim.bo.filetype == "Trouble" or
+			vim.bo.filetype == "startup" or
 			vim.bo.filetype == "TelescopePrompt" or
-			vim.bo.filetype == "NvimTree" then return end
+			vim.bo.filetype == "DressingInput" or
+			vim.bo.filetype == "NvimTree"
+		then return end
 		vim.opt.relativenumber = true
 	end,
 	group = myAugroup
@@ -77,3 +76,4 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 	group = myAugroup
 })
+

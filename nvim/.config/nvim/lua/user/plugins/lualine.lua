@@ -4,17 +4,26 @@ if not status_ok then
   return
 end
 
-local noice_status_ok, noice = pcall(require, "noice")
-if not noice_status_ok then
-	print("Unable to load: noice")
-  return
-end
+local colors = vim.g.colors
+local lsp_progress = {
+	'lsp_progress',
+	colors = {
+	  percentage  = colors.info,
+	  title  = colors.warn,
+	  message  = colors.hint,
+	  spinner = colors.hint,
+	  lsp_client_name = colors.warn,
+	  use = true,
+	},
+	display_components = { {'message', 'percentage'}, 'lsp_client_name', 'spinner' },
+	timer = { progress_enddelay = 100, spinner = 300, lsp_client_name_enddelay = 300 },
+	spinner_symbols = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", },
+}
 
 local c = vim.g.colors
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = "vscode",
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
@@ -46,18 +55,14 @@ lualine.setup {
 				icon_only = true  -- Display only an icon for filetype
 			}
 		},
-		lualine_x = {
-      {
-        noice.api.status.mode.get,
-        cond = noice.api.status.mode.has,
-        color = { fg = "#ff9e64" },
-      },
-      {
-        noice.api.status.search.get,
-        cond = noice.api.status.search.has,
-        color = { fg = "#ff9e64" },
-      },
-		},
+	lualine_x = {
+			lsp_progress,
+     {
+       require("lazy.status").updates,
+       cond = require("lazy.status").has_updates,
+       color = { fg = "#ff9e64" },
+     },
+	},
     lualine_y = {'encoding', 'filetype'},
     lualine_z = {'location'}
   },

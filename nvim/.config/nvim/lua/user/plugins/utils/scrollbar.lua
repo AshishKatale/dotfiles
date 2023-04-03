@@ -111,7 +111,6 @@ scrollbar.setup({
 			"prompt",
 			"NvimTree",
 			"TelescopePrompt",
-			"noice",
     },
     autocmd = {
 			render = {

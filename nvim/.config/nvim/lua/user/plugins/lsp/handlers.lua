@@ -55,11 +55,6 @@ M.setup = function()
 end
 
 local function lsp_highlight_document(client)
-	-- Set autocommands conditional on server_capabilities
-	-- for k,v in pairs(client.server_capabilities) do
-	-- 	print(k)
-	-- 	print(v)
-	-- end
 	if client.server_capabilities.documentHighlightProvider then
 		vim.cmd[[
       augroup lsp_document_highlight

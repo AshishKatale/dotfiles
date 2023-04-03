@@ -1,6 +1,6 @@
-local handlers_status_ok, handlers = pcall(require, "user.lsp.handlers")
+local handlers_status_ok, handlers = pcall(require, "user.plugins.lsp.handlers")
 if not handlers_status_ok then
-	print("Unable to load: user.lsp.handlers")
+	print("Unable to load: user.plugins.lsp.handlers")
 	return
 end
 
