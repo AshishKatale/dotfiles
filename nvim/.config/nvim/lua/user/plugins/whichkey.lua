@@ -100,32 +100,36 @@ local mappings = {
 	},
 	g = {
 		name = "Git Stuff",
-		C = { "<cmd>Telescope git_commits<cr>", "Commits" },
-		c = { "<cmd>Telescope git_bcommits<cr>", "File Commits" },
+		C = { "<cmd>Telescope git_commits prompt_title=Git\\ History<cr>", "Commits" },
+		c = { "<cmd>Telescope git_bcommits prompt_title=File\\ History<cr>", "File Commits" },
 		s = { "<cmd>Telescope git_status<cr>", "Git status" },
 		b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame line" },
 		B = { "<cmd>Telescope git_branches<cr>", "Branches" },
 		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview hunk" },
+		P = { "<cmd>lua require 'gitsigns'.preview_hunk_inline()<cr>", "Preview hunk inline" },
 		d = { "<cmd>lua require 'gitsigns'.diffthis()<cr>", "File diff" },
 		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset hunk" },
 		S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage hunk" },
 		U = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo stage hunk" },
-		g = { "<cmd>LazyGit<cr>", "LazyGit" }
+		g = { "<cmd>LazyGit<cr>", "LazyGit" },
+		G = { "<cmd>Gitsigns<cr>", "GitSigns menu" }
 	},
 	s = {
 		name = "Search",
-		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+		C = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
 		h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-		M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+		m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		C = { "<cmd>Telescope commands<cr>", "Commands" },
+		c = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
 	o = {
+		name = "Open",
 		L = { "<cmd>Lazy<cr>", "Lazy" },
 		l = { "<cmd>LspInfo<cr>", "LspInfo" },
 		m = { "<cmd>Mason<cr>", "Mason" },
+		c = { "<cmd>NvimConfig<cr>", "NvimConfig" },
 	},
 	t = {
 		name = "Toggle",
@@ -135,6 +139,7 @@ local mappings = {
 		s = { "<cmd>ScrollbarToggle<cr>", "Scrollbar" },
 		t = { "<cmd>TSToggle highlight<cr>", "Treesitter" },
 		b = { "<cmd>ToggleBlankline<cr>", "Blankline" },
+		g = { "<cmd>Gitsigns toggle_signs<cr>", "Gitsigns" },
 	},
 }
 

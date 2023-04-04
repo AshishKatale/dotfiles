@@ -1,6 +1,6 @@
 ----------- Custom User Commands ------------
 vim.api.nvim_create_user_command('ToggleBlankline', " execute 'IndentBlanklineToggle' | set list!", {})
-vim.api.nvim_create_user_command('NvimConfig', 'Telescope find_files hidden=true cwd=$DOTFILES', {})
+vim.api.nvim_create_user_command('NvimConfig', 'Telescope find_files hidden=true cwd=$DOTFILES/nvim prompt_title=Nvim\\ Config', {})
 vim.api.nvim_create_user_command('Format', "execute 'lua vim.lsp.buf.format()'", {})
 
 vim.api.nvim_create_user_command('ToggleBGOpacity', function()
