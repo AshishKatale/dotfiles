@@ -97,7 +97,14 @@ local plugins = {
 			require("user.plugins.utils.autopairs")
 		end,
 	},
-	{ "folke/trouble.nvim", lazy = true, cmd = "Trouble" },
+	{
+		"folke/trouble.nvim",
+		lazy = true,
+		cmd = "Trouble",
+		config = function()
+			require("user.plugins.utils.trouble")
+		end,
+	},
 	{ "debugloop/telescope-undo.nvim", lazy = true },
 	{
 		"nvim-telescope/telescope.nvim",

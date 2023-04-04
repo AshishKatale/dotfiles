@@ -122,6 +122,20 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
+	o = {
+		L = { "<cmd>Lazy<cr>", "Lazy" },
+		l = { "<cmd>LspInfo<cr>", "LspInfo" },
+		m = { "<cmd>Mason<cr>", "Mason" },
+	},
+	t = {
+		name = "Toggle",
+		o = { "<cmd>ToggleBGOpacity<cr>", "Background Opacity" },
+		q = { "<cmd>TroubleToggle<cr>", "QuickFix/Trouble" },
+		c = { "<cmd>ColorizerToggle<cr>", "Colorizer" },
+		s = { "<cmd>ScrollbarToggle<cr>", "Scrollbar" },
+		t = { "<cmd>TSToggle highlight<cr>", "Treesitter" },
+		b = { "<cmd>ToggleBlankline<cr>", "Blankline" },
+	},
 }
 
 local opts = {
