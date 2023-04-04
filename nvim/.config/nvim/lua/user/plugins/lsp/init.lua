@@ -14,6 +14,8 @@ local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
 	print("Unable to load: lspconfig")
 	return
+else
+	require('lspconfig.ui.windows').default_options.border = 'rounded'
 end
 
 local handlers_status_ok, handlers = pcall(require, "user.plugins.lsp.handlers")
