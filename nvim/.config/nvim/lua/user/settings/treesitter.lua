@@ -3,7 +3,7 @@ local configs = require("nvim-treesitter.configs")
 configs.setup({
 	ensure_installed = {
 		"vim", "regex", "bash", "css",
-		"lua", "javascript", "json",
+		"lua", "javascript", "json", "html",
 		"typescript", "tsx", "rust"
 	},
 	sync_install = false,
