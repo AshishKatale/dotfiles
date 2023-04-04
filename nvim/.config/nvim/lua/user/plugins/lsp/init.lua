@@ -39,7 +39,10 @@ mason.setup({
 	}
 })
 mason_lspconfig.setup({
-	ensure_installed = { }
+	ensure_installed = {
+		"lua_ls", "tsserver", "jsonls",
+		"svelte", "cssls", "tailwindcss"
+	}
 })
 handlers.setup()
 
