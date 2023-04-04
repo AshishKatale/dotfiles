@@ -6,6 +6,7 @@ end
 
 dressing.setup({
 	input = {
+		relative = "editor",
 		win_options = {
 			-- Window transparency (0-100)
 			winblend = 0,
