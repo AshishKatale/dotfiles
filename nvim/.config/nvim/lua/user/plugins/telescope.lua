@@ -7,8 +7,6 @@ end
 local trouble = require("trouble.providers.telescope")
 
 telescope.load_extension('undo');
--- telescope.load_extension('fzf');
--- telescope.load_extension('media_files')
 
 local actions = require "telescope.actions"
 
@@ -19,6 +17,7 @@ local mappings = {
 
 		["<Tab>"] = actions.move_selection_next,
 		["<S-Tab>"] = actions.move_selection_previous,
+		["<leader><leader>"] = actions.toggle_selection,
 
 		["<C-c>"] = actions.close,
 
@@ -61,6 +60,7 @@ local mappings = {
 		["<C-q>"] = trouble.open_with_trouble,
 		["<M-q>"] = trouble.open_selected_with_trouble,
 
+		["<leader><leader>"] = actions.toggle_selection,
 		["Tab"] = actions.move_selection_next,
 		["S-Tab"] = actions.move_selection_previous,
 		["j"] = actions.move_selection_next,
@@ -111,6 +111,7 @@ telescope.setup {
     prompt_prefix = "   ",
 		initial_mode = "insert",
     selection_caret = " ",
+		multi_icon = "",
     path_display = { "smart" },
 		file_ignore_patterns = {
 			".git/", ".cache", "%.o", "%.a",
@@ -148,11 +149,6 @@ telescope.setup {
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
     },
-		-- media_files = {
-		-- 	filetypes whitelist defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-		-- 	filetypes = {"png", "webp", "jpg", "jpeg"},
-		-- 	find_cmd = "rg" -- find command (defaults to `fd`)
-		-- }
 		undo = {
       use_delta = true,
       use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
