@@ -134,6 +134,9 @@ telescope.setup {
 		git_status = {
 			initial_mode = "normal",
 		},
+		git_branches = {
+			initial_mode = "normal",
+		},
 		git_commits = git_commit,
 		git_bcommits = git_commit
   },
