@@ -52,6 +52,7 @@ vim.g.colors = c;
 -- override highlight colors
 vim.cmd("hi CursorLine guifg=none guibg=" .. c.cursorlineGray) -- override cursorline bg color of vscode theme
 
+vim.cmd("hi DiffText guifg=#ffffff guibg=#881C9E")
 vim.cmd("hi GitSignsChange guifg=" .. c.gitSignsBlue)
 vim.cmd("hi GitSignsAdd guifg=" .. c.gitSignsGreen)
 vim.cmd("hi GitSignsDelete guifg=" .. c.gitSignsRed)

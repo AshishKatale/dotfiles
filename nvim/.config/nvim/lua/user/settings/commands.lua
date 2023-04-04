@@ -55,6 +55,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 	callback = function()
 		if vim.bo.filetype == "Trouble" or
+			vim.bo.filetype == "help" or
 			vim.bo.filetype == "startup" or
 			vim.bo.filetype == "TelescopePrompt" or
 			vim.bo.filetype == "DressingInput" or

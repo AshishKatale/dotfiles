@@ -69,7 +69,7 @@ nvim_tree.setup {
 		indent_width = 2,
 		icons = {
 			webdev_colors = true,
-			git_placement = "after",
+			git_placement = "signcolumn",
 			modified_placement = "signcolumn",
 			padding = " ",
 			symlink_arrow = " 󰁕 ",
@@ -96,7 +96,7 @@ nvim_tree.setup {
           symlink_open = "",
         },
 				git = {
-					unstaged = "",
+					unstaged = "󰐗",
 					staged = "",
 					unmerged = "",
 					renamed = "",

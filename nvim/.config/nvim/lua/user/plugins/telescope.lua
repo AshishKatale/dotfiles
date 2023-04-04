@@ -110,7 +110,7 @@ telescope.setup {
 		sorting_strategy="ascending",
     prompt_prefix = "   ",
 		initial_mode = "insert",
-    selection_caret = " ",
+    selection_caret = "  ",
 		multi_icon = "",
     path_display = { "smart" },
 		file_ignore_patterns = {
