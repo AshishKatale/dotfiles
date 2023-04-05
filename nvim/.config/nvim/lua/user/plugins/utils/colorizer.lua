@@ -15,7 +15,7 @@ colorizer.setup(
 			rgb_fn      = true,       -- CSS rgb() and rgba() functions like rgb(255, 0, 0) , rgba(255, 0, 0, 0.5)
 			hsl_fn      = true,       -- CSS hsl() and hsla() functions like hsl(0, 100%, 50%) , hsla(0, 100%, 50%, 0.5)
 			mode        = 'virtualtext', -- Set the display mode.
-			virtualtext = "",             -- 
+			virtualtext = "󰚍",             --  󰝤  󰚍
 			tailwind    = true,
 		}
 	}
