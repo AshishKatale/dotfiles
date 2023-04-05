@@ -36,6 +36,9 @@ local lsp_settings = {
 				enable = true
 			},
 		}
+	},
+	["tailwindcss"] = {
+		autostart = false
 	}
 }
 

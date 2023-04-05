@@ -64,6 +64,10 @@ mason_lspconfig.setup_handlers {
 		lspconfig[server_name].setup(lspsettings[server_name])
 	end,
 
+	["tailwindcss"] = function (server_name)
+		lspconfig[server_name].setup(lspsettings[server_name])
+	end,
+
 }
 
 lspconfig.rust_analyzer.setup(lspsettings["rust_analyzer"])

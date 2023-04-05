@@ -44,7 +44,6 @@ local c = {
 	gitSignsRed = "#EF233C",
 	gitSignsBlameTextGray = "#777777",
 	nvimTreeIconColor = "#BCBCBC",
-	masonBG = "#0b001d"
 }
 c = vim.tbl_extend('force', vscColors, c)
 vim.g.colors = c;
