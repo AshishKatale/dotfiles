@@ -89,6 +89,7 @@ local function lsp_keymaps(bufnr)
 		name = "Go to",
     d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
 		D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
+		h = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
     i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
     r = { "<cmd>Telescope lsp_references<CR>", "References" },
 		s = { "<cmd>Telescope lsp_document_symbols<CR>", "File symbols" },
