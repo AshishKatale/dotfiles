@@ -92,7 +92,7 @@ local plugins = {
 	{
 		"windwp/nvim-autopairs",
 		lazy = true,
-		event = "InsertEnter",
+		event = "InsertEnter *.*",
 		config = function()
 			require("user.plugins.utils.autopairs")
 		end,
@@ -150,7 +150,7 @@ local plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		lazy = true,
-		event = "InsertEnter",
+		event = "InsertEnter *.*",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
