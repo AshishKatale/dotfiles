@@ -101,7 +101,7 @@ local function lsp_keymaps(bufnr)
 	local leader_mappings = {
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "LSP rename" },
 		c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "LSP Code action" },
-		f = { "<cmd>lua vim.lsp.buf.format()<CR>", "Format Document" },
+		f = { "<cmd>lua vim.lsp.buf.format({ timeout_ms = 10000 })<CR>", "Format Document" },
 	}
 
 	local leader_opts = {}
