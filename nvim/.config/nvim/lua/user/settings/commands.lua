@@ -40,6 +40,17 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	group = myAugroup
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		if vim.bo.filetype == "help" and vim.opt.relativenumber._value == false then
+			vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", { noremap = true, silent = true, nowait = true })
+			vim.cmd("set nu rnu signcolumn=no")
+		elseif vim.bo.filetype == "qf" then
+			vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", { noremap = true, silent = true, nowait = true })
+		end
+	end
+})
+
 -- reset cursor style to underline before exiting
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
 	callback = function() vim.opt.guicursor = 'a:hor20' end,
