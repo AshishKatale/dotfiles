@@ -1,6 +1,5 @@
 local plugins = {
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
-	-- { "nvim-lua/popup.nvim", lazy = true },
 	{ "nvim-lua/plenary.nvim", lazy = true },
 	{
 		"Mofiqul/vscode.nvim",

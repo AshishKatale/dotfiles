@@ -71,7 +71,7 @@ git:
   branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
   allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
-  disableForcePushing: true
+  disableForcePushing: false
   parseEmoji: false
   diffContextSize: 3 # how many lines of context are shown around a change in diffs
 os:
@@ -92,9 +92,9 @@ notARepository: 'quit' # one of: 'prompt' | 'create' | 'skip' | 'quit'
 promptToReturnFromSubprocess: true # display confirmation when subprocess terminates
 keybinding:
   universal:
-    quit: 'q'
-    quit-alt1: '<c-c>' # alternative/alias of quit
-    return: '<esc>' # return to previous menu, will quit if there's nowhere to return
+    quit: '<esc>'
+    quit-alt1: '<c-q>' # alternative/alias of quit
+    return: '<c-c>' # return to previous menu, will quit if there's nowhere to return
     # When set to a printable character, this will work for returning from non-prompt panels
     return-alt1: null
     quitWithoutChangingDirectory: 'Q'
