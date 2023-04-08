@@ -93,6 +93,7 @@ local mappings = {
 		n = { "<cmd>Trouble document_diagnostics<cr>", "File Diagnostics" },
 		N = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 		r = { "<cmd>Trouble lsp_references<cr>", "References" },
+		g = { "<cmd>Gitsigns setqflist<cr>", "Git Hunks" },
 		d = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
 		i = { "<cmd>Trouble lsp_implementations<cr>", "Implementations" },
 		t = { "<cmd>Trouble lsp_type_definitions<cr>", "Type Definitions" },
