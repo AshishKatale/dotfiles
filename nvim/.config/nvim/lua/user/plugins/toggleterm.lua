@@ -6,7 +6,7 @@ end
 
 toggleterm.setup({
 	size = 20,
-	open_mapping = [[<F18>]],					--  bind Shift+F6(f18) => <S-Space> with autokey
+	open_mapping = [[<F15>]],					--  bind Shift+F6(f18) => <S-Space> with autokey
 	hide_numbers = true,
 	shade_filetypes = {},
 	shade_terminals = true,

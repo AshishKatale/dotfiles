@@ -67,7 +67,7 @@ local plugins = {
 		"akinsho/toggleterm.nvim",
 		lazy = true,
 		cmd = { "LazyGit", "NpmStart", "NpmRunDev", "HttpServer" },
-		keys = { "<F18>" },
+		keys = { "<F15>" },
 		config = function()
 			require("user.plugins.toggleterm")
 		end,
@@ -108,7 +108,7 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		lazy = true,
-		keys = { "<C-f>", "<F15>", "<C-p>" },
+		keys = { "<C-f>", "<F13>", "<C-p>" },
 		cmd = { "Telescope" },
 		config = function()
 			require("user.plugins.telescope")

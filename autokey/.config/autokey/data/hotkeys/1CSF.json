@@ -1,6 +1,6 @@
 {
     "type": "script",
-    "description": "4CSP",
+    "description": "1CSF",
     "store": {},
     "modes": [
         3
@@ -22,7 +22,7 @@
             "<ctrl>",
             "<shift>"
         ],
-        "hotKey": "p"
+        "hotKey": "f"
     },
     "filter": {
         "regex": "Alacritty.Alacritty",

@@ -35,7 +35,7 @@ local keybind_list = {
 	{ key = "gy",                                  action = "copy_path" },
 	{ key = "Y",                                   action = "copy_absolute_path" },
 	{ key = "<C-n>",                               action = "prev_git_item" },
-	{ key = "<F17>",                               action = "next_git_item" },
+	{ key = "<F14>",                               action = "next_git_item" },
 	{ key = "-",                                   action = "dir_up" },
 	{ key = "O",                                   action = "system_open" },
 	{ key = "q",                                   action = "close" },
