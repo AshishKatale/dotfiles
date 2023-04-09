@@ -1,3 +1,0 @@
-Option "AccelSpeed" "0.4"
-Option "Tapping" "on"
-Option "NaturalScrolling" "True"
