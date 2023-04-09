@@ -40,6 +40,7 @@ local keybind_list = {
 	{ key = "O",                                   action = "system_open" },
 	{ key = "q",                                   action = "close" },
 	{ key = "g?",                                  action = "toggle_help" },
+	{ key = "w",                                   action = "expand_all" },
 	{ key = "W",                                   action = "collapse_all" },
 	{ key = "S",                                   action = "search_node" },
 	{ key = "<C-f>",                               action = "search_node" },
