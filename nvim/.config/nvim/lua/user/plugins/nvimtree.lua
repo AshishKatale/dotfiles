@@ -188,7 +188,7 @@ nvim_tree.setup {
     require_confirm = true,
   },
 	live_filter = {
-		prefix = "[FILTER]: ",
+		prefix = "  : ",
 		always_show_folders = true,
 	},
 	ui = {
