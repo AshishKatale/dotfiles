@@ -66,7 +66,7 @@ local plugins = {
 	{
 		"akinsho/toggleterm.nvim",
 		lazy = true,
-		cmd = { "LazyGit", "NpmStart", "NpmRunDev", "HttpServer" },
+		cmd = { "LazyGit", "Vifm", "NpmStart", "NpmRunDev", "HttpServer" },
 		keys = { "<F15>" },
 		config = function()
 			require("user.plugins.toggleterm")

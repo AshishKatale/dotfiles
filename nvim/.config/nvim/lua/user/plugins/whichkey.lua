@@ -82,6 +82,7 @@ local mappings = {
 	b = { "<cmd>Telescope buffers<CR>", "Buffers" },
 	F = { "<cmd>Telescope git_files<CR>", "Files" },
 	e = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
+	E = { "<cmd>Vifm<CR>", "Toggle NvimTree" },
 	h = { "<C-w>h", "Left split" },
 	l = { "<C-w>l", "Right split" },
 	j = { "<C-w>j", "Lower split" },
