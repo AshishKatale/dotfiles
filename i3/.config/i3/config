@@ -41,6 +41,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 exec --no-startup-id nm-applet
 exec --no-startup-id picom
 exec --no-startup-id diodon
+exec --no-startup-id /usr/lib/notification-daemon-1.0/notification-daemon
 bindsym $mod+Shift+v exec diodon
 
 # start autokey on startup and move to scratchpad
