@@ -56,7 +56,7 @@ update_dotprofile() {
 	fi
 }
 
-read -p "Update bashrc? (y/N) : " -n 1 CONFIRM
+read -p "Update .bashrc? (y/N) : " -n 1 CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
@@ -66,7 +66,7 @@ else
 	echo -e '\033[00;31m\0.bashrc update cancelled\033[0m'
 fi
 
-read -p "Update bashrc? (y/N) : " -n 1 CONFIRM
+read -p "Update .profile? (y/N) : " -n 1 CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then

@@ -252,9 +252,9 @@ for_window [class="^.*"] title_format "%class"
 for_window [class="^.*"] border pixel 1
 
 # screenshot by pressing printscreen
-bindsym Print exec gnome-screenshot 
+bindsym Print exec gnome-screenshot -i
 # crop-area screenshot by pressing Mod + Shift + printscreen
-bindsym $mod+Print exec gnome-screenshot -a
+bindsym $mod+Print exec gnome-screenshot -w
 # interactive screenshot by pressing printscreen
-bindsym $mod+Shift+Print exec gnome-screenshot -i
+bindsym $mod+Shift+Print exec gnome-screenshot -a
 
