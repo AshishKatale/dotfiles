@@ -1,0 +1,46 @@
+set cursorline "yes"
+set hlsearch
+set clipboard=unnamedplus
+set scrolloff=5
+set visualbell
+set noerrorbells
+
+set ideajoin
+Plug 'nerdtree'
+set NERDTree
+Plug 'vim-surround'
+set surround
+Plug 'tcomment_vim'
+set commentary
+Plug 'vim-highlightedyank'
+set highlightedyank
+
+let mapleader =" "
+
+inoremap jk <esc>
+vnoremap ii <esc>
+nmap <C-l> :noh<CR>
+nmap H :bp<CR>
+nmap L :bn<CR>
+nmap <C-k>x :action CloseEditor<CR>
+nmap <C-k>w :action CloseAllEditorsButActive<CR>
+nmap <C-k><C-x> :action CloseAllEditors<CR>
+
+nmap <C-S-T> :action ReopenClosedTab<CR>
+nmap <C-S-P> :action GotoAction<CR>
+nmap <C-p> :action GotoFile<CR>
+nmap gs :action GotoSymbol<CR>
+nmap gr :action FindUsagesInFile<CR>
+nmap gR :action FindUsages<CR>
+nmap <leader>e :NERDTreeFocus<CR>
+nmap <leader>g :action Git.MainMenu<CR>
+nmap <leader>c :action CodeMenu<CR>
+nmap <leader>r :action CodeMenu<CR>
+nmap <S-Space> :action ActivateTerminalToolWindow<CR>
+nmap <leader>nr :set nu rnu<CR>
+nmap <leader>na :set nu nornu <CR>
+
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapCloseDir='h'
+let g:NERDTreeMapOpenRecursively='w'
+
