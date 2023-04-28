@@ -38,6 +38,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # start nm-applet on startup
+# exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 exec --no-startup-id picom
 exec --no-startup-id diodon

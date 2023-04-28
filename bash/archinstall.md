@@ -68,7 +68,7 @@ passwd #set root password
 - #### **Configure GRUB bootloader**
 
 ```bash
-pacman -s grub efibootmgr os-prober ntfs-3g mtools dosfstool networkmanager network-manager-applet wpa_supplicant wireless_tools dialog base-devel linux-headers git openssh bluez bluez-utils pulse-audio pulseaudio-bluetooth xdg-user-dirs xdg-user-dirs-gtk
+pacman -s grub efibootmgr os-prober ntfs-3g mtools dosfstool networkmanager network-manager-applet wpa_supplicant wireless_tools dialog base-devel linux-headers git openssh bluez bluez-utils blueman pulse-audio pulseaudio-bluetooth xdg-user-dirs xdg-user-dirs-gtk
 
 grub-install --target=x86_64-efi --efi-directory=/{efi} --bootloader-id=GRUB
 # uncomment GRUB_DISABLE_OS_PROBER=false /etc/default/grub
