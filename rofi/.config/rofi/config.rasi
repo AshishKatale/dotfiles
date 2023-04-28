@@ -1,6 +1,6 @@
 configuration {
-	display-run : "  ";
-	display-drun : "  ";
+	display-run : "   ";
+	display-drun : "   ";
 	modi: "window,run,drun";
 	font: "JetBrainsMono Nerd Font 9";
 	drun-display-format: "{icon} {name}";

@@ -72,7 +72,7 @@ bindsym $mod+p exec polybar-msg cmd toggle
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 
 # change focus
