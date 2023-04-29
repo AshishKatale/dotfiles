@@ -2,10 +2,11 @@ alias c="clear"
 alias x="clear"
 alias ccc="exit"
 alias xxx="exit"
-alias ls="ls --color=always"
-alias ll="ls -alh --color=always"
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
 alias stow='stow --no-folding'
-alias refresh="source $ZDOTDIR/.zshrc"
+alias bashrc="vim ~/.bashrc"
+alias zshrc="vim $ZDOTDIR/.zshrc"
 
 alias gst='git status'
 alias glo='git log --oneline'
@@ -21,10 +22,11 @@ alias ndv='npm run dev'
 alias zl='zellij'
 alias zled='zellij edit'
 alias zlef='zellij edit --floating'
-alias zlcode='zellij --layout ~/dotfiles/zellij/code.kdl'
+alias zlcode='zellij --layout ~/dotfiles/zellij/.config/zellij/code.kdl'
 
-function lsf() { ls -alhpA $1 | grep -v ".*/" }
-function lsd() { ls -alhpA $1 | grep ".*/" | sed "s/\///" }
+function ll() { ls -Alh --color=always $1 | sed '1d' }
+function lsf() { ls --color=always -alhA $1 | grep --color=never -v "^d.*" | sed '1d' }
+function lsd() { ls --color=always -alhA $1 | grep --color=never "^d.*" | sed '1d' }
 
 function cppath(){
 	if [ -z $1 ]
@@ -44,3 +46,22 @@ function opn(){
 	fi
 }
 
+function grab(){
+	if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "
+Copies the output of command provided as argument to the clipboard.
+
+USAGE:
+	grab [command]
+	eg.
+		grab \"ls -alh\"
+		grab \"echo \$PATH | tr ':' '\\\n'\"
+
+OPTIONS:
+	-h, --help
+		Print help information
+"
+	else
+		eval $1 | tee >(xclip -selection clipboard) 
+	fi
+}
