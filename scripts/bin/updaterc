@@ -19,6 +19,14 @@ update_dotbashrc() {
 		echo -e "\033[00;32m\0/home/$USER/bin already in path\033[0m"
 	else
 		echo "export PATH=\"\$PATH:/home/$USER/bin\"" >> ~/.bashrc
+		echo -e "\033[00;32m\0/home/$USER/bin added to path\033 .bashrc[0m"
+	fi
+
+	if grep -q ":/home/$USER/.local/bin" ~/.bashrc; then
+		echo -e "\033[00;32m\0/home/$USER/.local/bin already in path\033[0m"
+	else
+		echo "export PATH=\"\$PATH:/home/$USER/.local/bin\"" >> ~/.bashrc
+		echo -e "\033[00;32m\0/home/$USER/.local/bin added to path in .bashrc\033[0m"
 	fi
 
 	if grep -q "source.*bashrc.sh" ~/.bashrc; then
@@ -53,6 +61,14 @@ update_dotprofile() {
 		echo -e "\033[00;32m\0/home/$USER/bin already in path\033[0m"
 	else
 		echo "export PATH=\"\$PATH:/home/$USER/bin\"" >> ~/.profile
+		echo -e "\033[00;32m\0/home/$USER/bin added to path in .profile\033[0m"
+	fi
+
+	if grep -q ":/home/$USER/.local/bin" ~/.profile; then
+		echo -e "\033[00;32m\0/home/$USER/.local/bin already in path\033[0m"
+	else
+		echo "export PATH=\"\$PATH:/home/$USER/.local/bin\"" >> ~/.profile
+		echo -e "\033[00;32m\0/home/$USER/.local/bin added to path in .profile\033[0m"
 	fi
 }
 

@@ -3,7 +3,6 @@ EDITOR=vim
 HISTFILE="$ZDOTDIR/.zsh_history"
 SAVEHIST=5000
 HISTSIZE=1000
-PATH="$PATH:/home/ashish/bin"
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
