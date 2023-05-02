@@ -22,6 +22,7 @@ alias ndv='npm run dev'
 alias zl='zellij'
 alias zled='zellij edit'
 alias zlef='zellij edit --floating'
+alias zlp='zellij -l ~/dotfiles/zellij/.config/zellij/plain.kdl'
 alias zlcode='zellij --layout ~/dotfiles/zellij/.config/zellij/code.kdl'
 
 function ll() { ls -Alh --color=always $1 | sed '1d' }
