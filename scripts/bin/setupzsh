@@ -3,9 +3,9 @@
 DOTFILES=$(realpath $0 | sed 's/\(.*dotfiles\).*/\1/')
 
 setup_zsh() {
-	CWD=$PWD
-	cd $DOTFILES && stow zsh
-	cd $CWD
+	pushd $DOTFILES
+	stow zsh
+	popd
 
 	ZDOTDIR=~/.config/zsh
 	ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"

@@ -107,8 +107,11 @@ pacman -S xorg xorg-xinit x86-video-intel lightdm lightdm-slick-greeter stow ala
 git clone dotfiles
 cd dotfiles
 stow --no-folding */
+cd scripts/bin
+./updaterc
+./setupzsh
 
-echo "" >> etc/lightdm/slick-greeter.conf
+echo "background=/etc/lightdm/bg.jpg" >> etc/lightdm/slick-greeter.conf
 # uncomment below options in etc/lightdm/lightdm.conf
 greeter-session=lightdm-slick-greeter
 autologin-user={username}

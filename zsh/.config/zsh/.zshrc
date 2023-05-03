@@ -1,4 +1,4 @@
-TERM=alacritty
+TERM=xterm-256color
 EDITOR=vim
 HISTFILE="$ZDOTDIR/.zsh_history"
 SAVEHIST=5000
@@ -33,6 +33,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 bindkey -M vicmd 'j' undefined-key
 bindkey -M vicmd 'k' undefined-key
 
+bindkey -M viins '^j' undefined-key
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M viins '^w' backward-kill-word
@@ -40,10 +41,11 @@ bindkey -M viins '^k' kill-line
 bindkey -M viins '^u' backward-kill-line
 bindkey -M viins '^a' beginning-of-line
 bindkey -M viins '^e' end-of-line
-bindkey -M viins '^h' backward-char 
-bindkey -M viins '^l' forward-char 
+bindkey -M viins '^l' clear-screen
 bindkey -M viins '^[w' emacs-forward-word
 bindkey -M viins '^[b' emacs-backward-word
+bindkey -s -M visual 'i' '^[' # exit visual mode with i 
+bindkey -s -M viins '^b' 'tmux-sessionizer^M'
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char

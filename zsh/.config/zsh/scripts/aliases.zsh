@@ -1,10 +1,10 @@
+alias v="nvim"
 alias c="clear"
 alias x="clear"
 alias ccc="exit"
 alias xxx="exit"
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
-alias stow='stow --no-folding'
 alias bashrc="vim ~/.bashrc"
 alias zshrc="vim $ZDOTDIR/.zshrc"
 
@@ -25,11 +25,11 @@ alias zlef='zellij edit --floating'
 alias zlp='zellij -l ~/dotfiles/zellij/.config/zellij/plain.kdl'
 alias zlcode='zellij --layout ~/dotfiles/zellij/.config/zellij/code.kdl'
 
-function ll() { ls -Alh --color=always $1 | sed '1d' }
-function lsf() { ls --color=always -alhA $1 | grep --color=never -v "^d.*" | sed '1d' }
-function lsd() { ls --color=always -alhA $1 | grep --color=never "^d.*" | sed '1d' }
+function ll() { ls -Alh --color=always $@ }
+function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }
+function lsd() { ls --color=always -alhA $@ | grep --color=never "^d.*" }
 
-function cppath(){
+function cpwd(){
 	if [ -z $1 ]
 	then
 		pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard

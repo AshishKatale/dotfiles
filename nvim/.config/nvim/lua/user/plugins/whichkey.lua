@@ -80,7 +80,7 @@ local setup = {
 
 local mappings = {
 	b = { "<cmd>Telescope buffers<CR>", "Buffers" },
-	F = { "<cmd>Telescope git_files<CR>", "Files" },
+	F = { "<cmd>Telescope find_files cwd=~/Workspace prompt_title=Workspace\\ Files<CR>", "Files" },
 	e = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
 	E = { "<cmd>Vifm<CR>", "Toggle NvimTree" },
 	h = { "<C-w>h", "Left split" },
@@ -110,6 +110,7 @@ local mappings = {
 		B = { "<cmd>Telescope git_branches<cr>", "Branches" },
 		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview hunk" },
 		P = { "<cmd>lua require 'gitsigns'.preview_hunk_inline()<cr>", "Preview hunk inline" },
+		f = { "<cmd>Telescope git_files<CR>", "Git Files" },
 		d = { "<cmd>lua require 'gitsigns'.diffthis()<cr>", "File diff" },
 		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset hunk" },
 		S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage hunk" },

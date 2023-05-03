@@ -52,9 +52,9 @@ update_dotprofile() {
 	fi
 
 	if grep -q "export TERM=" ~/.profile; then
-		sed -i "s|\(export TERM=\).*|export TERM=alacritty|" ~/.profile
+		sed -i "s|\(export TERM=\).*|export TERM=xterm-256color|" ~/.profile
 	else
-		echo "export TERM=alacritty" >> ~/.profile
+		echo "export TERM=xterm-256color" >> ~/.profile
 	fi
 
 	if grep -q ":/home/$USER/bin" ~/.profile; then

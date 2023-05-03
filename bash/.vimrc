@@ -7,6 +7,9 @@ set cursorline "yes"
 set hlsearch
 set clipboard=unnamedplus
 
+let mapleader = " "
+let maplocalleader = " "
+
 highlight Normal guibg=NONE ctermbg=NONE
 
 " AutoCommands
@@ -15,7 +18,7 @@ au!
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber 
 
-autocmd VimEnter * silent !echo -ne "\e[1 q"
+" autocmd VimEnter * silent !echo -ne "\e[1 q"
 autocmd VimLeave * silent !echo -ne "\e[3 q"
 
 autocmd InsertEnter * silent !echo -ne "\e[3 q"
@@ -43,4 +46,9 @@ nnoremap <C-Up> :resize +2<CR>
 nnoremap <C-Down> :resize -2<CR> 
 nnoremap <C-Left> :vertical resize -2<CR> 
 nnoremap <C-Right> :vertical resize +2<CR> 
+
+nmap <leader>h <C-w>h
+nmap <leader>j <C-w>j
+nmap <leader>k <C-w>k
+nmap <leader>l <C-w>l
 

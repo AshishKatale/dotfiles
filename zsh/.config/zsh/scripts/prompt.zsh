@@ -96,3 +96,5 @@ precmd() {
 	prompt
 }
 
+export PROMPT_EOL_MARK='' # fix for random % sign before prompt
+
