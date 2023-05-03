@@ -110,6 +110,10 @@ local plugins = {
 		lazy = true,
 		keys = { "<C-f>", "<F13>", "<C-p>" },
 		cmd = { "Telescope" },
+		dependencies = {
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-project.nvim"
+		},
 		config = function()
 			require("user.plugins.telescope")
 		end,

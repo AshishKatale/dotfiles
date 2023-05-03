@@ -7,6 +7,8 @@ end
 local trouble = require("trouble.providers.telescope")
 
 telescope.load_extension('undo');
+telescope.load_extension("project")
+telescope.load_extension("file_browser")
 
 local actions = require "telescope.actions"
 
@@ -109,7 +111,7 @@ telescope.setup {
     },
 		sorting_strategy="ascending",
     prompt_prefix = "   ",
-		initial_mode = "insert",
+		initial_mode = "normal",
     selection_caret = "  ",
 		multi_icon = "",
     path_display = { "smart" },
@@ -128,8 +130,10 @@ telescope.setup {
     find_files = {
       theme = "dropdown",
 			previewer = false,
+			initial_mode = "insert",
     },
 		live_grep = {
+			initial_mode = "insert",
 			additional_args = function () return {"--hidden"} end
 		},
 		git_status = {
