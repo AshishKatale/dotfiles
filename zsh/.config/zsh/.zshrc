@@ -61,6 +61,7 @@ bindkey '^x' autosuggest-toggle
 
 source $ZDOTDIR/scripts/aliases.zsh 
 source $ZDOTDIR/scripts/prompt.zsh 
+source $ZDOTDIR/scripts/nvm.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
