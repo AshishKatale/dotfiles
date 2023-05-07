@@ -19,7 +19,6 @@ alias ccc='exit'
 alias ls='ls --color=auto'
 alias ll='ls -alh --color=auto'
 alias hx='helix'
-alias zl='zellij'
 alias bashrc="vim ~/.bashrc"
 
 alias gst='git status'
@@ -32,10 +31,6 @@ alias gcgl="git config --global --list"
 alias nst='npm start'
 alias nbld='npm run build'
 alias ndv='npm run dev'
-
-alias zle='zellij edit'
-alias zlef='zellij edit --floating'
-alias zlcode='zellij --layout ~/dotfiles/zellij/.config/zellij/code.kdl'
 
 alias stow='stow --no-folding'
 

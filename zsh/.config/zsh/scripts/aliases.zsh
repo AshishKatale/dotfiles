@@ -19,11 +19,10 @@ alias nst='npm start'
 alias nbld='npm run build'
 alias ndv='npm run dev'
 
-alias zl='zellij'
-alias zled='zellij edit'
-alias zlef='zellij edit --floating'
-alias zlp='zellij -l ~/dotfiles/zellij/.config/zellij/plain.kdl'
-alias zlcode='zellij --layout ~/dotfiles/zellij/.config/zellij/code.kdl'
+alias tls='tmux list-sessions'
+alias tks='tmux kill-server'
+alias tkst='tmux kill-session -t'
+alias ta='tmux attach -t'
 
 function ll() { ls -Alh --color=always $@ }
 function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }
