@@ -215,7 +215,7 @@ bindsym $mod+r mode " resize "
 # Exit mode
 mode " [l]ock, [L]ogout, [r]eboot, [s]hutdown " {
 
-  bindsym l exec i3lock -e -c 80AEFF -i ~/Pictures/lockscreen.png
+  bindsym l mode "default" exec i3lock -e -c 80AEFF -i ~/Pictures/lockscreen.png
 	
 	bindsym Shift+l exec i3-msg exit
 
