@@ -80,9 +80,9 @@ local setup = {
 
 local mappings = {
 	b = { "<cmd>Telescope buffers<CR>", "Buffers" },
-	F = { "<cmd>Telescope find_files cwd=~/Workspace prompt_title=Workspace\\ Files<CR>", "Files" },
+	F = { "<cmd>Telescope find_files cwd=~/Workspace prompt_title=All\\ Projects\\ Files<CR>", "Files" },
 	e = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
-	E = { "<cmd>Vifm<CR>", "Toggle NvimTree" },
+	E = { "<cmd>Vifm<CR>", "Vifm" },
 	h = { "<C-w>h", "Left split" },
 	l = { "<C-w>l", "Right split" },
 	j = { "<C-w>j", "Lower split" },

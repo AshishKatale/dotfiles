@@ -12,10 +12,10 @@ vim.g.maplocalleader = " "
 
 -- Disable arrow keys
 vim.keymap.set({ "n", "v" }, " ", "<Nop>", { silent = true })
-vim.keymap.set({ "n", "v" }, "<Up>", "<Nop>", { silent = true })
-vim.keymap.set({ "n", "v" }, "<Down>", "<Nop>", { silent = true })
-vim.keymap.set({ "n", "v" }, "<Left>", "<Nop>", { silent = true })
-vim.keymap.set({ "n", "v" }, "<Right>", "<Nop>", { silent = true })
+vim.keymap.set({ "i", "n", "v" }, "<Up>", "<Nop>", { silent = true })
+vim.keymap.set({ "i", "n", "v" }, "<Down>", "<Nop>", { silent = true })
+vim.keymap.set({ "i", "n", "v" }, "<Left>", "<Nop>", { silent = true })
+vim.keymap.set({ "i", "n", "v" }, "<Right>", "<Nop>", { silent = true })
 
 vim.keymap.set({ "n" }, "J", "mzJ`z", { silent = true })
 

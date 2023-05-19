@@ -90,12 +90,12 @@ local function lsp_keymaps(bufnr)
     d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
 		D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
 		h = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
-    i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
-    r = { "<cmd>Trouble lsp_references<CR>", "References" },
-		R = { "<cmd>Telescope lsp_references<CR>", "References" },
+    I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
+    r = { "<cmd>Trouble lsp_references<CR>", "References trouble" },
+		R = { "<cmd>Telescope lsp_references<CR>", "References telescope" },
 		s = { "<cmd>Telescope lsp_document_symbols<CR>", "File symbols" },
 		S = { "<cmd>Telescope lsp_workspace_symbols<CR>", "Workspace symbols" },
-		N = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Pervious diagnostic" },
+		b = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Pervious diagnostic" },
 		n = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic" },
 	}
 
