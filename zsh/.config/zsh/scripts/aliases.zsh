@@ -10,6 +10,7 @@ alias zshrc="vim $ZDOTDIR/.zshrc"
 
 alias gst='git status'
 alias glo='git log --oneline'
+alias glog='git log --oneline --graph --all --decorate=full'
 alias gcl="git config --list"
 alias gcm="git commit -m"
 alias gamend="git commit --amend --no-edit"
@@ -20,13 +21,19 @@ alias nbld='npm run build'
 alias ndv='npm run dev'
 
 alias tls='tmux list-sessions'
-alias tks='tmux kill-server'
-alias tkst='tmux kill-session -t'
+alias tks='tmux kill-session -t'
+alias tkill='tmux kill-server'
 alias ta='tmux attach -t'
 
 function ll() { ls -Alh --color=always $@ }
 function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }
 function lsd() { ls --color=always -alhA $@ | grep --color=never "^d.*" }
+
+function http-server() {
+  PORT=$1
+  [ -z "$PORT" ] && PORT=8080
+  python3 -m http.server $PORT
+}
 
 function cpwd(){
 	if [ -z $1 ]

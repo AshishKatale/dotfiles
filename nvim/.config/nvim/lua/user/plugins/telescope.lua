@@ -7,7 +7,6 @@ end
 local trouble = require("trouble.providers.telescope")
 
 telescope.load_extension('undo');
-telescope.load_extension("project")
 telescope.load_extension("file_browser")
 
 local actions = require "telescope.actions"

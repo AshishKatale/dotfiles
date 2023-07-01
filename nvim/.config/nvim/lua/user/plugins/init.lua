@@ -112,7 +112,6 @@ local plugins = {
 		cmd = { "Telescope" },
 		dependencies = {
 			"nvim-telescope/telescope-file-browser.nvim",
-			"nvim-telescope/telescope-project.nvim"
 		},
 		config = function()
 			require("user.plugins.telescope")

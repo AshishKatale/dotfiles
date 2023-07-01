@@ -43,7 +43,12 @@ vim.keymap.set({ "n", "v" }, "<A-j>", "<cmd>m .+1<CR>==", { silent = true })
 vim.keymap.set({ "n", "v" }, "<A-k>", "<cmd>m .-2<CR>==", { silent = true })
 vim.keymap.set({ "i" }, "<A-j>", "<Esc>:m .+1<CR>==a", { silent = true })
 vim.keymap.set({ "i" }, "<A-k>", "<Esc>:m .-2<CR>==a", { silent = true })
+
+-- copy-paste
 vim.keymap.set({ "v" }, "p", "\"_dP", { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", { silent = true })
+vim.keymap.set({ "n" }, "<leader>Y", "\"+y$", { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p", { silent = true })
 
 -- Visual Block --
 vim.keymap.set({ "x" }, "<A-j>", ":move '>+1<CR>gv-gv", { silent = true })

@@ -72,8 +72,8 @@ prompt() {
 	P+="%B%F{white}%K{$BLUE} $CD"
 	P+="%b%f%k%F{$BLUE}"
 	P+="$(gitinfo)"
-	P+="%K{green}%f"
-	P+="%k%F{green} %f"
+	P+="%K{$BLUE}%f"
+	P+="%k%F{$BLUE} %f"
 	PROMPT=$P
 	RPROMPT=$RP
 }
