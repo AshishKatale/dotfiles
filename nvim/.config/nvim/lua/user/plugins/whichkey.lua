@@ -87,8 +87,10 @@ local mappings = {
 	l = { "<C-w>l", "Right split" },
 	j = { "<C-w>j", "Lower split" },
 	k = { "<C-w>k", "Upper split" },
-	p = { "<cmd>Telescope project display_type=full theme=dropdown<cr>", "Projects" },
+	P = { "<cmd>Telescope project display_type=full theme=dropdown<cr>", "Projects" },
 	u = { "<cmd>Telescope undo<cr>", "Undo history" },
+	p = { "\"+p", "Paste" },
+	y = { "\"+y", "Copy" },
 	q = {
 		name = "QuickFix List",
 		q = { "<cmd>Trouble quickfix<cr>", "Open Quickfix" },
