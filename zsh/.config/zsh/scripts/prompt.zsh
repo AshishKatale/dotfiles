@@ -68,7 +68,8 @@ prompt() {
 		RP+="%F{$EXIT_COLOR}%B[$EXIT_CODE] $EXIT_ICON%b%f "
 	fi
 
-	local CD=$(echo $PWD | sed "s|/home/$USER| |g" | sed 's/\///g')
+  local HOMEPATH="$(realpath ~)"
+	local CD=$(echo $PWD | sed "s|$HOMEPATH| |g" | sed 's/\///g')
 	P+="%B%F{white}%K{$BLUE} $CD"
 	P+="%b%f%k%F{$BLUE}"
 	P+="$(gitinfo)"
