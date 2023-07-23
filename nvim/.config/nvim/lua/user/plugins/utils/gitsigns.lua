@@ -48,6 +48,6 @@ gitsigns.setup {
  }
 
 -- Gitsignes keybinds
-vim.keymap.set({ "n", "i" }, "<F14>", gitsigns.prev_hunk, { silent = true })	--  bind Shift+F2(f14) => <C-s-n> with autokey
+vim.keymap.set({ "n", "i" }, "<C-b>", gitsigns.prev_hunk, { silent = true })
 vim.keymap.set({ "n", "i" }, "<C-n>", gitsigns.next_hunk, { silent = true })
 

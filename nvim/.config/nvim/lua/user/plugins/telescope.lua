@@ -175,5 +175,4 @@ telescope.setup {
 -- Telescope keybinds
 local telescope_builtin = require("telescope.builtin")
 vim.keymap.set({ "n", "i" }, "<C-f>", telescope_builtin.current_buffer_fuzzy_find, { silent = true })
-vim.keymap.set({ "n", "i" }, "<F13>", telescope_builtin.live_grep, { silent = true })     --  bind Shift+F1(f13) => <C-S-f> with autokey
 vim.keymap.set({ "n", "i" }, "<C-p>", function () telescope_builtin.find_files({ hidden = true }) end, { silent = true })

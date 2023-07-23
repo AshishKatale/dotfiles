@@ -103,6 +103,7 @@ local function lsp_keymaps(bufnr)
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "LSP rename" },
 		c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "LSP Code action" },
 		f = { "<cmd>lua vim.lsp.buf.format({ timeout_ms = 10000 })<CR>", "Format Document" },
+    F = { "<cmd>Telescope live_grep<CR>", "Find" },
 	}
 
 	local leader_opts = {}

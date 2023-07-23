@@ -58,3 +58,5 @@ vim.keymap.set({ "x" }, "<A-k>", ":move '<-2<CR>gv-gv", { silent = true })
 vim.keymap.set({ "n", "i" }, "<C-k>x", "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", { silent = true })
 vim.keymap.set({ "n", "i" }, "<C-k><C-x>", "<cmd>1,$bd!<CR>", { silent = true })
 
+vim.keymap.set({ "n" }, "<leader><leader>", "<cmd>ToggleTerm<CR>", { silent = true })
+
