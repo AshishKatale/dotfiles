@@ -5,10 +5,6 @@ if not status_ok then
 end
 
 local trouble = require("trouble.providers.telescope")
-
-telescope.load_extension('undo');
-telescope.load_extension("file_browser")
-
 local actions = require "telescope.actions"
 
 local mappings = {
@@ -153,21 +149,6 @@ telescope.setup {
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
-    },
-		undo = {
-      use_delta = true,
-      use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
-      side_by_side = false,
-      diff_context_lines = vim.o.scrolloff,
-      entry_format = "state #$ID, $STAT, $TIME",
-      mappings = {
-        i = {
-          ["<cr>"] = require("telescope-undo.actions").yank_additions,
-          ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-          ["<C-cr>"] = require("telescope-undo.actions").restore,
-        },
-      },
     },
   },
 }
