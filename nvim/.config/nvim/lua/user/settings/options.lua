@@ -52,5 +52,6 @@ vim.opt.guicursor = 'n-v-c-sm:block,' ..
 		'i-r-cr-o:hor20,' ..
 		'i:blinkwait1000-blinkoff400-blinkon300';        -- changed cursor style to '_' in insert mode
 
+vim.opt.shell = "/bin/zsh"
 -- vim.opt.shortmess:append "c"
 -- vim.cmd [[set formatoptions-='cro']]

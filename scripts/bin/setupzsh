@@ -3,21 +3,24 @@
 DOTFILES=$(realpath $0 | sed 's/\(.*dotfiles\).*/\1/')
 
 setup_zsh() {
-	pushd $DOTFILES
-	stow zsh
-	popd
-
-	ZDOTDIR=~/.config/zsh
-	ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
-
-	git clone https://github.com/zsh-users/zsh-completions $ZSH_PLUGINS_DIR/zsh-completions 
-	git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS_DIR/zsh-autosuggestions
-	git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_PLUGINS_DIR/fast-syntax-highlighting
-
-	echo "ZDOTDIR=$ZDOTDIR" > ~/.zshenv
+  pushd $DOTFILES
+  stow zsh
+  popd
+  
+  ZDOTDIR=$(realpath ~)/.config/zsh
+  ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
+  
+  git clone https://github.com/zsh-users/zsh-completions $ZSH_PLUGINS_DIR/zsh-completions 
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS_DIR/zsh-autosuggestions
+  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_PLUGINS_DIR/fast-syntax-highlighting
+  
+  echo "ZDOTDIR=$ZDOTDIR" > ~/.zshenv
+  echo "ZPROMPT_STYLE=fancy" >> ~/.zshenv
+  echo "PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.zshenv
+  echo "PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.zshenv
 }
 
-read -p "Setup zsh? (y/N) : " -n 1 CONFIRM
+read -p "Setup zsh? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then

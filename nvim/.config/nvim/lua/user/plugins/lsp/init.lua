@@ -71,4 +71,5 @@ mason_lspconfig.setup_handlers {
 }
 
 lspconfig.rust_analyzer.setup(lspsettings["rust_analyzer"])
+-- lspconfig.gopls.setup(lspsettings["gopls"])
 

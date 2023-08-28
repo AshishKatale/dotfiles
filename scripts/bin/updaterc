@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DOTFILES=$(realpath $0 | sed 's/\(.*dotfiles\).*/\1/')
 
@@ -15,18 +15,18 @@ update_dotbashrc() {
 		echo "export DOTFILES=$DOTFILES" >> ~/.bashrc
 	fi
 
-	if grep -q ":~/bin" ~/.bashrc; then
-		echo -e "\033[00;32m\0~/bin already in path\033[0m"
+	if grep -q ":$(realpath ~)/bin" ~/.bashrc; then
+		echo -e "\033[00;32m\0$(realpath ~)/bin already in path\033[0m"
 	else
-		echo "export PATH=\"\$PATH:~/bin\"" >> ~/.bashrc
-		echo -e "\033[00;32m\0~/bin added to path\033 .bashrc[0m"
+		echo "export PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.bashrc
+		echo -e "\033[00;32m\0$(realpath ~)/bin added to path\033 .bashrc[0m"
 	fi
 
-	if grep -q ":~/.local/bin" ~/.bashrc; then
-		echo -e "\033[00;32m\0~/.local/bin already in path\033[0m"
+	if grep -q ":$(realpath ~)/.local/bin" ~/.bashrc; then
+		echo -e "\033[00;32m\0$(realpath ~)/.local/bin already in path\033[0m"
 	else
-		echo "export PATH=\"\$PATH:~/.local/bin\"" >> ~/.bashrc
-		echo -e "\033[00;32m\0~/.local/bin added to path in .bashrc\033[0m"
+		echo "export PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.bashrc
+		echo -e "\033[00;32m\0$(realpath ~)/.local/bin added to path in .bashrc\033[0m"
 	fi
 
 	if grep -q "source.*bashrc.sh" ~/.bashrc; then
@@ -35,7 +35,7 @@ update_dotbashrc() {
 		echo "source $DOTFILES/bash/bashrc.sh" >> ~/.bashrc
 	fi
 
-	cp "$DOTFILES/bash/.vimrc" ~/.vimrc
+	cp "$DOTFILES/editors/.vimrc" ~/.vimrc
 }
 
 update_dotprofile() {
@@ -57,22 +57,22 @@ update_dotprofile() {
 		echo "export TERM=xterm-256color" >> ~/.profile
 	fi
 
-	if grep -q ":~/bin" ~/.profile; then
-		echo -e "\033[00;32m\0~/bin already in path\033[0m"
+	if grep -q ":$(realpath ~)/bin" ~/.profile; then
+		echo -e "\033[00;32m\0$(realpath ~)/bin already in path\033[0m"
 	else
-		echo "export PATH=\"\$PATH:~/bin\"" >> ~/.profile
-		echo -e "\033[00;32m\0~/bin added to path in .profile\033[0m"
+		echo "export PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.profile
+		echo -e "\033[00;32m\0$(realpath ~)/bin added to path in .profile\033[0m"
 	fi
 
-	if grep -q ":~/.local/bin" ~/.profile; then
-		echo -e "\033[00;32m\0~/.local/bin already in path\033[0m"
+	if grep -q ":$(realpath ~)/.local/bin" ~/.profile; then
+		echo -e "\033[00;32m\0$(realpath ~)/.local/bin already in path\033[0m"
 	else
-		echo "export PATH=\"\$PATH:~/.local/bin\"" >> ~/.profile
-		echo -e "\033[00;32m\0~/.local/bin added to path in .profile\033[0m"
+		echo "export PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.profile
+		echo -e "\033[00;32m\0$(realpath ~)/.local/bin added to path in .profile\033[0m"
 	fi
 }
 
-read -p "Update .bashrc? (y/N) : " -n 1 CONFIRM
+read -p "Update .bashrc? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
@@ -82,7 +82,7 @@ else
 	echo -e '\033[00;31m\0.bashrc update cancelled\033[0m'
 fi
 
-read -p "Update .profile? (y/N) : " -n 1 CONFIRM
+read -p "Update .profile? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then

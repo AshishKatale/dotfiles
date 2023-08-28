@@ -37,6 +37,20 @@ local lsp_settings = {
 			},
 		}
 	},
+  ["gopls"] = {
+    cmd = {"gopls", "serve"},
+    filetypes = {"go", "gomod"},
+		on_attach = handlers.on_attach,
+		capabilities = handlers.capabilities,
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+  },
 	["tailwindcss"] = {
 		autostart = false
 	}

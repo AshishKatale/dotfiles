@@ -1,9 +1,9 @@
-alias v="nvim"
 alias c="clear"
 alias x="clear"
 alias ccc="exit"
 alias xxx="exit"
 alias ls="ls --color=auto"
+alias ll="ls -alh --color=auto"
 alias grep="grep --color=auto"
 alias bashrc="vim ~/.bashrc"
 alias zshrc="vim $ZDOTDIR/.zshrc"
@@ -28,6 +28,7 @@ alias ta='tmux attach -t'
 function ll() { ls -Alh --color=always $@ }
 function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }
 function lsd() { ls --color=always -alhA $@ | grep --color=never "^d.*" }
+function v() { if hash nvim &> /dev/null; then nvim $@; else vim $@; fi }
 
 function http-server() {
   PORT=$1
