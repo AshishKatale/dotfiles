@@ -15,20 +15,22 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
+selected_dirname="$(basename $(dirname $selected))"
+session_name="$selected_dirname/$selected_name"
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
+    tmux new-session -s $session_name -c $selected
     exit 0
 fi
 
-if ! tmux has-session -t $selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if ! tmux has-session -t $session_name 2> /dev/null; then
+    tmux new-session -ds $session_name -c $selected
 fi
 
 if tmux ls | grep attached; then
-	tmux switch-client -t $selected_name
+	tmux switch-client -t $session_name
 else
-	tmux attach-session -t $selected_name
+	tmux attach-session -t $session_name
 fi
 
