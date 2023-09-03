@@ -1,4 +1,6 @@
 ----------- Custom User Commands ------------
+local myAugroup = vim.api.nvim_create_augroup("myAugroup", { clear = true })
+
 vim.api.nvim_create_user_command('ToggleBlankline', " execute 'IndentBlanklineToggle' | set list!", {})
 vim.api.nvim_create_user_command('NvimConfig', 'Telescope find_files hidden=true cwd=$DOTFILES/nvim prompt_title=Nvim\\ Config', {})
 vim.api.nvim_create_user_command('Format', "execute 'lua vim.lsp.buf.format({ timeout_ms = 30000 })'", {})
@@ -24,9 +26,27 @@ vim.api.nvim_create_user_command('ToggleBGOpacity', function()
 	end
 end, {})
 
------------- Custom AutoCommands ------------
+vim.g.format_on_save_cmd = nil
+vim.api.nvim_create_user_command(
+  'ToggleFormatOnSave',
+  function ()
+    if vim.g.format_on_save_cmd ~= nil then
+      vim.api.nvim_del_autocmd(vim.g.format_on_save_cmd)
+      vim.g.format_on_save_cmd = nil
+    else
+      vim.g.format_on_save_cmd = vim.api.nvim_create_autocmd('BufWritePost', {
+        group = myAugroup,
+        callback = function()
+          vim.lsp.buf.format({ async = true })
+        end,
+      })
+    end
+  end,
+  {}
+)
 
-local myAugroup = vim.api.nvim_create_augroup("myAugroup", { clear = true })
+
+------------ Custom AutoCommands ------------
 
 -- set transparent background on opening neovim
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
