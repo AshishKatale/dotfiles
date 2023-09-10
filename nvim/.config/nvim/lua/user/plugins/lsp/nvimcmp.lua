@@ -19,22 +19,22 @@ end
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
+  Text = "󰉨",
+  Method = "",
+  Function = "",
   Constructor = "",
   Field = "",
   Variable = "",
   Class = "",
-  Interface = "",
+  Interface = "󰌗",
   Module = "󰅩",
   Property = "",
   Unit = "",
-  Value = "",
+  Value = "󰎠",
   Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
+  Keyword = "",
+  Snippet = "󰃐",
+  Color = "",
   File = "",
   Reference = "",
   Folder = "",
@@ -43,7 +43,7 @@ local kind_icons = {
   Struct = "",
   Event = "",
   Operator = "",
-  TypeParameter = "T",
+  TypeParameter = "󰗴",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
