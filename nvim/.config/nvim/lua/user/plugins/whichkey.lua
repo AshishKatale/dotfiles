@@ -112,6 +112,7 @@ local mappings = {
 		f = { "<cmd>Telescope git_files<CR>", "Git Files" },
 		d = { "<cmd>lua require 'gitsigns'.diffthis()<cr>", "File diff" },
 		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset hunk" },
+		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset hunk" },
 		S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage hunk" },
 		U = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo stage hunk" },
 		g = { "<cmd>LazyGit<cr>", "LazyGit" },
