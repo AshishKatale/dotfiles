@@ -127,7 +127,7 @@ prompt() {
 function zle-line-init zle-keymap-select {
 	local MODE_COLOR=$BLUE
 	local MODE="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
-	local VIMODE="%F{$MODE_COLOR}%K{$GRAY} %f%B$MODE%b%F{$MODE_COLOR} %k%f" 
+	local VIMODE="%F{$MODE_COLOR}%K{$GRAY}%f$MODE%F{$MODE_COLOR}%k%f" 
   if [[ "$ZPROMPT_STYLE" = "plain" ]]
   then
     if [[ $MODE == "NORMAL" ]]; then
