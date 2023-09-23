@@ -2,9 +2,11 @@ local configs = require("nvim-treesitter.configs")
 
 configs.setup({
 	ensure_installed = {
-		"vim", "regex", "bash", "css",
-		"lua", "javascript", "json", "html",
-		"typescript", "tsx", "rust"
+    "vim", "vimdoc", "regex", "lua", "bash",
+    "yaml", "xml", "json", "csv", "sql", "gitignore",
+    "css", "scss", "html", "javascript",
+    "typescript", "tsx", "jsdoc",
+    "c", "cpp", "rust", "go", "java"
 	},
 	sync_install = false,
 	ignore_install = { "" }, -- List of parsers to ignore installing
