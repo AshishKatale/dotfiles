@@ -16,11 +16,11 @@ todo.setup({
 			signs = false,                                  -- configure signs for some keywords individually
 		},
 		WARN = { icon = "", color = "warn", alt = { "WARNING", "XXX" } },
-		NOTE = { icon = "󰍨", color = "info", alt = { "INFO" } },
+		NOTE = { icon = "󰍨", color = "info", alt = { "INFO", "NOTICE" } },
 		HACK = { icon = "󰈸", color = "hack" },
-		TODO = { icon = "", color = "todo" },
-		PERF = { icon = "󱅳", color = "perf", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-		TEST = { icon = "󰖷", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+		TODO = { icon = "", color = "todo", alt = { "REMINDER", "REMEMBER" } },
+		PERF = { icon = "󱅳", color = "perf", alt = { "PERF", "PERFORMANCE", "OPTIM", "OPTIMIZE" } },
+		TEST = { icon = "󰖷", color = "test", alt = { "TEST", "TESTING", "PASS", "PASSED", "FAIL", "FAILED" } },
 	},
 	gui_style = {
 		fg = "NONE",             -- The gui style to use for the fg highlight group.
@@ -38,7 +38,7 @@ todo.setup({
 		before = "",                     -- "fg" or "bg" or empty
 		keyword = "wide",                  -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
 		after = "fg",                    -- "fg" or "bg" or empty
-		pattern = [[.<(KEYWORDS)\s?:]],     -- pattern or table of patterns, used for highlighting (vim regex)
+		pattern = [[.<(KEYWORDS)\s?:?]],     -- pattern or table of patterns, used for highlighting (vim regex)
 		comments_only = true,            -- uses treesitter to match keywords in comments only
 		max_line_len = 400,              -- ignore lines longer than this
 		exclude = {},                    -- list of file types to exclude highlighting
@@ -66,7 +66,7 @@ todo.setup({
 		},
 		-- regex that will be used to match keywords.
 		-- don't replace the (KEYWORDS) placeholder
-		pattern = [[\b(KEYWORDS)\s?:]],     -- ripgrep regex
+		pattern = [[\b(KEYWORDS)\s?:?]],     -- ripgrep regex
 		-- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
 	},
 })
