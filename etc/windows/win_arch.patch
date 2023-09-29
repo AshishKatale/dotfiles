@@ -1,0 +1,26 @@
+diff --git a/nvim/.config/nvim/lua/user/plugins/lsp/nvimcmp.lua b/nvim/.config/nvim/lua/user/plugins/lsp/nvimcmp.lua
+index ab379c8..15d6376 100644
+--- a/nvim/.config/nvim/lua/user/plugins/lsp/nvimcmp.lua
++++ b/nvim/.config/nvim/lua/user/plugins/lsp/nvimcmp.lua
+@@ -58,7 +58,7 @@ cmp.setup {
+     ["<C-n>"] = cmp.mapping.select_next_item(),
+     ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+-    ["<C-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
++    ["<C-Q>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+     ["<C-c>"] = cmp.mapping {
+       i = cmp.mapping.abort(),
+diff --git a/tmux/.config/tmux/tmux.conf b/tmux/.config/tmux/tmux.conf
+index de2fb56..bdc6e3c 100644
+--- a/tmux/.config/tmux/tmux.conf
++++ b/tmux/.config/tmux/tmux.conf
+@@ -3,7 +3,7 @@ set -g status-position bottom
+ set -g base-index 1
+ set -g mode-keys vi
+ set -g status off
+-set -g mouse on
++set -g mouse off
+ 
+ # status bar styles
+ set -g mode-style "fg=default,bg=#264f78"

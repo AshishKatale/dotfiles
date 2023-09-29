@@ -59,27 +59,31 @@ opn(){
 	fi
 }
 
-# tab completion forward and backwards
-bind 'TAB:menu-complete'
-bind '"\e[Z": menu-complete-backward'    # shift+tab
+# if the shell is interactive
+if [[ $- != *i* ]]; then
+  # tab completion forward and backwards
+  bind 'TAB:menu-complete'
+  bind '"\e[Z": menu-complete-backward'    # shift+tab
 
-# if multiple completions available, list them
-bind 'set show-all-if-ambiguous on'
+  # if multiple completions available, list them
+  bind 'set show-all-if-ambiguous on'
 
-# if multiple completions and no partial completion can be made
-bind "set show-all-if-unmodified on"
+  # if multiple completions and no partial completion can be made
+  bind "set show-all-if-unmodified on"
 
-# tab completion options set color 
-bind 'set colored-stats on'
-bind 'set visible-stats on'
+  # tab completion options set color
+  bind 'set colored-stats on'
+  bind 'set visible-stats on'
 
-# case insensitive completion
-bind "set completion-ignore-case on"
+  # case insensitive completion
+  bind "set completion-ignore-case on"
 
-# Perform partial (common) completion on the first Tab press, only start
-# cycling full results on the second Tab press (from bash version 5)
-bind "set menu-complete-display-prefix on"
+  # Perform partial (common) completion on the first Tab press, only start
+  # cycling full results on the second Tab press (from bash version 5)
+  bind "set menu-complete-display-prefix on"
 
-# Cycle through history based on characters already typed on the line
-bind '"\e[A":history-search-backward'    # uparrow
-bind '"\e[B":history-search-forward'     # downarrow
+  # Cycle through history based on characters already typed on the line
+  bind '"\e[A":history-search-backward'    # uparrow
+  bind '"\e[B":history-search-forward'     # downarrow
+fi
+

@@ -3,10 +3,15 @@ alias x="clear"
 alias ccc="exit"
 alias xxx="exit"
 alias ls="ls --color=auto"
+alias lls="ls -l --color=auto"
 alias ll="ls -alh --color=auto"
 alias grep="grep --color=auto"
 alias bashrc="vim ~/.bashrc"
 alias zshrc="vim $ZDOTDIR/.zshrc"
+
+function ll() { ls -Alh --color=always $@ }
+function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }
+function lsd() { ls --color=always -alhA $@ | grep --color=never "^d.*" }
 
 alias gst='git status'
 alias glo='git log --oneline'
@@ -20,20 +25,24 @@ alias nst='npm start'
 alias nbld='npm run build'
 alias ndv='npm run dev'
 
+alias ta='tmux attach -t'
 alias tls='tmux list-sessions'
 alias tks='tmux kill-session -t'
 alias tkill='tmux kill-server'
-alias ta='tmux attach -t'
+function tns () { tmux new-session -s ${1:=$(PROMPT_STYLE=plain pathinfo)} }
 
-function ll() { ls -Alh --color=always $@ }
-function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }
-function lsd() { ls --color=always -alhA $@ | grep --color=never "^d.*" }
-function v() { if hash nvim &> /dev/null; then nvim $@; else vim $@; fi }
+function v() { 
+  if hash nvim &> /dev/null; then 
+    nvim $@
+  elif hash vim &> /dev/null; then
+    vim $@
+  elif hash vi &> /dev/null; then
+    vi $@
+  fi
+}
 
 function http-server() {
-  PORT=$1
-  [ -z "$PORT" ] && PORT=8080
-  python3 -m http.server $PORT
+  python3 -m http.server ${PORT:=3000}
 }
 
 function cpwd(){

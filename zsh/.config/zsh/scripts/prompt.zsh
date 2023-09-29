@@ -1,8 +1,77 @@
 readonly GIT_BRANCH_CHANGED_SYMBOL='+'
 readonly GIT_NEED_PUSH_SYMBOL='↑'
 readonly GIT_NEED_PULL_SYMBOL='↓'
-readonly GRAY="#555555"
-readonly BLUE="#0A7BCB"
+readonly GRAY="240"
+readonly BLUE="33"
+
+function tmuxinfo(){
+	local TS_COUNT="$(tmux ls 2> /dev/null | wc -l)"
+  if [ "$PROMPT_STYLE" = "plain" ]
+  then
+    if [ -n "$TMUX" ]; then
+      echo "%F{yellow}%BT%b%f"
+    else
+      if [ $TS_COUNT -gt 0 ]; then
+        echo "%F{yellow}%B${TS_COUNT}T%b%f"
+      fi
+    fi
+  else
+    if [ -z "$TMUX" ]; then
+      if [ $TS_COUNT -gt 0 ]; then
+        SESSION_COUNT=""
+        if [ $TS_COUNT -gt 1 ]; then
+          SESSION_COUNT="[$TS_COUNT]"
+        fi
+        echo "%F{yellow}%B$SESSION_COUNT %b%f"
+      fi
+    fi
+  fi
+}
+
+function pathinfo() {
+  local HOMEPATH_FULL="$(realpath ~)"
+  local HOMEPATH_SHORT3=$(realpath ~ \
+    | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' \
+    | tr '\n' '/'
+  )
+  local HOMEPATH_SHORT1=$(realpath ~ \
+    | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' \
+    | tr '\n' '/'
+  )
+  local COLS="$(tput cols)"
+  local CD="${PWD##*/}"
+  local HD="${$(realpath ~)##*/}"
+
+  if [ "$PROMPT_STYLE" = "plain" ]
+  then
+    if [ "$CD" = "$HD" ]; then CD="~/"; fi
+    if [ $COLS -lt 80 ]; then
+      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
+        | sed "s|$HOMEPATH_SHORT1|~/|g" \
+        | sed "s|\(.*\).\/\$|\1$CD|"
+    elif [ $COLS -lt 120 ]; then
+      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
+        | sed "s|$HOMEPATH_SHORT3|~/|g" \
+        | sed "s|\(.*\)...\/\$|\1$CD|"
+    else
+      echo "$(pwd | sed "s|$HOMEPATH_FULL|~|g")"
+    fi
+  else
+    if [ $COLS -lt 80 ]; then
+      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
+        | sed "s|$HOMEPATH_SHORT1| |g" \
+        | sed "s|\(.*\).\/\$|\1$CD|" \
+        | sed 's|\/||g'
+    elif [ $COLS -lt 120 ]; then
+      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
+        | sed "s|$HOMEPATH_SHORT3| |g" \
+        | sed "s|\(.*\)...\/\$|\1$CD|" \
+        | sed 's|\/||g'
+    else
+      echo "$(pwd | sed "s|$HOMEPATH_FULL| |g" | sed 's/\///g')"
+    fi
+  fi
+}
 
 function gitinfo() {
 	[ -x "$(which git)" ] || return    # git not found
@@ -19,20 +88,20 @@ function gitinfo() {
 
 	[ -n $current_branch ] && {
 		checked_out=$current_branch
-		git_checkout_symbol='󰊢'
+		git_checkout_symbol='󰊢 '
 	}
 	[ -n $current_tag ] && [ -z $current_branch ] && {
 		checked_out=$current_tag
-		git_checkout_symbol='󰓻'
+		git_checkout_symbol='󰓻 '
 	}
 	[ -n $current_commit ] &&  [ -z $current_branch ] && [ -z $current_tag ] && {
 		checked_out=$current_commit
-		git_checkout_symbol=''
+		git_checkout_symbol=' '
 	}
 
 	local git_status=$(git status --porcelain | wc -l)
 	local marks
-  if [ "$ZPROMPT_STYLE" = "plain" ]
+  if [ "$PROMPT_STYLE" = "plain" ]
   then
     [ "$git_status" -gt 0 ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
     echo " %F{yellow}$checked_out$marks%f"
@@ -47,7 +116,7 @@ function gitinfo() {
 	[ -n "$aheadN" ] && marks+=" $aheadN$GIT_NEED_PUSH_SYMBOL"
 	[ -n "$behindN" ] && marks+=" $behindN$GIT_NEED_PULL_SYMBOL"
 
-	echo "%K{$GRAY}%B%F{yellow}$git_checkout_symbol $checked_out$marks%F{$GRAY}"
+	echo "%K{$GRAY}%F{$BLUE}%f%F{yellow}%B$git_checkout_symbol$checked_out$marks%b%f%k%K{$BLUE}%F{$GRAY}%f%k"
 }
 
 prompt() {
@@ -61,65 +130,44 @@ prompt() {
 
 	if [ -z $EXIT_CODE ]; then
 		local EXIT_COLOR="green"
-		local EXIT_ICON=""
-		RP+="%F{$EXIT_COLOR}%B$EXIT_ICON %b%f"
+		local EXIT_ICON=" "
+		RP+="%F{$EXIT_COLOR}%B$EXIT_ICON%b%f"
 	else
 		local EXIT_COLOR="red"
-		local EXIT_ICON=""
-		RP+="%F{$EXIT_COLOR}%B[$EXIT_CODE] $EXIT_ICON%b%f "
+		local EXIT_ICON=" "
+		RP+="%F{$EXIT_COLOR}%B[$EXIT_CODE] $EXIT_ICON%b%f"
 	fi
 
-  local HOMEPATH="$(realpath ~)"
-  local CD=$(echo $PWD | sed "s|$HOMEPATH| |g" | sed 's/\///g')
-	local TMX="$(tmux ls 2> /dev/null | wc -l)"
-  local TMUX_STR=""
+  local PATH_INFO=$(pathinfo)
+  local TMUX_INFO=$(tmuxinfo)
+  local GIT_INFO=$(gitinfo)
+  local TMUX_SYMBOL=""
 
-  if [ "$ZPROMPT_STYLE" = "plain" ]
+  if [ "$PROMPT_STYLE" = "plain" ]
   then
-    RP=""
-    CD=$PWD
-    HOMEPATH_LEN=${#HOMEPATH}
-
-    if [ ${#PWD} -gt $HOMEPATH_LEN ]; then
-      CD=$(echo $PWD | sed "s|$HOMEPATH|~|g")
-    fi
-
-    if [ -n "$TMUX" ]; then
-      RP+="%F{yellow}%BT%b%f"
-    else
-      if [ $TMX -gt 0 ]; then
-        RP+="%F{yellow}%B${TMX}T%b%f"
-      fi
-    fi
+    RP=$TMUX_INFO
 
     if [ $JOBS -gt 0 ]; then
       RP+="%F{cyan}%B $JOBS&%b%f"
     fi
 
-    P+="%F{cyan}$CD%f"
-    P+="$(gitinfo) %F{$EXIT_COLOR}$%f "
+    P+="%F{cyan}$PATH_INFO%f"
+    P+="$GIT_INFO %F{$EXIT_COLOR}$%f "
     PROMPT=$P
     RPROMPT=$RP
     return
   fi
 
-	if [ -n "$TMUX" ]; then
-	  TMUX_STR=" "	
-  else
-    if [ $TMX -gt 0 ]; then
-      RP+="%F{yellow}%B %b%f"
-    fi
-	fi
+  RP+=$TMUX_INFO
+	if [ -n "$TMUX" ]; then TMUX_SYMBOL=" ";	fi
 
 	if [ $JOBS -gt 0 ]; then
-		RP+="%F{$BLUE}%B  %b%f"
+		RP+="%F{cyan}%B %b%f"
 	fi
 
-	P+="%B%F{white}%K{$BLUE} $TMUX_STR$CD"
-	P+="%b%f%k%F{$BLUE}"
-	P+="$(gitinfo)"
-	P+="%K{$BLUE}%f"
-	P+="%k%F{$BLUE} %f"
+	P+="%F{$BLUE}%f%F{white}%K{$BLUE}%B$TMUX_SYMBOL$PATH_INFO%b%k%f"
+	P+="$GIT_INFO"
+	P+="%F{$BLUE} %f"
 	PROMPT=$P
 	RPROMPT=$RP
 }
@@ -127,8 +175,8 @@ prompt() {
 function zle-line-init zle-keymap-select {
 	local MODE_COLOR=$BLUE
 	local MODE="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
-	local VIMODE="%F{$MODE_COLOR}%K{$GRAY}%f$MODE%F{$MODE_COLOR}%k%f" 
-  if [[ "$ZPROMPT_STYLE" = "plain" ]]
+	local VIMODE="%F{$MODE_COLOR}%f%K{$MODE_COLOR}%F{$GRAY}%f%k%K{$GRAY}$MODE%k%F{$GRAY}%K{$MODE_COLOR}%k%f%F{$MODE_COLOR}%f"
+  if [[ "$PROMPT_STYLE" = "plain" ]]
   then
     if [[ $MODE == "NORMAL" ]]; then
       RPROMPT="$RPROMPT%F{green} $MODE %f"
@@ -139,7 +187,7 @@ function zle-line-init zle-keymap-select {
     if [[ $MODE == "NORMAL" ]]; then
       RPROMPT="$RPROMPT$VIMODE"
     else
-      RPROMPT=$(echo $RPROMPT | sed "s/.*//g")
+      RPROMPT=$(echo $RPROMPT | sed "s/%F{$BLUE}.*.*%f//g")
     fi
   fi
 	zle && { zle reset-prompt; zle -R }

@@ -4,10 +4,10 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
 		projects=$(
-			find ~/Workspace -mindepth 2 -maxdepth 2 -type d
+			find ~/workspace -mindepth 2 -maxdepth 2 -type d -not -name ".git"
 			find ~/dotfiles -mindepth 0 -maxdepth 0 -type d
 		)
-		selected=$(echo "$projects" | fzf --layout=reverse)
+		selected=$(echo "$projects" | fzf --layout=reverse --bind=tab:down,btab:up)
 fi
 
 if [[ -z $selected ]]; then

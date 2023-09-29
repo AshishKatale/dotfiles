@@ -26,7 +26,7 @@ vim.opt.timeoutlen = 500
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
 -- vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
-vim.opt.expandtab = true													 -- convert tabs to spaces
+vim.opt.expandtab = true      -- convert tabs to spaces
 vim.opt.shiftwidth = 2        -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2           -- insert 2 spaces for a tab
 vim.opt.cursorline = true     -- highlight the current line
@@ -39,18 +39,18 @@ vim.opt.fixeol = false        -- disable insert newline at EOF
 -- vim.opt.guifont = "monospace:h17"													-- the font used in graphical neovim applications
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
--- vim.opt.colorcolumn = '80'
+vim.opt.colorcolumn = '80'
 
 vim.opt.listchars:append("tab:→ ") -- render tab as → when list option is set
 vim.opt.listchars:append("space:·") -- render space as · when list option is set
 -- vim.opt.listchars:append("eol:↴")													-- render eol as ↴ when list option is set
-vim.opt.iskeyword:append('-')       -- treat kebab cased text as a single word
-vim.opt.whichwrap:append('h,l')     -- wrap to next line
+vim.opt.iskeyword:append('-') -- treat kebab cased text as a single word
+vim.opt.whichwrap:append('h,l') -- wrap to next line
 
 vim.opt.guicursor = 'n-v-c-sm:block,' ..
-		'ci-ve:ver25,' ..
-		'i-r-cr-o:hor20,' ..
-		'i:blinkwait1000-blinkoff400-blinkon300';        -- changed cursor style to '_' in insert mode
+    'ci-ve:ver25,' ..
+    'i-r-cr-o:hor20,' ..
+    'i:blinkwait1000-blinkoff400-blinkon300'; -- changed cursor style to '_' in insert mode
 
 vim.opt.shell = "/bin/zsh"
 -- vim.opt.shortmess:append "c"

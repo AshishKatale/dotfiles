@@ -46,9 +46,12 @@ function GIT_INFO {
 	}
 }
 
+$PROMPT_STYLE="fancy"
 function prompt {
 	Write-Host "$PWD" -ForegroundColor "Cyan" -NoNewline
-	GIT_INFO
+  if($PROMPT_STYLE.Equals("fancy")) {
+    GIT_INFO
+  }
 	Write-Host " $" -ForegroundColor "Yellow" -NoNewline
 	return " "
 }

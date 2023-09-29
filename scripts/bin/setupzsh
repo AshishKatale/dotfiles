@@ -8,14 +8,19 @@ setup_zsh() {
   popd
   
   ZDOTDIR=$(realpath ~)/.config/zsh
-  ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
+  ZPLUGDIR="$ZDOTDIR/plugins"
   
-  git clone https://github.com/zsh-users/zsh-completions $ZSH_PLUGINS_DIR/zsh-completions 
-  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGINS_DIR/zsh-autosuggestions
-  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZSH_PLUGINS_DIR/fast-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-completions $ZPLUGDIR/zsh-completions 
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZPLUGDIR/zsh-autosuggestions
+  git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZPLUGDIR/fast-syntax-highlighting
   
-  echo "ZDOTDIR=$ZDOTDIR" > ~/.zshenv
-  echo "ZPROMPT_STYLE=fancy" >> ~/.zshenv
+  touch ~/.zshenv
+  echo "EDITOR=vim" > ~/.zshenv
+  echo "ZDOTDIR=$ZDOTDIR" >> ~/.zshenv
+  echo "ZPLUGDIR=$ZPLUGDIR" >> ~/.zshenv
+  echo "DOTFILES=$DOTFILES" >> ~/.zshenv
+  echo "TERM=xterm-256color" >> ~/.zshenv
+  echo "PROMPT_STYLE=fancy" >> ~/.zshenv
   echo "PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.zshenv
   echo "PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.zshenv
 }

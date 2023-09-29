@@ -1,6 +1,6 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
-	print("Unable to load: nvimtree")
+  print("Unable to load: nvimtree")
   return
 end
 
@@ -48,9 +48,9 @@ local function on_attach(bufnr)
   vim.keymap.set('n', '-', api.tree.change_root_to_parent, opts('Up'))
   vim.keymap.set('n', 'O', api.node.run.system, opts('Run System'))
   vim.keymap.set('n', 'q', api.tree.close, opts('Close'))
-  vim.keymap.set('n', 'g?', api.tree.toggle_help, opts('Help'))
-  vim.keymap.set('n', 'w', api.tree.expand_all, opts('Expand All'))
-  vim.keymap.set('n', 'W', api.tree.collapse_all, opts('Collapse'))
+  vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+  vim.keymap.set('n', 'W', api.tree.expand_all, opts('Expand All'))
+  vim.keymap.set('n', 'w', api.tree.collapse_all, opts('Collapse'))
   vim.keymap.set('n', 'S', api.tree.search_node, opts('Search'))
   vim.keymap.set('n', '<C-f>', api.tree.search_node, opts('Search'))
   vim.keymap.set('n', '<C-k>', api.node.show_info_popup, opts('Info'))
@@ -58,63 +58,66 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'f', api.live_filter.start, opts('Filter'))
   vim.keymap.set('n', 'F', api.live_filter.clear, opts('Clean Filter'))
   vim.keymap.set('n', 'm', api.marks.toggle, opts('Toggle Bookmark'))
+  vim.keymap.set('n', 'bd', api.marks.bulk.delete, opts('Delete Bookmarked'))
+  vim.keymap.set('n', 'bt', api.marks.bulk.trash, opts('Trash Bookmarked'))
+  vim.keymap.set('n', 'bm', api.marks.bulk.move, opts('Move Bookmarked'))
 end
 
 nvim_tree.setup {
-	on_attach = on_attach,
-	auto_reload_on_write = true,
+  on_attach = on_attach,
+  auto_reload_on_write = true,
   disable_netrw = true,
   hijack_netrw = true,
   open_on_tab = false,
   hijack_cursor = false,
   update_cwd = true,
-	renderer = {
-		group_empty = false,
-		highlight_opened_files = "none",
-		root_folder_modifier = ":t",
-		add_trailing = false,
-		highlight_git = false,
-		full_name = false,
-		highlight_modified = "none",
-		root_folder_label = ":~:s?$?/..?",
-		indent_width = 2,
-		icons = {
-			webdev_colors = true,
-			git_placement = "signcolumn",
-			modified_placement = "signcolumn",
-			padding = " ",
-			symlink_arrow = " 󰁕 ",
-			show = {
-				file = true,
-				folder = true,
-				folder_arrow = true,
-				git = true,
-				modified = true,
-			},
+  renderer = {
+    group_empty = false,
+    highlight_opened_files = "none",
+    root_folder_modifier = ":t",
+    add_trailing = false,
+    highlight_git = false,
+    full_name = false,
+    highlight_modified = "none",
+    root_folder_label = ":~:s?$?/..?",
+    indent_width = 2,
+    icons = {
+      webdev_colors = true,
+      git_placement = "signcolumn",
+      modified_placement = "signcolumn",
+      padding = " ",
+      symlink_arrow = " 󰁕 ",
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+        modified = true,
+      },
       glyphs = {
         default = "",
         symlink = "",
-				bookmark = "",
-				modified = "󰷬",
+        bookmark = "",
+        modified = "󰷬",
         folder = {
-					default = "",
-					open = "",
-					empty = "",
-					empty_open = "",
-					symlink = "",
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
           arrow_open = "",
           arrow_closed = "",
           symlink_open = "",
         },
-				git = {
-					unstaged = "󰐗",
-					staged = "",
-					unmerged = "",
-					renamed = "",
-					deleted = "",
-					untracked = "",
-					ignored = "",
-				},
+        git = {
+          unstaged = "󰐗",
+          staged = "",
+          unmerged = "",
+          renamed = "",
+          deleted = "",
+          untracked = "",
+          ignored = "",
+        },
       },
     },
     indent_markers = {
@@ -123,14 +126,14 @@ nvim_tree.setup {
         corner = "└ ",
         edge = "│ ",
         item = "│ ",
-				bottom = "─",
+        bottom = "─",
         none = "  ",
       },
     },
   },
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_cwd = false,
     ignore_list = {},
   },
   system_open = {
@@ -140,19 +143,19 @@ nvim_tree.setup {
   filters = {
     dotfiles = false,
     custom = { "^\\.git$", "^node_modules$" },
-		exclude = {},
+    exclude = {},
   },
-	modified = {
-		enable = true,
-		show_on_dirs = true,
-		show_on_open_dirs = false,
-	},
-	diagnostics = {
+  modified = {
     enable = true,
-		show_on_dirs = true,
-		show_on_open_dirs = false,
+    show_on_dirs = true,
+    show_on_open_dirs = false,
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+    show_on_open_dirs = false,
     icons = {
-			info = "",
+      info = "",
       hint = "󰌵",
       warning = "",
       error = "",
@@ -161,47 +164,45 @@ nvim_tree.setup {
   git = {
     enable = true,
     ignore = true,
-		show_on_dirs = true,
-		show_on_open_dirs = false,
-		timeout = 500,
+    show_on_dirs = true,
+    show_on_open_dirs = false,
+    timeout = 500,
   },
-	view ={
-		centralize_selection = false,
-		cursorline = true,
-		debounce_delay = 15,
-		width = 30,
-		hide_root_folder = false,
-		side = "right",
-		preserve_window_proportions = false,
-		number = false,
-		relativenumber = false,
-		signcolumn = "yes",
-		float = {
-			enable = false,
-			quit_on_focus_loss = true,
-			open_win_config = {
-				relative = "editor",
-				border = "rounded",
-				width = 30,
-				height = 30,
-				row = 1,
-				col = 1,
-			},
-		},
-	},
+  view = {
+    centralize_selection = false,
+    cursorline = true,
+    debounce_delay = 15,
+    width = 30,
+    side = "right",
+    preserve_window_proportions = false,
+    number = false,
+    relativenumber = false,
+    signcolumn = "yes",
+    float = {
+      enable = false,
+      quit_on_focus_loss = true,
+      open_win_config = {
+        relative = "editor",
+        border = "rounded",
+        width = 30,
+        height = 30,
+        row = 1,
+        col = 1,
+      },
+    },
+  },
   trash = {
     cmd = "trash",
     require_confirm = true,
   },
-	live_filter = {
-		prefix = "  : ",
-		always_show_folders = true,
-	},
-	ui = {
-		confirm = {
-			remove = true,
-			trash = true,
-		},
-	},
+  live_filter = {
+    prefix = "  : ",
+    always_show_folders = true,
+  },
+  ui = {
+    confirm = {
+      remove = true,
+      trash = true,
+    },
+  },
 }
-

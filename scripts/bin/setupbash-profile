@@ -3,10 +3,24 @@
 DOTFILES=$(realpath $0 | sed 's/\(.*dotfiles\).*/\1/')
 
 update_dotbashrc() {
+  touch ~/.bashrc
+
+	if grep -q "PROMPT_STYLE=" ~/.bashrc; then
+		sed -i "s/\(PROMPT_STYLE=\).*/PROMPT_STYLE=fancy/" ~/.bashrc
+	else
+		echo "PROMPT_STYLE=fancy" >> ~/.bashrc
+	fi
+
 	if grep -q "EDITOR=" ~/.bashrc; then
 		sed -i "s/\(EDITOR=\).*/EDITOR=vim/" ~/.bashrc
 	else
 		echo "EDITOR=vim" >> ~/.bashrc
+	fi
+
+	if grep -q "export TERM=" ~/.bashrc; then
+		sed -i "s|\(export TERM=\).*|export TERM=xterm-256color|" ~/.bashrc
+	else
+		echo "export TERM=xterm-256color" >> ~/.bashrc
 	fi
 
 	if grep -q "export DOTFILES=" ~/.bashrc; then
@@ -39,22 +53,24 @@ update_dotbashrc() {
 }
 
 update_dotprofile() {
+  touch ~/.profile
+
 	if grep -q "EDITOR=" ~/.profile; then
 		sed -i "s/\(EDITOR=\).*/EDITOR=vim/" ~/.profile
 	else
 		echo "EDITOR=vim" >> ~/.profile
 	fi
 
-	if grep -q "export DOTFILES=" ~/.profile; then
-		sed -i "s|\(export DOTFILES=\).*|export DOTFILES=$DOTFILES|" ~/.profile
-	else
-		echo "export DOTFILES=$DOTFILES" >> ~/.profile
-	fi
-
 	if grep -q "export TERM=" ~/.profile; then
 		sed -i "s|\(export TERM=\).*|export TERM=xterm-256color|" ~/.profile
 	else
 		echo "export TERM=xterm-256color" >> ~/.profile
+	fi
+
+	if grep -q "export DOTFILES=" ~/.profile; then
+		sed -i "s|\(export DOTFILES=\).*|export DOTFILES=$DOTFILES|" ~/.profile
+	else
+		echo "export DOTFILES=$DOTFILES" >> ~/.profile
 	fi
 
 	if grep -q ":$(realpath ~)/bin" ~/.profile; then

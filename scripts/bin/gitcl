@@ -15,7 +15,7 @@ then
 			return 1
 		fi
 	fi
-  REMOTE_URL="https://github.com/${GitHub_USERNAME}/${REPO_NAME}.git"
+  REMOTE_URL="git@github.com:${GitHub_USERNAME}/${REPO_NAME}.git"
 	git clone $REMOTE_URL
 else
 	echo -e '\033[00;31m\0Git repository already exist at -> \033[00;33m\0'$REPO_ROOT_DIR'/.git'

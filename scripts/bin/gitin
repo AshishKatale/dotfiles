@@ -18,7 +18,7 @@ then
 		fi
 	fi
 	git init 
-	REMOTE_URL="https://github.com/${GitHub_USERNAME}/${REPO_NAME}.git"
+  REMOTE_URL="git@github.com:${GitHub_USERNAME}/${REPO_NAME}.git"
 	git remote add origin $REMOTE_URL
 	echo -e '\033[00;32m\0Added remote origin -> \033[00;33m\0'$REMOTE_URL
 else
