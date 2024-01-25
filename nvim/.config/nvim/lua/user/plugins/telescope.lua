@@ -107,7 +107,7 @@ telescope.setup {
     },
     sorting_strategy = "ascending",
     prompt_prefix = "   ",
-    initial_mode = "normal",
+    initial_mode = "insert",
     selection_caret = "󰜴 ",
     multi_icon = "",
     path_display = { "smart" },
@@ -126,20 +126,9 @@ telescope.setup {
     find_files = {
       theme = "dropdown",
       previewer = false,
-      initial_mode = "insert",
-    },
-    current_buffer_fuzzy_find = {
-      initial_mode = "insert",
     },
     live_grep = {
-      initial_mode = "insert",
       additional_args = function() return { "--hidden" } end
-    },
-    git_files = {
-      initial_mode = "insert",
-    },
-    help_tags = {
-      initial_mode = "insert",
     },
     git_status = {
       initial_mode = "normal",

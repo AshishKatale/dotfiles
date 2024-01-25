@@ -71,11 +71,17 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
-    if vim.bo.filetype == "help" and vim.opt.relativenumber["_value"] == false then
-      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", { noremap = true, silent = true, nowait = true })
-      vim.cmd("set nu rnu signcolumn=no")
+    local opts = {
+      noremap = true,
+      silent = true,
+      nowait = true
+    };
+    if vim.bo.filetype == "help" then
+      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", opts);
+      vim.api.nvim_set_option_value("number", true, { buf = 0 });
+      vim.api.nvim_set_option_value("relativenumber", true, { buf = 0 });
     elseif vim.bo.filetype == "qf" then
-      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", { noremap = true, silent = true, nowait = true })
+      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", opts)
     end
   end
 })

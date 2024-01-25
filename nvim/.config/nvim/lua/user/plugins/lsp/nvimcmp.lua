@@ -111,6 +111,13 @@ cmp.setup {
       end,
       { "i", "s" }
     ),
+    ['<C-x>'] = function()
+      if cmp.visible_docs() then
+        cmp.close_docs()
+      else
+        cmp.open_docs()
+      end
+    end
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },

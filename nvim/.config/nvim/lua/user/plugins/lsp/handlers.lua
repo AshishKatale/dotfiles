@@ -9,52 +9,7 @@ if not cmp_status_ok then
   return
 end
 
-local M = {}
-
-M.setup = function()
-  local signs = {
-    { name = "DiagnosticSignInfo", text = "" },
-    { name = "DiagnosticSignHint", text = "󰌵" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignError", text = "" },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
-  local config = {
-    -- disable virtual text
-    virtual_text = false,
-    -- show signs
-    signs = {
-      active = signs,
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-      focusable = false,
-      style = "minimal",
-      border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
-    },
-  }
-
-  vim.diagnostic.config(config)
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
-end
-
-local function lsp_highlight_document(client)
+local lsp_highlight_document = function(client)
   if client.server_capabilities.documentHighlightProvider then
     vim.cmd [[
       augroup lsp_document_highlight
@@ -84,14 +39,14 @@ function RangeFormat()
   })
 end
 
-local function lsp_keymaps(bufnr)
+local lsp_keymaps = function(bufnr)
   local opts = {
-    mode = "n",   -- NORMAL mode
+    mode = "n",     -- NORMAL mode
     prefix = "g",
     buffer = bufnr, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
   }
 
   local mappings = {
@@ -130,11 +85,64 @@ local function lsp_keymaps(bufnr)
   which_key.register(leader_mappings, leader_opts)
 end
 
+local M = {}
+M.capabilities = cmp_nvim_lsp.default_capabilities()
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
 
-M.capabilities = cmp_nvim_lsp.default_capabilities()
+M.lsp_settings = {
+  ["lua_ls"] = {
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+      },
+    }
+  },
+  ["rust_analyzer"] = {
+    cmd = { "rustup", "run", "stable", "rust-analyzer" },
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+    settings = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true
+      },
+    }
+  },
+  ["gopls"] = {
+    cmd = { "gopls", "serve" },
+    filetypes = { "go", "gomod" },
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+  },
+  ["tailwindcss"] = {
+    autostart = false
+  }
+}
 
 return M
+

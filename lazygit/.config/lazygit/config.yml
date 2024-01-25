@@ -93,7 +93,7 @@ promptToReturnFromSubprocess: true # display confirmation when subprocess termin
 keybinding:
     universal:
         quit: '<esc>'
-        quit-alt1: '<c-q>' # alternative/alias of quit
+        quit-alt1: 'q' # alternative/alias of quit
         return: '<c-c>' # return to previous menu, will quit if there's nowhere to return
         # When set to a printable character, this will work for returning from non-prompt panels
         return-alt1: null
