@@ -54,10 +54,9 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 bindkey -v '^?' backward-delete-char
-bindkey "^[[A" up-line-or-search
-bindkey "^[[B" down-line-or-search
-bindkey '^ ' autosuggest-fetch
-bindkey '^x' autosuggest-toggle
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey '^ ' autosuggest-toggle
 
 source $ZDOTDIR/scripts/aliases.zsh 
 source $ZDOTDIR/scripts/prompt.zsh 
@@ -65,3 +64,10 @@ source $ZDOTDIR/scripts/nvm.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+# fzf key-bindings
+if [ -f $ZDOTDIR/plugins/key-bindings.zsh ]; then
+  source $ZDOTDIR/plugins/key-bindings.zsh
+  bindkey '^t' undefined-key
+  bindkey '^x' fzf-file-widget
+  bindkey '^r' fzf-history-widget
+fi

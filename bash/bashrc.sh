@@ -5,62 +5,32 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=5000
 HISTTIMEFORMAT='%d-%m-%y %T %p  '
 
-source ~/dotfiles/bash/prompts/prompt.sh
-
-# set -o vi
-
-alias c='clear'
-alias x='clear'
-alias xxx='exit'
-alias ccc='exit'
-alias ls='ls --color=auto'
-alias ll='ls -alh --color=auto'
-alias hx='helix'
-alias bashrc="vim ~/.bashrc"
-
-alias gst='git status'
-alias glo='git log --oneline'
-alias gcl="git config --list"
-alias gcm="git commit -m"
-alias gamend="git commit --amend --no-edit"
-alias gcgl="git config --global --list"
-
-alias nst='npm start'
-alias nbld='npm run build'
-alias ndv='npm run dev'
-
-alias stow='stow --no-folding'
-
-ld(){
-	ll -pA $1 --color=always | grep '/$' | sed 's/\///'
-}
-lf(){
-	ll -pA $1 --color=always | grep -v '/$'
-}
-
-cppath(){
-	if [ -z $1 ]
-	then
-		pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard
-	else
-		pwd | tr '\n' ' ' | xclip -selection clipboard
-	fi
-}
-
-opn(){
-	if [ -z $1 ]
-	then
-		xdg-open .
-	else
-		xdg-open $1
-	fi
-}
+source ~/dotfiles/bash/prompt.sh
+source ~/dotfiles/bash/aliases.sh
 
 # if the shell is interactive
-if [[ $- != *i* ]]; then
+if [[ $- =~ i ]]; then
+
+  # enable vi mode for command-line
+  set -o vi
+  bind -m vi-command '"j": nop'
+  bind -m vi-command '"k": nop'
+  bind -m vi-insert '"jk":vi-movement-mode'
+  bind -m vi-insert '"\C-a":beginning-of-line'
+  bind -m vi-insert '"\C-e":end-of-line'
+  bind -m vi-insert '"\C-k":kill-line'
+  bind -m vi-insert '"\C-l":clear-screen'
+  bind -m vi-insert '"\C-w":backward-kill-word'
+  bind -m vi-insert '"\C-u":backward-kill-line'
+  bind -m vi-insert '"\e-w":emacs-forward-word'
+  bind -m vi-insert '"\e-b":emacs-backward-word'
+  bind -m vi-insert '"\C-b":"tmux-sessionizer\n"'
+  bind -m vi-insert '"\C-p":history-search-backward'
+  bind -m vi-insert '"\C-n":history-search-forward'
+
   # tab completion forward and backwards
   bind 'TAB:menu-complete'
   bind '"\e[Z": menu-complete-backward'    # shift+tab
@@ -83,7 +53,7 @@ if [[ $- != *i* ]]; then
   bind "set menu-complete-display-prefix on"
 
   # Cycle through history based on characters already typed on the line
-  bind '"\e[A":history-search-backward'    # uparrow
-  bind '"\e[B":history-search-forward'     # downarrow
+  # bind '"\e[A":history-search-backward'    # uparrow
+  # bind '"\e[B":history-search-forward'     # downarrow
 fi
 

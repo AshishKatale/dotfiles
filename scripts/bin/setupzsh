@@ -23,6 +23,7 @@ setup_zsh() {
   echo "PROMPT_STYLE=fancy" >> ~/.zshenv
   echo "PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.zshenv
   echo "PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.zshenv
+  echo "FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> ~/.zshenv
 }
 
 read -p "Setup zsh? (y/N) : " CONFIRM

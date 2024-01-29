@@ -35,7 +35,7 @@ __powerline() {
     readonly STANDOUT_START="\[$(tput smso)\]"
     readonly STANDOUT_END="\[$(tput rmso)\]"
 
-    __git_info() { 
+    gitinfo() {
         [ -x "$(which git)" ] || return    # git not found
 
         local repo_exists=$(git rev-parse --is-inside-work-tree 2> /dev/null)
@@ -81,7 +81,7 @@ __powerline() {
 				printf "$BG_GRAY$FG_BLUE$RESET$BG_GRAY$BOLD$FG_YELLOW$git_checkout_symbol$checked_out$marks$FG_GRAY"
     }
 
-    __path_info() {
+    pathinfo() {
         local HOMEPATH_FULL="$(realpath ~)"
         local HOMEPATH_SHORT3=$(realpath ~ \
           | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' \
@@ -126,6 +126,19 @@ __powerline() {
         fi
     }
 
+    tmuxinfo(){
+      if [ "$PROMPT_STYLE" = "plain" ]
+      then
+        if [ -n "$TMUX" ]; then
+            echo "[T]"
+        fi
+      else
+        if [ -n "$TMUX" ]; then
+            echo " "
+        fi
+      fi
+    }
+
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
@@ -138,20 +151,18 @@ __powerline() {
         fi
 				
         if [ "$PROMPT_STYLE" = "plain" ]; then
-          PS1="$BOLD$FG_BLUE$(__path_info)"
+          PS1="$BOLD$FG_YELLOW$(tmuxinfo) $FG_BLUE$(pathinfo)"
           PS1+="$RESET$FG_BLUE"
-          PS1+="$(__git_info)"
+          PS1+="$(gitinfo)"
           PS1+="$FG_EXIT$BOLD \$$RESET "
           return
         fi
 
 				local CD=$(echo $(pwd) | sed "s|/home/$USER| |g" | sed 's/\///g')
-        local TMUX_SYMBOL=""
-        if [ -n "$TMUX" ]; then TMUX_SYMBOL=" ";	fi
+        PS1="$BOLD$FG_BLUE$BG_BLUE$FG_WHITE$(tmuxinfo)$(pathinfo)"
 
-        PS1="$BOLD$FG_BLUE$FG_WHITE$BG_BLUE$TMUX_SYMBOL$(__path_info)"
     		PS1+="$RESET$FG_BLUE"
-    		PS1+="$(__git_info)"
+    		PS1+="$(gitinfo)"
         PS1+="$BG_EXIT$RESET"
         PS1+="$BG_EXIT$RESET$FG_EXIT $RESET"
     }

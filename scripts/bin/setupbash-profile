@@ -48,8 +48,7 @@ update_dotbashrc() {
 	else
 		echo "source $DOTFILES/bash/bashrc.sh" >> ~/.bashrc
 	fi
-
-	cp "$DOTFILES/editors/.vimrc" ~/.vimrc
+  echo "export FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> ~/.bashrc
 }
 
 update_dotprofile() {
@@ -86,6 +85,7 @@ update_dotprofile() {
 		echo "export PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.profile
 		echo -e "\033[00;32m\0$(realpath ~)/.local/bin added to path in .profile\033[0m"
 	fi
+  echo "FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> ~/.profile
 }
 
 read -p "Update .bashrc? (y/N) : " CONFIRM

@@ -4,10 +4,14 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
 		projects=$(
-			find ~/workspace -mindepth 2 -maxdepth 2 -type d -not -name ".git"
+			find ~/workspace -type d -not \( -path "*/node_modules*" -o \
+                                       -path "*/.git*" -o \
+                                       -path "*/target*" -o \
+                                       -path "*/dist*" \)
 			find ~/dotfiles -mindepth 0 -maxdepth 0 -type d
 		)
-		selected=$(echo "$projects" | fzf --layout=reverse --bind=tab:down,btab:up)
+		selected=$(echo "$projects" |
+      fzf --layout=reverse --info=right --height=20 --bind=tab:down,btab:up)
 fi
 
 if [[ -z $selected ]]; then
@@ -15,7 +19,7 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-selected_dirname="$(basename $(dirname $selected))"
+selected_dirname="$(basename $(dirname $selected) | tr . _)"
 session_name="$selected_dirname/$selected_name"
 tmux_running=$(pgrep tmux)
 
@@ -28,7 +32,7 @@ if ! tmux has-session -t $session_name 2> /dev/null; then
     tmux new-session -ds $session_name -c $selected
 fi
 
-if tmux ls | grep attached; then
+if tmux ls | grep attached &> /dev/null; then
 	tmux switch-client -t $session_name
 else
 	tmux attach-session -t $session_name

@@ -1,21 +1,14 @@
-alias c="clear"
-alias x="clear"
-alias ccc="exit"
-alias xxx="exit"
-alias ls="ls --color=auto"
-alias lls="ls -l --color=auto"
-alias ll="ls -alh --color=auto"
-alias grep="grep --color=auto"
+alias c='clear'
+alias x='clear'
+alias xxx='exit'
+alias ccc='exit'
+alias ls='ls --color=auto'
+alias ll='ls -alh --color=auto'
+alias hx='helix'
 alias bashrc="vim ~/.bashrc"
-alias zshrc="vim $ZDOTDIR/.zshrc"
-
-function ll() { ls -Alh --color=always $@ }
-function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }
-function lsd() { ls --color=always -alhA $@ | grep --color=never "^d.*" }
 
 alias gst='git status'
 alias glo='git log --oneline'
-alias glog='git log --oneline --graph --all --decorate=full'
 alias gcl="git config --list"
 alias gcm="git commit -m"
 alias gamend="git commit --amend --no-edit"
@@ -29,7 +22,7 @@ alias ta='tmux attach -t'
 alias tls='tmux list-sessions'
 alias tks='tmux kill-session -t'
 alias tkill='tmux kill-server'
-function tns () {
+function tns(){
   session_name=${1:-$(PROMPT_STYLE=plain pathinfo)}
   cwd=${PWD:-$1}
   if ! tmux has-session -t $session_name 2> /dev/null; then
@@ -40,6 +33,13 @@ function tns () {
   else
     tmux attach-session -t $session_name
   fi
+}
+
+function ld(){
+	ll -pA $1 --color=always | grep '/$' | sed 's/\///'
+}
+function lf(){
+	ll -pA $1 --color=always | grep -v '/$'
 }
 
 function v() { 
@@ -56,7 +56,7 @@ function http-server() {
   python3 -m http.server ${PORT:-3000}
 }
 
-function cpwd(){
+function cppath(){
 	if [ -z $1 ]
 	then
 		pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard
@@ -71,25 +71,5 @@ function opn(){
 		xdg-open .
 	else
 		xdg-open $1
-	fi
-}
-
-function grab(){
-	if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    echo "
-Copies the output of command provided as argument to the clipboard.
-
-USAGE:
-	grab [command]
-	eg.
-		grab \"ls -alh\"
-		grab \"echo \$PATH | tr ':' '\\\n'\"
-
-OPTIONS:
-	-h, --help
-		Print help information
-"
-	else
-		eval $1 | tee >(xclip -selection clipboard) 
 	fi
 }
