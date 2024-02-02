@@ -4,10 +4,17 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
 		projects=$(
-			find ~/workspace -type d -not \( -path "*/node_modules*" -o \
-                                       -path "*/.git*" -o \
-                                       -path "*/target*" -o \
-                                       -path "*/dist*" \)
+      find ~/workspace -type d \( -path "*/\.*" -o \
+                                  -path "*/src*" -o \
+                                  -path "*/assets*" -o \
+                                  -path "*/build*" -o \
+                                  -path "*/public*" -o \
+                                  -path "*/lua*" -o \
+                                  -path "*/plugin*" -o \
+                                  -path "*/node_modules*" -o \
+                                  -path "*/target*" -o \
+                                  -path "*/dist*" \) -prune -o \
+                                  -type d -print
 			find ~/dotfiles -mindepth 0 -maxdepth 0 -type d
 		)
 		selected=$(echo "$projects" |

@@ -24,7 +24,10 @@ alias tks='tmux kill-session -t'
 alias tkill='tmux kill-server'
 function tns(){
   session_name=${1:-$(PROMPT_STYLE=plain pathinfo)}
-  cwd=${PWD:-$1}
+  cwd=$(realpath $PWD)
+  if [[ $session_name == "~" || $session_name == "~/" ]]; then
+    session_name=$HOME
+  fi
   if ! tmux has-session -t $session_name 2> /dev/null; then
       tmux new-session -ds $session_name -c $cwd
   fi
