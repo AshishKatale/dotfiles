@@ -21,9 +21,33 @@ alias gcm="git commit -m"
 alias gamend="git commit --amend --no-edit"
 alias gcgl="git config --global --list"
 
-alias nst='npm start'
-alias nbld='npm run build'
-alias ndv='npm run dev'
+function nst () {
+  if [ -f "pnpm-lock.yaml" ]; then
+    echo pnpm dev
+    pnpm dev
+  elif [ -f "package-lock.json" ]; then
+    echo npm start
+    npm start
+  fi
+}
+function nbld () {
+  if [ -f "pnpm-lock.yaml" ]; then
+    echo pnpm build
+    pnpm build
+  elif [ -f "package-lock.json" ]; then
+    echo npm run build
+    npm run build
+  fi
+}
+function ndv () {
+  if [ -f "pnpm-lock.yaml" ]; then
+    echo pnpm host
+    pnpm host
+  elif [ -f "package-lock.json" ]; then
+    echo npm run dev
+    npm run dev
+  fi
+}
 
 alias ta='tmux attach -t'
 alias tls='tmux list-sessions'
@@ -56,7 +80,7 @@ function v() {
 }
 
 function http-server() {
-  python3 -m http.server ${PORT:-3000}
+  python3 -m http.server ${1:-3000}
 }
 
 function cpwd(){
