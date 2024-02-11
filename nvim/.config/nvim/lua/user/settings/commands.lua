@@ -1,19 +1,37 @@
 ----------- Custom User Commands ------------
 local myAugroup = vim.api.nvim_create_augroup("myAugroup", { clear = true })
 
-vim.api.nvim_create_user_command('NvimConfig',
-  'Telescope find_files hidden=true cwd=$DOTFILES/nvim prompt_title=Nvim\\ Config', {})
-vim.api.nvim_create_user_command('Format', "execute 'lua vim.lsp.buf.format({ timeout_ms = 30000 })'", {})
+vim.api.nvim_create_user_command(
+  'NvimConfig',
+  'Telescope find_files hidden=true cwd=$DOTFILES/nvim prompt_title=Nvim\\ Config',
+  {}
+)
 
-vim.api.nvim_create_user_command('BlanklineToggle', " execute 'IBLToggle' | set list!", {})
+vim.api.nvim_create_user_command(
+  'Format',
+  function()
+    vim.lsp.buf.format({ timeout_ms = 30000 })
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'BlanklineToggle',
+  "execute 'IBLToggle' | set list!",
+  {}
+)
+
 vim.api.nvim_create_user_command('ColorColumnToggle', function()
-  local colorcolumn = vim.api.nvim_get_option_value("colorcolumn", { scope = "local" })
+  local colorcolumn = vim.api.nvim_get_option_value("colorcolumn", {
+    scope = "local"
+  })
   if colorcolumn == "80" then
     vim.api.nvim_set_option_value("colorcolumn", "", { scope = "local" })
   else
     vim.api.nvim_set_option_value("colorcolumn", "80", { scope = "local" })
   end
 end, {})
+
 vim.api.nvim_create_user_command('OpacityToggle', function()
   local hl = vim.api.nvim_get_hl_by_name("Normal", {})
   if hl.background == nil then

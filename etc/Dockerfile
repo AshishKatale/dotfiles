@@ -1,4 +1,4 @@
-# docker build --build-arg NODE_VERSION="18.18.0" --build-arg NVM_VERSION="0.39.5" --build-arg VAULT_PASS="password" -t archlinux:config .
+# docker build --build-arg NODE_VERSION="20.11.0" --build-arg NVM_VERSION="0.39.7" --build-arg VAULT_PASS="pw" -t archlinux:config .
 FROM archlinux:latest
 ARG NODE_VERSION
 ARG NVM_VERSION
@@ -20,12 +20,11 @@ RUN git remote set-url origin git@github.com:AshishKatale/dotfiles.git
 RUN cp /root/dotfiles/etc/ssh/id_rsa.pub /root/.ssh
 RUN openssl enc -aes256 -d -md sha1 -iter 1000000 -pass "pass:$VAULT_PASS" -in /root/dotfiles/etc/ssh/id_rsa -out /root/.ssh/id_rsa
 RUN chmod 600 /root/.ssh/id_rsa
-RUN git apply /root/dotfiles/etc/windows/win_arch.patch
 
 WORKDIR /root/dotfiles/scripts/bin
 RUN yes | ./setupzsh
 WORKDIR /root
-RUN mkdir Workspace
+RUN mkdir workspace
 RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | bash -s -- -y
 RUN source /root/.cargo/env && rustup component add rust-analyzer
 RUN mkdir /root/.nvm
