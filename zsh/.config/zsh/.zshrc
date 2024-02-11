@@ -1,5 +1,3 @@
-TERM=xterm-256color
-EDITOR=vim
 HISTFILE="$ZDOTDIR/.zsh_history"
 SAVEHIST=5000
 HISTSIZE=1000
@@ -54,8 +52,8 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 bindkey -v '^?' backward-delete-char
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
+bindkey '^p' up-line-or-search
+bindkey '^n' down-line-or-search
 bindkey '^ ' autosuggest-toggle
 
 source $ZDOTDIR/scripts/aliases.zsh 

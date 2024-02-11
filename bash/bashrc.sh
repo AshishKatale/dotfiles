@@ -31,6 +31,13 @@ if [[ $- =~ i ]]; then
   bind -m vi-insert '"\C-p":history-search-backward'
   bind -m vi-insert '"\C-n":history-search-forward'
 
+  # Set show-mode-in-prompt option
+  bind 'set show-mode-in-prompt on'
+  # Set vi-cmd-mode-string
+  bind 'set vi-cmd-mode-string "\1\e[2 q\2"'
+  # Set vi-ins-mode-string
+  bind 'set vi-ins-mode-string "\1\e[3 q\2"'
+
   # tab completion forward and backwards
   bind 'TAB:menu-complete'
   bind '"\e[Z": menu-complete-backward'    # shift+tab

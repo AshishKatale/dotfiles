@@ -36,7 +36,7 @@ mount /dev/{efi} /mnt/{efi}
 - #### **Install linux filesystem**
 
 ```bash
-pacstrap -K /mnt base linux linux-firmware intel-ucode vim
+pacstrap -K /mnt base linux linux-firmware intel-ucode gvim
 
 genfstab -U /mnt >> /mnt/etc/fstab
 

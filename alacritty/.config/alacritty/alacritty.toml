@@ -20,7 +20,10 @@ yellow = "#FFC21D"
 
 [colors.primary]
 background = "#1B1919"
-foreground = "#ffffff"
+foreground = "#dfdfdf"
+
+[cursor]
+thickness = 0.2
 
 [cursor.style]
 blinking = "On"
@@ -34,7 +37,7 @@ size = 9.5
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Medium"
+style = "SemiBold"
 
 [window]
 decorations = "none"

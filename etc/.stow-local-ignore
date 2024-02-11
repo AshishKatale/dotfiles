@@ -4,3 +4,5 @@ Dockerfile
 install.list
 ssh
 windows
+.vimrc
+.gitconfig

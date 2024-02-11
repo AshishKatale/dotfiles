@@ -1,0 +1,7 @@
+[user]
+	name = Ashish Katale
+	email = 61214878+AshishKatale@users.noreply.github.com
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim

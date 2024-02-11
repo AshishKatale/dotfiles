@@ -16,17 +16,17 @@ gui:
             - '#bdbdbd'
             - bold
         optionsTextColor:
-            - '#6b9dff'
+            - '#3b7dff'
         selectedLineBgColor:
             - '#004aab' # set to `default` to have no background colour
         selectedRangeBgColor:
-            - red
+            - reverse
         cherryPickedCommitBgColor:
-            - '#94e2d5'
+            - reverse
         cherryPickedCommitFgColor:
             - '#89b4fa'
         unstagedChangesColor:
-            - yellow
+            - '#efef00'
         defaultFgColor:
             - default
     commitLength:

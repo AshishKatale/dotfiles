@@ -172,32 +172,21 @@ prompt() {
 	RPROMPT=$RP
 }
 
-function zle-line-init zle-keymap-select {
-	local MODE_COLOR=$BLUE
-	local MODE="${${KEYMAP/vicmd/NORMAL}/(main|viins)/INSERT}"
-	local VIMODE="%F{$MODE_COLOR}%f%K{$MODE_COLOR}%F{$GRAY}%f%k%K{$GRAY}$MODE%k%F{$GRAY}%K{$MODE_COLOR}%k%f%F{$MODE_COLOR}%f"
-  if [[ "$PROMPT_STYLE" = "plain" ]]
-  then
-    if [[ $MODE == "NORMAL" ]]; then
-      RPROMPT="$RPROMPT%F{green} $MODE %f"
-    else
-      RPROMPT=$(echo $RPROMPT | sed "s/\sNORMAL\s//g")
-    fi
-  else
-    if [[ $MODE == "NORMAL" ]]; then
-      RPROMPT="$RPROMPT$VIMODE"
-    else
-      RPROMPT=$(echo $RPROMPT | sed "s/%F{$BLUE}.*.*%f//g")
-    fi
-  fi
-	zle && { zle reset-prompt; zle -R }
+function zle-keymap-select zle-line-init zle-line-finish {
+  case $KEYMAP in
+      vicmd)      print -n '\033[2 q';; # block cursor
+      viins|main) print -n '\033[3 q';; # underscore cursor
+  esac
 }
+
 zle -N zle-line-init
+zle -N zle-line-finish
 zle -N zle-keymap-select
 
 precmd() {
 	prompt
 }
 
+zle_highlight=('region:bg=244,fg=254')
 export PROMPT_EOL_MARK='' # fix for random % sign before prompt
 

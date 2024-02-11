@@ -72,6 +72,7 @@ vim.api.nvim_create_user_command(
   {}
 )
 
+vim.api.nvim_create_user_command('RemoveTrailingSpaces', "%s/\\s\\+$//e", {})
 
 ------------ Custom AutoCommands ------------
 
