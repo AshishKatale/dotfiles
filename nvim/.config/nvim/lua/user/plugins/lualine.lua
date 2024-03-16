@@ -53,7 +53,7 @@ lualine.setup {
     lualine_c = {
       {
         'filename',
-        colored = true, -- Displays filetype icon in color if set to true
+        colored = true,  -- Displays filetype icon in color if set to true
         icon_only = true -- Display only an icon for filetype
       }
     },
@@ -78,7 +78,14 @@ lualine.setup {
   },
   tabline = {
     lualine_a = {
-      { 'buffers', icons_enabled = true, mode = 0 },
+      {
+        'buffers',
+        icons_enabled = true,
+        mode = 0,
+        symbols = {
+          alternate_file = '', -- Text to show to identify the alternate file
+        },
+      },
     },
     lualine_b = {},
     lualine_c = {},

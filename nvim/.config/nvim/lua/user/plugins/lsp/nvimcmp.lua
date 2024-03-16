@@ -142,6 +142,7 @@ cmp.setup {
     { name = "buffer" },
     { name = "path" },
   },
+  preselect = cmp.PreselectMode.Item,
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,

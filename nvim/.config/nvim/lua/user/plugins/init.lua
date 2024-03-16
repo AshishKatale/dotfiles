@@ -50,13 +50,13 @@ local plugins = {
     lazy = true,
     event = { "BufEnter *.*" }
   },
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {
-      disable_filetype = { "TelescopePrompt", "spectre_panel" },
-    }
-  },
+  -- {
+  --   'windwp/nvim-autopairs',
+  --   event = "InsertEnter",
+  --   opts = {
+  --     disable_filetype = { "TelescopePrompt", "spectre_panel" },
+  --   }
+  -- },
   {
     "petertriho/nvim-scrollbar",
     lazy = true,
