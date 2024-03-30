@@ -1,9 +1,12 @@
 " Options
-set runtimepath=~/.local/share/.vim,/usr/share/vim/vimfiles,/usr/share/vim/vim91,/usr/share/vim/vimfiles/after,~/.local/share/.vim/after
-set viminfofile=~/.local/share/.vim/viminfo
+set viminfofile=~/.local/.vim/viminfo
+set runtimepath+=~/.local/.vim
+set runtimepath-=~/.vim
 
 let mapleader = " "
 let maplocalleader = " "
+
+syntax on
 
 set nu
 set rnu
@@ -20,12 +23,12 @@ let &t_EI = "\e[1 q"    " blink block
 highlight Normal ctermbg=NONE
 highlight Search ctermfg=0 ctermbg=42
 highlight VertSplit cterm=NONE ctermbg=242
-highlight StatusLine cterm=NONE ctermbg=242
-highlight CursorLine cterm=NONE ctermbg=240
-highlight StatusLineNC cterm=NONE ctermbg=238
+highlight StatusLine cterm=NONE ctermbg=240
+highlight CursorLine cterm=NONE ctermbg=236
+highlight StatusLineNC cterm=NONE ctermbg=237
 highlight LineNr cterm=NONE ctermfg=244
 highlight CursorLineNr cterm=NONE ctermfg=252
-highlight ColorColumn cterm=NONE ctermbg=238
+highlight ColorColumn cterm=NONE ctermbg=236
 highlight Visual cterm=NONE ctermbg=73 ctermfg=0
 highlight DiffDelete cterm=bold ctermfg=154 ctermbg=160
 highlight DiffAdd    cterm=bold ctermfg=18 ctermbg=40

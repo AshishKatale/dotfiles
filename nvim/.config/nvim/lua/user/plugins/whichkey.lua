@@ -156,6 +156,7 @@ local mappings = {
     t = { "<cmd>TSToggle highlight<cr>", "Treesitter" },
     b = { "<cmd>BlanklineToggle<cr>", "Blankline" },
     g = { "<cmd>Gitsigns toggle_signs<cr>", "Gitsigns" },
+    B = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Git Blame" },
   },
 }
 

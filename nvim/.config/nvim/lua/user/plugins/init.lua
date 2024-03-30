@@ -114,7 +114,6 @@ local plugins = {
       require("user.plugins.utils.trouble")
     end,
   },
-  { "debugloop/telescope-undo.nvim", lazy = true },
   {
     "nvim-telescope/telescope.nvim",
     lazy = true,

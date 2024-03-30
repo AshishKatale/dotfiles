@@ -62,7 +62,8 @@ local lazygit = Terminal:new({
     if exit_code ~= "0" then
       vim.notify("Git repository is not available in the workspace")
     end
-    -- vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+
+    vim.keymap.set({ "t" }, "ii", "", { silent = true, buffer = 0 })
   end,
 
   -- on_close = function(term) end,

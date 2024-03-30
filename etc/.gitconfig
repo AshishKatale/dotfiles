@@ -2,6 +2,6 @@
 	name = Ashish Katale
 	email = 61214878+AshishKatale@users.noreply.github.com
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [core]
-	editor = vim
+	editor = nvim-remote || nvim
