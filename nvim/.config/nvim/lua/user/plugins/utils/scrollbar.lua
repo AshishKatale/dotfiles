@@ -3,7 +3,6 @@ if not status_ok then
   print("Unable to load: scrollbar")
   return
 end
-local c = vim.g.colors
 
 scrollbar.setup({
   show = true,
@@ -16,7 +15,7 @@ scrollbar.setup({
   handle = {
     text = " ",
     blend = 25,                -- Integer between 0 and 100. 0 for fully opaque and 100 to full transparent. Defaults to 30.
-    color = c.gitSignsBlameTextGray,
+    color = vim.g.colors.vscGray,
     color_nr = nil,            -- cterm
     highlight = "CursorColumn",
     hide_if_all_visible = true, -- Hides handle if all lines are visible

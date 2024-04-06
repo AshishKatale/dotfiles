@@ -1,28 +1,46 @@
 local colorscheme = "vscode"
 
+local vscColors = require('vscode.colors').get_colors()
+local color_overrides = {
+  vscGitUntracked = '#38E54D',
+  info = "#0096FF",
+  warn = "#FF9933",
+  hint = "#FFFF00",
+  error = "#EF233C"
+}
+local colors = vim.tbl_extend('force', vscColors, color_overrides)
+vim.g.colors = colors;
+
 require('vscode').setup({
   -- style = 'light'
-
-  -- Enable transparent background
   -- transparent = true,
-
-  -- Enable italic comment
   italic_comments = true,
-
-  -- Disable nvim-tree background color
   disable_nvimtree_bg = true,
 
   -- Override colors (see ./lua/vscode/colors.lua)
-  -- color_overrides = {
-  --     vscLineNumber = '#FFFFFF',
-  -- },
+  color_overrides,
 
-  -- Override highlight groups (see ./lua/vscode/theme.lua)
-  -- group_overrides = {
-  --     -- this supports the same val table as vim.api.nvim_set_hl
-  --     -- use colors from this colorscheme by requiring vscode.colors!
-  --     Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
-  -- }
+  group_overrides = {
+    DiffText = { fg = colors.vscFront, bg = colors.vscSelection },
+    CursorLine = { bg = colors.vscContext, },
+    ColorColumn = { bg = colors.vscContext, },
+    NvimTreeCursorLine = { bg = colors.vscContext, },
+    NvimTreeGitDeleted = { fg = colors.vscRed, bold = true },
+    NvimTreeGitIgnored = { fg = colors.vscRed, },
+    NvimTreeFolderIcon = { fg = colors.vscFront, },
+    NvimTreeGitNew = { fg = colors.vscGitUntracked, },
+    NvimTreeExecFile = { fg = colors.vscGitUntracked, },
+    GitSignsAdd = { fg = colors.vscGitUntracked, },
+    GitSignsChange = { fg = colors.vscMediumBlue, },
+    GitSignsDelete = { fg = colors.vscRed, },
+    GitSignsAddPreview = { fg = colors.vscGitUntracked, },
+    GitSignsDeletePreview = { fg = colors.vscRed, },
+    GitSignsCurrentLineBlame = { fg = colors.vscGray, },
+    DiagnosticWarn = { fg = colors.warn, },
+    DiagnosticError = { fg = colors.error, },
+    DiagnosticInfo = { fg = colors.info, },
+    DiagnosticHint = { fg = colors.hint, },
+  }
 })
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
@@ -31,43 +49,28 @@ if not status_ok then
   return
 end
 
-local vscColors = require('vscode.colors').get_colors()
-local c = {
-  none = "NONE",
-  info = "#0096FF",
-  warn = "#FF9933",
-  hint = "#FFFF00",
-  error = "#EF233C",
-  cursorlineGray = "#323232",
-  gitSignsBlue = "#0096FF",
-  gitSignsGreen = "#38E54D",
-  gitSignsRed = "#EF233C",
-  gitSignsBlameTextGray = "#777777",
-  nvimTreeIconColor = "#BCBCBC",
-}
-c = vim.tbl_extend('force', vscColors, c)
-vim.g.colors = c;
+vim.api.nvim_create_user_command('OpacityToggle', function()
+  local hl = vim.api.nvim_get_hl_by_name("Normal", {})
+  if hl.background == nil then
+    vim.cmd("hi Normal guifg=#d4d4d4 guibg=#181818")
+    vim.cmd("hi NormalFloat guifg=#bbbbbb guibg=#272727")
+    vim.cmd("hi NvimTreeNormal guifg=#d4d4d4 guibg=#1e1e1e")
+    vim.cmd("hi LineNr guifg=#5a5a5a guibg=#181818")
+    vim.cmd("hi CursorLineNr guibg=#1e1e1e")
+    vim.cmd("hi SignColumn guibg=#1e1e1e")
+    vim.cmd("hi VertSplit guifg=#444444 guibg=#1e1e1e")
+  else
+    vim.cmd("hi Normal guibg=NONE")
+    vim.cmd("hi NormalFloat guibg=NONE")
+    vim.cmd("hi NvimTreeNormal guibg=NONE")
+    vim.cmd("hi LineNr guibg=NONE")
+    vim.cmd("hi CursorLineNr guibg=NONE")
+    vim.cmd("hi SignColumn guibg=NONE")
+    vim.cmd("hi VertSplit guifg=#666666 guibg=NONE")
+  end
+end, {})
 
--- override highlight colors
-vim.cmd("hi CursorLine guifg=none guibg=" .. c.cursorlineGray)
-vim.cmd("hi ColorColumn guifg=none guibg=" .. c.cursorlineGray)
-
-vim.cmd("hi DiffText guifg=#ffffff guibg=#881C9E")
-vim.cmd("hi GitSignsChange guifg=" .. c.gitSignsBlue)
-vim.cmd("hi GitSignsAdd guifg=" .. c.gitSignsGreen)
-vim.cmd("hi GitSignsDelete guifg=" .. c.gitSignsRed)
-vim.cmd("hi GitSignsAddPreview guifg=" .. c.gitSignsGreen)
-vim.cmd("hi GitSignsDeletePreview  guifg=" .. c.gitSignsRed)
-vim.cmd("hi GitSignsCurrentLineBlame guifg=" .. c.gitSignsBlameTextGray)
-
-vim.cmd("hi DiagnosticWarn guifg=" .. c.warn)
-vim.cmd("hi DiagnosticError guifg=" .. c.error)
-vim.cmd("hi DiagnosticInfo guifg=" .. c.info)
-vim.cmd("hi DiagnosticHint guifg=" .. c.hint)
-
-vim.cmd("hi NvimTreeCursorLine guibg=" .. c.cursorlineGray)
-vim.cmd("hi NvimTreeGitNew guifg=" .. c.gitSignsGreen)
-vim.cmd("hi NvimTreeGitDeleted guifg=" .. c.gitSignsRed)
-vim.cmd("hi NvimTreeGitIgnored guifg=" .. c.gitSignsRed)
-vim.cmd("hi NvimTreeFolderIcon guifg=" .. c.nvimTreeIconColor)
-vim.cmd("hi NvimTreeExecFile gui=bold guifg=" .. c.gitSignsGreen)
+-- set transparent background on opening neovim
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  command = "OpacityToggle",
+})

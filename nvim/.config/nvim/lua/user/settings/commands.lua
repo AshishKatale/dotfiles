@@ -32,27 +32,6 @@ vim.api.nvim_create_user_command('ColorColumnToggle', function()
   end
 end, {})
 
-vim.api.nvim_create_user_command('OpacityToggle', function()
-  local hl = vim.api.nvim_get_hl_by_name("Normal", {})
-  if hl.background == nil then
-    vim.cmd("hi Normal guifg=#d4d4d4 guibg=#181818")
-    vim.cmd("hi NormalFloat guifg=#bbbbbb guibg=#272727")
-    vim.cmd("hi NvimTreeNormal guifg=#d4d4d4 guibg=#1e1e1e")
-    vim.cmd("hi LineNr guifg=#5a5a5a guibg=#181818")
-    vim.cmd("hi CursorLineNr guibg=#1e1e1e")
-    vim.cmd("hi SignColumn guibg=#1e1e1e")
-    vim.cmd("hi VertSplit guifg=#444444 guibg=#1e1e1e")
-  else
-    vim.cmd("hi Normal guibg=NONE")
-    vim.cmd("hi NormalFloat guibg=NONE")
-    vim.cmd("hi NvimTreeNormal guibg=NONE")
-    vim.cmd("hi LineNr guibg=NONE")
-    vim.cmd("hi CursorLineNr guibg=NONE")
-    vim.cmd("hi SignColumn guibg=NONE")
-    vim.cmd("hi VertSplit guifg=#666666 guibg=NONE")
-  end
-end, {})
-
 vim.g.format_on_save_cmd = nil
 vim.api.nvim_create_user_command(
   'FormatOnSaveToggle',
@@ -75,12 +54,6 @@ vim.api.nvim_create_user_command(
 vim.api.nvim_create_user_command('RemoveTrailingSpaces', "%s/\\s\\+$//e", {})
 
 ------------ Custom AutoCommands ------------
-
--- set transparent background on opening neovim
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  command = "OpacityToggle",
-  group = myAugroup
-})
 
 -- highlight text on yank
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {

@@ -12,15 +12,15 @@ todo.setup({
     FIX = {
       icon = "", -- icon used for the sign, and in search results
       color = "error", -- can be a hex color, or a named color (see below)
-      alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+      alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "FAIL", "FAILED" }, -- a set of other keywords that all map to this FIX keywords
       signs = false, -- configure signs for some keywords individually
     },
     WARN = { icon = "", color = "warn", alt = { "WARNING", "XXX" } },
     NOTE = { icon = "󰍨", color = "info", alt = { "INFO", "NOTICE" } },
     HACK = { icon = "󰈸", color = "hack" },
-    TODO = { icon = "", color = "todo", alt = { "REMINDER", "REMEMBER" } },
-    PERF = { icon = "󱅳", color = "perf", alt = { "PERF", "PERFORMANCE", "OPTIM", "OPTIMIZE" } },
-    TEST = { icon = "󰖷", color = "test", alt = { "TEST", "TESTING", "PASS", "PASSED", "FAIL", "FAILED" } },
+    TODO = { icon = "", color = "todo", alt = { "REMIND", "REMINDER", "REMEMBER" } },
+    PERF = { icon = "󱅳", color = "perf", alt = { "PERF", "PERFORMANCE", "OPTM", "OPTIMIZE" } },
+    TEST = { icon = "󰖷", color = "test", alt = { "TESTING", "PASS", "PASSED" } },
   },
   gui_style = {
     fg = "NONE",        -- The gui style to use for the fg highlight group.

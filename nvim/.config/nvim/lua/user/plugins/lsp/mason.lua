@@ -33,12 +33,17 @@ mason.setup({
   }
 })
 mason_lspconfig.setup({
+  -- A list of servers to automatically install if they're not already installed.
+  -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
     "lua_ls", "tsserver", "jsonls", "html",
     "emmet_language_server", "eslint", "dockerls",
     "svelte", "cssls", "tailwindcss", "gopls",
   },
-  automatic_installation = true,
+  -- Whether servers that are set up (via lspconfig) should be automatically
+  -- installed if they're not already installed.
+  -- This setting has no relation with the `ensure_installed` setting.
+  automatic_installation = false,
 })
 
 mason_lspconfig.setup_handlers({
@@ -66,4 +71,3 @@ mason_lspconfig.setup_handlers({
 -- external lsp servers (not installed with mason)
 lspconfig.rust_analyzer.setup(handlers.lsp_settings["rust_analyzer"])
 -- lspconfig.gopls.setup(handlers.lsp_settings["gopls"])
-

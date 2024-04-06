@@ -10,7 +10,7 @@ local lsp_progress = {
   colors = {
     percentage      = colors.info,
     title           = colors.warn,
-    message         = colors.hint,
+    message         = colors.info,
     spinner         = colors.hint,
     lsp_client_name = colors.warn,
     use             = true,
@@ -22,7 +22,6 @@ local lsp_progress = {
   spinner_symbols = { "󰪞 ", "󰪟 ", "󰪠 ", "󰪠 ", "󰪢 ", "󰪣 ", "󰪤 ", "󰪥 " },
 }
 
-local c = vim.g.colors
 lualine.setup {
   options = {
     icons_enabled = true,
@@ -33,30 +32,17 @@ lualine.setup {
     globalstatus = true,
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = { "mode" },
     lualine_b = {
       {
         'branch',
-        color = { fg = c.gitSignsBlue },
-        icon = { '' }
+        icon = { '' },
+        color = { fg = colors.info }
       },
-      {
-        'diff',
-        diff_color = {
-          -- modified = { fg = c.gitSignsBlue },
-          -- added    = 'DiffAdd',
-          -- removed  = 'DiffDelete'
-        },
-      },
+      'diff',
       'diagnostics'
     },
-    lualine_c = {
-      {
-        'filename',
-        colored = true,  -- Displays filetype icon in color if set to true
-        icon_only = true -- Display only an icon for filetype
-      }
-    },
+    lualine_c = {},
     lualine_x = {
       lsp_progress,
       {
