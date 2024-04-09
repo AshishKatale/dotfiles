@@ -79,7 +79,7 @@ function v() {
   fi
 }
 
-function http-server() {
+function serve() {
   python3 -m http.server ${1:-3000}
 }
 

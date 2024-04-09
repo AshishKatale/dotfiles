@@ -19,7 +19,6 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'o', api.node.open.no_window_picker, opts('Open: No Window Picker'))
   vim.keymap.set('n', '=', api.tree.change_root_to_node, opts('CD'))
   vim.keymap.set('n', '<C-v>', api.node.open.vertical, opts('Open: Vertical Split'))
-  vim.keymap.set('n', '<C-h>', api.node.open.horizontal, opts('Open: Horizontal Split'))
   vim.keymap.set('n', '<C-x>', api.node.open.horizontal, opts('Open: Horizontal Split'))
   vim.keymap.set('n', '<C-t>', api.node.open.tab, opts('Open: New Tab'))
   vim.keymap.set('n', '<', api.node.navigate.sibling.prev, opts('Previous Sibling'))
@@ -204,6 +203,35 @@ nvim_tree.setup {
     confirm = {
       remove = true,
       trash = true,
+    },
+  },
+  actions = {
+    use_system_clipboard = true,
+    change_dir = {
+      enable = true,
+      global = false,
+      restrict_above_cwd = false,
+    },
+    expand_all = {
+      max_folder_discovery = 300,
+      exclude = {},
+    },
+    file_popup = {
+      open_win_config = {
+        col = 1,
+        row = 1,
+        relative = "cursor",
+        border = "rounded",
+        style = "minimal",
+      },
+    },
+    open_file = {
+      quit_on_open = false,
+      eject = true,
+      resize_window = true,
+    },
+    remove_file = {
+      close_window = true,
     },
   },
 }
