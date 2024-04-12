@@ -24,4 +24,13 @@ configs.setup({
     -- termcolors = {} -- table of colour name strings
   },
   indent = { enable = true, disable = { "yaml" } },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "vv",
+      node_incremental = "K",
+      scope_incremental = "L",
+      node_decremental = "J",
+    },
+  },
 })
