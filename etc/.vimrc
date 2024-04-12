@@ -14,6 +14,8 @@ set hlsearch
 set colorcolumn=80
 set laststatus=2
 " set showtabline=2
+set path+=**
+set wildmenu
 set fillchars=vert:\ ,fold:-,eob:\ ,lastline:@
 set statusline=[%n]\ %t\ %m\ %r\ %h\ %=\ %y\ [%l,%v]\ [%P]\ [%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
 
@@ -34,6 +36,7 @@ highlight DiffDelete cterm=bold ctermfg=154 ctermbg=160
 highlight DiffAdd    cterm=bold ctermfg=18 ctermbg=40
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight QuickFixLine ctermfg=15 ctermbg=8
 highlight Pmenu ctermfg=white ctermbg=8
 highlight PmenuSel ctermfg=0 ctermbg=7
 highlight TabLineSel ctermbg=234 ctermfg=white

@@ -24,7 +24,7 @@ local mappings = {
     ["<CR>"] = actions.select_default,
     ["<C-x>"] = actions.select_horizontal,
     ["<C-v>"] = actions.select_vertical,
-    ["<C-t>"] = actions.select_tab,
+    -- ["<C-t>"] = actions.select_tab,
 
     ["<C-u>"] = actions.preview_scrolling_up,
     ["<C-d>"] = actions.preview_scrolling_down,
@@ -34,10 +34,10 @@ local mappings = {
 
     ["<C-j>"] = actions.toggle_selection + actions.move_selection_worse,
     ["<C-k>"] = actions.toggle_selection + actions.move_selection_better,
-    -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-    -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-    ["<C-q>"] = trouble.open_with_trouble,
-    ["<M-q>"] = trouble.open_selected_with_trouble,
+    ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+    ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+    ["<C-t>"] = trouble.open_with_trouble,
+    ["<M-t>"] = trouble.open_selected_with_trouble,
     ["<C-l>"] = actions.complete_tag,
     ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
   },
@@ -48,14 +48,14 @@ local mappings = {
     ["l"] = actions.select_default,
     ["<C-x>"] = actions.select_horizontal,
     ["<C-v>"] = actions.select_vertical,
-    ["<C-t>"] = actions.select_tab,
+    -- ["<C-t>"] = actions.select_tab,
 
     ["<C-j>"] = actions.toggle_selection + actions.move_selection_worse,
     ["<C-k>"] = actions.toggle_selection + actions.move_selection_better,
-    -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-    -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-    ["<C-q>"] = trouble.open_with_trouble,
-    ["<M-q>"] = trouble.open_selected_with_trouble,
+    ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+    ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+    ["<C-t>"] = trouble.open_with_trouble,
+    ["<M-t>"] = trouble.open_selected_with_trouble,
 
     ["<leader><leader>"] = actions.toggle_selection,
     ["Tab"] = actions.move_selection_next,
