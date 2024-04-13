@@ -12,10 +12,12 @@
 " Command used to edit files in various contexts.  The default is vim.
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
-if executable('vim')
-    set vicmd=vim
-elseif executable('nvim')
+if executable('nvim')
     set vicmd=nvim
+elseif executable('vim')
+    set vicmd=vim
+elseif executable('vi')
+    set vicmd=vi
 elseif executable('elvis')
     set vicmd=elvis\ -G\ termcap
 elseif executable('vile')
@@ -65,7 +67,7 @@ set vimhelp
 set norunexec
 
 " List of color schemes to try (picks the first one supported by the terminal)
-colorscheme gruvbox Default-256 Default
+colorscheme gruvbox default-256 default
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -134,7 +136,8 @@ mark h ~/
 "  see `:help vifm-macros` and `:help vifm-filename-modifiers` for more
 
 command! df df -h %m 2> /dev/null
-command! diff vim -d %f %F
+command! diff nvim -d %f %F
+command! vimdiff vim -d %f %F
 command! zip zip -r %c.zip %f
 command! run !! ./%f
 command! make !!make %a
@@ -542,3 +545,97 @@ nnoremap <c-u> <c-w>x
 " ------------------------------------------------------------------------------
 
 " https://github.com/cirala/vifm_devicons
+
+if $PROMPT_STYLE != 'plain'
+
+  " Ranger devicons for ViFM
+  " https://github.com/cirala/vifm_devicons
+  "
+  " Filetypes/directories
+  set classify='  :dir:/,  :exe:,󰈔  :reg:,  :link:,? :?:,󱞴  ::../::'
+
+  " Specific files
+  set classify+='  ::.Xdefaults,,.Xresources,,.dmrc,,.d_store,,.fasd,,.jack-settings::'
+  set classify+='  ::.mime.types,,.nvidia-settings-rc,,.pam_environment,,.recently-used::'
+  set classify+='  ::.selected_editor,,.xinitpurc,,.zprofile,,.yarnc,,.snclirc::'
+  set classify+='  ::.tmux.conf,,.urlview,,.config,,.ini,,.user-dirs.dirs::'
+  set classify+='  ::.mimeapps.list,,.offlineimaprc,,.msmtprc,,.Xauthority,,config::'
+
+  set classify+='  ::.gitconfig,,.gitignore::'
+  set classify+='  ::.bashprofile,,.bash_profile,,.bashrc,,.profile,,.zprofile::'
+  set classify+='  ::dropbox::'
+  set classify+='  ::favicon.*::'
+  set classify+='  ::README,,README.md,,readme::'
+  set classify+='  ::*.markdown,,*.md::'
+  set classify+='  ::.vim,,.vimrc,,.gvimrc,,.vifm::'
+  set classify+='  ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::'
+  set classify+='  ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::'
+  set classify+='  ::ledger::'
+  set classify+='  ::license,,copyright,,copying,,LICENSE,,COPYRIGHT,,COPYING::'
+  set classify+='󰎙  ::node_modules::'
+  set classify+='  ::react.jsx::'
+
+  " File extensions
+  set classify+='λ  ::*.ml,,*.mli::'
+  set classify+='  ::*.styl::'
+  set classify+='  ::*.css,,*.less,,*.scss::'
+  set classify+='  ::*.py,,*.pyc,,*.pyd,,*.pyo::'
+  set classify+='  ::*.php::'
+  set classify+='  ::*.json::'
+  set classify+='  ::*.js::'
+
+  set classify+='  ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz::'
+  set classify+='  ::*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2,,*.dng,,*.3fr,,*.ari::'
+  set classify+='  ::*.arw,,*.bay,,*.crw,,*.cr3,,*.cap,,*.data,,*.dcs,,*.dcr,,*.drf,,*.eip,,*.erf::'
+  set classify+='  ::*.fff,,*.gpr,,*.iiq,,*.k25,,*.kdc,,*.mdc,,*.mef,,*.mos,,*.mrw,,*.obm,,*.orf::'
+  set classify+='  ::*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl,,*.rw2,,*.rwz,,*.sr2,,*.srf::'
+  set classify+='  ::*.srw,,*.tif,,*.x3f,,*.webp,,*.avif,,*.jxl::'
+
+  set classify+='󰗀  ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml::'
+  set classify+='  ::*.mustasche::'
+  set classify+='  ::*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.cfg::'
+  set classify+='  ::*.rss::'
+  set classify+='  ::*.coffee::'
+  set classify+='  ::*.twig::'
+  set classify+='  ::*.c++,,*.cpp,,*.cxx,,*.h::'
+  set classify+='  ::*.cc,,*.c::'
+  set classify+='  ::*.hs,,*.lhs::'
+  set classify+='  ::*.lua::'
+  set classify+='  ::*.jl::'
+  set classify+='  ::*.go::'
+  set classify+='  ::*.ts::'
+  set classify+='  ::*.db,,*.dump,,*.sql::'
+  set classify+='  ::*.sln,,*.suo::'
+  set classify+='  ::*.exe::'
+  set classify+='  ::*.diff,,*.sum,,*.md5,,*.sha512::'
+  set classify+='  ::*.scala::'
+  set classify+='  ::*.java,,*.jar::'
+  set classify+='  ::*.xul::'
+  set classify+='  ::*.clj,,*.cljc::'
+  set classify+='  ::*.pl,,*.pm,,*.t::'
+  set classify+='  ::*.cljs,,*.edn::'
+  set classify+='  ::*.rb::'
+  set classify+='  ::*.fish,,*.sh,,*.bash::'
+  set classify+='  ::*.dart::'
+  set classify+='  ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::'
+  set classify+='  ::*.rlib,,*.rs::'
+  set classify+='  ::*.d::'
+  set classify+='  ::*.erl,,*.hrl::'
+  set classify+='  ::*.ai::'
+  set classify+='  ::*.psb,,*.psd::'
+  set classify+='  ::*.jsx::'
+  set classify+='  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a::'
+  set classify+='  ::*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra::'
+  set classify+='  ::*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+  set classify+='  ::*.avi,,*.flv,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm,,*.av1::'
+  set classify+='  ::*.epub,,*.pdf,,*.fb2,,*.djvu::'
+  set classify+='  ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz::'
+  set classify+='  ::*.gzip,,*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip,,*.zst::'
+  set classify+='  ::*.cbr,,*.cbz::'
+  set classify+='  ::*.log::'
+  set classify+='  ::*.doc,,*.docx,,*.adoc::'
+  set classify+='  ::*.xls,,*.xlsmx::'
+  set classify+='  ::*.pptx,,*.ppt::'
+
+endif
+

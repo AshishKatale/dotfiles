@@ -4,12 +4,10 @@ if not status_ok then
   return
 end
 
-local search = function(code)
-  local word = vim.fn.expand(code);
-  require("telescope.builtin").grep_string({
-    search = word,
-    additional_args = function() return { "--hidden" } end
-  })
+local utils_status_ok, utils = pcall(require, "user.settings.utils")
+if not utils_status_ok then
+  print("Unable to load: settings/utils")
+  return
 end
 
 local setup = {
@@ -87,7 +85,7 @@ local setup = {
 }
 
 local mappings = {
-  ["<leader>"] = { "<cmd>term<CR>", "Terminal" },
+  ["<leader>"] = { "<cmd>tabnew term://$SHELL<CR>", "Terminal" },
   b = { "<cmd>Telescope buffers<CR>", "Buffers" },
   e = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
   E = { "<cmd>Vifm<CR>", "Vifm" },
@@ -135,15 +133,20 @@ local mappings = {
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     c = { "<cmd>Telescope commands<cr>", "Commands" },
     f = { "<cmd>Telescope live_grep<CR>", "Find in Workspace" },
-    w = { function () search("<cword>") end, "Find word Under Cursor" },
-    W = { function () search("<cWORD>") end, "Find WORD Under Cursor" },
+    w = {
+      function() utils.search_string(vim.fn.expand("<cword>")) end,
+      "Find word Under Cursor"
+    },
+    W = {
+      function() utils.search_string(vim.fn.expand("<cWORD>")) end,
+      "Find WORD Under Cursor"
+    },
   },
   o = {
     name = "Open",
     L = { "<cmd>Lazy<cr>", "Lazy" },
     l = { "<cmd>LspInfo<cr>", "LspInfo" },
     m = { "<cmd>Mason<cr>", "Mason" },
-    c = { "<cmd>NvimConfig<cr>", "NvimConfig" },
   },
   t = {
     name = "Toggle",
@@ -171,13 +174,21 @@ local opts = {
 
 which_key.register(mappings, opts)
 
+-- visual mode keybinds
+opts.mode = "v"
+mappings = {
+  s = { utils.search_selection, "Search visual selection" },
+}
+which_key.register(mappings, opts)
+
 local CK_mappings = {
-  x = { "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", "Delete Buffer"},
-  ["<C-x>"] = { "<cmd>1,$bd!<CR>", "Delete All Buffers" }
+  x = { "<cmd>bp<bar>sp<bar>bn<bar>bd<CR>", "Delete Buffer" },
+  ["<C-x>"] = { "<cmd>1,$bd!<CR>", "Delete All Buffers" },
+  l = { utils.set_filetype, "Set Filetype" },
 }
 
 local CK_opts = {
-  mode = {"i", "n"},
+  mode = { "i", "n" },
   prefix = "<C-k>",
   buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true,  -- use `silent` when creating keymaps

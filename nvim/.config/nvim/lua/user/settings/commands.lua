@@ -9,7 +9,7 @@ vim.api.nvim_create_user_command(
       "true"
     )
     if is_git_repo then
-      vim.cmd("edit term://lazygit")
+      vim.cmd("tabnew term://lazygit")
       vim.keymap.set({ "t" }, "ii", "", { silent = true, buffer = 0 })
     else
       vim.print("Error: lazygit must be run inside a git repository")
@@ -20,7 +20,7 @@ vim.api.nvim_create_user_command(
 
 vim.api.nvim_create_user_command(
   'Vifm',
-  function() vim.cmd("edit term://vifm") end,
+  function() vim.cmd("tabnew term://vifm") end,
   {}
 )
 

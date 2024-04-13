@@ -37,7 +37,7 @@ vim.opt.wrap = true           -- display lines as one long line
 vim.opt.fixeol = false        -- disable insert newline at EOF
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.colorcolumn = '80'
+vim.opt.colorcolumn = '81'
 
 vim.opt.guicursor = 'n-v-c-sm:block,' ..
     'ci-ve:ver25,' ..
