@@ -87,7 +87,7 @@ local setup = {
 }
 
 local mappings = {
-  ["<leader>"] = { "<cmd>ToggleTerm<CR>", "Terminal" },
+  ["<leader>"] = { "<cmd>term<CR>", "Terminal" },
   b = { "<cmd>Telescope buffers<CR>", "Buffers" },
   e = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
   E = { "<cmd>Vifm<CR>", "Vifm" },

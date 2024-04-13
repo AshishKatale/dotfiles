@@ -2,16 +2,31 @@
 local myAugroup = vim.api.nvim_create_augroup("myAugroup", { clear = true })
 
 vim.api.nvim_create_user_command(
-  'NvimConfig',
-  'Telescope find_files hidden=true cwd=$DOTFILES/nvim prompt_title=Nvim\\ Config',
+  'LazyGit',
+  function()
+    local is_git_repo = vim.startswith(
+      vim.fn.system("git rev-parse --is-inside-work-tree"),
+      "true"
+    )
+    if is_git_repo then
+      vim.cmd("edit term://lazygit")
+      vim.keymap.set({ "t" }, "ii", "", { silent = true, buffer = 0 })
+    else
+      vim.print("Error: lazygit must be run inside a git repository")
+    end
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'Vifm',
+  function() vim.cmd("edit term://vifm") end,
   {}
 )
 
 vim.api.nvim_create_user_command(
   'Format',
-  function()
-    vim.lsp.buf.format({ timeout_ms = 30000 })
-  end,
+  function() vim.lsp.buf.format({ timeout_ms = 30000 }) end,
   {}
 )
 
@@ -81,6 +96,26 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- reset cursor style to underline before exiting
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function() vim.opt.guicursor = 'a:hor20' end,
+  group = myAugroup
+})
+
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  callback = function()
+    vim.cmd("setlocal nonu nornu")
+    vim.cmd('startinsert')
+    vim.cmd('setlocal signcolumn=no')
+  end,
+  group = myAugroup
+})
+
+vim.api.nvim_create_autocmd({ "TermClose" }, {
+  callback = function()
+    vim.api.nvim_feedkeys(
+      vim.api.nvim_replace_termcodes("<CR>", true, true, true),
+      "n",
+      true
+    )
+  end,
   group = myAugroup
 })
 

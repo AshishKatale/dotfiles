@@ -81,15 +81,6 @@ local plugins = {
     end
   },
   {
-    "akinsho/toggleterm.nvim",
-    lazy = true,
-    cmd = { "LazyGit", "Vifm", "ToggleTerm", "NpmStart", "NpmRunDev", "HttpServer" },
-    keys = { "<C-\\>" },
-    config = function()
-      require("user.plugins.toggleterm")
-    end,
-  },
-  {
     "folke/todo-comments.nvim",
     lazy = true,
     event = "BufEnter *.*",
