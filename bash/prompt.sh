@@ -98,11 +98,11 @@ __powerline() {
         if [ "$PROMPT_STYLE" = "plain" ]
         then
           if [ "$CD" = "$HD" ]; then CD="~/"; fi
-          if [ $COLS -lt 80 ]; then
+          if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
             echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
               | sed "s|$HOMEPATH_SHORT1|~/|g" \
               | sed "s|\(.*\).\/\$|\1$CD|"
-          elif [ $COLS -lt 120 ]; then
+          elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
             echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
               | sed "s|$HOMEPATH_SHORT3|~/|g" \
               | sed "s|\(.*\)...\/\$|\1$CD|"
@@ -110,12 +110,12 @@ __powerline() {
             echo "$(pwd | sed "s|$HOMEPATH_FULL|~|g")"
           fi
         else
-          if [ $COLS -lt 80 ]; then
+          if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
             echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
               | sed "s|$HOMEPATH_SHORT1| |g" \
               | sed "s|\(.*\).\/\$|\1$CD|" \
               | sed 's|\/||g'
-          elif [ $COLS -lt 120 ]; then
+          elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
             echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
               | sed "s|$HOMEPATH_SHORT3| |g" \
               | sed "s|\(.*\)...\/\$|\1$CD|" \

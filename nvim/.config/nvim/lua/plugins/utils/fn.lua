@@ -1,13 +1,7 @@
-local telescope_builtin_ok, telescope_builtin = pcall(require, "telescope.builtin")
-if not telescope_builtin_ok then
-  print("Unable to load: settings/utils")
-  return
-end
-
 M = {}
 
 M.search_string = function(text)
-  telescope_builtin.grep_string({
+  require("telescope.builtin").grep_string({
     search = text,
     additional_args = function() return { "--hidden" } end
   })
@@ -29,20 +23,11 @@ M.search_selection = function()
 end
 
 M.set_filetype = function()
-  local filetypes = vim.split(
-    vim.fn.system("ls -1 /usr/share/nvim/runtime/syntax | cut -d'.' -f1"),
-    "\n"
-  )
-  table.remove(filetypes, #filetypes)
-  vim.ui.select(
-    filetypes,
-    { prompt = 'Select filetype:' },
-    function(choice)
-      if choice then
-        vim.cmd("set filetype=" .. choice)
-        vim.print("filetype set: " .. choice)
-      end
-    end
+  require("telescope.builtin").filetypes(
+    require('telescope.themes').get_dropdown {
+      previewer = false,
+      hidden = true
+    }
   )
 end
 

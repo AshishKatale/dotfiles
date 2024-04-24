@@ -39,9 +39,9 @@ if ! tmux has-session -t $session_name 2> /dev/null; then
     tmux new-session -ds $session_name -c $selected
 fi
 
-if tmux ls | grep attached &> /dev/null; then
+if [[ $TMUX ]] then
 	tmux switch-client -t $session_name
 else
-	tmux attach-session -t $session_name
+  tmux attach-session -t $session_name
 fi
 

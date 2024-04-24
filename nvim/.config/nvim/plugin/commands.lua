@@ -1,18 +1,22 @@
 ----------- Custom User Commands ------------
-local myAugroup = vim.api.nvim_create_augroup("myAugroup", { clear = true })
+local augroup = vim.api.nvim_create_augroup("customcmd", { clear = true })
 
 vim.api.nvim_create_user_command(
   'LazyGit',
   function()
-    local is_git_repo = vim.startswith(
-      vim.fn.system("git rev-parse --is-inside-work-tree"),
-      "true"
-    )
+    local is_git_repo = vim.system(
+      { "git", "rev-parse", "--is-inside-work-tree" },
+      { text = true }
+    ):wait().code == 0
     if is_git_repo then
       vim.cmd("tabnew term://lazygit")
-      vim.keymap.set({ "t" }, "ii", "", { silent = true, buffer = 0 })
+      vim.keymap.set({ "t" }, "ii", "<Nop>", { silent = true, buffer = 0 })
+      vim.keymap.set(
+        { "t" }, "<C-\\>", [[<C-\><C-n>0M]],
+        { silent = true, buffer = 0 }
+      )
     else
-      vim.print("Error: lazygit must be run inside a git repository")
+      vim.notify("Error: lazygit must be run inside a git repository")
     end
   end,
   {}
@@ -36,14 +40,47 @@ vim.api.nvim_create_user_command(
   {}
 )
 
+vim.api.nvim_create_user_command(
+  'DiagnosticsToggle',
+  function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'InlayhintsToggle',
+  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'FloatTerm',
+  function(cmd)
+    if #cmd.fargs > 0 then
+      require("lazy.util").float_term(cmd.fargs, {})
+    else
+      require("lazy.util").float_term(nil, {})
+    end
+  end,
+  {
+    nargs = '*',
+    complete = function(cmd)
+      local cmds = { "btop", "top", "git log", "lazygit" }
+      return vim.tbl_filter(
+        function(c) return string.find(c, cmd) end,
+        cmds
+      )
+    end,
+  }
+)
+
 vim.api.nvim_create_user_command('ColorColumnToggle', function()
-  local colorcolumn = vim.api.nvim_get_option_value("colorcolumn", {
+  local colorcolumn = tonumber(vim.api.nvim_get_option_value("colorcolumn", {
     scope = "local"
-  })
-  if colorcolumn == "80" then
+  }))
+  if colorcolumn and colorcolumn > 0 then
     vim.api.nvim_set_option_value("colorcolumn", "", { scope = "local" })
   else
-    vim.api.nvim_set_option_value("colorcolumn", "80", { scope = "local" })
+    vim.api.nvim_set_option_value("colorcolumn", "81", { scope = "local" })
   end
 end, {})
 
@@ -56,7 +93,7 @@ vim.api.nvim_create_user_command(
       vim.g.format_on_save_cmd = nil
     else
       vim.g.format_on_save_cmd = vim.api.nvim_create_autocmd('BufWritePost', {
-        group = myAugroup,
+        group = augroup,
         callback = function()
           vim.lsp.buf.format({ async = true })
         end,
@@ -73,21 +110,20 @@ vim.api.nvim_create_user_command('RemoveTrailingSpaces', "%s/\\s\\+$//e", {})
 -- highlight text on yank
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function() vim.highlight.on_yank({ timeout = 200 }) end,
-  group = myAugroup
+  group = augroup
+})
+
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+  pattern = { "query_editor.scm" },
+  callback = function() vim.diagnostic.open_float() end,
+  group = augroup
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
-    local opts = {
-      noremap = true,
-      silent = true,
-      nowait = true
-    };
-    if vim.bo.filetype == "help" then
-      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", opts);
-      vim.api.nvim_set_option_value("number", true, { buf = 0 });
-      vim.api.nvim_set_option_value("relativenumber", true, { buf = 0 });
-    elseif vim.bo.filetype == "qf" then
+    local opts = { noremap = true, silent = true, nowait = true };
+    if vim.bo.filetype == "help" or
+        vim.bo.filetype == "qf" then
       vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", opts)
     end
   end
@@ -96,7 +132,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- reset cursor style to underline before exiting
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   callback = function() vim.opt.guicursor = 'a:hor20' end,
-  group = myAugroup
+  group = augroup
 })
 
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
@@ -105,7 +141,7 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     vim.cmd('startinsert')
     vim.cmd('setlocal signcolumn=no')
   end,
-  group = myAugroup
+  group = augroup
 })
 
 vim.api.nvim_create_autocmd({ "TermClose" }, {
@@ -116,18 +152,19 @@ vim.api.nvim_create_autocmd({ "TermClose" }, {
       true
     )
   end,
-  group = myAugroup
+  group = augroup
 })
 
 -- set absolute line numbers in insert mode
 vim.api.nvim_create_autocmd({ "InsertEnter" }, {
   callback = function() vim.opt.relativenumber = false end,
-  group = myAugroup
+  group = augroup
 })
 
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   callback = function()
-    if vim.bo.filetype == "Trouble" or
+    if vim.bo.filetype == "trouble" or
+        vim.bo.filetype == "lazy" or
         vim.bo.filetype == "help" or
         vim.bo.filetype == "startup" or
         vim.bo.filetype == "TelescopePrompt" or
@@ -138,19 +175,16 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
     end
     vim.opt.relativenumber = true
   end,
-  group = myAugroup
+  group = augroup
 })
 
 -- open quickfix list item with 'l'
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "qf", "Trouble" },
-  callback = function()
-    local match = vim.fn.expand("<amatch>")
-    if match == "qf" then
+  pattern = { "qf" },
+  callback = function(opts)
+    if opts.match == "qf" then
       vim.api.nvim_buf_set_keymap(0, "n", "l", "<cr>", { noremap = true })
-    elseif match == "Trouble" then
-      vim.cmd("set nu signcolumn=yes")
     end
   end,
-  group = myAugroup
+  group = augroup
 })
