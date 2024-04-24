@@ -1,9 +1,7 @@
 Set-Alias -Name c -Value clear
-Set-Alias -Name x -Value clear
 Set-Alias -Name ll -Value ls
 Set-Alias -Name opn -Value explorer
 
-function ccc { exit }
 function xxx { exit }
 function D { cd D:\ }
 function C { cd C:\ }

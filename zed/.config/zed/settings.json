@@ -1,0 +1,56 @@
+{
+  "theme": "Colorizer",
+  "notification_panel": {
+    "dock": "right"
+  },
+  "chat_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "dock": "right"
+  },
+  "ui_font_size": 16,
+  "ui_font_weight": 300,
+  "tab_bar": {
+    "show_nav_history_buttons": false
+  },
+  "tabs": {
+    "git_status": true
+  },
+  "base_keymap": "VSCode",
+  "vertical_scroll_margin": 8,
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "never"
+  },
+  "indent_guides": {
+    "active_line_width": 2
+  },
+  "wrap_guides": [80],
+  "show_whitespaces": "all",
+  "current_line_highlight": "line",
+  "relative_line_numbers": true,
+  "use_autoclose": false,
+  "ensure_final_newline_on_save": true,
+  "buffer_font_size": 13,
+  "buffer_font_weight": 300,
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_features": {
+    "calt": false
+  },
+  "terminal": {
+    "dock": "right",
+    "font_size": 13,
+    "working_directory": "current_project_directory",
+    "font_family": "JetBrains Mono",
+    "env": {
+      "PROMPT_STYLE": "plain"
+    }
+  }
+}

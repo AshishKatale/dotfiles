@@ -43,7 +43,6 @@ bindkey -M viins '^l' clear-screen
 bindkey -M viins '^[w' emacs-forward-word
 bindkey -M viins '^[b' emacs-backward-word
 bindkey -s -M visual 'i' '^[' # exit visual mode with i 
-bindkey -s -M viins '^b' 'tmux-sessionizer^M'
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect 'h' vi-backward-char
@@ -62,10 +61,13 @@ source $ZDOTDIR/scripts/nvm.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+which lazygit &> /dev/null && bindkey -s -M viins '^g' '^U lazygit^M'
+[ -e ~/bin/tmux-sm ] && bindkey -s -M viins '^b' '^U tmux-sm^M'
+
 # fzf key-bindings
-if [ -f $ZDOTDIR/plugins/key-bindings.zsh ]; then
+[ -e $ZDOTDIR/plugins/key-bindings.zsh ] && {
   source $ZDOTDIR/plugins/key-bindings.zsh
-  bindkey '^t' undefined-key
+  bindkey '^t' undefined-key # disable default fzf ^t
   bindkey '^x' fzf-file-widget
   bindkey '^r' fzf-history-widget
-fi
+}

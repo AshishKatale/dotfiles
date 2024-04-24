@@ -14,6 +14,8 @@ set hlsearch
 set colorcolumn=80
 set laststatus=2
 " set showtabline=2
+set splitbelow
+set splitright
 set path+=**
 set wildmenu
 set fillchars=vert:\ ,fold:-,eob:\ ,lastline:@
@@ -22,8 +24,10 @@ set statusline=[%n]\ %t\ %m\ %r\ %h\ %=\ %y\ [%l,%v]\ [%P]\ [%{len(filter(range(
 let &t_SI = "\e[3 q"    " blink bar
 let &t_EI = "\e[1 q"    " blink block
 
+" highlight Normal ctermbg=234
 highlight Normal ctermbg=NONE
-highlight Search ctermfg=0 ctermbg=42
+highlight Search cterm=bold ctermfg=15 ctermbg=52
+highlight CurSearch cterm=bold ctermfg=15 ctermbg=172
 highlight VertSplit cterm=NONE ctermbg=242
 highlight StatusLine cterm=NONE ctermbg=240
 highlight CursorLine cterm=NONE ctermbg=236
@@ -32,10 +36,10 @@ highlight LineNr cterm=NONE ctermfg=244
 highlight CursorLineNr cterm=NONE ctermfg=252
 highlight ColorColumn cterm=NONE ctermbg=236
 highlight Visual cterm=NONE ctermbg=73 ctermfg=0
-highlight DiffDelete cterm=bold ctermfg=154 ctermbg=160
-highlight DiffAdd    cterm=bold ctermfg=18 ctermbg=40
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight DiffAdd cterm=bold ctermfg=15 ctermbg=71
+highlight DiffText   cterm=bold ctermfg=15 ctermbg=24
+highlight DiffChange cterm=bold ctermfg=15 ctermbg=17
+highlight DiffDelete cterm=bold ctermfg=124 ctermbg=124
 highlight QuickFixLine ctermfg=15 ctermbg=8
 highlight Pmenu ctermfg=white ctermbg=8
 highlight PmenuSel ctermfg=0 ctermbg=7
@@ -49,7 +53,7 @@ au!
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
-autocmd VimEnter * silent !echo -ne "\e[1 q"
+autocmd BufEnter * silent !echo -ne "\e[1 q"
 autocmd VimLeave * silent !echo -ne "\e[3 q"
 
 autocmd InsertEnter * silent !echo -ne "\e[3 q"

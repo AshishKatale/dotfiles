@@ -13,6 +13,7 @@ setup_zsh() {
   git clone https://github.com/zsh-users/zsh-completions $ZPLUGDIR/zsh-completions 
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZPLUGDIR/zsh-autosuggestions
   git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZPLUGDIR/fast-syntax-highlighting
+  curl -s https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -o $ZPLUGDIR/key-bindings.zsh
   
   if [ ! -e ~/.zshenv ]; then
     touch ~/.zshenv
