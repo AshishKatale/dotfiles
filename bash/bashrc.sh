@@ -14,29 +14,8 @@ source ~/dotfiles/bash/aliases.sh
 # if the shell is interactive
 if [[ $- =~ i ]]; then
 
-  # enable vi mode for command-line
-  set -o vi
-  bind -m vi-command '"j": nop'
-  bind -m vi-command '"k": nop'
-  bind -m vi-insert '"jk":vi-movement-mode'
-  bind -m vi-insert '"\C-a":beginning-of-line'
-  bind -m vi-insert '"\C-e":end-of-line'
-  bind -m vi-insert '"\C-k":kill-line'
-  bind -m vi-insert '"\C-l":clear-screen'
-  bind -m vi-insert '"\C-w":backward-kill-word'
-  bind -m vi-insert '"\C-u":backward-kill-line'
-  bind -m vi-insert '"\e-w":emacs-forward-word'
-  bind -m vi-insert '"\e-b":emacs-backward-word'
-  bind -m vi-insert '"\C-b":"tmux-sessionizer\n"'
-  bind -m vi-insert '"\C-p":history-search-backward'
-  bind -m vi-insert '"\C-n":history-search-forward'
-
-  # Set show-mode-in-prompt option
-  bind 'set show-mode-in-prompt on'
-  # Set vi-cmd-mode-string
-  bind 'set vi-cmd-mode-string "\1\e[2 q\2"'
-  # Set vi-ins-mode-string
-  bind 'set vi-ins-mode-string "\1\e[3 q\2"'
+  bind '"\C-b":"\C-U tmux-sm\n"'
+  bind '"\C-g":"\C-U lazygit\n"'
 
   # tab completion forward and backwards
   bind 'TAB:menu-complete'
@@ -60,7 +39,7 @@ if [[ $- =~ i ]]; then
   bind "set menu-complete-display-prefix on"
 
   # Cycle through history based on characters already typed on the line
-  # bind '"\e[A":history-search-backward'    # uparrow
-  # bind '"\e[B":history-search-forward'     # downarrow
+  bind '"\e[A":history-search-backward'    # uparrow
+  bind '"\e[B":history-search-forward'     # downarrow
 fi
 

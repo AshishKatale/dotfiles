@@ -1,11 +1,11 @@
 local which_key_status_ok, which_key = pcall(require, "which-key")
 if not which_key_status_ok then
-  print("Unable to load: whichkey")
+  vim.print("Unable to load: whichkey")
   return
 end
 local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_status_ok then
-  print("Unable to load: cmp_nvim_lsp")
+  vim.print("Unable to load: cmp_nvim_lsp")
   return
 end
 
@@ -43,7 +43,7 @@ local lsp_keymaps = function(bufnr)
   local opts = {
     mode = "n",     -- NORMAL mode
     prefix = "g",
-    buffer = bufnr, -- Global mappings. Specify a buffer number for buffer local mappings
+    buffer = bufnr, -- Specify a buffer number for buffer local mappings
     silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
     nowait = true,  -- use `nowait` when creating keymaps
@@ -67,7 +67,10 @@ local lsp_keymaps = function(bufnr)
   local leader_mappings = {
     r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "LSP rename" },
     c = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "LSP Code action" },
-    f = { "<cmd>lua vim.lsp.buf.format({ timeout_ms = 10000 })<CR>", "Format Document" },
+    f = {
+      "<cmd>lua vim.lsp.buf.format({ timeout_ms = 10000 })<CR>",
+      "Format Document"
+    },
   }
 
   local leader_opts = {}
@@ -76,10 +79,15 @@ local lsp_keymaps = function(bufnr)
   end
   leader_opts.prefix = "<leader>"
 
-  vim.api.nvim_buf_set_keymap(0, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>",
-    { noremap = true, silent = true, nowait = true })
-  vim.api.nvim_buf_set_keymap(0, "v", "<leader>f", "<cmd>lua RangeFormat()<CR><esc>",
-    { noremap = true, silent = true, nowait = true })
+  vim.api.nvim_buf_set_keymap(
+    0, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>",
+    { noremap = true, silent = true, nowait = true }
+  )
+  vim.api.nvim_buf_set_keymap(
+    0, "v", "<leader>f",
+    "<cmd>lua RangeFormat()<CR><esc>",
+    { noremap = true, silent = true, nowait = true }
+  )
 
   which_key.register(mappings, opts)
   which_key.register(leader_mappings, leader_opts)
@@ -145,4 +153,3 @@ M.lsp_settings = {
 }
 
 return M
-

@@ -3,6 +3,9 @@ readonly GIT_NEED_PUSH_SYMBOL='↑'
 readonly GIT_NEED_PULL_SYMBOL='↓'
 readonly GRAY="240"
 readonly BLUE="33"
+readonly HOME_ICON=" "
+readonly SLASH=""
+readonly TMUX_ICON=" "
 
 function tmuxinfo(){
 	local TS_COUNT="$(tmux ls 2> /dev/null | wc -l)"
@@ -45,11 +48,11 @@ function pathinfo() {
   if [ "$PROMPT_STYLE" = "plain" ]
   then
     if [ "$CD" = "$HD" ]; then CD="~/"; fi
-    if [ $COLS -lt 80 ]; then
+    if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
       echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
         | sed "s|$HOMEPATH_SHORT1|~/|g" \
         | sed "s|\(.*\).\/\$|\1$CD|"
-    elif [ $COLS -lt 120 ]; then
+    elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
       echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
         | sed "s|$HOMEPATH_SHORT3|~/|g" \
         | sed "s|\(.*\)...\/\$|\1$CD|"
@@ -57,18 +60,18 @@ function pathinfo() {
       echo "$(pwd | sed "s|$HOMEPATH_FULL|~|g")"
     fi
   else
-    if [ $COLS -lt 80 ]; then
+    if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
       echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
-        | sed "s|$HOMEPATH_SHORT1| |g" \
+        | sed "s|$HOMEPATH_SHORT1|$HOME_ICON|g" \
         | sed "s|\(.*\).\/\$|\1$CD|" \
-        | sed 's|\/||g'
-    elif [ $COLS -lt 120 ]; then
+        | sed "s|\/|$SLASH|g"
+    elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
       echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
-        | sed "s|$HOMEPATH_SHORT3| |g" \
+        | sed "s|$HOMEPATH_SHORT3|$HOME_ICON|g" \
         | sed "s|\(.*\)...\/\$|\1$CD|" \
-        | sed 's|\/||g'
+        | sed "s|\/|$SLASH|g"
     else
-      echo "$(pwd | sed "s|$HOMEPATH_FULL| |g" | sed 's/\///g')"
+      echo "$(pwd | sed "s|$HOMEPATH_FULL|$HOME_ICON|g" | sed "s/\//$SLASH/g")"
     fi
   fi
 }
@@ -159,7 +162,7 @@ prompt() {
   fi
 
   RP+=$TMUX_INFO
-	if [ -n "$TMUX" ]; then TMUX_SYMBOL=" ";	fi
+	if [ -n "$TMUX" ]; then TMUX_SYMBOL="$TMUX_ICON";	fi
 
 	if [ $JOBS -gt 0 ]; then
 		RP+="%F{cyan}%B %b%f"

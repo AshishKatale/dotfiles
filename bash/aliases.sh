@@ -19,7 +19,10 @@ alias tls='tmux list-sessions'
 alias tks='tmux kill-session -t'
 alias tkill='tmux kill-server'
 function tns(){
-  session_name=${1:-$(PROMPT_STYLE=plain pathinfo)}
+  selected=${1:-$(PROMPT_STYLE=plain pathinfo full)}
+  selected_name=$(basename "$selected" | tr . _)
+  selected_dirname="$(basename $(dirname $selected) | tr . _)"
+  session_name="$selected_dirname/$selected_name"
   cwd=$(realpath $PWD)
   if [[ $session_name == "~" || $session_name == "~/" ]]; then
     session_name=$HOME
@@ -27,7 +30,7 @@ function tns(){
   if ! tmux has-session -t $session_name 2> /dev/null; then
       tmux new-session -ds $session_name -c $cwd
   fi
-  if tmux ls | grep attached &> /dev/null; then
+  if [[ $TMUX ]] then
     tmux switch-client -t $session_name
   else
     tmux attach-session -t $session_name

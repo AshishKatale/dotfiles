@@ -32,10 +32,10 @@ highlight LineNr cterm=NONE ctermfg=244
 highlight CursorLineNr cterm=NONE ctermfg=252
 highlight ColorColumn cterm=NONE ctermbg=236
 highlight Visual cterm=NONE ctermbg=73 ctermfg=0
-highlight DiffDelete cterm=bold ctermfg=154 ctermbg=160
-highlight DiffAdd    cterm=bold ctermfg=18 ctermbg=40
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight DiffAdd cterm=bold ctermfg=15 ctermbg=71
+highlight DiffText   cterm=bold ctermfg=15 ctermbg=24
+highlight DiffChange cterm=bold ctermfg=15 ctermbg=17
+highlight DiffDelete cterm=bold ctermfg=124 ctermbg=124
 highlight QuickFixLine ctermfg=15 ctermbg=8
 highlight Pmenu ctermfg=white ctermbg=8
 highlight PmenuSel ctermfg=0 ctermbg=7

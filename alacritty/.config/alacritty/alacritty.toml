@@ -1,26 +1,9 @@
-[colors.bright]
-black = "#5E5C64"
-blue = "#4499F8"
-cyan = "#43E6FF"
-green = "#5CFF39"
-magenta = "#FF4FFE"
-red = "#FF7120"
-white = "#ffffff"
-yellow = "#FFF300"
+[env]
+TERM = "xterm-256color"
 
-[colors.normal]
-black = "#000000"
-blue = "#0057FF"
-cyan = "#00B6D1"
-green = "#1AFF84"
-magenta = "#EE00CB"
-red = "#FF0000"
-white = "#e5e5e5"
-yellow = "#FFC21D"
-
-[colors.primary]
-background = "#1B1919"
-foreground = "#dfdfdf"
+[window]
+decorations = "none"
+opacity = 0.8
 
 [cursor]
 thickness = 0.2
@@ -29,16 +12,39 @@ thickness = 0.2
 blinking = "On"
 shape = "Underline"
 
-[env]
-TERM = "xterm-256color"
-
 [font]
 size = 9.5
+offset.x = 0
+offset.y = 0
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "JetBrainsMonoNerd Font"
 style = "SemiBold"
 
-[window]
-decorations = "none"
-opacity = 0.8
+[colors.bright]
+black = "#3C4048"
+blue = "#0000FF"
+cyan = "#00FFFF"
+green = "#40FF40"
+magenta = "#BD5EFF"
+red = "#FF1E1E"
+white = "#FFFFFF"
+yellow = "#FFFF80"
+
+[colors.normal]
+black = "#16181A"
+blue = "#5EA1FF"
+cyan = "#9EF1FF"
+green = "#00FF00"
+magenta = "#BD5EFF"
+red = "#FF3232"
+white = "#FFFFFF"
+yellow = "#F1FF5E"
+
+[colors.primary]
+background = "#16181A"
+foreground = "#EEEEEE"
+
+[colors.selection]
+background = "#264F78"
+foreground = "#FFFFFF"

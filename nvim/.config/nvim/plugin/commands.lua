@@ -4,13 +4,17 @@ local myAugroup = vim.api.nvim_create_augroup("myAugroup", { clear = true })
 vim.api.nvim_create_user_command(
   'LazyGit',
   function()
-    local is_git_repo = vim.startswith(
-      vim.fn.system("git rev-parse --is-inside-work-tree"),
-      "true"
-    )
+    local is_git_repo = vim.system(
+      { "git", "rev-parse", "--is-inside-work-tree" },
+      { text = true }
+    ):wait().code == 0
     if is_git_repo then
       vim.cmd("tabnew term://lazygit")
-      vim.keymap.set({ "t" }, "ii", "", { silent = true, buffer = 0 })
+      vim.keymap.set({ "t" }, "ii", "<Nop>", { silent = true, buffer = 0 })
+      vim.keymap.set(
+        { "t" }, "<C-\\>", [[<C-\><C-n>0M]],
+        { silent = true, buffer = 0 }
+      )
     else
       vim.print("Error: lazygit must be run inside a git repository")
     end
@@ -36,14 +40,47 @@ vim.api.nvim_create_user_command(
   {}
 )
 
+vim.api.nvim_create_user_command(
+  'DiagnosticsToggle',
+  function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'InlayhintsToggle',
+  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'FloatTerm',
+  function(cmd)
+    if #cmd.fargs > 0 then
+      require("lazy.util").float_term(cmd.fargs, {})
+    else
+      require("lazy.util").float_term(nil, {})
+    end
+  end,
+  {
+    nargs = '*',
+    complete = function(cmd)
+      local cmds = { "btop", "top", "git log", "lazygit" }
+      return vim.tbl_filter(
+        function(c) return string.find(c, cmd) end,
+        cmds
+      )
+    end,
+  }
+)
+
 vim.api.nvim_create_user_command('ColorColumnToggle', function()
-  local colorcolumn = vim.api.nvim_get_option_value("colorcolumn", {
+  local colorcolumn = tonumber(vim.api.nvim_get_option_value("colorcolumn", {
     scope = "local"
-  })
-  if colorcolumn == "80" then
+  }))
+  if colorcolumn and colorcolumn > 0 then
     vim.api.nvim_set_option_value("colorcolumn", "", { scope = "local" })
   else
-    vim.api.nvim_set_option_value("colorcolumn", "80", { scope = "local" })
+    vim.api.nvim_set_option_value("colorcolumn", "81", { scope = "local" })
   end
 end, {})
 
@@ -78,15 +115,11 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
-    local opts = {
-      noremap = true,
-      silent = true,
-      nowait = true
-    };
+    local opts = { noremap = true, silent = true, nowait = true };
     if vim.bo.filetype == "help" then
-      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", opts);
-      vim.api.nvim_set_option_value("number", true, { buf = 0 });
-      vim.api.nvim_set_option_value("relativenumber", true, { buf = 0 });
+      vim.api.nvim_set_option_value("number", true, { scope = "local" })
+      vim.api.nvim_set_option_value("relativenumber", true, { scope = "local" })
+      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", opts)
     elseif vim.bo.filetype == "qf" then
       vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", opts)
     end
@@ -128,6 +161,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter" }, {
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   callback = function()
     if vim.bo.filetype == "Trouble" or
+        vim.bo.filetype == "lazy" or
         vim.bo.filetype == "help" or
         vim.bo.filetype == "startup" or
         vim.bo.filetype == "TelescopePrompt" or
