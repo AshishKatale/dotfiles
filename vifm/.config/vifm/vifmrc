@@ -506,6 +506,7 @@ nnoremap <f5> :copy<cr>
 nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
+nnoremap q :q<cr>
 
 " Midnight commander alike mappings
 " Open current directory in the other pane
@@ -629,8 +630,8 @@ if $PROMPT_STYLE != 'plain'
   set classify+='  ::*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
   set classify+='  ::*.avi,,*.flv,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm,,*.av1::'
   set classify+='  ::*.epub,,*.pdf,,*.fb2,,*.djvu::'
-  set classify+='  ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz::'
-  set classify+='  ::*.gzip,,*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip,,*.zst::'
+  set classify+='  ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz::'
+  set classify+='  ::*.gzip,,*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip,,*.zst::'
   set classify+='  ::*.cbr,,*.cbz::'
   set classify+='  ::*.log::'
   set classify+='  ::*.doc,,*.docx,,*.adoc::'

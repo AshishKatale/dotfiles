@@ -1,0 +1,113 @@
+[
+  {
+    "bindings": {
+      "ctrl-k": "zed::NoAction",
+      "ctrl-k k": "zed::OpenKeymap",
+      "ctrl-k x": "pane::CloseActiveItem",
+      "ctrl-k ctrl-x": "pane::CloseAllItems",
+      "tab": "menu::SelectNext",
+      "shift-tab": "menu::SelectPrev"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-\\": "terminal_panel::ToggleFocus",
+      "ctrl-n": "editor::GoToHunk",
+      "ctrl-b": "editor::GoToPrevHunk",
+      "ctrl-k l": "language_selector::Toggle"
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "up": "zed::NoAction",
+      "down": "zed::NoAction",
+      "left": "zed::NoAction",
+      "right": "zed::NoAction",
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "ctrl-f": "buffer_search::Deploy",
+      "ctrl-l": ["workspace::SendKeystrokes", "escape"],
+      "space y": ["workspace::SendKeystrokes", "\" + y"],
+      "space p": ["workspace::SendKeystrokes", "\" + p"],
+      "space shift-p": ["workspace::SendKeystrokes", "\" + shift-p"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space space": "workspace::NewCenterTerminal",
+      "space b": "tab_switcher::Toggle",
+      "space e": "project_panel::ToggleFocus",
+      "space f": "editor::Format",
+      "space r": "editor::Rename",
+      "space c": "editor::ToggleCodeActions",
+      "space h": ["workspace::ActivatePaneInDirection", "Left"],
+      "space l": ["workspace::ActivatePaneInDirection", "Right"],
+      "space k": ["workspace::ActivatePaneInDirection", "Up"],
+      "space j": ["workspace::ActivatePaneInDirection", "Down"],
+      "space g b": "branches::OpenRecent",
+      "space g p": "editor::ToggleHunkDiff",
+      "space g d": "editor::ExpandAllHunkDiffs",
+      "space g r": "editor::RevertSelectedHunks",
+      "space g B": "editor::ToggleGitBlameInline",
+      "space shift-y": ["workspace::SendKeystrokes", "\" + y $"],
+      "shift-y": ["workspace::SendKeystrokes", "y $"],
+      "shift-h": "pane::ActivatePrevItem",
+      "shift-k": "editor::Hover",
+      "shift-l": "pane::ActivateNextItem",
+      "g r": "editor::FindAllReferences",
+      "g n": "editor::GoToDiagnostic",
+      "g b": "editor::GoToPrevDiagnostic"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore",
+      "ctrl-l": "zed::NoAction"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "i i": ["vim::SwitchMode", "Normal"],
+      "shift-k": "editor::SelectLargerSyntaxNode",
+      "shift-j": "editor::SelectSmallerSyntaxNode"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "tab": "editor::ContextMenuNext",
+      "shift-tab": "editor::ContextMenuPrev"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-\\": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space": "zed::NoAction",
+      "space e": "workspace::ToggleRightDock",
+      "space h": ["workspace::ActivatePaneInDirection", "Left"],
+      "space l": ["workspace::ActivatePaneInDirection", "Right"],
+      "space k": ["workspace::ActivatePaneInDirection", "Up"],
+      "space j": ["workspace::ActivatePaneInDirection", "Down"],
+      "shift-d": "project_panel::Trash",
+      "shift-y": "project_panel::CopyRelativePath",
+      "q": "workspace::ToggleRightDock",
+      "l": "project_panel::OpenPermanent",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "p": "project_panel::Paste",
+      "y": "project_panel::CopyPath"
+    }
+  }
+]

@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+elif which fd &> /dev/null; then
+		projects=$(
+      echo ~/dotfiles
+      fd . --type=directory \
+        --exclude="src" \
+        --exclude="assets" \
+        --exclude="build" \
+        --exclude="public" \
+        --exclude="lua" \
+        --exclude="plugin" \
+        --exclude="node_modules" \
+        --exclude="target" \
+        --exclude="dist" \
+        ~/workspace
+    )
+else
+		projects=$(
+			echo ~/dotfiles
+      find ~/workspace -type d \( -path "*/\.*" -o \
+                                  -path "*/src*" -o \
+                                  -path "*/assets*" -o \
+                                  -path "*/build*" -o \
+                                  -path "*/public*" -o \
+                                  -path "*/lua*" -o \
+                                  -path "*/plugin*" -o \
+                                  -path "*/node_modules*" -o \
+                                  -path "*/target*" -o \
+                                  -path "*/dist*" \) -prune -o \
+                                  -type d -print
+		)
+fi
+
+selected=$(echo "$projects" |
+      fzf --layout=reverse --info=right --height=20 --bind=tab:down,btab:up)
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+selected_dirname="$(basename $(dirname $selected) | tr . _)"
+session_name="$selected_dirname/$selected_name"
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $session_name -c $selected
+    exit 0
+fi
+
+if ! tmux has-session -t $session_name 2> /dev/null; then
+    tmux new-session -ds $session_name -c $selected
+fi
+
+if [[ $TMUX ]] then
+	tmux switch-client -t $session_name
+else
+  tmux attach-session -t $session_name
+fi
+
