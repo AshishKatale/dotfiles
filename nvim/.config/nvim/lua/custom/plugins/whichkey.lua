@@ -96,12 +96,12 @@ M.config = function(_, setup)
 
   which_key.add({
     { '<leader>',  group = 'Leader' },
-    { '<leader>E', '<cmd>Vifm<CR>',            desc = 'Vifm' },
-    { '<leader>e', '<cmd>NvimTreeToggle<CR>',  desc = 'Netrw' },
-    { '<leader>h', '<C-w>h',                   desc = 'Left split' },
-    { '<leader>j', '<C-w>j',                   desc = 'Lower split' },
-    { '<leader>k', '<C-w>k',                   desc = 'Upper split' },
-    { '<leader>l', '<C-w>l',                   desc = 'Right split' },
+    { '<leader>E', '<cmd>Vifm<CR>',           desc = 'Vifm' },
+    { '<leader>e', '<cmd>NvimTreeToggle<CR>', desc = 'Netrw' },
+    { '<leader>h', '<C-w>h',                  desc = 'Left split' },
+    { '<leader>j', '<C-w>j',                  desc = 'Lower split' },
+    { '<leader>k', '<C-w>k',                  desc = 'Upper split' },
+    { '<leader>l', '<C-w>l',                  desc = 'Right split' },
     {
       '<leader><leader>',
       '<cmd>Terminal tab<CR>',
@@ -250,7 +250,7 @@ M.config = function(_, setup)
     },
     {
       '<leader>to',
-      '<cmd>OpacityToggle<cr>',
+      utils.toggle_opacity,
       desc = 'Background Opacity'
     },
     {
@@ -267,7 +267,7 @@ M.config = function(_, setup)
 
     { '<C-k>', group = 'Control-K' },
     {
-      mode = { 'i', 'n' },
+      mode = { 'n' },
       { '<C-k><C-x>', '<cmd>1,$bd!<CR>',  desc = 'Delete All Buffers' },
       { '<C-k>l',     utils.set_filetype, desc = 'Set Filetype' },
       {

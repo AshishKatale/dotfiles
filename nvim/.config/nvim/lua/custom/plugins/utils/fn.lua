@@ -31,4 +31,20 @@ M.set_filetype = function()
   )
 end
 
+M.toggle_opacity = function()
+  if vim.gg.opacity then
+    vim.gg.opacity = false
+    vim.system(
+      { 'alacritty', 'msg', 'config', 'window.opacity=1' },
+      { text = true }
+    )
+  else
+    vim.gg.opacity = true
+    vim.system(
+      { 'alacritty', 'msg', 'config', 'window.opacity=0.75' },
+      { text = true }
+    )
+  end
+end
+
 return M;

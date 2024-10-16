@@ -7,8 +7,10 @@
 --   command_mode = "c",
 
 -- Remap space as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- already set in init.lua before loading lazy
+-- vim.g.mapleader = ' '
+-- vim.g.maplocalleader = '\\'
+
 local map = vim.keymap.set
 
 -- Disable arrow keys

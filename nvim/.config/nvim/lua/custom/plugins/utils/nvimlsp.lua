@@ -42,7 +42,7 @@ M.setup = function()
     vim.lsp.handlers.hover,
     {
       border = 'rounded',
-      max_width = 80,
+      max_width = 100,
     }
   )
 

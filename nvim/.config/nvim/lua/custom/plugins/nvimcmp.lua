@@ -1,7 +1,7 @@
 local M = {
   'hrsh7th/nvim-cmp',
   lazy = true,
-  event = 'InsertEnter *.*',
+  event = 'VeryLazy',
   dependencies = {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
@@ -101,7 +101,10 @@ M.opts = function()
       },
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
-      ['<CR>'] = cmp.mapping.confirm { select = true },
+      ['<CR>'] = cmp.mapping.confirm({
+        select = true,
+        behavior = cmp.ConfirmBehavior.Insert
+      }),
       ['<Tab>'] = cmp.mapping(
         function(fallback)
           if cmp.visible() then
@@ -162,14 +165,13 @@ M.opts = function()
       { name = 'path' },
     },
     preselect = cmp.PreselectMode.Item,
-    confirm_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    },
     window = {
       -- { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
+    },
+    view = {
+      entries = 'custom'
     },
     experimental = {
       ghost_text = false,

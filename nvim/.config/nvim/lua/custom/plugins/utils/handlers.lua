@@ -16,7 +16,7 @@ local enable_lsp_features = function(client, bufnr)
       callback = function(ev)
         if ev.event == 'CursorHold' then
           vim.lsp.buf.document_highlight()
-          vim.diagnostic.open_float({ max_width = 80 })
+          vim.diagnostic.open_float({ max_width = 100 })
         else
           vim.lsp.buf.clear_references()
         end
@@ -26,7 +26,7 @@ local enable_lsp_features = function(client, bufnr)
     })
   else
     vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-      callback = function() vim.diagnostic.open_float({ max_width = 80 }) end,
+      callback = function() vim.diagnostic.open_float({ max_width = 100 }) end,
       buffer = bufnr,
       group = augroup
     })

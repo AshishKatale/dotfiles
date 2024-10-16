@@ -10,12 +10,14 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-vim.g.maplocalleader = ' '
 vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
 
-vim.gg = {}
+vim.gg = {
+  opacity = true
+}
 
 local opts = {
   ui = {
