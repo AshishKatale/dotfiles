@@ -63,36 +63,18 @@ M.config = function(_, opts)
     vim.notify('colorscheme ' .. colorscheme .. ' not found!')
     return
   end
-  vim.api.nvim_create_user_command('OpacityToggle', function()
-    local hl = vim.api.nvim_get_hl_by_name('Normal', {})
-    if hl.background == nil then
-      vim.cmd('hi Normal guifg=#d4d4d4 guibg=#181818')
-      vim.cmd('hi NormalFloat guifg=#d4d4d4 guibg=#181818')
-      vim.cmd('hi LazyBackdrop guifg=#d4d4d4 guibg=#181818')
-      vim.cmd('hi NvimTreeNormal guifg=#d4d4d4 guibg=#1e1e1e')
-      vim.cmd('hi LineNr guifg=#5a5a5a guibg=#181818')
-      vim.cmd('hi CursorLineNr guibg=#1e1e1e')
-      vim.cmd('hi SignColumn guibg=#1e1e1e')
-      vim.cmd('hi VertSplit guifg=#444444 guibg=#181818')
-      vim.cmd('hi netrwDir guifg=#569cd6 guibg=#1f1f1f')
-      vim.cmd('hi! link CurSearch Search')
-    else
-      vim.cmd('hi Normal guibg=NONE')
-      vim.cmd('hi NormalFloat guibg=NONE')
-      vim.cmd('hi LineNr guibg=NONE')
-      vim.cmd('hi NvimTreeNormal guibg=NONE')
-      vim.cmd('hi CursorLineNr guibg=NONE')
-      vim.cmd('hi SignColumn guibg=NONE')
-      vim.cmd('hi VertSplit guifg=#666666 guibg=NONE')
-      vim.cmd('hi netrwDir guifg=#569cd6 guibg=NONE')
-      vim.cmd('hi! link CurSearch Search')
-    end
-  end, {})
 
-  -- set transparent background on opening neovim
-  vim.api.nvim_create_autocmd({ 'VimEnter' }, {
-    command = 'OpacityToggle',
-  })
+  if vim.gg.opacity then
+    vim.cmd('hi Normal guibg=NONE')
+    vim.cmd('hi NormalFloat guibg=NONE')
+    vim.cmd('hi LineNr guibg=NONE')
+    vim.cmd('hi NvimTreeNormal guibg=NONE')
+    vim.cmd('hi CursorLineNr guibg=NONE')
+    vim.cmd('hi SignColumn guibg=NONE')
+    vim.cmd('hi VertSplit guifg=#666666 guibg=NONE')
+    vim.cmd('hi netrwDir guifg=#569cd6 guibg=NONE')
+    vim.cmd('hi! link CurSearch Search')
+  end
 end
 
 return M

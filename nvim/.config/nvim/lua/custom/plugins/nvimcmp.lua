@@ -1,7 +1,7 @@
 local M = {
   'hrsh7th/nvim-cmp',
   lazy = true,
-  event = 'InsertEnter *.*',
+  event = 'VeryLazy',
   dependencies = {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
