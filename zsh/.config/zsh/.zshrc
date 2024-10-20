@@ -1,6 +1,6 @@
 HISTFILE="$ZDOTDIR/.zsh_history"
-SAVEHIST=5000
-HISTSIZE=1000
+SAVEHIST=10000
+HISTSIZE=2000
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
@@ -23,10 +23,10 @@ fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-_comp_options+=(globdots)		     # Include hidden files.
+_comp_options+=(globdots)     # Include hidden files.
 
-bindkey '^I' menu-complete       # Tab key
-bindkey -M menuselect '^[[Z' reverse-menu-complete
+bindkey -M viins '	' menu-expand-or-complete                          # Tab key
+bindkey -M menuselect '^[[Z' reverse-menu-complete  # S-Tab key
 
 bindkey -M vicmd 'j' undefined-key
 bindkey -M vicmd 'k' undefined-key
@@ -51,9 +51,12 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 bindkey -v '^?' backward-delete-char
-bindkey '^p' up-line-or-search
-bindkey '^n' down-line-or-search
+
+# Cycle through history based on characters already typed on the line
+bindkey '^p' history-beginning-search-backward
+bindkey '^n' history-beginning-search-forward
 bindkey '^ ' autosuggest-toggle
+bindkey '^y' autosuggest-accept
 
 source $ZDOTDIR/scripts/aliases.zsh 
 source $ZDOTDIR/scripts/prompt.zsh 
