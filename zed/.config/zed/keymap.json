@@ -5,6 +5,7 @@
       "ctrl-k k": "zed::OpenKeymap",
       "ctrl-k x": "pane::CloseActiveItem",
       "ctrl-k ctrl-x": "pane::CloseAllItems",
+      "ctrl-c": "menu::Cancel",
       "tab": "menu::SelectNext",
       "shift-tab": "menu::SelectPrev"
     }

@@ -94,7 +94,6 @@ M.opts = function()
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
       ['<C-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable,
       ['<C-c>'] = cmp.mapping {
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
@@ -102,6 +101,10 @@ M.opts = function()
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
       ['<CR>'] = cmp.mapping.confirm({
+        select = true,
+        behavior = cmp.ConfirmBehavior.Insert
+      }),
+      ['<C-y>'] = cmp.mapping.confirm({
         select = true,
         behavior = cmp.ConfirmBehavior.Insert
       }),

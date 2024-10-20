@@ -24,6 +24,11 @@ npx() {
   npx $@
 }
 
+pnpm() {
+  lazynvm
+  pnpm $@
+}
+
 nvim() {
   lazynvm
   nvim $@

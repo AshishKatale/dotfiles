@@ -65,7 +65,7 @@ __powerline() {
         local marks
         if [ "$PROMPT_STYLE" = "plain" ]
         then
-          [ "$git_status" -gt 0 ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
+          [ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
           printf " $FG_BRIGHTYELLOW$checked_out$marks"
           return
         fi
@@ -75,55 +75,38 @@ __powerline() {
         local aheadN="$(echo $stat | grep -o 'ahead [0-9]\+' | grep -o '[0-9]\+')"
         local behindN="$(echo $stat | grep -o 'behind [0-9]\+' | grep -o '[0-9]\+')"
         [ -n "$aheadN" ] && marks+=" $aheadN$GIT_NEED_PUSH_SYMBOL"
-        [ "$git_status" -gt 0 ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
+        [ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
         [ -n "$behindN" ] && marks+=" $behindN$GIT_NEED_PULL_SYMBOL"
 
 				printf "$BG_GRAY$FG_BLUE$RESET$BG_GRAY$BOLD$FG_YELLOW$git_checkout_symbol$checked_out$marks$FG_GRAY"
     }
 
     pathinfo() {
-        local HOMEPATH_FULL="$(realpath ~)"
-        local HOMEPATH_SHORT3=$(realpath ~ \
-          | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' \
-          | tr '\n' '/'
-        )
-        local HOMEPATH_SHORT1=$(realpath ~ \
-          | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' \
-          | tr '\n' '/'
-        )
-        local COLS="$(tput cols)"
-        local CD="${PWD##*/}"
-        local HD=$USER
+      local CHAR_CNT=8
+      local COLS="$(tput cols)"
+      if [ "$COLS" -lt "80" ]; then
+        CHAR_CNT=2
+      elif [ "$COLS" -lt "120" ]; then
+        CHAR_CNT=3
+      fi
 
-        if [ "$PROMPT_STYLE" = "plain" ]
-        then
-          if [ "$CD" = "$HD" ]; then CD="~/"; fi
-          if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
-            echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
-              | sed "s|$HOMEPATH_SHORT1|~/|g" \
-              | sed "s|\(.*\).\/\$|\1$CD|"
-          elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
-            echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
-              | sed "s|$HOMEPATH_SHORT3|~/|g" \
-              | sed "s|\(.*\)...\/\$|\1$CD|"
-          else
-            echo "$(pwd | sed "s|$HOMEPATH_FULL|~|g")"
-          fi
-        else
-          if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
-            echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
-              | sed "s|$HOMEPATH_SHORT1| |g" \
-              | sed "s|\(.*\).\/\$|\1$CD|" \
-              | sed 's|\/||g'
-          elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
-            echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
-              | sed "s|$HOMEPATH_SHORT3| |g" \
-              | sed "s|\(.*\)...\/\$|\1$CD|" \
-              | sed 's|\/||g'
-          else
-            echo "$(pwd | sed "s|$HOMEPATH_FULL| |g" | sed 's/\///g')"
-          fi
-        fi
+      local HOME_SYM=" "
+      if [ "$PROMPT_STYLE" = "plain" ]; then
+        HOME_SYM="~"
+      fi
+      local HOME_PATH="$(realpath ~)"
+      local PWD_FULL="$(/usr/bin/pwd)"
+      if [ "$HOME_PATH" = "$PWD_FULL" ]; then
+        echo "$HOME_SYM"
+        return
+      fi
+
+      local PWD_PATH="$(echo "$PWD_FULL" | sed 's|^\(.*\)/.*|\1|')"
+      local PWD_NAME="$(echo "$PWD_FULL" | sed 's|^.*/||')"
+      local PATH_NEW="${PWD_PATH/$HOME_PATH/$HOME_SYM}"
+      local FINAL_PATH="$(echo "$PATH_NEW" | tr '/' '\n' | sed "s|\(.\{$CHAR_CNT\}\).*|\1|" | paste -sd '/')/$PWD_NAME"
+
+      echo "$FINAL_PATH"
     }
 
     tmuxinfo(){
@@ -142,7 +125,7 @@ __powerline() {
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
-        if [ $? -eq 0 ]; then
+        if [ "$?" -eq "0" ]; then
           local BG_EXIT="$BG_GREEN"
           local FG_EXIT="$FG_GREEN"
         else
@@ -158,7 +141,6 @@ __powerline() {
           return
         fi
 
-				local CD=$(echo $(pwd) | sed "s|/home/$USER| |g" | sed 's/\///g')
         PS1="$BOLD$FG_BLUE$BG_BLUE$FG_WHITE$(tmuxinfo)$(pathinfo)"
 
     		PS1+="$RESET$FG_BLUE"

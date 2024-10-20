@@ -46,9 +46,9 @@
   },
   "terminal": {
     "dock": "right",
-    "font_size": 13,
+    "font_size": 12,
     "working_directory": "current_project_directory",
-    "font_family": "JetBrains Mono",
+    "font_family": "JetBrainsMono Nerd Font",
     "env": {
       "PROMPT_STYLE": "plain"
     }

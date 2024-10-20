@@ -109,7 +109,7 @@ M.config = function(_, setup)
     },
 
     { '<leader>b',  group = 'Buffer' },
-    { '<leader>bb', '<cmd>Telescope buffers<CR>',      desc = 'Buffers' },
+    { '<leader>bb', '<cmd>Telescope buffers<CR>',      desc = 'Open Buffers' },
     { '<leader>br', '<cmd>Telescope oldfiles<cr>',     desc = 'Recent Files' },
     { '<leader>bs', '<cmd>ScratchPad<cr>',             desc = 'Scratch Pad' },
     { '<leader>bu', '<cmd>UndotreeToggle<cr>',         desc = 'Undo Tree' },

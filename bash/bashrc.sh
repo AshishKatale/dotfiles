@@ -1,11 +1,11 @@
 # don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignorespace:erasedups       # ignorespace/ignoredups/ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-HISTSIZE=1000
-HISTFILESIZE=5000
+HISTSIZE=2000
+HISTFILESIZE=10000
 HISTTIMEFORMAT='%d-%m-%y %T %p  '
 
 [ -e ~/dotfiles/bash/prompt.sh ] && source ~/dotfiles/bash/prompt.sh
@@ -39,7 +39,7 @@ if [[ $- =~ i ]]; then
   bind "set menu-complete-display-prefix on"
 
   # Cycle through history based on characters already typed on the line
-  bind '"\e[A":history-search-backward'    # uparrow
-  bind '"\e[B":history-search-forward'     # downarrow
+  bind '"\C-p":history-search-backward'
+  bind '"\C-n":history-search-forward'
 fi
 

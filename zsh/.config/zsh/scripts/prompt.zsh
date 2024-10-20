@@ -14,15 +14,15 @@ function tmuxinfo(){
     if [ -n "$TMUX" ]; then
       echo "%F{yellow}%BT%b%f"
     else
-      if [ $TS_COUNT -gt 0 ]; then
+      if [ "$TS_COUNT" -gt "0" ]; then
         echo "%F{yellow}%B${TS_COUNT}T%b%f"
       fi
     fi
   else
     if [ -z "$TMUX" ]; then
-      if [ $TS_COUNT -gt 0 ]; then
+      if [ "$TS_COUNT" -gt "0" ]; then
         SESSION_COUNT=""
-        if [ $TS_COUNT -gt 1 ]; then
+        if [ "$TS_COUNT" -gt "1" ]; then
           SESSION_COUNT="[$TS_COUNT]"
         fi
         echo "%F{yellow}%B$SESSION_COUNT %b%f"
@@ -32,48 +32,31 @@ function tmuxinfo(){
 }
 
 function pathinfo() {
-  local HOMEPATH_FULL="$(realpath ~)"
-  local HOMEPATH_SHORT3=$(realpath ~ \
-    | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' \
-    | tr '\n' '/'
-  )
-  local HOMEPATH_SHORT1=$(realpath ~ \
-    | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' \
-    | tr '\n' '/'
-  )
+  local CHAR_CNT=8
   local COLS="$(tput cols)"
-  local CD="${PWD##*/}"
-  local HD="${$(realpath ~)##*/}"
-
-  if [ "$PROMPT_STYLE" = "plain" ]
-  then
-    if [ "$CD" = "$HD" ]; then CD="~/"; fi
-    if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
-      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
-        | sed "s|$HOMEPATH_SHORT1|~/|g" \
-        | sed "s|\(.*\).\/\$|\1$CD|"
-    elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
-      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
-        | sed "s|$HOMEPATH_SHORT3|~/|g" \
-        | sed "s|\(.*\)...\/\$|\1$CD|"
-    else
-      echo "$(pwd | sed "s|$HOMEPATH_FULL|~|g")"
-    fi
-  else
-    if ! [ "$1" = "full" ] && [ $COLS -lt 80 ]; then
-      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,1) } }' | tr '\n' '/')" \
-        | sed "s|$HOMEPATH_SHORT1|$HOME_ICON|g" \
-        | sed "s|\(.*\).\/\$|\1$CD|" \
-        | sed "s|\/|$SLASH|g"
-    elif ! [ "$1" = "full" ] && [ $COLS -lt 120 ]; then
-      echo "$(pwd | awk '{ split($0,arr,"/") } END{ for(i in arr){ print substr(arr[i],0,3) } }' | tr '\n' '/')" \
-        | sed "s|$HOMEPATH_SHORT3|$HOME_ICON|g" \
-        | sed "s|\(.*\)...\/\$|\1$CD|" \
-        | sed "s|\/|$SLASH|g"
-    else
-      echo "$(pwd | sed "s|$HOMEPATH_FULL|$HOME_ICON|g" | sed "s/\//$SLASH/g")"
-    fi
+  if [ "$COLS" -lt "80" ]; then
+    CHAR_CNT=2
+  elif [ "$COLS" -lt "120" ]; then
+    CHAR_CNT=3
   fi
+
+  local HOME_SYM=" ~"
+  if [ "$PROMPT_STYLE" = "fancy" ]; then
+    HOME_SYM=" "
+  fi
+  local HOME_PATH="$(realpath ~)"
+  local PWD_FULL="$(/usr/bin/pwd)"
+  if [ "$HOME_PATH" = "$PWD_FULL" ]; then
+    echo "$HOME_SYM"
+    return
+  fi
+
+  local PWD_PATH="$(echo "$PWD_FULL" | sed 's|^\(.*\)/.*|\1|')"
+  local PWD_NAME="$(echo "$PWD_FULL" | sed 's|^.*/||')"
+  local PATH_NEW="${PWD_PATH/$HOME_PATH/$HOME_SYM}"
+  local FINAL_PATH="$(echo "$PATH_NEW" | tr '/' '\n' | sed "s|\(.\{$CHAR_CNT\}\).*|\1|" | paste -sd '/')/$PWD_NAME"
+
+  echo "$FINAL_PATH"
 }
 
 function gitinfo() {
@@ -106,7 +89,7 @@ function gitinfo() {
 	local marks
   if [ "$PROMPT_STYLE" = "plain" ]
   then
-    [ "$git_status" -gt 0 ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
+    [ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
     echo " %F{yellow}$checked_out$marks%f"
     return
   fi
@@ -115,7 +98,7 @@ function gitinfo() {
 	local stat="$(git status --porcelain --branch | grep '^##' | grep -o '.\+$')"
 	local aheadN="$(echo $stat | grep -o 'ahead [0-9]\+' | grep -o '[0-9]\+')"
 	local behindN="$(echo $stat | grep -o 'behind [0-9]\+' | grep -o '[0-9]\+')"
-	[ "$git_status" -gt 0 ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
+	[ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
 	[ -n "$aheadN" ] && marks+=" $aheadN$GIT_NEED_PUSH_SYMBOL"
 	[ -n "$behindN" ] && marks+=" $behindN$GIT_NEED_PULL_SYMBOL"
 
@@ -126,7 +109,7 @@ prompt() {
 	# Check the exit code of the previous command and display different
 	# colors in the prompt accordingly. 
 	local CODE=$?
-	local EXIT_CODE=$([ $CODE -gt 0 ] && echo $CODE)
+	local EXIT_CODE=$([ "$CODE" -gt "0" ] && echo $CODE)
 	local JOBS="$(jobs | wc -l)"
 	local RP=""
 	local P=""
@@ -150,7 +133,7 @@ prompt() {
   then
     RP=$TMUX_INFO
 
-    if [ $JOBS -gt 0 ]; then
+    if [ "$JOBS" -gt "0" ]; then
       RP+="%F{cyan}%B $JOBS&%b%f"
     fi
 
@@ -164,7 +147,7 @@ prompt() {
   RP+=$TMUX_INFO
 	if [ -n "$TMUX" ]; then TMUX_SYMBOL="$TMUX_ICON";	fi
 
-	if [ $JOBS -gt 0 ]; then
+	if [ "$JOBS" -gt "0" ]; then
 		RP+="%F{cyan}%B %b%f"
 	fi
 
