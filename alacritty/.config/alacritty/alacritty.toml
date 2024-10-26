@@ -1,48 +1,56 @@
 [env]
-TERM = "xterm-256color"
+TERM = "alacritty"
 
 [window]
 decorations = "none"
-opacity = 0.75
+opacity     = 0.75
 
 [cursor]
 thickness = 0.2
 
 [cursor.style]
 blinking = "On"
-shape = "Underline"
+shape    = "Underline"
 
 [font]
-size = 9.5
+size     = 9.5
 offset.x = 0
 offset.y = 0
 
 [font.normal]
 family = "JetBrainsMonoNerd Font"
-style = "Medium"
+style  = "Medium"
+
+[font.bold]
+family = "JetBrainsMonoNerd Font"
+style  = "ExtraBold"
+
+[colors.cursor]
+text   = "#4D4D4C"
+cursor = "#F5E0DC"
 
 [colors.bright]
-black = "#3C4048"
-blue = "#0000FF"
-cyan = "#00FFFF"
-green = "#40FF40"
+black   = "#3C4048"
+red     = "#FF1E1E"
+green   = "#40FF40"
+yellow  = "#F1FF8E"
+blue    = "#5EA1FF"
 magenta = "#BD5EFF"
-red = "#FF1E1E"
-white = "#FFFFFF"
-yellow = "#FFFF80"
+cyan    = "#00FFFF"
+white   = "#FFFFFF"
 
 [colors.normal]
-black = "#16181A"
-blue = "#5EA1FF"
-cyan = "#9EF1FF"
-green = "#00FF00"
+black   = "#16181A"
+red     = "#FF033E"
+green   = "#40FF80"
+yellow  = "#FFFF40"
+blue    = "#3BA1FF"
 magenta = "#BD5EFF"
-red = "#FF3232"
-white = "#FFFFFF"
-yellow = "#F1FF5E"
+cyan    = "#9EF1FF"
+white   = "#F8F8F8"
 
 [colors.primary]
-background = "#111111"
+background = "#11111b"
 foreground = "#EEEEEE"
 
 [colors.selection]

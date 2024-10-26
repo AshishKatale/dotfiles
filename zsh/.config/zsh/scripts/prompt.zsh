@@ -41,7 +41,7 @@ function pathinfo() {
   fi
 
   local HOME_SYM=" ~"
-  if [ "$PROMPT_STYLE" = "fancy" ]; then
+  if [ "$PROMPT_STYLE" != "plain" ]; then
     HOME_SYM=" "
   fi
   local HOME_PATH="$(realpath ~)"

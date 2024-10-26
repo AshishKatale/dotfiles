@@ -95,18 +95,13 @@ M.config = function(_, setup)
   which_key.setup(setup)
 
   which_key.add({
-    { '<leader>',  group = 'Leader' },
-    { '<leader>E', '<cmd>Vifm<CR>',           desc = 'Vifm' },
-    { '<leader>e', '<cmd>NvimTreeToggle<CR>', desc = 'Netrw' },
-    { '<leader>h', '<C-w>h',                  desc = 'Left split' },
-    { '<leader>j', '<C-w>j',                  desc = 'Lower split' },
-    { '<leader>k', '<C-w>k',                  desc = 'Upper split' },
-    { '<leader>l', '<C-w>l',                  desc = 'Right split' },
-    {
-      '<leader><leader>',
-      '<cmd>Terminal tab<CR>',
-      desc = 'Terminal'
-    },
+    { '<leader>',   group = 'Leader' },
+    { '<leader>E',  '<cmd>Vifm<CR>',                   desc = 'Vifm' },
+    { '<leader>e',  '<cmd>NvimTreeToggle<CR>',         desc = 'File tree' },
+    { '<leader>h',  '<C-w>h',                          desc = 'Left split' },
+    { '<leader>j',  '<C-w>j',                          desc = 'Lower split' },
+    { '<leader>k',  '<C-w>k',                          desc = 'Upper split' },
+    { '<leader>l',  '<C-w>l',                          desc = 'Right split' },
 
     { '<leader>b',  group = 'Buffer' },
     { '<leader>bb', '<cmd>Telescope buffers<CR>',      desc = 'Open Buffers' },

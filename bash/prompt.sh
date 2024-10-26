@@ -78,7 +78,7 @@ __powerline() {
         [ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
         [ -n "$behindN" ] && marks+=" $behindN$GIT_NEED_PULL_SYMBOL"
 
-				printf "$BG_GRAY$FG_BLUE$RESET$BG_GRAY$BOLD$FG_YELLOW$git_checkout_symbol$checked_out$marks$FG_GRAY"
+				printf "$BG_GRAY$FG_BLUE$RESET$BG_GRAY$BOLD$FG_YELLOW$git_checkout_symbol$checked_out$marks"
     }
 
     pathinfo() {
@@ -143,9 +143,9 @@ __powerline() {
 
         PS1="$BOLD$FG_BLUE$BG_BLUE$FG_WHITE$(tmuxinfo)$(pathinfo)"
 
-    		PS1+="$RESET$FG_BLUE"
-    		PS1+="$(gitinfo)"
-        PS1+="$BG_EXIT$RESET"
+        PS1+="$RESET$BG_BLUE"
+        PS1+="$(gitinfo)"
+        PS1+="$FG_EXIT$RESET"
         PS1+="$BG_EXIT$RESET$FG_EXIT $RESET"
     }
 
