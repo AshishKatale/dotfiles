@@ -35,7 +35,7 @@ M.opts = function()
     },
     win = {
       height = { min = 3 },
-      row = -2,
+      row = -1,
       border = 'rounded',
       padding = { 0, 1 }, -- extra window padding [top/bottom, right/left]
       title = true,
@@ -104,10 +104,12 @@ M.config = function(_, setup)
     { '<leader>l',  '<C-w>l',                          desc = 'Right split' },
 
     { '<leader>b',  group = 'Buffer' },
+    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',          desc = 'Remove trailing' },
     { '<leader>bb', '<cmd>Telescope buffers<CR>',      desc = 'Open Buffers' },
     { '<leader>br', '<cmd>Telescope oldfiles<cr>',     desc = 'Recent Files' },
     { '<leader>bs', '<cmd>ScratchPad<cr>',             desc = 'Scratch Pad' },
     { '<leader>bu', '<cmd>UndotreeToggle<cr>',         desc = 'Undo Tree' },
+    { '<leader>by', '<cmd>%y<cr>',                     desc = 'Copy buffer' },
 
     { '<leader>g',  group = 'Git Stuff' },
     { '<leader>gf', '<cmd>Telescope git_files<CR>',    desc = 'Git Files' },
@@ -121,8 +123,8 @@ M.config = function(_, setup)
     },
     {
       '<leader>gB',
-      "<cmd>lua require('gitsigns').blame_line()<cr>",
-      desc = 'Blame line'
+      "<cmd>lua require('gitsigns').blame()<cr>",
+      desc = 'Blame'
     },
     {
       '<leader>gC',
@@ -260,7 +262,24 @@ M.config = function(_, setup)
       mode = 'v'
     },
 
-    { '<C-k>', group = 'Control-K' },
+    { '<localleader>', group = 'Local Leader' },
+    {
+      '<localleader><localleader>',
+      '<cmd>tabnew term://$SHELL<CR>',
+      desc = 'Terminal tab'
+    },
+    {
+      '<localleader>_',
+      '<cmd>new term://$SHELL<CR>',
+      desc = 'Terminal bottom'
+    },
+    {
+      '<localleader>|',
+      '<cmd>vnew term://$SHELL<CR>',
+      desc = 'Terminal right'
+    },
+
+    { '<C-k>',         group = 'Control-K' },
     {
       mode = { 'n' },
       { '<C-k><C-x>', '<cmd>1,$bd!<CR>',  desc = 'Delete All Buffers' },

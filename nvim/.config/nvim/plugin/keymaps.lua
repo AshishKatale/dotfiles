@@ -23,10 +23,10 @@ map({ 'i', 'n', 'v' }, '<Right>', '<Nop>', { silent = true })
 map({ 'n' }, 'J', 'mzJ`z', { silent = true })
 
 -- Resize with arrow
-map({ 'n' }, '<C-Up>', ':resize +2<CR>', { silent = true })
-map({ 'n' }, '<C-Down>', ':resize -2<CR>', { silent = true })
-map({ 'n' }, '<C-Left>', '<cmd>vertical resize -2<CR>', { silent = true })
-map({ 'n' }, '<C-Right>', '<cmd>vertical resize +2<CR>', { silent = true })
+map({ 'n', 't' }, '<c-up>', '<cmd>resize +2<cr>', { silent = true })
+map({ 'n', 't' }, '<c-down>', '<cmd>resize -2<cr>', { silent = true })
+map({ 'n', 't' }, '<c-left>', '<cmd>vertical resize -2<cr>', { silent = true })
+map({ 'n', 't' }, '<C-Right>', '<cmd>vertical resize +2<CR>', { silent = true })
 
 -- Navigate buffers
 map({ 'n' }, '<S-l>', '<cmd>bn<CR>', { silent = true })
@@ -44,8 +44,8 @@ map({ 'v' }, '>', '>gv', { silent = true })
 -- Move text up and down
 map({ 'n', 'v' }, '<A-j>', '<cmd>m .+1<CR>==', { silent = true })
 map({ 'n', 'v' }, '<A-k>', '<cmd>m .-2<CR>==', { silent = true })
-map({ 'i' }, '<A-j>', '<Esc>:m .+1<CR>==a', { silent = true })
-map({ 'i' }, '<A-k>', '<Esc>:m .-2<CR>==a', { silent = true })
+map({ 'i' }, '<A-j>', '<Esc><cmd>m .+1<CR>==a', { silent = true })
+map({ 'i' }, '<A-k>', '<Esc><cmd>m .-2<CR>==a', { silent = true })
 
 -- copy-paste
 map({ 'v' }, 'p', '\"_dP', { silent = true })
@@ -55,7 +55,7 @@ map({ 'n', 'v' }, '<leader>p', '"+p', { silent = true })
 map({ 'n', 'v' }, '<leader>P', '"+P', { silent = true })
 
 -- Visual Block --
-map({ 'x' }, '<A-j>', ":move '>+1<CR>gv-gv", { silent = true })
-map({ 'x' }, '<A-k>', ":move '<-2<CR>gv-gv", { silent = true })
+map({ 'x' }, '<A-j>', "<cmd>move '>+1<CR>gv-gv", { silent = true })
+map({ 'x' }, '<A-k>', "<cmd>move '<-2<CR>gv-gv", { silent = true })
 
 map({ 'n', 't' }, '<C-\\>', '<cmd>FloatTerm<CR>', { silent = true })

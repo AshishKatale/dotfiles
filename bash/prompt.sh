@@ -14,16 +14,18 @@ __powerline() {
     readonly GIT_NEED_PULL_SYMBOL='↓'
 
     readonly FG_GRAY=$(FG 240)
-    readonly FG_BLUE=$(FG 33)
+    readonly FG_BLUE=$(FG 27)
     readonly FG_YELLOW=$(FG 3)
-    readonly FG_GREEN=$(FG 2)
+    readonly FG_GREEN=$(FG 46)
+    readonly FG_RED=$(FG 9)
     readonly FG_WHITE=$(FG 7)
     readonly FG_BRIGHTYELLOW=$(FG 11)
 
     readonly BG_GRAY=$(BG 240)
-    readonly BG_BLUE=$(BG 33)
+    readonly BG_BLUE=$(BG 27)
     readonly BG_YELLOW=$(BG 3)
-    readonly BG_GREEN=$(BG 2)
+    readonly BG_GREEN=$(BG 46)
+    readonly BG_RED=$(BG 9)
     readonly BG_BRIGHTYELLOW=$(BG 11)
 
     readonly DIM="\[$(tput dim)\]"

@@ -14,6 +14,7 @@ alias gbr='git branch'
 alias gco='git checkout'
 alias gpo='git pull origin'
 alias glo='git log --oneline'
+alias glon='git log --oneline -n'
 alias glog='git log --oneline --graph --all --decorate=full'
 alias gcl="git config --list"
 alias gcm="git commit -m"

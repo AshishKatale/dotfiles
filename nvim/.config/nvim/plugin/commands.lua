@@ -28,27 +28,6 @@ vim.api.nvim_create_user_command(
   {}
 )
 
-vim.api.nvim_create_user_command('Terminal',
-  function(opts)
-    local type = opts.args
-    if type == 'tab' then
-      vim.cmd('tabnew term://$SHELL')
-    elseif type == 'splitright' then
-      vim.cmd('vnew term://$SHELL')
-    elseif type == 'splitbelow' then
-      vim.cmd('new term://$SHELL')
-    else
-      vim.cmd('vnew term://$SHELL')
-    end
-  end,
-  {
-    nargs = '?',
-    complete = function()
-      return { 'splitright', 'splitbelow', 'tab' }
-    end,
-  }
-)
-
 vim.api.nvim_create_user_command(
   'Format',
   function() vim.lsp.buf.format({ timeout_ms = 30000 }) end,
@@ -173,8 +152,6 @@ vim.api.nvim_create_user_command(
   {}
 )
 
-vim.api.nvim_create_user_command('RemoveTrailingSpaces', '%s/\\s\\+$//e', {})
-
 ------------ Custom AutoCommands ------------
 
 -- highlight text on yank
@@ -248,7 +225,7 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = { 'qf', 'help', 'netrw' },
+  pattern = { 'qf', 'help', 'netrw', 'gitsigns-blame' },
   callback = function(opt)
     local opts = { noremap = true, silent = true, nowait = true };
     if opt.match == 'qf' then
@@ -260,6 +237,8 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
     elseif opt.match == 'netrw' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'Q', '<cmd>q<CR>', opts)
+    elseif opt.match == 'gitsigns-blame' then
+      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<CR>', opts)
     end
   end,
   group = augroup

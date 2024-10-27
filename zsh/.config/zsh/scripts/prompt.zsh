@@ -2,7 +2,7 @@ readonly GIT_BRANCH_CHANGED_SYMBOL='+'
 readonly GIT_NEED_PUSH_SYMBOL='↑'
 readonly GIT_NEED_PULL_SYMBOL='↓'
 readonly GRAY="240"
-readonly BLUE="33"
+readonly BLUE="27"
 readonly HOME_ICON=" "
 readonly SLASH=""
 readonly TMUX_ICON=" "
@@ -115,11 +115,11 @@ prompt() {
 	local P=""
 
 	if [ -z $EXIT_CODE ]; then
-		local EXIT_COLOR="green"
+		local EXIT_COLOR="46" # green
 		local EXIT_ICON=" "
 		RP+="%F{$EXIT_COLOR}%B$EXIT_ICON%b%f"
 	else
-		local EXIT_COLOR="red"
+		local EXIT_COLOR="9" # red
 		local EXIT_ICON=" "
 		RP+="%F{$EXIT_COLOR}%B[$EXIT_CODE] $EXIT_ICON%b%f"
 	fi

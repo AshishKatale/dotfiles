@@ -25,16 +25,16 @@ return {
         ---Line-comment toggle keymap
         line = 'gcc',
         ---Block-comment toggle keymap
-        block = 'gbc',
+        block = 'gcb',
       },
 
       ---LHS of operator-pending mappings in NORMAL + VISUAL mode
       ---@type table
       opleader = {
         ---Line-comment keymap
-        line = 'gc',
+        line = 'gcc',
         ---Block-comment keymap
-        block = 'gb',
+        block = 'gcb',
       },
 
       ---LHS of extra mappings
