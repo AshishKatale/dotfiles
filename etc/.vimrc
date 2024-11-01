@@ -33,6 +33,7 @@ set statusline=[%n]\ %t\ %m\ %r\ %h\ %=\ %y\ [%l,%v]\ [%P]\ [%{len(filter(range(
 highlight Normal ctermbg=NONE
 highlight Search cterm=bold ctermfg=15 ctermbg=52
 highlight CurSearch cterm=bold ctermfg=15 ctermbg=172
+highlight MatchParen ctermfg=0 ctermbg=7
 highlight VertSplit cterm=NONE ctermfg=242 ctermbg=NONE
 highlight StatusLine cterm=NONE ctermbg=240
 highlight CursorLine cterm=NONE ctermbg=236
@@ -69,6 +70,9 @@ autocmd BufEnter * :setlocal cursorline
 autocmd WinLeave,BufLeave * :setlocal nocursorline
 
 augroup END
+
+" save on W
+command! W  write
 
 " Keymaps
 inoremap jk <esc>

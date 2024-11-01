@@ -1,5 +1,7 @@
 ----------- Custom User Commands ------------
 local augroup = vim.api.nvim_create_augroup('customcmd', { clear = true })
+vim.api.nvim_create_user_command('W', 'write', {})
+vim.api.nvim_create_user_command('Vifm', 'tabnew term://vifm', {})
 
 vim.api.nvim_create_user_command(
   'LazyGit',
@@ -22,11 +24,6 @@ vim.api.nvim_create_user_command(
   {}
 )
 
-vim.api.nvim_create_user_command(
-  'Vifm',
-  function() vim.cmd('tabnew term://vifm') end,
-  {}
-)
 
 vim.api.nvim_create_user_command(
   'Format',

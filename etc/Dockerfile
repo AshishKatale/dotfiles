@@ -17,8 +17,8 @@ RUN git clone https://github.com/AshishKatale/dotfiles.git
 WORKDIR /root/dotfiles
 RUN stow lazygit nvim scripts tmux vifm
 RUN git remote set-url origin git@github.com:AshishKatale/dotfiles.git
-RUN cp /root/dotfiles/etc/ssh/id_rsa.pub /root/.ssh
-RUN openssl enc -aes256 -d -md sha1 -iter 1000000 -pass "pass:$VAULT_PASS" -in /root/dotfiles/etc/ssh/id_rsa -out /root/.ssh/id_rsa
+RUN openssl enc -aes256 -d -md sha1 -iter 1000000 -a -pass "pass:$VAULT_PASS" -in /root/dotfiles/etc/ssh/id_ed25519 -out /root/.ssh/id_ed25519
+RUN openssl -f /root/.ssh/id_ed25519 -y > /root/.ssh/id_ed25519.pub
 RUN chmod 600 /root/.ssh/id_rsa
 
 WORKDIR /root/dotfiles/scripts/bin

@@ -13,16 +13,6 @@ return {
               relative = 'cursor',
               title = ' Rename to '
             })
-          elseif ' Rename to ' == conf.title then
-            -- customize nvimtree rename popup
-            local cur_row = vim.api.nvim_win_get_cursor(0)[1]
-            vim.api.nvim_win_set_cursor(0, { cur_row, 0 })
-            return vim.tbl_extend('force', conf, {
-              col = 0,
-              row = 2,
-              anchor = 'SE',
-              relative = 'cursor',
-            })
           end
         end,
         relative = 'editor',

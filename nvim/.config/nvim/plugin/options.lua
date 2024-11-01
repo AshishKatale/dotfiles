@@ -39,10 +39,12 @@ opt.fixeol = false        -- disable insert newline at EOF
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.colorcolumn = '81'
+
 opt.list = true
-vim.opt.fillchars:append('diff:·');
+opt.fillchars:append('diff:·') -- render diff empty lines as ······
+opt.fillchars:append('eob: ') -- hide ~ on empty buffer
 opt.listchars:append('trail:') -- render trailing spaces as ·
-opt.listchars:append('tab:  ') -- don't render tabs
+-- opt.listchars:append('tab:  ') -- don't render tabs
 
 opt.whichwrap:append('h,l') -- wrap to next line
 -- opt.shortmess:append("c")
