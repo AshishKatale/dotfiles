@@ -21,11 +21,13 @@ set hlsearch
 set pumheight=15
 set colorcolumn=81
 set laststatus=2
+set scrolloff=8
 " set showtabline=2
 set splitbelow
 set splitright
 set path+=**
 set wildmenu
+set wildoptions+=pum
 set fillchars=eob:\ ,vert:\┃,fold:-
 set statusline=[%n]\ %t\ %m\ %r\ %h\ %=\ %y\ [%l,%v]\ [%P]\ [%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
 
@@ -41,7 +43,7 @@ highlight StatusLineNC cterm=NONE ctermbg=237
 highlight LineNr cterm=NONE ctermfg=244
 highlight CursorLineNr cterm=NONE ctermfg=252
 highlight ColorColumn cterm=NONE ctermbg=236
-highlight Visual cterm=NONE ctermbg=73 ctermfg=0
+highlight visual cterm=NONE ctermbg=24 ctermfg=15
 highlight DiffAdd cterm=bold ctermfg=15 ctermbg=71
 highlight DiffText   cterm=bold ctermfg=15 ctermbg=24
 highlight DiffChange cterm=bold ctermfg=15 ctermbg=17
@@ -49,6 +51,7 @@ highlight DiffDelete cterm=bold ctermfg=124 ctermbg=124
 highlight QuickFixLine ctermfg=15 ctermbg=8
 highlight Pmenu ctermfg=white ctermbg=8
 highlight PmenuSel ctermfg=0 ctermbg=7
+highlight PmenuThumb ctermbg=0 ctermbg=240
 highlight TabLineSel ctermbg=234 ctermfg=white
 highlight TabLineFill cterm=none ctermbg=242
 highlight netrwMarkFile cterm=bold ctermbg=242

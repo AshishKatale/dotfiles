@@ -10,6 +10,7 @@ HISTTIMEFORMAT='%d-%m-%y %T %p  '
 
 [ -e ~/dotfiles/bash/prompt.sh ] && source ~/dotfiles/bash/prompt.sh
 [ -e ~/dotfiles/bash/aliases.sh ] && source ~/dotfiles/bash/aliases.sh
+[ -e ~/dotfiles/bash/nvm.sh ] && source ~/dotfiles/bash/nvm.sh
 
 # if the shell is interactive
 if [[ $- =~ i ]]; then
