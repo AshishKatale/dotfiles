@@ -4,6 +4,7 @@ alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias bashrc="vim ~/.bashrc"
 alias zshrc="vim $ZDOTDIR/.zshrc"
+alias ls='ls --color=auto'
 
 function ll() { ls -Alh --color=always $@ }
 function lsf() { ls --color=always -alhA $@ | grep --color=never -v "^d.*" }

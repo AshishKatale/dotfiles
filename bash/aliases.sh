@@ -1,6 +1,7 @@
 alias c='clear'
 alias xxx='exit'
 alias bashrc="vim ~/.bashrc"
+alias ls='ls --color=auto'
 
 function ll() {
 	ls -Alh --color=always $@

@@ -44,8 +44,8 @@ exec --no-startup-id diodon
 exec --no-startup-id /usr/lib/notification-daemon-1.0/notification-daemon
 
 #  move to scratchpad
-for_window [title="^DevTools" ] , floating enable resize set 950 550
-for_window [title="^Developer Tools" ] , floating enable resize set 950 550
+for_window [title="^DevTools" ], floating enable, resize set 968 576
+for_window [title="^Developer Tools" ], floating enable, resize set 968 576
 bindsym $mod+Shift+i [title="^(DevTools|Developer Tools)"] scratchpad show
 
 # initialize polybar
@@ -63,7 +63,7 @@ bindsym $mod+Shift+Return exec brave
 bindsym $mod+Shift+v exec diodon
 
 # toggle polybar
-bindsym $mod+p exec polybar-msg cmd toggle 
+bindsym $mod+p exec polybar-msg cmd toggle
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -114,7 +114,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+Shift+plus scratchpad show 
 
 # toggle tiling / floating
-bindsym $mod+f floating toggle
+bindsym $mod+f floating toggle, resize set 968 576, move position center
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -231,20 +231,20 @@ bindsym $mod+Shift+e mode " [l]ock, [L]ogout, [r]eboot, [s]hutdown "
 
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #666666 #353535 #ffffff #008800   #667766
-client.focused_inactive #333333 #2C2C2C #ffffff #484e50   #333333
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #FF8138 #ffffff #FF8138   #FF8138
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.focused          #666666 #353535 #FFFFFF #00AA00   #667766
+client.focused_inactive #333333 #2C2C2C #FFFFFF #484E50   #333333
+client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #FF8138 #FFFFFF #FF8138   #FF8138
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
-client.background       #ffffff
+client.background       #FFFFFF
 
 gaps inner 2
 gaps outer 0
 
 smart_gaps on
 smart_borders on
-hide_edge_borders vertical
+hide_edge_borders smart
 focus_follows_mouse yes
 
 for_window [class="^.*"] title_format "%class"

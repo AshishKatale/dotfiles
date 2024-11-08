@@ -199,7 +199,9 @@ vim.api.nvim_create_autocmd({ 'TermClose' }, {
 -- set absolute line numbers in insert mode
 vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
   callback = function()
-    vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
+    if vim.o.relativenumber then
+      vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
+    end
   end,
   group = augroup
 })
@@ -216,7 +218,9 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     then
       return
     end
-    vim.api.nvim_set_option_value('relativenumber', true, { win = 0 })
+    if not vim.o.relativenumber then
+      vim.api.nvim_set_option_value('relativenumber', true, { win = 0 })
+    end
   end,
   group = augroup
 })
