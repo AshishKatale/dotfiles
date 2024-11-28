@@ -203,7 +203,8 @@ M.config = function(_, setup)
     { '<leader>sC', '<cmd>Telescope colorscheme<cr>', desc = 'Colorscheme' },
     { '<leader>sh', '<cmd>Telescope help_tags<cr>',   desc = 'Find Help' },
     { '<leader>sk', '<cmd>Telescope keymaps<cr>',     desc = 'Keymaps' },
-    { '<leader>sm', '<cmd>Telescope man_pages<cr>',   desc = 'Man Pages' },
+    { '<leader>sm', '<cmd>Man<cr>',                   desc = 'Man Pages' },
+    { '<leader>sM', '<cmd>Telescope man_pages<cr>',   desc = 'Telescope Man' },
     { '<leader>sr', '<cmd>Telescope registers<cr>',   desc = 'Registers' },
     {
       '<leader>ss',

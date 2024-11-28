@@ -226,7 +226,7 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = { 'qf', 'help', 'netrw', 'gitsigns-blame' },
+  pattern = { 'qf', 'help', 'man', 'netrw', 'gitsigns-blame' },
   callback = function(opt)
     local opts = { noremap = true, silent = true, nowait = true };
     if opt.match == 'qf' then
@@ -236,6 +236,8 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<CR>', opts)
       vim.api.nvim_set_option_value('number', true, { win = 0 })
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
+    elseif opt.match == 'man' then
+      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<CR>', opts)
     elseif opt.match == 'netrw' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'Q', '<cmd>q<CR>', opts)
     elseif opt.match == 'gitsigns-blame' then
