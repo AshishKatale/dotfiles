@@ -61,11 +61,6 @@ M.opts = function()
     TypeParameter = '󰗴',
   }
 
-  local check_backspace = function()
-    local col = vim.fn.col '.' - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
-  end
-
   return {
     snippet = {
       expand = function(args)
@@ -74,20 +69,24 @@ M.opts = function()
     },
     mapping = {
       ['<C-p>'] = cmp.mapping(
-        function()
+        function(fallback)
           if luasnip.choice_active() then
             luasnip.change_choice(-1)
-          else
+          elseif cmp.visible() then
             cmp.select_prev_item()
+          else
+            fallback()
           end
         end
       ),
       ['<C-n>'] = cmp.mapping(
-        function()
+        function(fallback)
           if luasnip.choice_active() then
             luasnip.change_choice(1)
-          else
+          elseif cmp.visible() then
             cmp.select_next_item()
+          else
+            fallback()
           end
         end
       ),
@@ -116,8 +115,6 @@ M.opts = function()
             luasnip.expand()
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
-          elseif check_backspace() then
-            fallback()
           else
             fallback()
           end
@@ -136,13 +133,15 @@ M.opts = function()
         end,
         { 'i', 's' }
       ),
-      ['<C-x>'] = function()
-        if cmp.visible_docs() then
+      ['<C-x>'] = cmp.mapping(function(fallback)
+        if cmp.visible() and cmp.visible_docs() then
           cmp.close_docs()
-        else
+        elseif cmp.visible() and not cmp.visible_docs() then
           cmp.open_docs()
+        else
+          fallback()
         end
-      end
+      end)
     },
     formatting = {
       fields = { 'kind', 'abbr', 'menu' },
@@ -151,10 +150,11 @@ M.opts = function()
         vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
         vim_item.menu = ({
           nvim_lsp = '[LSP]',
-          nvim_lua = '[CMPLUA]',
-          luasnip = '[LUASNIP]',
-          buffer = '[BUFFER]',
+          nvim_lua = '[LUA]',
+          luasnip = '[SNIP]',
+          buffer = '[BUF]',
           path = '[PATH]',
+          nvim_lsp_signature_help = '[SIG]',
         })[entry.source.name]
         return vim_item
       end,

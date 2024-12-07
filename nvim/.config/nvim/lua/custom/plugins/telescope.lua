@@ -146,11 +146,6 @@ M.config = function(_, opts)
   local telescope_builtin = require('telescope.builtin')
   telescope.setup(opts)
   vim.keymap.set(
-    { 'n', 'i' }, '<C-f>',
-    telescope_builtin.current_buffer_fuzzy_find,
-    { silent = true }
-  )
-  vim.keymap.set(
     { 'n', 'i' }, '<C-p>',
     function()
       telescope_builtin.find_files(
