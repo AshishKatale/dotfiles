@@ -26,11 +26,11 @@ map({ 'n' }, 'J', 'mzJ`z', { silent = true })
 map({ 'n', 't' }, '<c-up>', '<cmd>resize +2<cr>', { silent = true })
 map({ 'n', 't' }, '<c-down>', '<cmd>resize -2<cr>', { silent = true })
 map({ 'n', 't' }, '<c-left>', '<cmd>vertical resize -2<cr>', { silent = true })
-map({ 'n', 't' }, '<C-Right>', '<cmd>vertical resize +2<CR>', { silent = true })
+map({ 'n', 't' }, '<C-Right>', '<cmd>vertical resize +2<cr>', { silent = true })
 
 -- Navigate buffers
-map({ 'n' }, '<S-l>', '<cmd>bn<CR>', { silent = true })
-map({ 'n' }, '<S-h>', '<cmd>bp<CR>', { silent = true })
+map({ 'n' }, '<S-l>', '<cmd>bn<cr>', { silent = true })
+map({ 'n' }, '<S-h>', '<cmd>bp<cr>', { silent = true })
 
 -- Press jk fast to enter normal mode
 map({ 'i' }, 'jk', '<ESC>', { silent = true })
@@ -42,10 +42,10 @@ map({ 'v' }, '<', '<gv', { silent = true })
 map({ 'v' }, '>', '>gv', { silent = true })
 
 -- Move text up and down
-map({ 'n', 'v' }, '<A-j>', '<cmd>m .+1<CR>==', { silent = true })
-map({ 'n', 'v' }, '<A-k>', '<cmd>m .-2<CR>==', { silent = true })
-map({ 'i' }, '<A-j>', '<Esc><cmd>m .+1<CR>==a', { silent = true })
-map({ 'i' }, '<A-k>', '<Esc><cmd>m .-2<CR>==a', { silent = true })
+map({ 'n', 'v' }, '<A-j>', '<cmd>m .+1<cr>==', { silent = true })
+map({ 'n', 'v' }, '<A-k>', '<cmd>m .-2<cr>==', { silent = true })
+map({ 'i' }, '<A-j>', '<Esc><cmd>m .+1<cr>==a', { silent = true })
+map({ 'i' }, '<A-k>', '<Esc><cmd>m .-2<cr>==a', { silent = true })
 
 -- copy-paste
 map({ 'v' }, 'p', '\"_dP', { silent = true })
@@ -55,7 +55,7 @@ map({ 'n', 'v' }, '<leader>p', '"+p', { silent = true })
 map({ 'n', 'v' }, '<leader>P', '"+P', { silent = true })
 
 -- Visual Block --
-map({ 'x' }, '<A-j>', "<cmd>move '>+1<CR>gv-gv", { silent = true })
-map({ 'x' }, '<A-k>', "<cmd>move '<-2<CR>gv-gv", { silent = true })
+map({ 'x' }, '<A-j>', "<cmd>move '>+1<cr>gv-gv", { silent = true })
+map({ 'x' }, '<A-k>', "<cmd>move '<-2<cr>gv-gv", { silent = true })
 
-map({ 'n', 't' }, '<C-\\>', '<cmd>FloatTerm<CR>', { silent = true })
+map({ 'n', 't' }, '<C-\\>', '<cmd>FloatTerm<cr>', { silent = true })

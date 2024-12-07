@@ -96,23 +96,29 @@ M.config = function(_, setup)
 
   which_key.add({
     { '<leader>',   group = 'Leader' },
-    { '<leader>E',  '<cmd>Vifm<CR>',                   desc = 'Vifm' },
-    { '<leader>e',  '<cmd>NvimTreeToggle<CR>',         desc = 'File tree' },
-    { '<leader>h',  '<C-w>h',                          desc = 'Left split' },
-    { '<leader>j',  '<C-w>j',                          desc = 'Lower split' },
-    { '<leader>k',  '<C-w>k',                          desc = 'Upper split' },
-    { '<leader>l',  '<C-w>l',                          desc = 'Right split' },
+    { '<leader>E',  '<cmd>Vifm<cr>',               desc = 'Vifm' },
+    { '<leader>e',  '<cmd>NvimTreeToggle<cr>',     desc = 'File tree' },
+    { '<leader>h',  '<C-w>h',                      desc = 'Left split' },
+    { '<leader>j',  '<C-w>j',                      desc = 'Lower split' },
+    { '<leader>k',  '<C-w>k',                      desc = 'Upper split' },
+    { '<leader>l',  '<C-w>l',                      desc = 'Right split' },
 
     { '<leader>b',  group = 'Buffer' },
-    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',          desc = 'Remove trailing' },
-    { '<leader>bb', '<cmd>Telescope buffers<CR>',      desc = 'Open Buffers' },
-    { '<leader>br', '<cmd>Telescope oldfiles<cr>',     desc = 'Recent Files' },
-    { '<leader>bs', '<cmd>ScratchPad<cr>',             desc = 'Scratch Pad' },
-    { '<leader>bu', '<cmd>UndotreeToggle<cr>',         desc = 'Undo Tree' },
-    { '<leader>by', '<cmd>%y<cr>',                     desc = 'Copy buffer' },
+    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',      desc = 'Remove trailing' },
+    { '<leader>bB', '<cmd>Telescope buffers<cr>',  desc = 'Open Buffers' },
+    { '<leader>br', '<cmd>Telescope oldfiles<cr>', desc = 'Recent Files' },
+    { '<leader>bu', '<cmd>UndotreeToggle<cr>',     desc = 'Undo Tree' },
+    { '<leader>by', '<cmd>%y<cr>',                 desc = 'Yank buffer' },
+    { '<leader>bY', '<cmd>%y+<cr>',                desc = 'Copy buffer' },
+    { '<leader>bb', '<cmd>ScratchPad<cr>',         desc = 'Scratch Pad' },
+    {
+      '<leader>bs',
+      '<cmd>Telescope current_buffer_fuzzy_find<cr>',
+      desc = 'Search in Buffer'
+    },
 
     { '<leader>g',  group = 'Git Stuff' },
-    { '<leader>gf', '<cmd>Telescope git_files<CR>',    desc = 'Git Files' },
+    { '<leader>gf', '<cmd>Telescope git_files<cr>',    desc = 'Git Files' },
     { '<leader>gg', '<cmd>LazyGit<cr>',                desc = 'LazyGit' },
     { '<leader>gs', '<cmd>Telescope git_status<cr>',   desc = 'Git status' },
     { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'Branches' },
@@ -208,7 +214,7 @@ M.config = function(_, setup)
     { '<leader>sr', '<cmd>Telescope registers<cr>',   desc = 'Registers' },
     {
       '<leader>ss',
-      '<cmd>Telescope live_grep<CR>',
+      '<cmd>Telescope live_grep<cr>',
       desc = 'Search in Workspace'
     },
     {
@@ -223,7 +229,7 @@ M.config = function(_, setup)
     },
     {
       '<leader>sf',
-      '<cmd>Telescope find_files hidden=truelayout_config={previewer=true}<CR>',
+      '<cmd>Telescope find_files hidden=true layout_config={previewer=true}<cr>',
       desc = 'Find files'
     },
 
@@ -266,28 +272,28 @@ M.config = function(_, setup)
     { '<localleader>', group = 'Local Leader' },
     {
       '<localleader><localleader>',
-      '<cmd>tabnew term://$SHELL<CR>',
+      '<cmd>tabnew term://$SHELL<cr>',
       desc = 'Terminal tab'
     },
     {
       '<localleader>_',
-      '<cmd>new term://$SHELL<CR>',
+      '<cmd>new term://$SHELL<cr>',
       desc = 'Terminal bottom'
     },
     {
       '<localleader>|',
-      '<cmd>vnew term://$SHELL<CR>',
+      '<cmd>vnew term://$SHELL<cr>',
       desc = 'Terminal right'
     },
 
     { '<C-k>',         group = 'Control-K' },
     {
       mode = { 'n' },
-      { '<C-k><C-x>', '<cmd>1,$bd!<CR>',  desc = 'Delete All Buffers' },
+      { '<C-k><C-x>', '<cmd>1,$bd!<cr>',  desc = 'Delete All Buffers' },
       { '<C-k>l',     utils.set_filetype, desc = 'Set Filetype' },
       {
         '<C-k>x',
-        '<cmd>bp<bar>sp<bar>bn<bar>bd<CR>',
+        '<cmd>bp<bar>sp<bar>bn<bar>bd<cr>',
         desc = 'Delete Buffer'
       },
     }

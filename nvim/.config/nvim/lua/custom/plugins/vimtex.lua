@@ -1,7 +1,8 @@
 return {
   'lervag/vimtex',
   lazy = true,
-  event = 'BufNew *.tex',
+  ft = 'tex',
+  -- event = 'BufNew *.tex',
   -- tag = "v2.15",
   init = function()
     -- needs latexmk, zathura and texlive to work
