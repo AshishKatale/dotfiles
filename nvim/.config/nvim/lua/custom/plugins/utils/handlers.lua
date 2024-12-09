@@ -33,17 +33,8 @@ local enable_lsp_features = function(client, bufnr)
   end
 end
 
-function RangeFormat()
-  vim.lsp.buf.format({
-    async = true,
-    range = {
-      ['start'] = vim.api.nvim_buf_get_mark(0, '<'),
-      ['end'] = vim.api.nvim_buf_get_mark(0, '>'),
-    }
-  })
-end
-
 local set_lsp_keymaps = function(bufnr)
+  local utils = require('custom.plugins.utils.fn')
   which_key.add({
     { '<leader>', group = 'Leader' },
     {
@@ -65,11 +56,11 @@ local set_lsp_keymaps = function(bufnr)
       buffer = bufnr
     },
     {
-      mode = { 'v' },
       '<leader>f',
-      '<cmd>lua RangeFormat()<cr><esc>',
-      desc = 'Format Selection',
-      buffer = bufnr
+      utils.range_format,
+      desc = 'format selection',
+      buffer = bufnr,
+      mode = { 'v' },
     },
 
     { 'g',        group = 'Go to' },
