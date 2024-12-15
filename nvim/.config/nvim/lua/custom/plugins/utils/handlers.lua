@@ -65,6 +65,12 @@ local set_lsp_keymaps = function(bufnr)
 
     { 'g',        group = 'Go to' },
     {
+      'gd',
+      '<cmd>lua vim.lsp.buf.definition()<CR>',
+      desc = 'Definition',
+      buffer = bufnr
+    },
+    {
       'gD',
       '<cmd>lua vim.lsp.buf.declaration()<CR>',
       desc = 'Declaration',
@@ -77,9 +83,21 @@ local set_lsp_keymaps = function(bufnr)
       buffer = bufnr
     },
     {
+      'gr',
+      '<cmd>Trouble lsp_references<CR>',
+      desc = 'References trouble',
+      buffer = bufnr
+    },
+    {
       'gR',
       '<cmd>Telescope lsp_references<CR>',
       desc = 'References telescope',
+      buffer = bufnr
+    },
+    {
+      'gs',
+      '<cmd>Telescope lsp_document_symbols<CR>',
+      desc = 'File symbols',
       buffer = bufnr
     },
     {
@@ -89,39 +107,15 @@ local set_lsp_keymaps = function(bufnr)
       buffer = bufnr
     },
     {
-      'gb',
+      'gp',
       '<cmd>lua vim.diagnostic.goto_prev()<CR>',
       desc = 'Pervious diagnostic',
-      buffer = bufnr
-    },
-    {
-      'gd',
-      '<cmd>lua vim.lsp.buf.definition()<CR>',
-      desc = 'Definition',
-      buffer = bufnr
-    },
-    {
-      'gh',
-      '<cmd>lua vim.lsp.buf.signature_help()<CR>',
-      desc = 'Signature help',
       buffer = bufnr
     },
     {
       'gn',
       '<cmd>lua vim.diagnostic.goto_next()<CR>',
       desc = 'Next diagnostic',
-      buffer = bufnr
-    },
-    {
-      'gr',
-      '<cmd>Trouble lsp_references<CR>',
-      desc = 'References trouble',
-      buffer = bufnr
-    },
-    {
-      'gs',
-      '<cmd>Telescope lsp_document_symbols<CR>',
-      desc = 'File symbols',
       buffer = bufnr
     },
     {
