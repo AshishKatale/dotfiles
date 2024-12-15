@@ -50,7 +50,7 @@ return {
         col = 1
       },
     })
-    vim.keymap.set({ 'n' }, '<C-b>', gitsigns.prev_hunk, { silent = true })
+    vim.keymap.set({ 'n' }, '<C-p>', gitsigns.prev_hunk, { silent = true })
     vim.keymap.set({ 'n' }, '<C-n>', gitsigns.next_hunk, { silent = true })
   end,
 }

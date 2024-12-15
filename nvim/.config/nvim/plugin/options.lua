@@ -46,7 +46,7 @@ opt.fillchars:append('eob: ') -- hide ~ on empty buffer
 opt.listchars:append('trail:') -- render trailing spaces as ·
 opt.listchars:append('tab:  ') -- don't render tabs
 
-opt.whichwrap:append('h,l') -- wrap to next line
+-- opt.whichwrap:append('h,l') -- wrap to next line
 -- opt.shortmess:append("c")
 -- opt.iskeyword:append('-') -- treat kebab cased text as a single word
 

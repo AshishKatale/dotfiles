@@ -5,7 +5,7 @@ local M = {
     'folke/trouble.nvim',
   },
   lazy = true,
-  keys = { '<C-f>', '<C-p>' },
+  keys = { '<C-b>' },
   cmd = { 'Telescope' },
 }
 
@@ -146,7 +146,7 @@ M.config = function(_, opts)
   local telescope_builtin = require('telescope.builtin')
   telescope.setup(opts)
   vim.keymap.set(
-    { 'n', 'i' }, '<C-p>',
+    { 'n', 'i' }, '<C-b>',
     function()
       telescope_builtin.find_files(
         require('telescope.themes').get_dropdown {
