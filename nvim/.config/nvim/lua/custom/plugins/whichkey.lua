@@ -105,7 +105,7 @@ M.config = function(_, setup)
 
     { '<leader>b',  group = 'Buffer' },
     { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',      desc = 'Remove trailing' },
-    { '<leader>bB', '<cmd>Telescope buffers<cr>',  desc = 'Open Buffers' },
+    { '<leader>bf', '<cmd>Telescope buffers<cr>',  desc = 'Open Buffers' },
     { '<leader>br', '<cmd>Telescope oldfiles<cr>', desc = 'Recent Files' },
     { '<leader>bu', '<cmd>UndotreeToggle<cr>',     desc = 'Undo Tree' },
     { '<leader>by', '<cmd>%y<cr>',                 desc = 'Yank buffer' },
@@ -184,10 +184,22 @@ M.config = function(_, setup)
     { '<leader>om', '<cmd>Mason<cr>',               desc = 'Mason' },
 
     { '<leader>q',  group = 'QuickFix' },
-    { '<leader>qq', '<cmd>copen<cr>',               desc = 'QuickFix List' },
-    { '<leader>qT', '<cmd>TodoTrouble<cr>',         desc = 'Todos' },
+    { '<leader>qf', '<cmd>Trouble qflist<cr>',      desc = 'Trouble QfList' },
+    { '<leader>qp', '<cmd>cprev<cr>',               desc = 'QuickFix Prev' },
+    { '<leader>qn', '<cmd>cnext<cr>',               desc = 'QuickFix Next' },
+    { '<leader>q0', '<cmd>cfirst<cr>',              desc = 'QuickFix First' },
+    { '<leader>q$', '<cmd>clast<cr>',               desc = 'QuickFix Last' },
+    { '<leader>qt', '<cmd>TodoTrouble<cr>',         desc = 'Todos' },
     { '<leader>qd', '<cmd>Trouble diagnostics<cr>', desc = 'Diagnostics' },
     { '<leader>qg', '<cmd>Gitsigns setqflist<cr>',  desc = 'Git Hunks' },
+    {
+      '<leader>qq',
+      function()
+        require('nvim-tree.api').tree.close()
+        vim.cmd('copen')
+      end,
+      desc = 'QuickFix List'
+    },
     {
       '<leader>qi',
       '<cmd>Trouble lsp_implementations<cr>',
@@ -199,7 +211,7 @@ M.config = function(_, setup)
       desc = 'File Symbols'
     },
     {
-      '<leader>qt',
+      '<leader>qT',
       '<cmd>Trouble lsp_type_definitions<cr>',
       desc = 'Type Definitions'
     },

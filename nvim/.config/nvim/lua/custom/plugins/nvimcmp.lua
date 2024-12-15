@@ -169,7 +169,6 @@ M.opts = function()
     },
     preselect = cmp.PreselectMode.Item,
     window = {
-      -- { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
     },
@@ -177,8 +176,7 @@ M.opts = function()
       entries = 'custom'
     },
     experimental = {
-      ghost_text = false,
-      native_menu = false,
+      ghost_text = false
     },
   }
 end

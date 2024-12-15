@@ -130,15 +130,14 @@ vim.api.nvim_create_user_command('ColorColumnToggle', function()
   end
 end, {})
 
-vim.g.format_on_save_cmd = nil
 vim.api.nvim_create_user_command(
   'FormatOnSaveToggle',
   function()
-    if vim.g.format_on_save_cmd ~= nil then
-      vim.api.nvim_del_autocmd(vim.g.format_on_save_cmd)
-      vim.g.format_on_save_cmd = nil
+    if vim.gg.format_on_save_autocmd_id ~= nil then
+      vim.api.nvim_del_autocmd(vim.gg.format_on_save_autocmd_id)
+      vim.gg.format_on_save_autocmd_id = nil
     else
-      vim.g.format_on_save_cmd = vim.api.nvim_create_autocmd('BufWritePost', {
+      vim.gg.format_on_save_autocmd_id = vim.api.nvim_create_autocmd('BufWritePost', {
         group = augroup,
         callback = function()
           vim.lsp.buf.format({ async = true })
@@ -229,10 +228,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = { 'qf', 'help', 'man', 'netrw', 'gitsigns-blame' },
   callback = function(opt)
     local opts = { noremap = true, silent = true, nowait = true };
-    if opt.match == 'qf' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'l', '<cr>', { noremap = true })
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<CR>', opts)
-    elseif opt.match == 'help' then
+    if opt.match == 'qf' or opt.match == 'help' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<CR>', opts)
       vim.api.nvim_set_option_value('number', true, { win = 0 })
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })

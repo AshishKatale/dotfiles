@@ -42,10 +42,10 @@ map({ 'v' }, '<', '<gv', { silent = true })
 map({ 'v' }, '>', '>gv', { silent = true })
 
 -- Move text up and down
-map({ 'n', 'v' }, '<A-j>', '<cmd>m .+1<cr>==', { silent = true })
-map({ 'n', 'v' }, '<A-k>', '<cmd>m .-2<cr>==', { silent = true })
-map({ 'i' }, '<A-j>', '<Esc><cmd>m .+1<cr>==a', { silent = true })
-map({ 'i' }, '<A-k>', '<Esc><cmd>m .-2<cr>==a', { silent = true })
+-- map({ 'n', 'v' }, '<A-j>', '<cmd>m .+1<cr>==', { silent = true })
+-- map({ 'n', 'v' }, '<A-k>', '<cmd>m .-2<cr>==', { silent = true })
+-- map({ 'i' }, '<A-j>', '<Esc><cmd>m .+1<cr>==a', { silent = true })
+-- map({ 'i' }, '<A-k>', '<Esc><cmd>m .-2<cr>==a', { silent = true })
 
 -- copy-paste
 map({ 'v' }, 'p', '\"_dP', { silent = true })

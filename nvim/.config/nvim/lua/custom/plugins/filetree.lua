@@ -2,7 +2,7 @@ local M = {
   'nvim-tree/nvim-tree.lua',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   lazy = true,
-  cmd = { 'NvimTreeToggle' },
+  cmd = { 'NvimTreeToggle', 'NvimTreeOpen', 'NvimTreeClose' },
 }
 
 M.opts = function()

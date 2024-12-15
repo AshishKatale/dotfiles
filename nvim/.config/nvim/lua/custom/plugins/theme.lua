@@ -32,6 +32,7 @@ M.opts = function()
       DiffText = { fg = colors.vscFront, bg = colors.vscSelection },
       CursorLine = { bg = colors.scrollbar, },
       ColorColumn = { bg = colors.scrollbar, },
+      QuickFixLine = { bg = colors.scrollbar, bold = true },
       NvimTreeCursorLine = { bg = colors.scrollbar, },
       NvimTreeGitDeleted = { fg = colors.vscRed, bold = true },
       NvimTreeGitIgnored = { fg = colors.vscRed, },
