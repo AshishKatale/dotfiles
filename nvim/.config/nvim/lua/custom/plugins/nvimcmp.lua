@@ -62,6 +62,24 @@ M.opts = function()
   }
 
   return {
+    completion = {
+      -- autocomplete = false -- disable auto-trigger opening cmp menu
+      autocomplete = { -- auto-trigger opening cmp menu
+        cmp.TriggerEvent.TextChanged,
+        -- cmp.TriggerEvent.InsertEnter,
+      }
+    },
+    preselect = cmp.PreselectMode.Item,
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    view = {
+      entries = 'custom'
+    },
+    experimental = {
+      ghost_text = false
+    },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -77,7 +95,8 @@ M.opts = function()
           else
             fallback()
           end
-        end
+        end,
+        { 'i', 's' }
       ),
       ['<C-n>'] = cmp.mapping(
         function(fallback)
@@ -88,7 +107,8 @@ M.opts = function()
           else
             fallback()
           end
-        end
+        end,
+        { 'i', 's' }
       ),
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
@@ -166,17 +186,6 @@ M.opts = function()
       { name = 'luasnip' },
       { name = 'buffer' },
       { name = 'path' },
-    },
-    preselect = cmp.PreselectMode.Item,
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    },
-    view = {
-      entries = 'custom'
-    },
-    experimental = {
-      ghost_text = false
     },
   }
 end

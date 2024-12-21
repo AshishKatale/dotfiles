@@ -32,9 +32,9 @@ return {
       ---@type table
       opleader = {
         ---Line-comment keymap
-        line = 'gcc',
+        line = 'gc',
         ---Block-comment keymap
-        block = 'gcb',
+        block = 'gb',
       },
 
       ---LHS of extra mappings

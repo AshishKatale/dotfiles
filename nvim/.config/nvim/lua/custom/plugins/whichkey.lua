@@ -224,6 +224,7 @@ M.config = function(_, setup)
     { '<leader>sm', '<cmd>Man<cr>',                   desc = 'Man Pages' },
     { '<leader>sM', '<cmd>Telescope man_pages<cr>',   desc = 'Telescope Man' },
     { '<leader>sr', '<cmd>Telescope registers<cr>',   desc = 'Registers' },
+    { '<leader>so', '<cmd>Telescope vim_options<cr>', desc = 'Vim Options' },
     {
       '<leader>ss',
       '<cmd>Telescope live_grep<cr>',

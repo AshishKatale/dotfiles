@@ -187,7 +187,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 vim.api.nvim_create_autocmd({ 'TermClose' }, {
   callback = function()
     vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes('<CR>', true, true, true),
+      vim.api.nvim_replace_termcodes('<cr>', true, true, true),
       'n',
       true
     )
@@ -229,15 +229,15 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   callback = function(opt)
     local opts = { noremap = true, silent = true, nowait = true };
     if opt.match == 'qf' or opt.match == 'help' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<CR>', opts)
+      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
       vim.api.nvim_set_option_value('number', true, { win = 0 })
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
     elseif opt.match == 'man' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<CR>', opts)
+      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
     elseif opt.match == 'netrw' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'Q', '<cmd>q<CR>', opts)
+      vim.api.nvim_buf_set_keymap(0, 'n', 'Q', '<cmd>q<cr>', opts)
     elseif opt.match == 'gitsigns-blame' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<CR>', opts)
+      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<cr>', opts)
     end
   end,
   group = augroup

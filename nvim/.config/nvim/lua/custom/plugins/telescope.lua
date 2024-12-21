@@ -15,85 +15,36 @@ M.opts = function()
 
   local mappings = {
     i = {
-      ['<C-n>'] = actions.cycle_history_next,
-      ['<C-p>'] = actions.cycle_history_prev,
-
-      ['<Tab>'] = actions.move_selection_next,
-      ['<S-Tab>'] = actions.move_selection_previous,
-
-      ['<C-c>'] = actions.close,
-
-      ['<Down>'] = actions.move_selection_next,
-      ['<Up>'] = actions.move_selection_previous,
-
-      ['<CR>'] = actions.select_default,
-      ['<C-x>'] = actions.select_horizontal,
-      ['<C-v>'] = actions.select_vertical,
-      -- ["<C-t>"] = actions.select_tab,
-
-      ['<C-u>'] = actions.preview_scrolling_up,
-      ['<C-d>'] = actions.preview_scrolling_down,
-
-      ['<PageUp>'] = actions.results_scrolling_up,
-      ['<PageDown>'] = actions.results_scrolling_down,
-
-      ['<C-j>'] = actions.toggle_selection + actions.move_selection_worse,
-      ['<C-k>'] = actions.toggle_selection + actions.move_selection_better,
+      ['<A-p>'] = actions.cycle_history_prev,
+      ['<A-n>'] = actions.cycle_history_next,
       ['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
       ['<M-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
       ['<C-w>'] = trouble.open,
-
-      ['<C-l>'] = actions.complete_tag,
-      ['<C-_>'] = actions.which_key, -- keys from pressing <C-/>
+      ['<C-c>'] = actions.close,
+      ['<C-l>'] = actions.drop_all,
     },
 
     n = {
-      ['<C-c>'] = actions.close,
-      ['<CR>'] = actions.select_default,
-      ['l'] = actions.select_default,
-      ['<C-x>'] = actions.select_horizontal,
-      ['<C-v>'] = actions.select_vertical,
-      -- ["<C-t>"] = actions.select_tab,
-
-      ['<C-j>'] = actions.toggle_selection + actions.move_selection_worse,
-      ['<C-k>'] = actions.toggle_selection + actions.move_selection_better,
+      ['<A-p>'] = actions.cycle_history_prev,
+      ['<A-n>'] = actions.cycle_history_next,
       ['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
       ['<M-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
       ['<C-w>'] = trouble.open,
-
+      ['<C-c>'] = actions.close,
+      ['<C-l>'] = actions.drop_all,
       ['<leader><leader>'] = actions.toggle_selection,
-      ['Tab'] = actions.move_selection_next,
-      ['S-Tab'] = actions.move_selection_previous,
-      ['j'] = actions.move_selection_next,
-      ['k'] = actions.move_selection_previous,
-      ['H'] = actions.move_to_top,
-      ['M'] = actions.move_to_middle,
-      ['L'] = actions.move_to_bottom,
-
-      ['<Down>'] = actions.move_selection_next,
-      ['<Up>'] = actions.move_selection_previous,
-      ['gg'] = actions.move_to_top,
-      ['G'] = actions.move_to_bottom,
-
-      ['<C-u>'] = actions.preview_scrolling_up,
-      ['<C-d>'] = actions.preview_scrolling_down,
-
-      ['<PageUp>'] = actions.results_scrolling_up,
-      ['<PageDown>'] = actions.results_scrolling_down,
-
-      ['?'] = actions.which_key,
     },
   }
 
   local git_commit = {
     mappings = {
       n = {
-        ['<cr>'] = actions.select_default,
-        ['<A-cr>'] = actions.git_checkout,
+        ['<CR>'] = actions.select_default,
+        ['<A-CR>'] = actions.git_checkout,
       },
       i = {
-        ['<cr>'] = actions.move_selection_next,
-        ['<A-cr>'] = actions.git_checkout,
+        ['<CR>'] = actions.move_selection_next,
+        ['<A-CR>'] = actions.git_checkout,
       },
     },
   }
@@ -126,14 +77,14 @@ M.opts = function()
       buffers = {
         initial_mode = 'normal',
       },
-      live_grep = {
-        additional_args = function() return { '--hidden' } end
-      },
       git_status = {
         initial_mode = 'normal',
       },
       git_branches = {
         initial_mode = 'normal',
+      },
+      live_grep = {
+        additional_args = function() return { '--hidden' } end
       },
       git_commits = git_commit,
       git_bcommits = git_commit

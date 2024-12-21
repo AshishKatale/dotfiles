@@ -6,16 +6,13 @@
       "ctrl-k x": "pane::CloseActiveItem",
       "ctrl-k ctrl-x": "pane::CloseAllItems",
       "ctrl-c": "menu::Cancel",
-      "tab": "menu::SelectNext",
-      "shift-tab": "menu::SelectPrev"
+      "ctrl-b": "file_finder::Toggle"
     }
   },
   {
     "context": "Editor",
     "bindings": {
       "ctrl-\\": "terminal_panel::ToggleFocus",
-      "ctrl-n": "editor::GoToHunk",
-      "ctrl-b": "editor::GoToPrevHunk",
       "ctrl-k l": "language_selector::Toggle"
     }
   },
@@ -58,9 +55,11 @@
       "shift-h": "pane::ActivatePrevItem",
       "shift-k": "editor::Hover",
       "shift-l": "pane::ActivateNextItem",
+      "ctrl-n": "editor::GoToHunk",
+      "ctrl-p": "editor::GoToPrevHunk",
       "g r": "editor::FindAllReferences",
       "g n": "editor::GoToDiagnostic",
-      "g b": "editor::GoToPrevDiagnostic"
+      "g p": "editor::GoToPrevDiagnostic"
     }
   },
   {
