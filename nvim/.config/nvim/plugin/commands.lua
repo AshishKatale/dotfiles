@@ -71,6 +71,8 @@ vim.api.nvim_create_user_command('ScratchPad', function()
       vim.api.nvim_set_option_value('cursorline', true, { win = win })
       vim.api.nvim_set_option_value('signcolumn', 'yes', { win = win })
       vim.api.nvim_set_option_value('conceallevel', 0, { win = win })
+      -- override lazy util keymap
+      vim.keymap.set('n', 'q', 'q', { buffer = vim.gg.scratch.buf })
     end
     if vim.gg.scratch and
         (vim.gg.scratch:win_valid() or vim.gg.scratch:buf_valid()) then
