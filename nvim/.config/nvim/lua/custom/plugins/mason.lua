@@ -39,7 +39,6 @@ M.config = function(_, opts)
   require('custom.plugins.utils.nvimlsp').setup()
   require('mason').setup(opts.mason)
   require('mason-lspconfig').setup(opts.mason_lspconfig)
-  require('lspconfig.ui.windows').default_options.border = 'rounded'
 
   local lspconfig = require('lspconfig')
   local handlers = require('custom.plugins.utils.handlers')
@@ -50,25 +49,24 @@ M.config = function(_, opts)
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
       lspconfig[server_name].setup({
-        on_attach = handlers.on_attach,
         inlay_hints = { enabled = true },
         capabilities = handlers.capabilities
       })
     end,
 
     -- Next, you can provide a dedicated handler for specific servers.
-    ['lua_ls'] = function(server_name)
+    [handlers.ls.lua] = function(server_name)
       lspconfig[server_name].setup(handlers.lsp_settings[server_name])
     end,
 
-    ['tailwindcss'] = function(server_name)
+    [handlers.ls.tailwindcss] = function(server_name)
       lspconfig[server_name].setup(handlers.lsp_settings[server_name])
     end,
   })
 
   -- external lsp servers (not installed with mason)
-  lspconfig.rust_analyzer.setup(handlers.lsp_settings['rust_analyzer'])
-  -- lspconfig.gopls.setup(handlers.lsp_settings["gopls"])
+  lspconfig.rust_analyzer.setup(handlers.lsp_settings[handlers.ls.rust])
+  -- lspconfig.gopls.setup(handlers.lsp_settings[handlers.ls.go])
 end
 
 return M
