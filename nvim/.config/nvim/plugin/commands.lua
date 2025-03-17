@@ -209,13 +209,13 @@ vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
 
 vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   callback = function()
-    if vim.bo.filetype == 'trouble' or
-        vim.bo.filetype == 'lazy' or
-        vim.bo.filetype == 'help' or
-        vim.bo.filetype == 'startup' or
-        vim.bo.filetype == 'TelescopePrompt' or
-        vim.bo.filetype == 'DressingInput' or
-        vim.bo.filetype == 'NvimTree'
+    local fts = {
+      'trouble', 'lazy', 'help', 'startup',
+      'TelescopePrompt', 'DressingInput', 'NvimTree',
+    }
+    if vim.iter(fts):any(function(ft)
+          return ft == vim.bo.filetype
+        end)
     then
       return
     end
