@@ -74,15 +74,6 @@ M.opts = function()
       mappings = mappings,
     },
     pickers = {
-      buffers = {
-        initial_mode = 'normal',
-      },
-      git_status = {
-        initial_mode = 'normal',
-      },
-      git_branches = {
-        initial_mode = 'normal',
-      },
       live_grep = {
         additional_args = function() return { '--hidden' } end
       },

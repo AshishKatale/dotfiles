@@ -31,6 +31,13 @@ end
 local function set_lsp_keymaps(bufnr)
   local utils = require('custom.plugins.utils.fn')
   which_key.add({
+    {
+      'K',
+      '<cmd>lua vim.lsp.buf.hover({ max_width=100, border="rounded" })<CR>',
+      desc = 'LSP Code action',
+      buffer = bufnr
+    },
+
     { '<leader>', group = 'Leader' },
     {
       '<leader>c',
@@ -126,27 +133,19 @@ local M = {}
 
 M.setup = function()
   local signs = {
-    { name = 'DiagnosticSignInfo', text = '' },
-    { name = 'DiagnosticSignHint', text = '󰘥' },
-    { name = 'DiagnosticSignWarn', text = '' },
-    { name = 'DiagnosticSignError', text = '󰅚' },
+    text = {
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '󰘥',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.ERROR] = '󰅚',
+    }
   }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, {
-      texthl = sign.name,
-      text = sign.text,
-      numhl = ''
-    })
-  end
 
   local config = {
     -- disable virtual text
     virtual_text = false,
     -- show signs
-    signs = {
-      active = signs,
-    },
+    signs = signs,
     update_in_insert = true,
     underline = true,
     severity_sort = true,
@@ -162,13 +161,13 @@ M.setup = function()
 
   vim.diagnostic.config(config)
 
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    {
-      border = 'rounded',
-      max_width = 100,
-    }
-  )
+  -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  --   vim.lsp.handlers.hover,
+  --   {
+  --     border = 'rounded',
+  --     max_width = 100,
+  --   }
+  -- )
 
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
     vim.lsp.handlers.signature_help,
