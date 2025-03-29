@@ -128,7 +128,7 @@ M.config = function(_, opts)
             unmerged = '',
             renamed = '󰳠',
             deleted = '󰮈',
-            untracked = '󰐙',
+            untracked = '󰘥',
             ignored = '󰍷',
           },
         },

@@ -8,7 +8,7 @@ M.opts = function()
   local vscColors = require('vscode.colors').get_colors()
   local color_overrides = vim.tbl_extend('force', vim.gg.colors or {}, {
     vscGitUntracked = '#38E54D',
-    scrollbar = '#323640',
+    cursorline = '#323640',
     inlayhint = '#727272',
     info = '#0096FF',
     warn = '#FF9933',
@@ -30,10 +30,10 @@ M.opts = function()
 
     group_overrides = {
       DiffText = { fg = colors.vscFront, bg = colors.vscSelection },
-      CursorLine = { bg = colors.scrollbar, },
-      ColorColumn = { bg = colors.scrollbar, },
-      QuickFixLine = { bg = colors.scrollbar, bold = true },
-      NvimTreeCursorLine = { bg = colors.scrollbar, },
+      CursorLine = { bg = colors.cursorline, },
+      ColorColumn = { bg = colors.cursorline, },
+      QuickFixLine = { bg = colors.cursorline, bold = true },
+      NvimTreeCursorLine = { bg = colors.cursorline, },
       NvimTreeGitDeleted = { fg = colors.vscRed, bold = true },
       NvimTreeGitIgnored = { fg = colors.vscRed, },
       NvimTreeFolderIcon = { fg = colors.vscFront, },

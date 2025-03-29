@@ -254,7 +254,6 @@ M.config = function(_, setup)
     { '<leader>tf', '<cmd>FormatOnSaveToggle<cr>',    desc = 'Format on Save' },
     { '<leader>tg', '<cmd>Gitsigns toggle_signs<cr>', desc = 'Gitsigns' },
     { '<leader>th', '<cmd>InlayhintsToggle<cr>',      desc = 'Inlay hints' },
-    { '<leader>ts', '<cmd>ScrollbarToggle<cr>',       desc = 'Scrollbar' },
     {
       '<leader>tB',
       '<cmd>Gitsigns toggle_current_line_blame<cr>',
@@ -306,7 +305,7 @@ M.config = function(_, setup)
       { '<C-k>l',     utils.set_filetype, desc = 'Set Filetype' },
       {
         '<C-k>x',
-        '<cmd>bp<bar>sp<bar>bn<bar>bd<cr>',
+        '<cmd>bd!<cr>',
         desc = 'Delete Buffer'
       },
     }
