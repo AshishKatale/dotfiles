@@ -4,8 +4,8 @@ if not which_key_status_ok then
   return
 end
 
+local augroup = vim.api.nvim_create_augroup('lspcursor', { clear = true })
 local function enable_lsp_features(client, bufnr)
-  local augroup = vim.api.nvim_create_augroup('lspcursor', { clear = true })
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorMoved' }, {
       callback = function(ev)
@@ -79,18 +79,6 @@ local function set_lsp_keymaps(bufnr)
       buffer = bufnr
     },
     {
-      'gI',
-      '<cmd>lua vim.lsp.buf.implementation()<CR>',
-      desc = 'Implementation',
-      buffer = bufnr
-    },
-    {
-      'gr',
-      '<cmd>Trouble lsp_references<CR>',
-      desc = 'References trouble',
-      buffer = bufnr
-    },
-    {
       'gR',
       '<cmd>Telescope lsp_references<CR>',
       desc = 'References telescope',
@@ -132,20 +120,18 @@ end
 local M = {}
 
 M.setup = function()
-  local signs = {
-    text = {
-      [vim.diagnostic.severity.INFO] = '',
-      [vim.diagnostic.severity.HINT] = '󰘥',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.ERROR] = '󰅚',
-    }
-  }
-
-  local config = {
+  vim.diagnostic.config({
     -- disable virtual text
     virtual_text = false,
     -- show signs
-    signs = signs,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.HINT] = '󰘥',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.ERROR] = '󰅚',
+      }
+    },
     update_in_insert = true,
     underline = true,
     severity_sort = true,
@@ -153,28 +139,11 @@ M.setup = function()
       focusable = false,
       style = 'minimal',
       border = 'rounded',
-      source = 'always',
+      source = true,
       header = '',
       prefix = '',
     },
-  }
-
-  vim.diagnostic.config(config)
-
-  -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-  --   vim.lsp.handlers.hover,
-  --   {
-  --     border = 'rounded',
-  --     max_width = 100,
-  --   }
-  -- )
-
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-    vim.lsp.handlers.signature_help,
-    {
-      border = 'rounded',
-    }
-  )
+  })
 
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)

@@ -43,29 +43,32 @@ M.config = function(_, opts)
   local lspconfig = require('lspconfig')
   local handlers = require('custom.plugins.utils.handlers')
 
-  require('mason-lspconfig').setup_handlers({
+  local mason_lsp_handlers = {
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
       lspconfig[server_name].setup({
-        inlay_hints = { enabled = true },
         capabilities = handlers.capabilities
       })
     end,
+  }
 
-    -- Next, you can provide a dedicated handler for specific servers.
-    [handlers.ls.lua] = function(server_name)
-      lspconfig[server_name].setup(handlers.lsp_settings[server_name])
-    end,
+  -- customize settings for lang_servers
+  vim.iter(handlers.lang_servers):fold(
+    mason_lsp_handlers,
+    function(acc, _, ls_name)
+      acc[ls_name] = function(server_name)
+        lspconfig[server_name].setup(handlers.ls_settings[server_name])
+      end
+      return acc;
+    end
+  )
 
-    [handlers.ls.tailwindcss] = function(server_name)
-      lspconfig[server_name].setup(handlers.lsp_settings[server_name])
-    end,
-  })
+  require('mason-lspconfig').setup_handlers(mason_lsp_handlers)
 
   -- external lsp servers (not installed with mason)
-  lspconfig.rust_analyzer.setup(handlers.lsp_settings[handlers.ls.rust])
+  lspconfig.rust_analyzer.setup(handlers.ls_settings[handlers.lang_servers.rust])
   -- lspconfig.gopls.setup(handlers.lsp_settings[handlers.ls.go])
 end
 

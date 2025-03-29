@@ -4,8 +4,9 @@ if not cmp_status_ok then
   return
 end
 
-local ls = {
+local lang_servers = {
   lua = 'lua_ls',
+  js_ts = 'ts_ls',
   go = 'gopls',
   rust = 'rust_analyzer',
   tailwindcss = 'tailwindcss'
@@ -13,17 +14,24 @@ local ls = {
 
 local M = {}
 
-M.ls = ls
+M.lang_servers = lang_servers
 M.capabilities = cmp_nvim_lsp.default_capabilities()
 
-M.lsp_settings = {
-  [ls.lua] = {
+M.ls_settings = {
+  [lang_servers.lua] = {
     capabilities = M.capabilities,
     settings = {
       Lua = {
-        runtime = { version = 'Lua 5.1' },
-        diagnostics = {
-          globals = { 'vim' },
+        hint = {
+          enable = true,
+          await = true,
+          arrayIndex = 'Auto',
+          paramName = 'All',
+          paramType = true,
+          setType = true,
+        },
+        workspace = {
+          checkThirdParty = false,
         },
       },
       telemetry = {
@@ -32,7 +40,7 @@ M.lsp_settings = {
     }
   },
 
-  [ls.rust] = {
+  [lang_servers.rust] = {
     cmd = { 'rustup', 'run', 'stable', 'rust-analyzer' },
     capabilities = M.capabilities,
     settings = {
@@ -53,21 +61,69 @@ M.lsp_settings = {
     }
   },
 
-  [ls.go] = {
+  [lang_servers.go] = {
     cmd = { 'gopls', 'serve' },
     filetypes = { 'go', 'gomod' },
     capabilities = M.capabilities,
     settings = {
       gopls = {
+        usePlaceholders = true,
+        completeUnimported = true,
+        staticcheck = true,
+        semanticTokens = true,
         analyses = {
           unusedparams = true,
         },
-        staticcheck = true,
+        hints = {
+          constantValues = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+          assignVariableTypes = true,
+          compositeLiteralTypes = true,
+          compositeLiteralFields = true,
+          functionTypeParameters = true
+        }
       },
     },
   },
 
-  [ls.tailwindcss] = {
+  [lang_servers.js_ts] = {
+    capabilities = M.capabilities,
+    settings = {
+      javascript = {
+        format = {
+          trimtrailingwhitespace = true
+        },
+        inlayHints = {
+          includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+      typescript = {
+        format = {
+          trimtrailingwhitespace = true
+        },
+        inlayHints = {
+          includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
+  },
+
+  [lang_servers.tailwindcss] = {
     autostart = false
   }
 }

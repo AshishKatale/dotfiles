@@ -114,10 +114,9 @@ end, {
   nargs = '*',
   complete = function(cmd)
     local cmds = { 'btop', 'top', 'git log --oneline', 'lazygit' }
-    return vim.tbl_filter(
-      function(c) return string.find(c, cmd) end,
-      cmds
-    )
+    return vim.iter(cmds):filter(
+      function(c) return string.match(c, cmd) end
+    ):totable()
   end,
 })
 
