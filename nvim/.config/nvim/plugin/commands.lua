@@ -211,6 +211,8 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     local fts = {
       'trouble', 'lazy', 'help', 'startup',
       'TelescopePrompt', 'DressingInput', 'NvimTree',
+      'dapui_breakpoints', 'dapui_scopes', 'dapui_stacks',
+      'dapui_watches', 'dapui_console', 'dap-repl'
     }
     if vim.iter(fts):any(function(ft)
           return ft == vim.bo.filetype

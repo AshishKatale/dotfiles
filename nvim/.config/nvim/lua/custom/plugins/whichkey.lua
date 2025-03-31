@@ -117,6 +117,10 @@ M.config = function(_, setup)
       desc = 'Search in Buffer'
     },
 
+    { '<leader>d',  group = 'Debug' },
+    { '<leader>dd', '<cmd>DapContinue<cr>',            desc = 'DAP Continue' },
+    { '<leader>db', '<cmd>DapToggleBreakpoint<cr>',    desc = 'Breakpoint' },
+
     { '<leader>g',  group = 'Git Stuff' },
     { '<leader>gf', '<cmd>Telescope git_files<cr>',    desc = 'Git Files' },
     { '<leader>gg', '<cmd>LazyGit<cr>',                desc = 'LazyGit' },
