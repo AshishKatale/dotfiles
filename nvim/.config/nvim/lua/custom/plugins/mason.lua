@@ -23,9 +23,10 @@ M.opts = function()
       -- A list of servers to automatically install if not already installed.
       -- This setting has no relation with the `automatic_installation` setting.
       ensure_installed = {
-        'lua_ls', 'ts_ls', 'jsonls', 'html',
-        'emmet_language_server', 'eslint', 'dockerls',
-        'cssls', 'tailwindcss', 'gopls',
+        'lua_ls', 'ts_ls', 'jsonls',
+        'html', 'emmet_language_server', 'cssls',
+        'eslint', 'tailwindcss', 'editorconfig-checker',
+        'yamlls', 'texlab', 'gopls', 'dockerls',
       },
       -- Whether servers that are set up (via lspconfig) should be automatically
       -- installed if they're not already installed.

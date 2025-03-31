@@ -96,7 +96,7 @@ M.config = function(_, setup)
 
   which_key.add({
     { '<leader>',   group = 'Leader' },
-    { '<leader>E',  '<cmd>Vifm<cr>',               desc = 'Vifm' },
+    { '<leader>E',  '<cmd>tabnew term://vifm<cr>', desc = 'Vifm' },
     { '<leader>e',  '<cmd>NvimTreeToggle<cr>',     desc = 'File tree' },
     { '<leader>h',  '<C-w>h',                      desc = 'Left split' },
     { '<leader>j',  '<C-w>j',                      desc = 'Lower split' },
@@ -116,6 +116,10 @@ M.config = function(_, setup)
       '<cmd>Telescope current_buffer_fuzzy_find<cr>',
       desc = 'Search in Buffer'
     },
+
+    { '<leader>d',  group = 'Debug' },
+    { '<leader>dd', '<cmd>DapContinue<cr>',            desc = 'DAP Continue' },
+    { '<leader>db', '<cmd>DapToggleBreakpoint<cr>',    desc = 'Breakpoint' },
 
     { '<leader>g',  group = 'Git Stuff' },
     { '<leader>gf', '<cmd>Telescope git_files<cr>',    desc = 'Git Files' },
@@ -245,8 +249,15 @@ M.config = function(_, setup)
       '<cmd>Telescope find_files hidden=true layout_config={previewer=true}<cr>',
       desc = 'Find files'
     },
+    {
+      '<leader>s',
+      utils.search_selection,
+      desc = 'Search visual selection',
+      mode = 'v'
+    },
 
     { '<leader>t',  group = 'Toggle' },
+    { '<leader>tw', '<cmd>set wrap!<cr>',             desc = 'Line wrap' },
     { '<leader>tC', '<cmd>ColorColumnToggle<cr>',     desc = 'Color Column' },
     { '<leader>tb', '<cmd>BlanklineToggle<cr>',       desc = 'Blankline' },
     { '<leader>tc', '<cmd>ColorizerToggle<cr>',       desc = 'Colorizer' },
@@ -273,12 +284,6 @@ M.config = function(_, setup)
       '<leader>tt',
       '<cmd>TSContextToggle<cr>',
       desc = 'Treesitter context'
-    },
-    {
-      '<leader>s',
-      utils.search_selection,
-      desc = 'Search visual selection',
-      mode = 'v'
     },
 
     { '<localleader>', group = 'Local Leader' },
