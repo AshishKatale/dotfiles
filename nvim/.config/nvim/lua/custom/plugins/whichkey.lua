@@ -117,6 +117,11 @@ M.config = function(_, setup)
       desc = 'Search in Buffer'
     },
 
+    { '<leader>c',  group = 'Code AI' },
+    { '<leader>cc', '<cmd>CodeCompanion<cr>',          desc = 'Prompt' },
+    { '<leader>ca', '<cmd>CodeCompanionActions<cr>',   desc = 'Actions' },
+    { '<leader>cl', '<cmd>CodeCompanionChat<cr>',      desc = 'Chat' },
+
     { '<leader>d',  group = 'Debug' },
     { '<leader>dd', '<cmd>DapContinue<cr>',            desc = 'DAP Continue' },
     { '<leader>db', '<cmd>DapToggleBreakpoint<cr>',    desc = 'Breakpoint' },

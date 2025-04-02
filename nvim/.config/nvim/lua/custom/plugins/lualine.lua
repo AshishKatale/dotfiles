@@ -6,7 +6,7 @@ local M = {
   },
 }
 
-M.opts = function()
+M.config = function()
   local colors = vim.gg.colors
   local lsp_progress = {
     'lsp_progress',
@@ -30,9 +30,10 @@ M.opts = function()
     },
     -- spinner_symbols = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", },
     -- spinner_symbols = { "⣾", "⣻", "⣷", "⣯", "⣟", "⡿", "⢿", "⣻", "⣽" },
-    spinner_symbols = { '󰪞 ', '󰪟 ', '󰪠 ', '󰪠 ', '󰪢 ', '󰪣 ', '󰪤 ', '󰪥 ' },
+    spinner_symbols = { '󰄰 ', '󰪞 ', '󰪟 ', '󰪠 ', '󰪠 ', '󰪢 ', '󰪣 ', '󰪤 ', '󰪥 ' },
   }
-  return {
+
+  require('lualine').setup({
     options = {
       icons_enabled = true,
       component_separators = { left = '', right = '' },
@@ -55,6 +56,10 @@ M.opts = function()
       lualine_c = {},
       lualine_x = {
         lsp_progress,
+        {
+          require('custom.plugins.utils.companion_progress'),
+          color = { fg = colors.warn }
+        },
         {
           require('lazy.status').updates,
           cond = require('lazy.status').has_updates,
@@ -91,7 +96,7 @@ M.opts = function()
       lualine_z = { 'tabs' }
     },
     extensions = {}
-  }
+  })
 end
 
 return M
