@@ -13,7 +13,7 @@ vim.api.nvim_create_user_command(
       vim.cmd('tabnew term://lazygit')
       vim.keymap.set({ 't' }, 'ii', '<Nop>', { silent = true, buffer = 0 })
       vim.keymap.set(
-        { 't' }, '<C-\\>', [[<C-\><C-n>0M]],
+        { 't' }, [[<C-\>]], [[<C-\><C-n>0M]],
         { silent = true, buffer = 0 }
       )
     else
@@ -211,7 +211,8 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
       'trouble', 'lazy', 'help', 'startup',
       'TelescopePrompt', 'DressingInput', 'NvimTree',
       'dapui_breakpoints', 'dapui_scopes', 'dapui_stacks',
-      'dapui_watches', 'dapui_console', 'dap-repl'
+      'dapui_watches', 'dapui_console', 'dap-repl',
+      'Avante', 'AvanteInput', 'AvanteSelectedFiles'
     }
     if vim.iter(fts):any(function(ft)
           return ft == vim.bo.filetype

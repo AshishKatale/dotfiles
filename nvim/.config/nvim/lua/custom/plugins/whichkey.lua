@@ -103,6 +103,10 @@ M.config = function(_, setup)
     { '<leader>k',  '<C-w>k',                      desc = 'Upper split' },
     { '<leader>l',  '<C-w>l',                      desc = 'Right split' },
 
+    { '<leader>a',  group = 'Avante' },
+    { '<leader>aa', '<cmd>AvanteAsk<cr>',          desc = 'avante: ask' },
+    { '<leader>ax', '<cmd>AvanteClear<cr>',        desc = 'avante: clear' },
+
     { '<leader>b',  group = 'Buffer' },
     { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',      desc = 'Remove trailing' },
     { '<leader>bf', '<cmd>Telescope buffers<cr>',  desc = 'Open Buffers' },
@@ -121,9 +125,9 @@ M.config = function(_, setup)
     { '<leader>dd', '<cmd>DapContinue<cr>',            desc = 'DAP Continue' },
     { '<leader>db', '<cmd>DapToggleBreakpoint<cr>',    desc = 'Breakpoint' },
 
-    { '<leader>g',  group = 'Git Stuff' },
-    { '<leader>gf', '<cmd>Telescope git_files<cr>',    desc = 'Git Files' },
+    { '<leader>g',  group = 'Git' },
     { '<leader>gg', '<cmd>LazyGit<cr>',                desc = 'LazyGit' },
+    { '<leader>gf', '<cmd>Telescope git_files<cr>',    desc = 'Git Files' },
     { '<leader>gs', '<cmd>Telescope git_status<cr>',   desc = 'Git status' },
     { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'Branches' },
     {
