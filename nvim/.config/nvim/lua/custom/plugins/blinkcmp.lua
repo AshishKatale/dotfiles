@@ -70,6 +70,11 @@ return {
         ['<C-c>'] = { 'hide', 'fallback' },
         ['<C-space>'] = { 'show', 'fallback' },
       },
+
+      enabled = function()
+        return not vim.tbl_contains({ 'AvanteInput' }, vim.bo.filetype)
+      end,
+
       completion = {
         ghost_text = { enabled = false },
         -- accept = { auto_brackets = { enabled = false } },
