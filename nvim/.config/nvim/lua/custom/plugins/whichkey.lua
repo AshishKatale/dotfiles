@@ -105,6 +105,10 @@ M.config = function(_, setup)
     { '<leader>|',  '<cmd>vnew<cr>',                desc = 'Split right' },
     { '<leader>_',  '<cmd>new<cr>',                 desc = 'Split bottom' },
 
+    { '<leader>a',  group = 'Avante' },
+    { '<leader>aa', '<cmd>AvanteAsk<cr>',           desc = 'avante: ask' },
+    { '<leader>ax', '<cmd>AvanteClear<cr>',         desc = 'avante: clear' },
+
     { '<leader>b',  group = 'Buffer' },
     { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',       desc = 'Remove trailing' },
     { '<leader>bf', '<cmd>FzfLua buffers<cr>',      desc = 'Open Buffers' },
