@@ -80,6 +80,7 @@ M.config = function(_, opts)
       hi VertSplit guifg=#666666 guibg=NONE
       hi netrwDir guifg=#569cd6 guibg=NONE
       hi! link CurSearch Search
+      hi! link RenderMarkdownCode Normal
     ]])
   end
 end
