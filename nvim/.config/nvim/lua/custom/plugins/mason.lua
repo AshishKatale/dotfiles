@@ -25,8 +25,8 @@ M.opts = function()
       ensure_installed = {
         'lua_ls', 'ts_ls', 'jsonls',
         'html', 'emmet_language_server', 'cssls',
-        'eslint', 'tailwindcss', 'editorconfig-checker',
-        'yamlls', 'texlab', 'gopls', 'dockerls',
+        'eslint', 'tailwindcss', 'yamlls',
+        'texlab', 'gopls', 'dockerls',
       },
       -- Whether servers that are set up (via lspconfig) should be automatically
       -- installed if they're not already installed.
