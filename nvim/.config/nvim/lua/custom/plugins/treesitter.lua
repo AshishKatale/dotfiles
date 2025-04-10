@@ -2,7 +2,7 @@ local M = {
   'nvim-treesitter/nvim-treesitter',
   dependencies = { 'nvim-treesitter/nvim-treesitter-context' },
   lazy = true,
-  event = 'BufEnter *.*',
+  event = 'BufEnter',
   build = function()
     require('nvim-treesitter.install').update({ with_sync = true })
   end,

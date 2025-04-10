@@ -33,7 +33,7 @@ local function set_lsp_keymaps(bufnr)
   which_key.add({
     {
       'K',
-      '<cmd>lua vim.lsp.buf.hover({ max_width=100, border="rounded" })<CR>',
+      '<cmd>lua vim.lsp.buf.hover({max_width=100,max_height=24,border="rounded"})<CR>',
       desc = 'LSP Code action',
       buffer = bufnr
     },

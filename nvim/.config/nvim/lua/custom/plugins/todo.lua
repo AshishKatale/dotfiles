@@ -1,7 +1,7 @@
 return {
   'folke/todo-comments.nvim',
   lazy = true,
-  event = 'BufEnter *.*',
+  event = 'BufEnter',
   cmd = { 'TodoQuickfix', 'TodoTrouble', 'TodoTelescope' },
   config = function()
     require('todo-comments').setup({

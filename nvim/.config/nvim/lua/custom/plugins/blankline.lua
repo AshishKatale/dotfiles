@@ -2,7 +2,7 @@ return {
   'lukas-reineke/indent-blankline.nvim',
   lazy = true,
   main = 'ibl',
-  event = 'BufEnter *.*',
+  event = 'BufEnter',
   config = function()
     local hk = require('ibl.hooks')
     hk.register(hk.type.WHITESPACE, hk.builtin.hide_first_space_indent_level)
