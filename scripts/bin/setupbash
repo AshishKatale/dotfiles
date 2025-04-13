@@ -3,68 +3,68 @@
 DOTFILES=$(realpath $0 | sed 's/\(.*dotfiles\).*/\1/')
 
 update_dotbashrc() {
-  if [ ! -e ~/.bashrc ]; then
-    touch ~/.bashrc
+  if [ ! -e $HOME/.bashrc ]; then
+    touch $HOME/.bashrc
   fi
-  echo "EDITOR=vim" >> ~/.bashrc
-  echo "PROMPT_STYLE=fancy" >> ~/.bashrc
-  echo "export TERM=xterm-256color" >> ~/.bashrc
-  echo "export DOTFILES=$DOTFILES" >> ~/.bashrc
-  echo "export PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.bashrc
-  echo "export PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.bashrc
-  echo "export FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> ~/.bashrc
-  echo "source $DOTFILES/bash/bashrc.sh" >> ~/.bashrc
+  echo "EDITOR=vim" >> $HOME/.bashrc
+  echo "PROMPT_STYLE=fancy" >> $HOME/.bashrc
+  echo "export TERM=xterm-256color" >> $HOME/.bashrc
+  echo "export DOTFILES=$DOTFILES" >> $HOME/.bashrc
+  echo "export PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.bashrc
+  echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.bashrc
+  echo "export FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> $HOME/.bashrc
+  echo "source $DOTFILES/bash/bashrc.sh" >> $HOME/.bashrc
 }
 
 update_dotprofile() {
-  if [ ! -e ~/.profile ]; then
-    touch ~/.profile
+  if [ ! -e $HOME/.profile ]; then
+    touch $HOME/.profile
   fi
-  echo "EDITOR=vim" >> ~/.profile
-  echo "export TERM=xterm-256color" >> ~/.profile
-  echo "export DOTFILES=$DOTFILES" >> ~/.profile
-  echo "export PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.profile
-  echo "export PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.profile
-  echo "FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> ~/.profile
+  echo "EDITOR=vim" >> $HOME/.profile
+  echo "export TERM=xterm-256color" >> $HOME/.profile
+  echo "export DOTFILES=$DOTFILES" >> $HOME/.profile
+  echo "export PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.profile
+  echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.profile
+  echo "FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> $HOME/.profile
 }
 
 read -p "Update .bashrc? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
-	update_dotbashrc
-	echo -e "\033[00;32m\0.bashrc updated\033[0m"
+  update_dotbashrc
+  echo -e "\033[00;32m\0.bashrc updated\033[0m"
 else
-	echo -e '\033[00;31m\0.bashrc update cancelled\033[0m'
+  echo -e '\033[00;31m\0.bashrc update cancelled\033[0m'
 fi
 
 read -p "Setup .gitconfig? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
-  ln -s $DOTFILES/etc/.gitconfig ~/.gitconfig
-	echo -e "\033[00;32m\0.gitconfig updated\033[0m"
+  ln -s $DOTFILES/etc/.gitconfig $HOME/.gitconfig
+  echo -e "\033[00;32m\0.gitconfig updated\033[0m"
 else
-	echo -e '\033[00;31m\0cancelled\033[0m'
+  echo -e '\033[00;31m\0cancelled\033[0m'
 fi
 
 read -p "Setup .vimrc? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
-  ln -s $DOTFILES/etc/.vimrc ~/.vimrc
-	echo -e "\033[00;32m\0.vimrc updated\033[0m"
+  ln -s $DOTFILES/etc/.vimrc $HOME/.vimrc
+  echo -e "\033[00;32m\0.vimrc updated\033[0m"
 else
-	echo -e '\033[00;31m\0cancelled\033[0m'
+  echo -e '\033[00;31m\0cancelled\033[0m'
 fi
 
 read -p "Update .profile? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
-	update_dotprofile
-	echo -e "\033[00;32m\0.profile updated\033[0m"
+  update_dotprofile
+  echo -e "\033[00;32m\0.profile updated\033[0m"
 else
-	echo -e '\033[00;31m\0.profile update cancelled\033[0m'
+  echo -e '\033[00;31m\0.profile update cancelled\033[0m'
 fi
 

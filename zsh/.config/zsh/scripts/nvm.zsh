@@ -1,6 +1,6 @@
 lazynvm() {
   unset -f nvm node npm npx nvim pnpm
-  export NVM_DIR=~/.local/nvm
+  export NVM_DIR=$HOME/.local/nvm
 	[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 }
 

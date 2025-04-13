@@ -1,7 +1,7 @@
 " Options
-set viminfofile=~/.local/.vim/viminfo
-set runtimepath+=~/.local/.vim
-set runtimepath-=~/.vim
+set viminfofile=$HOME/.local/.vim/viminfo
+set runtimepath+=$HOME/.local/.vim
+set runtimepath-=$HOME/.vim
 
 let mapleader = " "
 let maplocalleader = " "

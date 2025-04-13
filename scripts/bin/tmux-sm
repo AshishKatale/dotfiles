@@ -3,8 +3,8 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 elif which fd &> /dev/null; then
-		projects=$(
-      echo ~/dotfiles
+    projects=$(
+      echo $HOME/dotfiles
       fd . --type=directory \
         --exclude="src" \
         --exclude="assets" \
@@ -15,12 +15,12 @@ elif which fd &> /dev/null; then
         --exclude="node_modules" \
         --exclude="target" \
         --exclude="dist" \
-        ~/workspace
+        $HOME/workspace
     )
 else
-		projects=$(
-			echo ~/dotfiles
-      find ~/workspace -type d \( -path "*/\.*" -o \
+    projects=$(
+      echo $HOME/dotfiles
+      find $HOME/workspace -type d \( -path "*/\.*" -o \
                                   -path "*/src*" -o \
                                   -path "*/assets*" -o \
                                   -path "*/build*" -o \
@@ -31,7 +31,7 @@ else
                                   -path "*/target*" -o \
                                   -path "*/dist*" \) -prune -o \
                                   -type d -print
-		)
+    )
 fi
 
 selected=$(echo "$projects" |
@@ -55,7 +55,7 @@ if ! tmux has-session -t $session_name 2> /dev/null; then
 fi
 
 if [[ $TMUX ]] then
-	tmux switch-client -t $session_name
+  tmux switch-client -t $session_name
 else
   tmux attach-session -t $session_name
 fi

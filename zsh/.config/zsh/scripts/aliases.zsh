@@ -2,7 +2,7 @@ alias c="clear"
 alias xxx="exit"
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
-alias bashrc="vim ~/.bashrc"
+alias bashrc="vim $HOME/.bashrc"
 alias zshrc="vim $ZDOTDIR/.zshrc"
 alias ls='ls --color=auto'
 
@@ -62,25 +62,25 @@ function serve() {
 }
 
 function cpwd(){
-	if [ -z $1 ]
-	then
-		pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard
-	else
-		pwd | tr '\n' ' ' | xclip -selection clipboard
-	fi
+  if [ -z $1 ]
+  then
+    pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard
+  else
+    pwd | tr '\n' ' ' | xclip -selection clipboard
+  fi
 }
 
 function opn(){
-	if [ -z $1 ]
-	then
-		xdg-open .
-	else
-		xdg-open $1
-	fi
+  if [ -z $1 ]
+  then
+    xdg-open .
+  else
+    xdg-open $1
+  fi
 }
 
 function grab(){
-	if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
     echo "
 Copies the output of command provided as argument to the clipboard.
 
@@ -94,7 +94,7 @@ OPTIONS:
 	-h, --help
 		Print help information
 "
-	else
-		eval $1 | tee >(xclip -selection clipboard) 
-	fi
+  else
+    eval $1 | tee >(xclip -selection clipboard) 
+  fi
 }

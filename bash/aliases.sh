@@ -1,16 +1,16 @@
 alias c='clear'
 alias xxx='exit'
-alias bashrc="vim ~/.bashrc"
+alias bashrc="vim $HOME/.bashrc"
 alias ls='ls --color=auto'
 
 function ll() {
-	ls -Alh --color=always $@
+  ls -Alh --color=always $@
 }
 function lsf() {
-	ls --color=always -alhA $@ | grep --color=never -v "^d.*"
+  ls --color=always -alhA $@ | grep --color=never -v "^d.*"
 }
 function lsd() {
-	ls --color=always -alhA $@ | grep --color=never "^d.*"
+  ls --color=always -alhA $@ | grep --color=never "^d.*"
 }
 
 alias gst='git status'
@@ -64,19 +64,19 @@ function serve() {
 }
 
 function cppath(){
-	if [ -z $1 ]
-	then
-		pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard
-	else
-		pwd | tr '\n' ' ' | xclip -selection clipboard
-	fi
+  if [ -z $1 ]
+  then
+    pwd | tr '\n' ' ' | sed s/\\/home\\/$USER/~/ | xclip -selection clipboard
+  else
+    pwd | tr '\n' ' ' | xclip -selection clipboard
+  fi
 }
 
 function opn(){
-	if [ -z $1 ]
-	then
-		xdg-open .
-	else
-		xdg-open $1
-	fi
+  if [ -z $1 ]
+  then
+    xdg-open .
+  else
+    xdg-open $1
+  fi
 }

@@ -6,56 +6,56 @@ setup_zsh() {
   pushd $DOTFILES
   stow zsh
   popd
-  
-  ZDOTDIR=$(realpath ~)/.config/zsh
+
+  ZDOTDIR=$HOME/.config/zsh
   ZPLUGDIR="$ZDOTDIR/plugins"
-  
-  git clone https://github.com/zsh-users/zsh-completions $ZPLUGDIR/zsh-completions 
+
+  git clone https://github.com/zsh-users/zsh-completions $ZPLUGDIR/zsh-completions
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZPLUGDIR/zsh-autosuggestions
   git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZPLUGDIR/fast-syntax-highlighting
   curl -s https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -o $ZPLUGDIR/key-bindings.zsh
-  
-  if [ ! -e ~/.zshenv ]; then
-    touch ~/.zshenv
+
+  if [ ! -e $HOME/.zshenv ]; then
+    touch $HOME/.zshenv
   fi
-  echo "EDITOR=vim" >> ~/.zshenv
-  echo "ZDOTDIR=$ZDOTDIR" >> ~/.zshenv
-  echo "ZPLUGDIR=$ZPLUGDIR" >> ~/.zshenv
-  echo "DOTFILES=$DOTFILES" >> ~/.zshenv
-  echo "TERM=xterm-256color" >> ~/.zshenv
-  echo "PROMPT_STYLE=fancy" >> ~/.zshenv
-  echo "PATH=\"\$PATH:$(realpath ~)/bin\"" >> ~/.zshenv
-  echo "PATH=\"\$PATH:$(realpath ~)/.local/bin\"" >> ~/.zshenv
-  echo "FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> ~/.zshenv
+  echo "EDITOR=vim" >> $HOME/.zshenv
+  echo "ZDOTDIR=$ZDOTDIR" >> $HOME/.zshenv
+  echo "ZPLUGDIR=$ZPLUGDIR" >> $HOME/.zshenv
+  echo "DOTFILES=$DOTFILES" >> $HOME/.zshenv
+  echo "TERM=xterm-256color" >> $HOME/.zshenv
+  echo "PROMPT_STYLE=fancy" >> $HOME/.zshenv
+  echo "PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.zshenv
+  echo "PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.zshenv
+  echo "FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> $HOME/.zshenv
 }
 
 read -p "Setup zsh? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
-	setup_zsh
-	echo -e "\033[00;32m\0Zsh setup completed\033[0m"
+  setup_zsh
+  echo -e "\033[00;32m\0Zsh setup completed\033[0m"
 else
-	echo -e '\033[00;31m\0Cancelled\033[0m'
+  echo -e '\033[00;31m\0Cancelled\033[0m'
 fi
 
 read -p "Setup .gitconfig? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
-  ln -s $DOTFILES/etc/.gitconfig ~/.gitconfig
-	echo -e "\033[00;32m\0.gitconfig updated\033[0m"
+  ln -s $DOTFILES/etc/.gitconfig $HOME/.gitconfig
+  echo -e "\033[00;32m\0.gitconfig updated\033[0m"
 else
-	echo -e '\033[00;31m\0cancelled\033[0m'
+  echo -e '\033[00;31m\0cancelled\033[0m'
 fi
 
 read -p "Setup .vimrc? (y/N) : " CONFIRM
 echo
 if [[ $CONFIRM =~ ^[Yy]$ ]]
 then
-  ln -s $DOTFILES/etc/.vimrc ~/.vimrc
-	echo -e "\033[00;32m\0.vimrc updated\033[0m"
+  ln -s $DOTFILES/etc/.vimrc $HOME/.vimrc
+  echo -e "\033[00;32m\0.vimrc updated\033[0m"
 else
-	echo -e '\033[00;31m\0cancelled\033[0m'
+  echo -e '\033[00;31m\0cancelled\033[0m'
 fi
 

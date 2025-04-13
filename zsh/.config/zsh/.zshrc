@@ -16,17 +16,18 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt nocaseglob 		           # Case insensitive completion
 
-ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#787878"
 fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
 
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;
+33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;
+43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32'
+
 zmodload zsh/complist
 _comp_options+=(globdots)     # Include hidden files.
-
-bindkey -M viins '	' menu-expand-or-complete                          # Tab key
-bindkey -M menuselect '^[[Z' reverse-menu-complete  # S-Tab key
 
 bindkey -M vicmd 'j' undefined-key
 bindkey -M vicmd 'k' undefined-key
@@ -42,21 +43,28 @@ bindkey -M viins '^e' end-of-line
 bindkey -M viins '^l' clear-screen
 bindkey -M viins '^[w' emacs-forward-word
 bindkey -M viins '^[b' emacs-backward-word
-bindkey -s -M visual 'i' '^[' # exit visual mode with i 
+bindkey -M viins '	' menu-expand-or-complete # Tab key
+bindkey -M viins '^ ' menu-expand-or-complete # C-Space
+
+bindkey -s -M visual 'i' '^[' # exit visual mode with i
 
 # Use vim keys in tab complete menu:
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect '^h' vi-backward-char
+bindkey -M menuselect '^j' vi-down-line-or-history
+bindkey -M menuselect '^k' vi-up-line-or-history
+bindkey -M menuselect '^l' vi-forward-char
+bindkey -M menuselect '^p' vi-up-line-or-history
+bindkey -M menuselect '^n' vi-down-line-or-history
+bindkey -M menuselect '^[[Z' reverse-menu-complete  # S-Tab key
 
 bindkey -v '^?' backward-delete-char
 
 # Cycle through history based on characters already typed on the line
-bindkey '^p' history-beginning-search-backward
-bindkey '^n' history-beginning-search-forward
-bindkey '^ ' autosuggest-toggle
-bindkey '^y' autosuggest-accept
+bindkey -M viins '^p' history-beginning-search-backward
+bindkey -M viins '^n' history-beginning-search-forward
+
+bindkey -M viins '^h' autosuggest-toggle
+bindkey -M viins '^y' autosuggest-accept
 
 source $ZDOTDIR/scripts/aliases.zsh 
 source $ZDOTDIR/scripts/prompt.zsh 
@@ -65,7 +73,7 @@ source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 which lazygit &> /dev/null && bindkey -s -M viins '^g' '^E^U lazygit^M'
-[ -e ~/bin/tmux-sm ] && bindkey -s -M viins '^b' '^E^U tmux-sm^M'
+[ -e $HOME/bin/tmux-sm ] && bindkey -s -M viins '^b' '^E^U tmux-sm^M'
 
 # fzf key-bindings
 [ -e $ZDOTDIR/plugins/key-bindings.zsh ] && {

@@ -116,8 +116,8 @@ echo "background=/etc/lightdm/bg.jpg" >> etc/lightdm/slick-greeter.conf
 greeter-session=lightdm-slick-greeter
 autologin-user={username}
 
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
-echo "exec i3" >> ~/.xinitrc
+cp /etc/X11/xinit/xinitrc $HOME/.xinitrc
+echo "exec i3" >> $HOME/.xinitrc
 
 systemctl enable lightdm
 ```

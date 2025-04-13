@@ -8,14 +8,14 @@ HISTSIZE=2000
 HISTFILESIZE=10000
 HISTTIMEFORMAT='%d-%m-%y %T %p  '
 
-[ -e ~/dotfiles/bash/prompt.sh ] && source ~/dotfiles/bash/prompt.sh
-[ -e ~/dotfiles/bash/aliases.sh ] && source ~/dotfiles/bash/aliases.sh
-[ -e ~/dotfiles/bash/nvm.sh ] && source ~/dotfiles/bash/nvm.sh
+[ -e $HOME/dotfiles/bash/prompt.sh ] && source $HOME/dotfiles/bash/prompt.sh
+[ -e $HOME/dotfiles/bash/aliases.sh ] && source $HOME/dotfiles/bash/aliases.sh
+[ -e $HOME/dotfiles/bash/nvm.sh ] && source $HOME/dotfiles/bash/nvm.sh
 
 # if the shell is interactive
 if [[ $- =~ i ]]; then
 
-  [ -e ~/bin/tmux-sm ] && bind '"\C-b":"\C-E\C-U tmux-sm\n"'
+  [ -e $HOME/bin/tmux-sm ] && bind '"\C-b":"\C-E\C-U tmux-sm\n"'
   which lazygit &> /dev/null && bind '"\C-g":"\C-E\C-U lazygit\n"'
 
   # tab completion forward and backwards
