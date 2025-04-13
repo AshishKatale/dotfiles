@@ -17,7 +17,11 @@ vim.api.nvim_create_user_command(
         { silent = true, buffer = 0 }
       )
     else
-      vim.notify('Error: lazygit must be run inside a git repository')
+      vim.api.nvim_echo(
+        { { 'Error: lazygit must be run inside a git repository' } },
+        false, -- don't add to message history
+        { err = true }
+      )
     end
   end,
   {}

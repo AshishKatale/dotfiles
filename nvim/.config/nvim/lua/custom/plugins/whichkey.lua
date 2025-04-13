@@ -258,6 +258,7 @@ M.config = function(_, setup)
 
     { '<leader>t',  group = 'Toggle' },
     { '<leader>tw', '<cmd>set wrap!<cr>',             desc = 'Line wrap' },
+    { '<leader>tm', '<cmd>set showmode!<cr>',         desc = 'Show mode' },
     { '<leader>tC', '<cmd>ColorColumnToggle<cr>',     desc = 'Color Column' },
     { '<leader>tb', '<cmd>BlanklineToggle<cr>',       desc = 'Blankline' },
     { '<leader>tc', '<cmd>ColorizerToggle<cr>',       desc = 'Colorizer' },

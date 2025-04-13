@@ -7,6 +7,13 @@ M.search_string = function(text)
   })
 end
 
+M.find_in_dir = function(cwd_path, dirname)
+  require('telescope.builtin').live_grep({
+    prompt_title = 'Find in [' .. dirname .. ']',
+    cwd = cwd_path,
+  })
+end
+
 M.search_selection = function()
   local sel_start, sel_end = vim.fn.getpos('v'), vim.fn.getpos('.')
   local line_start, col_start = sel_start[2], sel_start[3]

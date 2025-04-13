@@ -61,20 +61,26 @@ M.config = function(_, opts)
   local colorscheme = 'vscode'
   local status_ok, _ = pcall(vim.cmd.colorscheme, colorscheme)
   if not status_ok then
-    vim.notify('colorscheme ' .. colorscheme .. ' not found!')
+    vim.api.nvim_echo(
+      { { 'Error: colorscheme ' .. colorscheme .. ' not found!' } },
+      false, -- don't add to message history
+      { err = true }
+    )
     return
   end
 
   if vim.gg.opacity then
-    vim.cmd('hi Normal guibg=NONE')
-    vim.cmd('hi NormalFloat guibg=NONE')
-    vim.cmd('hi LineNr guibg=NONE')
-    vim.cmd('hi NvimTreeNormal guibg=NONE')
-    vim.cmd('hi CursorLineNr guibg=NONE')
-    vim.cmd('hi SignColumn guibg=NONE')
-    vim.cmd('hi VertSplit guifg=#666666 guibg=NONE')
-    vim.cmd('hi netrwDir guifg=#569cd6 guibg=NONE')
-    vim.cmd('hi! link CurSearch Search')
+    vim.cmd([[
+      hi Normal guibg=NONE
+      hi NormalFloat guibg=NONE
+      hi LineNr guibg=NONE
+      hi NvimTreeNormal guibg=NONE
+      hi CursorLineNr guibg=NONE
+      hi SignColumn guibg=NONE
+      hi VertSplit guifg=#666666 guibg=NONE
+      hi netrwDir guifg=#569cd6 guibg=NONE
+      hi! link CurSearch Search
+    ]])
   end
 end
 

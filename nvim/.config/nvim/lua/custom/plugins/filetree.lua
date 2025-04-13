@@ -9,6 +9,7 @@ M.opts = function()
   return {
     on_attach = function(bufnr)
       local api = require('nvim-tree.api')
+      local utils = require('custom.plugins.utils.fn')
       local map = vim.keymap.set
 
       local function o(desc)
@@ -21,6 +22,24 @@ M.opts = function()
         }
       end
 
+      local function find()
+        local node = api.tree.get_node_under_cursor()
+        if node.type == 'directory' then
+          utils.find_in_dir(node.absolute_path, node.name)
+        else
+          utils.find_in_dir(node.parent.absolute_path, node.parent.name)
+          vim.api.nvim_echo({ {
+              node.name ..
+              ' is not a directory, searching in ' ..
+              node.parent.name
+            } },
+            false, -- don't add to message history
+            { err = false }
+          )
+        end
+      end
+
+      map('n', 'F', find, o('Find in directory'))
       map('n', 'l', api.node.open.edit, o('Open'))
       map('n', '<CR>', api.node.open.edit, o('Open'))
       map('n', '<2-LeftMouse>', api.node.open.edit, o('Open'))
@@ -68,8 +87,6 @@ M.opts = function()
       map('n', 'bd', api.marks.bulk.delete, o('Delete Bookmarked'))
       map('n', 'bt', api.marks.bulk.trash, o('Trash Bookmarked'))
       map('n', 'bm', api.marks.bulk.move, o('Move Bookmarked'))
-      map('n', 'f', api.live_filter.start, o('Filter'))
-      map('n', 'F', api.live_filter.clear, o('Clean Filter'))
     end
   }
 end
