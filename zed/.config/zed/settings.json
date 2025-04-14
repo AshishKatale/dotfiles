@@ -3,6 +3,9 @@
   "notification_panel": {
     "dock": "right"
   },
+  "git_panel": {
+    "dock": "right"
+  },
   "chat_panel": {
     "dock": "left"
   },
@@ -32,7 +35,9 @@
   "indent_guides": {
     "active_line_width": 2
   },
-  "wrap_guides": [80],
+  "wrap_guides": [
+    80
+  ],
   "show_whitespaces": "all",
   "current_line_highlight": "line",
   "relative_line_numbers": true,
@@ -52,5 +57,12 @@
     "env": {
       "PROMPT_STYLE": "plain"
     }
+  },
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "version": "2"
   }
 }

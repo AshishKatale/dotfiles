@@ -69,8 +69,8 @@ bindsym $mod+p exec polybar-msg cmd toggle
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
-bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+bindsym $mod+b exec --no-startup-id rofi -show drun -show-icons
+bindsym $mod+Shift+b exec --no-startup-id rofi -show run
 
 # change focus
 bindsym $mod+h focus left
@@ -123,7 +123,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -199,13 +199,21 @@ bindsym $mod+r mode " resize "
 # finds out, if available)
 # bar {
 # 		status_command i3status
+#     position top
+#     # mode dock
+#     # strip_workspace_numbers yes
 # 		# i3bar_command i3bar
 # 		separator_symbol "  "
-# 		colors {
-# 			background #000000
-# 			statusline #ffffff
-# 			separator #586e75
-# 		}
+#     colors {
+#       background #11111E
+#       statusline #ffffff
+#       separator #FFFF00
+#       #<colorclass>       <border> <bg>   <text>
+#       focused_workspace  #000000 #45475A #ffffff
+#       active_workspace   #000000 #ffffff #000000
+#       inactive_workspace #000000 #313244 #ffffff
+#       urgent_workspace   #000000 #E60053 #ffffff
+#     }
 # }
 
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
