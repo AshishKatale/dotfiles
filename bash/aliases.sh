@@ -49,8 +49,8 @@ function tns() {
   fi
 }
 
-function v() { 
-  if hash nvim &> /dev/null; then 
+function v() {
+  if hash nvim &> /dev/null; then
     nvim $@
   elif hash vim &> /dev/null; then
     vim $@

@@ -14,27 +14,26 @@ setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
-setopt nocaseglob 		           # Case insensitive completion
+setopt nocaseglob                # Case insensitive completion
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#787878"
 fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
 
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' list-colors 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;
-33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;
-43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32'
-
 zmodload zsh/complist
 _comp_options+=(globdots)     # Include hidden files.
+autoload -Uz compinit && compinit
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors 'ma=01;30;44:rs=0:di=01;34:ln=01;36:mh=00:pi=40;
+33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;
+43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32'
 
 bindkey -M vicmd 'j' undefined-key
 bindkey -M vicmd 'k' undefined-key
 
 bindkey -M viins '^j' undefined-key
 bindkey -M viins 'jk' vi-cmd-mode
-bindkey -M viins 'kj' vi-cmd-mode
 bindkey -M viins '^w' backward-kill-word
 bindkey -M viins '^k' kill-line
 bindkey -M viins '^u' backward-kill-line
@@ -48,7 +47,7 @@ bindkey -M viins '^ ' menu-expand-or-complete # C-Space
 
 bindkey -s -M visual 'i' '^[' # exit visual mode with i
 
-# Use vim keys in tab complete menu:
+# Use vim keys in complete menu:
 bindkey -M menuselect '^h' vi-backward-char
 bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -M menuselect '^k' vi-up-line-or-history
@@ -66,8 +65,8 @@ bindkey -M viins '^n' history-beginning-search-forward
 bindkey -M viins '^h' autosuggest-toggle
 bindkey -M viins '^y' autosuggest-accept
 
-source $ZDOTDIR/scripts/aliases.zsh 
-source $ZDOTDIR/scripts/prompt.zsh 
+source $ZDOTDIR/scripts/aliases.zsh
+source $ZDOTDIR/scripts/prompt.zsh
 source $ZDOTDIR/scripts/nvm.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -76,9 +75,10 @@ which lazygit &> /dev/null && bindkey -s -M viins '^g' '^E^U lazygit^M'
 [ -e $HOME/bin/tmux-sm ] && bindkey -s -M viins '^b' '^E^U tmux-sm^M'
 
 # fzf key-bindings
-[ -e $ZDOTDIR/plugins/key-bindings.zsh ] && {
-  source $ZDOTDIR/plugins/key-bindings.zsh
+hash fzf &> /dev/null && {
+  source <(fzf --zsh)
   bindkey '^t' undefined-key # disable default fzf ^t
-  bindkey '^x' fzf-file-widget
+  bindkey '^x' fzf-cd-widget
+  bindkey '^f' fzf-file-widget
   bindkey '^r' fzf-history-widget
 }

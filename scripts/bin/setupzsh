@@ -18,15 +18,21 @@ setup_zsh() {
   if [ ! -e $HOME/.zshenv ]; then
     touch $HOME/.zshenv
   fi
-  echo "EDITOR=vim" >> $HOME/.zshenv
-  echo "ZDOTDIR=$ZDOTDIR" >> $HOME/.zshenv
-  echo "ZPLUGDIR=$ZPLUGDIR" >> $HOME/.zshenv
-  echo "DOTFILES=$DOTFILES" >> $HOME/.zshenv
-  echo "TERM=xterm-256color" >> $HOME/.zshenv
-  echo "PROMPT_STYLE=fancy" >> $HOME/.zshenv
-  echo "PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.zshenv
-  echo "PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.zshenv
-  echo "FZF_DEFAULT_OPTS='--layout=reverse --info=right --bind=tab:down,btab:up'" >> $HOME/.zshenv
+  echo "export EDITOR=vim" >> $HOME/.zshenv
+  echo "export ZDOTDIR=$ZDOTDIR" >> $HOME/.zshenv
+  echo "export ZPLUGDIR=$ZPLUGDIR" >> $HOME/.zshenv
+  echo "export DOTFILES=$DOTFILES" >> $HOME/.zshenv
+  echo "export TERM=xterm-256color" >> $HOME/.zshenv
+  echo "export PROMPT_STYLE=fancy" >> $HOME/.zshenv
+  echo "export PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.zshenv
+  echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.zshenv
+  cat << EOF >> $HOME/.zshenv
+export FZF_DEFAULT_OPTS="\\
+ --color='gutter:-1,prompt:12,pointer:10,marker:12,info=12,spinner=10'\\
+ --color='fg:253,fg+:12,bg+:-1,hl:12,hl:bold,hl+:10'\\
+ --layout=reverse --info=inline-right --border=rounded\\
+ --height=15 --prompt='▶ ' --marker='▶' --pointer='▶' --scrollbar='┃'"
+EOF
 }
 
 read -p "Setup zsh? (y/N) : " CONFIRM
