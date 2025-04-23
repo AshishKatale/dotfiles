@@ -59,3 +59,4 @@ map({ 'x' }, '<A-j>', "<cmd>move '>+1<cr>gv-gv", { silent = true })
 map({ 'x' }, '<A-k>', "<cmd>move '<-2<cr>gv-gv", { silent = true })
 
 map({ 'n', 't' }, '<C-\\>', '<cmd>FloatTerm<cr>', { silent = true })
+map({ 'n', 'i' }, '<C-b>', '<cmd>FzfLua files<cr>', { silent = true })

@@ -96,50 +96,46 @@ M.config = function(_, setup)
 
   which_key.add({
     { '<leader>',   group = 'Leader' },
-    { '<leader>E',  '<cmd>tabnew term://vifm<cr>', desc = 'Vifm' },
-    { '<leader>e',  '<cmd>NvimTreeToggle<cr>',     desc = 'File tree' },
-    { '<leader>h',  '<C-w>h',                      desc = 'Left split' },
-    { '<leader>j',  '<C-w>j',                      desc = 'Lower split' },
-    { '<leader>k',  '<C-w>k',                      desc = 'Upper split' },
-    { '<leader>l',  '<C-w>l',                      desc = 'Right split' },
+    { '<leader>E',  '<cmd>tabnew term://vifm<cr>',  desc = 'Vifm' },
+    { '<leader>e',  '<cmd>NvimTreeToggle<cr>',      desc = 'File tree' },
+    { '<leader>h',  '<C-w>h',                       desc = 'Left split' },
+    { '<leader>j',  '<C-w>j',                       desc = 'Lower split' },
+    { '<leader>k',  '<C-w>k',                       desc = 'Upper split' },
+    { '<leader>l',  '<C-w>l',                       desc = 'Right split' },
 
     { '<leader>b',  group = 'Buffer' },
-    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',      desc = 'Remove trailing' },
-    { '<leader>bf', '<cmd>Telescope buffers<cr>',  desc = 'Open Buffers' },
-    { '<leader>br', '<cmd>Telescope oldfiles<cr>', desc = 'Recent Files' },
-    { '<leader>bu', '<cmd>UndotreeToggle<cr>',     desc = 'Undo Tree' },
-    { '<leader>by', '<cmd>%y<cr>',                 desc = 'Yank buffer' },
-    { '<leader>bY', '<cmd>%y+<cr>',                desc = 'Copy buffer' },
-    { '<leader>bb', '<cmd>ScratchPad<cr>',         desc = 'Scratch Pad' },
-    {
-      '<leader>bs',
-      '<cmd>Telescope current_buffer_fuzzy_find<cr>',
-      desc = 'Search in Buffer'
-    },
+    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',       desc = 'Remove trailing' },
+    { '<leader>bf', '<cmd>FzfLua buffers<cr>',      desc = 'Open Buffers' },
+    { '<leader>bo', '<cmd>FzfLua oldfiles<cr>',     desc = 'Old Files' },
+    { '<leader>bu', '<cmd>UndotreeToggle<cr>',      desc = 'Undo Tree' },
+    { '<leader>by', '<cmd>%y<cr>',                  desc = 'Yank buffer' },
+    { '<leader>bY', '<cmd>%y+<cr>',                 desc = 'Copy buffer' },
+    { '<leader>bb', '<cmd>ScratchPad<cr>',          desc = 'Scratch Pad' },
 
     { '<leader>d',  group = 'Debug' },
-    { '<leader>dd', '<cmd>DapContinue<cr>',            desc = 'DAP Continue' },
-    { '<leader>db', '<cmd>DapToggleBreakpoint<cr>',    desc = 'Breakpoint' },
+    { '<leader>dd', '<cmd>DapContinue<cr>',         desc = 'DAP Continue' },
+    { '<leader>db', '<cmd>DapToggleBreakpoint<cr>', desc = 'Breakpoint' },
 
-    { '<leader>g',  group = 'Git Stuff' },
-    { '<leader>gf', '<cmd>Telescope git_files<cr>',    desc = 'Git Files' },
-    { '<leader>gg', '<cmd>LazyGit<cr>',                desc = 'LazyGit' },
-    { '<leader>gs', '<cmd>Telescope git_status<cr>',   desc = 'Git status' },
-    { '<leader>gb', '<cmd>Telescope git_branches<cr>', desc = 'Branches' },
+    { '<leader>g',  group = 'Git' },
+    { '<leader>gg', '<cmd>LazyGit<cr>',             desc = 'LazyGit' },
+    { '<leader>gf', '<cmd>FzfLua git_files<cr>',    desc = 'Git Files' },
+    { '<leader>gs', '<cmd>FzfLua git_status<cr>',   desc = 'Git status' },
+    { '<leader>gb', '<cmd>FzfLua git_branches<cr>', desc = 'Branches' },
+    { '<leader>gl', utils.show_line_history,        desc = 'Git line history' },
     {
       '<leader>gc',
-      '<cmd>Telescope git_bcommits prompt_title=File\\ History<cr>',
-      desc = 'File Commits'
+      [[<cmd>FzfLua git_commits winopts.title=\ Git\ log\ <cr>]],
+      desc = 'Git commit log'
+    },
+    {
+      '<leader>gh',
+      [[<cmd>FzfLua git_bcommits winopts.title=\ File\ history\ <cr>]],
+      desc = 'File history'
     },
     {
       '<leader>gB',
       "<cmd>lua require('gitsigns').blame()<cr>",
       desc = 'Blame'
-    },
-    {
-      '<leader>gC',
-      '<cmd>Telescope git_commits prompt_title=Git\\ History<cr>',
-      desc = 'Commits'
     },
     {
       '<leader>gG',
@@ -221,18 +217,29 @@ M.config = function(_, setup)
     },
 
     { '<leader>s',  group = 'Search' },
-    { '<leader>sc', '<cmd>Telescope commands<cr>',    desc = 'Commands' },
-    { '<leader>sC', '<cmd>Telescope colorscheme<cr>', desc = 'Colorscheme' },
-    { '<leader>sh', '<cmd>Telescope help_tags<cr>',   desc = 'Find Help' },
-    { '<leader>sk', '<cmd>Telescope keymaps<cr>',     desc = 'Keymaps' },
-    { '<leader>sm', '<cmd>Man<cr>',                   desc = 'Man Pages' },
-    { '<leader>sM', '<cmd>Telescope man_pages<cr>',   desc = 'Telescope Man' },
-    { '<leader>sr', '<cmd>Telescope registers<cr>',   desc = 'Registers' },
-    { '<leader>so', '<cmd>Telescope vim_options<cr>', desc = 'Vim Options' },
+    { '<leader>sc', '<cmd>FzfLua commands<cr>',     desc = 'Commands' },
+    { '<leader>sC', '<cmd>FzfLua colorscheme<cr>',  desc = 'Colorscheme' },
+    { '<leader>sh', '<cmd>FzfLua helptags<cr>',     desc = 'Find Help' },
+    { '<leader>sH', '<cmd>FzfLua highlights<cr>',   desc = 'HL Groups' },
+    { '<leader>sk', '<cmd>FzfLua keymaps<cr>',      desc = 'Keymaps' },
+    { '<leader>sm', '<cmd>Man<cr>',                 desc = 'Man Pages' },
+    { '<leader>sM', '<cmd>FzfLua manpages<cr>',     desc = 'FzfLua Man' },
+    { '<leader>sr', '<cmd>FzfLua registers<cr>',    desc = 'Registers' },
+    { '<leader>so', '<cmd>FzfLua nvim_options<cr>', desc = 'Vim Options' },
     {
       '<leader>ss',
-      '<cmd>Telescope live_grep<cr>',
-      desc = 'Search in Workspace'
+      '<cmd>FzfLua live_grep<cr>',
+      desc = 'Search Workspace'
+    },
+    {
+      '<leader>sg',
+      '<cmd>FzfLua live_grep_glob<cr>',
+      desc = 'Glob search Workspace'
+    },
+    {
+      '<leader>sf',
+      '<cmd>FzfLua grep<cr>',
+      desc = 'Glob search Workspace'
     },
     {
       '<leader>sw',
@@ -243,11 +250,6 @@ M.config = function(_, setup)
       '<leader>sW',
       function() utils.search_string(vim.fn.expand('<cWORD>')) end,
       desc = 'Find WORD Under Cursor'
-    },
-    {
-      '<leader>sf',
-      '<cmd>Telescope find_files hidden=true layout_config={previewer=true}<cr>',
-      desc = 'Find files'
     },
     {
       '<leader>s',
@@ -287,6 +289,8 @@ M.config = function(_, setup)
       desc = 'Treesitter context'
     },
 
+    { '<leader>zz',    '<cmd>lua Snacks.zen()<cr>', desc = 'Zen mode' },
+
     { '<localleader>', group = 'Local Leader' },
     {
       '<localleader><localleader>',
@@ -304,11 +308,11 @@ M.config = function(_, setup)
       desc = 'Terminal right'
     },
 
-    { '<C-k>',         group = 'Control-K' },
+    { '<C-k>', group = 'Control-K' },
     {
       mode = { 'n' },
-      { '<C-k><C-x>', '<cmd>1,$bd!<cr>',  desc = 'Delete All Buffers' },
-      { '<C-k>l',     utils.set_filetype, desc = 'Set Filetype' },
+      { '<C-k><C-x>', '<cmd>1,$bd!<cr>',           desc = 'Delete All Buffers' },
+      { '<C-k>l',     '<cmd>FzfLua filetypes<cr>', desc = 'Set Filetype' },
       {
         '<C-k>x',
         '<cmd>bd!<cr>',

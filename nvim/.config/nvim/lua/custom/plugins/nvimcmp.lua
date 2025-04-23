@@ -71,8 +71,18 @@ M.opts = function()
     },
     preselect = cmp.PreselectMode.Item,
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      completion = {
+        max_height = 24,
+        max_width = 100,
+        border = 'rounded',
+        winhighlight = 'FloatBorder:FloatBorder,CursorLine:PmenuSel',
+      },
+      documentation = {
+        max_height = 24,
+        max_width = 100,
+        border = 'rounded',
+        winhighlight = 'FloatBorder:FloatBorder,CursorLine:PmenuSel',
+      }
     },
     view = {
       entries = 'custom'

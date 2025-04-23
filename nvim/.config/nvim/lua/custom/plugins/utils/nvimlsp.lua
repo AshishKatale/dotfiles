@@ -80,19 +80,19 @@ local function set_lsp_keymaps(bufnr)
     },
     {
       'gR',
-      '<cmd>Telescope lsp_references<CR>',
-      desc = 'References telescope',
+      '<cmd>FzfLua lsp_references<CR>',
+      desc = 'References',
       buffer = bufnr
     },
     {
       'gs',
-      '<cmd>Telescope lsp_document_symbols<CR>',
+      '<cmd>FzfLua lsp_document_symbols<CR>',
       desc = 'File symbols',
       buffer = bufnr
     },
     {
       'gS',
-      '<cmd>Telescope lsp_workspace_symbols<CR>',
+      '<cmd>FzfLua lsp_workspace_symbols<CR>',
       desc = 'Workspace symbols',
       buffer = bufnr
     },

@@ -256,12 +256,12 @@ M.config = function(_, opts)
         },
       },
       open_file = {
-        quit_on_open = false,
+        quit_on_open = true,
         eject = true,
         resize_window = true,
       },
       remove_file = {
-        close_window = true,
+        close_window = false,
       },
     },
   }

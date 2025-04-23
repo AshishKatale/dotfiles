@@ -6,20 +6,21 @@ return {
     local gitsigns = require('gitsigns')
     gitsigns.setup({
       signs                        = {
-        add          = { text = '▍' },
-        change       = { text = '▍' },
-        delete       = { text = '▁' },
+        add          = { text = '▎' },
+        change       = { text = '▎' },
+        changedelete = { text = '▎' },
+        untracked    = { text = '🮌' }, -- ┋
         topdelete    = { text = '▔' },
-        changedelete = { text = '▍' },
-        untracked    = { text = '░' },
+        delete       = { text = '▁' },
+
       },
       signs_staged                 = {
-        add          = { text = '▍' },
-        change       = { text = '▍' },
-        delete       = { text = '▁' },
+        add          = { text = '▎' },
+        change       = { text = '▎' },
+        changedelete = { text = '▎' },
+        untracked    = { text = '🮌' }, -- ┋
         topdelete    = { text = '▔' },
-        changedelete = { text = '▍' },
-        untracked    = { text = '░' },
+        delete       = { text = '▁' },
       },
       signcolumn                   = true,
       word_diff                    = false,

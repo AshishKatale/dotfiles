@@ -2,7 +2,7 @@ return {
   'folke/todo-comments.nvim',
   lazy = true,
   event = 'BufEnter',
-  cmd = { 'TodoQuickfix', 'TodoTrouble', 'TodoTelescope' },
+  cmd = { 'TodoQuickfix', 'TodoTrouble', 'TodoFzfLua' },
   config = function()
     require('todo-comments').setup({
       signs = false,     -- show icons in the signs column

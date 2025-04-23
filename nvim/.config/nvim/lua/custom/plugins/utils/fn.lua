@@ -1,16 +1,37 @@
 M = {}
 
 M.search_string = function(text)
-  require('telescope.builtin').grep_string({
+  require('fzf-lua').live_grep({
     search = text,
-    additional_args = function() return { '--hidden' } end
+    hidden = true
   })
 end
 
 M.find_in_dir = function(cwd_path, dirname)
-  require('telescope.builtin').live_grep({
-    prompt_title = 'Find in [' .. dirname .. ']',
+  require('fzf-lua').live_grep({
     cwd = cwd_path,
+    hidden = true,
+    ['winopts.title'] = ' Find in [' .. dirname .. '] ',
+  })
+end
+
+M.show_line_history = function()
+  local line          = vim.api.nvim_win_get_cursor(0)[1]
+  local file          = vim.api.nvim_buf_get_name(0)
+  local git_root      = vim.trim(
+    vim.system({ 'git', 'rev-parse', '--show-toplevel' }, { text = true })
+    :wait().stdout
+  )
+
+  local line_hist_cmd = [[git -C ]] .. git_root .. [[ log --color --pretty=format:]] ..
+      [['%C(yellow)%h%Creset %s %C(magenta)%cr%Creset %C(blue)<%an>%Creset']] ..
+      [[ -s -L ]] .. line .. [[,+1:]] .. file
+
+  require('fzf-lua').fzf_exec(line_hist_cmd, {
+    preview = 'git show --color {1} -- ' .. file,
+    winopts = {
+      title = ' Line history '
+    }
   })
 end
 
@@ -27,15 +48,6 @@ M.search_selection = function()
   )
   local text = vim.tbl_get(visual_select, 1)
   M.search_string(text)
-end
-
-M.set_filetype = function()
-  require('telescope.builtin').filetypes(
-    require('telescope.themes').get_dropdown {
-      previewer = false,
-      hidden = true
-    }
-  )
 end
 
 M.toggle_opacity = function()

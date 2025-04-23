@@ -37,7 +37,13 @@ vim.api.nvim_create_user_command(
 vim.api.nvim_create_user_command(
   'BlanklineToggle',
   function()
-    vim.cmd('IBLToggle')
+    local snacks = require('snacks')
+    if snacks.indent.enabled then
+      snacks.indent.disable()
+    else
+      snacks.indent.enable()
+    end
+
     if not vim.gg.listchars then
       vim.opt.listchars:append('eol:↲') -- render eol as ↴
       vim.opt.listchars:append('tab:→ ') -- render tab as →
@@ -83,7 +89,7 @@ vim.api.nvim_create_user_command('ScratchPad', function()
       set_opts()
     else
       vim.gg.scratch = require('lazy.util').float({
-        title = ' Scratch Pad ─',
+        title = ' Scratch Pad ',
         title_pos = 'right',
         persistent = true,
         interactive = true
@@ -191,7 +197,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 vim.api.nvim_create_autocmd({ 'TermClose' }, {
   callback = function()
     vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes('<cr>', true, true, true),
+      vim.api.nvim_replace_termcodes('<esc>', true, true, true),
       'n',
       true
     )
@@ -213,7 +219,7 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   callback = function()
     local fts = {
       'trouble', 'lazy', 'help', 'startup',
-      'TelescopePrompt', 'DressingInput', 'NvimTree',
+      'fzf', 'snacks_input', 'NvimTree',
       'dapui_breakpoints', 'dapui_scopes', 'dapui_stacks',
       'dapui_watches', 'dapui_console', 'dap-repl'
     }
