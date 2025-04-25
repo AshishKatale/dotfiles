@@ -50,7 +50,11 @@ end
 
 M.config = function(_, opts)
   require('nvim-treesitter.configs').setup(opts)
-  vim.cmd('hi TreesitterContextLineNumber guifg=#bbbbbb')
+  require 'treesitter-context'.setup({
+    enable = true,
+    min_window_height = 24,
+  })
+  vim.cmd('hi! link TreesitterContextLineNumber CursorLineNr')
 end
 
 return M

@@ -38,6 +38,7 @@ opt.fixeol = false                          -- disable insert newline at EOF
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.colorcolumn = '81'
+opt.winborder = 'rounded'
 
 opt.list = true
 opt.fillchars:append('diff:·') -- render diff empty lines as ······

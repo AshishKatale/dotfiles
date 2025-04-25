@@ -1,10 +1,5 @@
-local cmp_status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not cmp_status_ok then
-  vim.notify('Unable to load: cmp_nvim_lsp')
-  return
-end
-
-local lang_servers = {
+local M = {}
+M.lang_servers = {
   lua = 'lua_ls',
   js_ts = 'ts_ls',
   go = 'gopls',
@@ -12,13 +7,14 @@ local lang_servers = {
   tailwindcss = 'tailwindcss'
 }
 
-local M = {}
-
-M.lang_servers = lang_servers
-M.capabilities = cmp_nvim_lsp.default_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = vim.tbl_deep_extend(
+  'force', capabilities,
+  require('blink.cmp').get_lsp_capabilities({}, false)
+)
 
 M.ls_settings = {
-  [lang_servers.lua] = {
+  [M.lang_servers.lua] = {
     capabilities = M.capabilities,
     settings = {
       Lua = {
@@ -40,7 +36,7 @@ M.ls_settings = {
     }
   },
 
-  [lang_servers.rust] = {
+  [M.lang_servers.rust] = {
     cmd = { 'rustup', 'run', 'stable', 'rust-analyzer' },
     capabilities = M.capabilities,
     settings = {
@@ -61,7 +57,7 @@ M.ls_settings = {
     }
   },
 
-  [lang_servers.go] = {
+  [M.lang_servers.go] = {
     cmd = { 'gopls', 'serve' },
     filetypes = { 'go', 'gomod' },
     capabilities = M.capabilities,
@@ -87,7 +83,7 @@ M.ls_settings = {
     },
   },
 
-  [lang_servers.js_ts] = {
+  [M.lang_servers.js_ts] = {
     capabilities = M.capabilities,
     settings = {
       javascript = {
@@ -123,7 +119,7 @@ M.ls_settings = {
     },
   },
 
-  [lang_servers.tailwindcss] = {
+  [M.lang_servers.tailwindcss] = {
     autostart = false
   }
 }
