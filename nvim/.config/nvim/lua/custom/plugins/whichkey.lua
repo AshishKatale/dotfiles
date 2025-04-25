@@ -110,14 +110,14 @@ M.config = function(_, setup)
     { '<leader>bu', '<cmd>UndotreeToggle<cr>',      desc = 'Undo Tree' },
     { '<leader>by', '<cmd>%y<cr>',                  desc = 'Yank buffer' },
     { '<leader>bY', '<cmd>%y+<cr>',                 desc = 'Copy buffer' },
-    { '<leader>bb', '<cmd>ScratchPad<cr>',          desc = 'Scratch Pad' },
+    { '<leader>bb', utils.scratch_buffer,           desc = 'Scratch Pad' },
 
     { '<leader>d',  group = 'Debug' },
     { '<leader>dd', '<cmd>DapContinue<cr>',         desc = 'DAP Continue' },
     { '<leader>db', '<cmd>DapToggleBreakpoint<cr>', desc = 'Breakpoint' },
 
     { '<leader>g',  group = 'Git' },
-    { '<leader>gg', '<cmd>LazyGit<cr>',             desc = 'LazyGit' },
+    { '<leader>gg', utils.lazy_git,                 desc = 'LazyGit' },
     { '<leader>gf', '<cmd>FzfLua git_files<cr>',    desc = 'Git Files' },
     { '<leader>gs', '<cmd>FzfLua git_status<cr>',   desc = 'Git status' },
     { '<leader>gb', '<cmd>FzfLua git_branches<cr>', desc = 'Branches' },
@@ -260,33 +260,23 @@ M.config = function(_, setup)
 
     { '<leader>t',  group = 'Toggle' },
     { '<leader>tw', '<cmd>set wrap!<cr>',             desc = 'Line wrap' },
-    { '<leader>tm', '<cmd>set showmode!<cr>',         desc = 'Show mode' },
-    { '<leader>tC', '<cmd>ColorColumnToggle<cr>',     desc = 'Color Column' },
-    { '<leader>tb', '<cmd>BlanklineToggle<cr>',       desc = 'Blankline' },
+    { '<leader>tm', '<cmd>RenderMarkdown toggle<cr>', desc = 'Render markdown' },
+    { '<leader>tM', '<cmd>set showmode!<cr>',         desc = 'Show mode' },
+    { '<leader>ts', '<cmd>set spell!<cr>',            desc = 'Spell check' },
     { '<leader>tc', '<cmd>ColorizerToggle<cr>',       desc = 'Colorizer' },
-    { '<leader>td', '<cmd>DiagnosticsToggle<cr>',     desc = 'Diagnostics' },
-    { '<leader>tf', '<cmd>FormatOnSaveToggle<cr>',    desc = 'Format on Save' },
     { '<leader>tg', '<cmd>Gitsigns toggle_signs<cr>', desc = 'Gitsigns' },
-    { '<leader>th', '<cmd>InlayhintsToggle<cr>',      desc = 'Inlay hints' },
+    { '<leader>tt', '<cmd>TSContextToggle<cr>',       desc = 'Treesitter context' },
+    { '<leader>tT', '<cmd>TSToggle highlight<cr>',    desc = 'Treesitter highlight' },
+    { '<leader>tf', utils.toggle_format_on_save,      desc = 'Format on Save' },
+    { '<leader>tC', utils.toggle_color_column,        desc = 'Color Column' },
+    { '<leader>tb', utils.toggle_indent_guides,       desc = 'Blankline' },
+    { '<leader>td', utils.toggle_diagnostic,          desc = 'Diagnostics' },
+    { '<leader>th', utils.toggle_inlay_hints,         desc = 'Inlay hints' },
+    { '<leader>to', utils.toggle_opacity,             desc = 'Background Opacity' },
     {
       '<leader>tB',
       '<cmd>Gitsigns toggle_current_line_blame<cr>',
       desc = 'Git Blame'
-    },
-    {
-      '<leader>tT',
-      '<cmd>TSToggle highlight<cr>',
-      desc = 'Treesitter highlight'
-    },
-    {
-      '<leader>to',
-      utils.toggle_opacity,
-      desc = 'Background Opacity'
-    },
-    {
-      '<leader>tt',
-      '<cmd>TSContextToggle<cr>',
-      desc = 'Treesitter context'
     },
 
     { '<leader>zz',    '<cmd>lua Snacks.zen()<cr>', desc = 'Zen mode' },

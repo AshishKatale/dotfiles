@@ -81,6 +81,7 @@ return {
         help_border    = 'VertSplit',
         preview_border = 'VertSplit',
         title          = '@markup.heading',
+        scrollborder_f = 'PmenuThumb',
       },
 
       winopts = {

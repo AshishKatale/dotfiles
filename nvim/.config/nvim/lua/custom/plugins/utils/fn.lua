@@ -53,16 +53,16 @@ end
 M.toggle_opacity = function()
   if vim.gg.opacity then
     vim.gg.opacity = false
-    vim.system(
-      { 'alacritty', 'msg', 'config', 'window.opacity=1' },
-      { text = true }
-    )
+    vim.cmd([[
+      hi! Normal guibg=#11111B
+      hi! NormalFloat guibg=#11111B
+    ]])
   else
     vim.gg.opacity = true
-    vim.system(
-      { 'alacritty', 'msg', 'config', 'window.opacity=0.75' },
-      { text = true }
-    )
+    vim.cmd([[
+      hi! Normal guibg=NONE
+      hi! NormalFloat guibg=NONE
+    ]])
   end
 end
 
@@ -73,6 +73,114 @@ M.range_format = function()
       ['start'] = vim.api.nvim_buf_get_mark(0, '<'),
       ['end'] = vim.api.nvim_buf_get_mark(0, '>'),
     }
+  })
+end
+
+M.toggle_inlay_hints = function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end
+
+M.toggle_diagnostic = function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end
+
+M.toggle_color_column = function()
+  local colorcolumn = tonumber(vim.api.nvim_get_option_value('colorcolumn', {
+    scope = 'local'
+  }))
+  if colorcolumn and colorcolumn > 0 then
+    vim.api.nvim_set_option_value('colorcolumn', '', { scope = 'local' })
+  else
+    vim.api.nvim_set_option_value('colorcolumn', '81', { scope = 'local' })
+  end
+end
+
+M.toggle_indent_guides = function()
+  local snacks = require('snacks')
+  if snacks.indent.enabled then
+    snacks.indent.disable()
+  else
+    snacks.indent.enable()
+  end
+
+  if not vim.gg.listchars then
+    vim.opt.listchars:append('eol:↲') -- render eol as ↴
+    vim.opt.listchars:append('tab:→ ') -- render tab as →
+    vim.opt.listchars:append('lead:·') -- render space as ·
+    vim.gg.listchars = true
+  else
+    vim.opt.listchars:remove('eol')
+    vim.opt.listchars:remove('tab')
+    vim.opt.listchars:remove('lead')
+    vim.opt.listchars:append('tab:  ')
+    vim.gg.listchars = false
+  end
+end
+
+M.toggle_format_on_save = function()
+  if vim.gg.format_on_save_autocmd_id ~= nil then
+    vim.api.nvim_del_autocmd(vim.gg.format_on_save_autocmd_id)
+    vim.gg.format_on_save_autocmd_id = nil
+    vim.notify('Disabled format on save.')
+  else
+    vim.gg.format_on_save_autocmd_id = vim.api.nvim_create_autocmd('BufWritePost', {
+      callback = function()
+        vim.lsp.buf.format({ async = true })
+      end,
+    })
+    vim.notify('Enabled format on save.')
+  end
+end
+
+M.lazy_git = function()
+  local is_inside_git_work_tree = vim.system(
+    { 'git', 'rev-parse', '--is-inside-work-tree' }, { text = true }
+  ):wait().code == 0
+
+  if is_inside_git_work_tree then
+    vim.cmd('tabnew term://lazygit')
+    vim.keymap.set({ 't' }, 'ii', '<Nop>', { silent = true, buffer = 0 })
+    vim.keymap.set(
+      { 't' }, [[<C-\>]], [[<C-\><C-n>0M]],
+      { silent = true, buffer = 0 }
+    )
+  else
+    vim.notify('Error: lazygit must be run inside a git repository',
+      vim.log.levels.ERROR, { history = false })
+  end
+end
+
+M.scratch_buffer = function()
+  if vim.gg.scratch and
+      (vim.gg.scratch:win_valid() or vim.gg.scratch:buf_valid()) then
+    vim.gg.scratch:toggle()
+    return
+  end
+
+  vim.gg.scratch = require('snacks').win({
+    width = 0.85,
+    height = 0.85,
+    border = 'rounded',
+    title = ' Scratch Pad ',
+    title_pos = 'right',
+    fixbuf = true,
+    scratch_ft = vim.bo.filetype,
+    keys = {
+      { '<C-q>', function(self) self:toggle() end,      desc = 'hide' },
+      { '<C-_>', function(self) self:toggle_help() end, desc = 'help' },
+      {
+        '<M-q>',
+        function(self) vim.api.nvim_buf_delete(self.buf, { force = true }) end,
+        desc = 'close'
+      },
+    },
+    wo = {
+      spell = false,
+      wrap = false,
+      number = true,
+      relativenumber = true,
+      signcolumn = 'yes',
+    },
   })
 end
 

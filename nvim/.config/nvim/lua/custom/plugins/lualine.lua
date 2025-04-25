@@ -1,6 +1,8 @@
 local M = {
   'nvim-lualine/lualine.nvim',
-  lazy = false,
+  lazy = true,
+  event = { 'BufNew', 'BufNewFile' },
+  priority = 999,
   dependencies = {
     'arkav/lualine-lsp-progress'
   },
@@ -78,6 +80,13 @@ M.opts = function()
           'buffers',
           icons_enabled = false,
           mode = 0,
+          filetype_names = {
+            snacks_dashboard = 'Dashboard',
+            Avante = 'Avante',
+            AvanteInput = 'Avante',
+            AvanteSelectedFiles = 'Avante',
+            NvimTree = 'NvimTree'
+          },
           symbols = {
             alternate_file = '', -- Text to show to identify the alternate file
             modified = '', -- Text to show when the buffer is modified

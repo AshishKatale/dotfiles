@@ -46,8 +46,7 @@ return {
         -- Options passed to nvim_open_win
         border = 'rounded',
         style = 'minimal',
-        relative = 'cursor',
-        row = 0,
+        row = 1,
         col = 1
       },
     })

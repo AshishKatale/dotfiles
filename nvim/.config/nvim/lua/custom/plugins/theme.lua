@@ -1,7 +1,7 @@
 local M = {
   'Mofiqul/vscode.nvim',
   lazy = false,
-  priority = 1000,
+  priority = 1001,
 }
 
 M.opts = function()
@@ -77,8 +77,9 @@ M.config = function(_, opts)
       hi NvimTreeNormal guibg=NONE
       hi CursorLineNr guibg=NONE
       hi SignColumn guibg=NONE
-      hi VertSplit guifg=#777777 guibg=NONE
       hi netrwDir guifg=#569CD6 guibg=NONE
+      hi VertSplit guifg=#777777 guibg=NONE
+      hi PmenuThumb guifg=NONE guibg=#777777
       hi! link NormalFloat Normal
       hi! link CurSearch Search
       hi! link FloatBorder VertSplit

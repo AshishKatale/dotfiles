@@ -50,6 +50,13 @@ return {
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {
+          lsp = { name = ' LSP' },
+          path = { name = 'PATH' },
+          snippets = { name = 'SNIP' },
+          buffer = { name = ' BUF' },
+          cmdline = { name = ' CMD' },
+        },
       },
 
       keymap = {
@@ -72,7 +79,8 @@ return {
         },
         menu = {
           max_height = 15,
-          winhighlight = 'CursorLine:BlinkCmpMenuSelection',
+          border = 'rounded',
+          winhighlight = 'CursorLine:BlinkCmpMenuSelection,Search:None',
           draw = {
             columns = { -- kind_icon, kind, label, source_name, source_id
               { 'label',      'label_description' },
@@ -92,6 +100,7 @@ return {
             min_width = 20,
             max_width = 100,
             max_height = 24,
+            border = 'rounded',
             direction_priority = {
               menu_north = { 'e', 'w', 'n', 's' },
               menu_south = { 'e', 'w', 's', 'n' },
@@ -111,6 +120,7 @@ return {
           min_width = 10,
           max_width = 100,
           max_height = 10,
+          border = 'rounded',
           winhighlight = 'FloatBorder:FloatBorder',
         }
       },
@@ -118,12 +128,19 @@ return {
       -- snippets = { preset = 'luasnip' },
 
       cmdline = {
-        enabled = true,
+        enabled = false,
         completion = {
           menu = {
+            auto_show = true,
             draw = { columns = { { 'label' } } }
           },
-        }
+          list = {
+            selection = {
+              auto_insert = true,
+              preselect = false,
+            }
+          }
+        },
       },
     }
   end,

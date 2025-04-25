@@ -70,6 +70,7 @@ source $ZDOTDIR/scripts/prompt.zsh
 source $ZDOTDIR/scripts/nvm.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+[ -e $HOME/.zshrc ] && source $HOME/.zshrc # to optionally override configs
 
 which lazygit &> /dev/null && bindkey -s -M viins '^g' '^E^U lazygit^M'
 [ -e $HOME/bin/tmux-sm ] && bindkey -s -M viins '^b' '^E^U tmux-sm^M'

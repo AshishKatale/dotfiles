@@ -3,121 +3,81 @@ local augroup = vim.api.nvim_create_augroup('customcmd', { clear = true })
 vim.api.nvim_create_user_command('W', 'write', {})
 
 vim.api.nvim_create_user_command(
-  'LazyGit',
-  function()
-    local is_git_repo = vim.system(
-      { 'git', 'rev-parse', '--is-inside-work-tree' },
-      { text = true }
-    ):wait().code == 0
-    if is_git_repo then
-      vim.cmd('tabnew term://lazygit')
-      vim.keymap.set({ 't' }, 'ii', '<Nop>', { silent = true, buffer = 0 })
-      vim.keymap.set(
-        { 't' }, '<C-\\>', [[<C-\><C-n>0M]],
-        { silent = true, buffer = 0 }
-      )
-    else
-      vim.api.nvim_echo(
-        { { 'Error: lazygit must be run inside a git repository' } },
-        false, -- don't add to message history
-        { err = true }
-      )
-    end
-  end,
-  {}
-)
-
-
-vim.api.nvim_create_user_command(
   'Format',
-  function() vim.lsp.buf.format({ timeout_ms = 30000 }) end,
-  {}
-)
-
-vim.api.nvim_create_user_command(
-  'BlanklineToggle',
-  function()
-    local snacks = require('snacks')
-    if snacks.indent.enabled then
-      snacks.indent.disable()
-    else
-      snacks.indent.enable()
-    end
-
-    if not vim.gg.listchars then
-      vim.opt.listchars:append('eol:↲') -- render eol as ↴
-      vim.opt.listchars:append('tab:→ ') -- render tab as →
-      vim.opt.listchars:append('lead:·') -- render space as ·
-      vim.gg.listchars = true
-    else
-      vim.opt.listchars:remove('eol')
-      vim.opt.listchars:remove('tab')
-      vim.opt.listchars:remove('lead')
-      vim.opt.listchars:append('tab:  ')
-      vim.gg.listchars = false
-    end
+  function(cmd)
+    local ms = (#cmd.args > 0 and tonumber(cmd.args)) and
+        tonumber(cmd.args) or 30000
+    vim.lsp.buf.format({ timeout_ms = ms })
   end,
-  {}
-)
-
-vim.api.nvim_create_user_command(
-  'DiagnosticsToggle',
-  function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
-  {}
-)
-
-vim.api.nvim_create_user_command(
-  'InlayhintsToggle',
-  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-  {}
-)
-
-vim.api.nvim_create_user_command('ScratchPad', function()
-    local function set_opts()
-      local win = vim.gg.scratch.win
-      vim.api.nvim_set_option_value('number', true, { win = win })
-      vim.api.nvim_set_option_value('relativenumber', true, { win = win })
-      vim.api.nvim_set_option_value('cursorline', true, { win = win })
-      vim.api.nvim_set_option_value('signcolumn', 'yes', { win = win })
-      vim.api.nvim_set_option_value('conceallevel', 0, { win = win })
-      -- override lazy util keymap
-      vim.keymap.set('n', 'q', 'q', { buffer = vim.gg.scratch.buf })
-    end
-    if vim.gg.scratch and
-        (vim.gg.scratch:win_valid() or vim.gg.scratch:buf_valid()) then
-      vim.gg.scratch:toggle()
-      set_opts()
-    else
-      vim.gg.scratch = require('lazy.util').float({
-        title = ' Scratch Pad ',
-        title_pos = 'right',
-        persistent = true,
-        interactive = true
-      })
-      vim.api.nvim_set_option_value('filetype', 'text', {
-        buf = vim.gg.scratch.buf
-      })
-      set_opts()
-    end
-  end,
-  {}
+  { nargs = '?' }
 )
 
 vim.api.nvim_create_user_command('FloatTerm', function(cmd)
+  local snacks = require('snacks')
+  local term_win_opts = {
+    auto_close = true,
+    win = {
+      width = 0.85,
+      height = 0.85,
+      border = 'rounded',
+      keys = { { '<C-q>', function(self) self:hide() end, desc = 'hide' } },
+    },
+  }
+
+  local terminals = snacks.terminal.list()
+  local open_term = vim.iter(terminals):find(function(term)
+    return not term.closed
+  end)
+
+  if open_term then
+    -- close open terminal if any
+    snacks.terminal.toggle(open_term.cmd, term_win_opts)
+    return
+  end
+
+  if #cmd.fargs < 1 and #terminals > 1 then
+    -- check and force remove hidden terminals with [Process exited] message
+    vim.iter(terminals):each(function(term)
+      if term.closed and term:buf_valid() then
+        local exited = vim.iter(term:lines()):any(function(line)
+          return line:match('^%[Process exited %d+%]') ~= nil
+        end)
+        if exited then
+          snacks.bufdelete.delete(term.buf)
+        end
+      end
+    end)
+
+    terminals = snacks.terminal.list()
+    if #terminals == 1 then
+      -- open hidden terminal if only one
+      snacks.terminal.toggle(terminals[1].cmd, term_win_opts)
+      return
+    end
+
+    -- select hidden terminal to open
+    vim.ui.select(terminals, {
+      prompt = 'Select terminal',
+      format_item = function(term)
+        local _cmd = type(term.cmd) == 'table'
+            and table.concat(term.cmd, ' ')
+            or term.cmd
+        return term.id .. ': ' .. _cmd
+      end,
+    }, function(selected_term)
+      if not selected_term then
+        return
+      end
+      snacks.terminal.toggle(selected_term.cmd, term_win_opts)
+    end)
+    return
+  end
+
+  -- open terminal
   if #cmd.fargs > 0 then
-    require('lazy.util').float_term(cmd.fargs, {})
-  elseif vim.gg.term and
-      (vim.gg.term:win_valid() or vim.gg.term:buf_valid()) then
-    vim.gg.term:toggle()
+    snacks.terminal.toggle(cmd.fargs, term_win_opts)
   else
-    vim.gg.term = require('lazy.util').float_term(nil, {
-      persistent = true,
-      interactive = true
-    })
-    vim.api.nvim_create_autocmd('BufEnter', {
-      buffer = vim.gg.term.buf,
-      callback = function() vim.cmd.startinsert() end,
-    })
+    snacks.terminal.toggle({ vim.o.shell }, term_win_opts)
   end
 end, {
   nargs = '*',
@@ -128,35 +88,6 @@ end, {
     ):totable()
   end,
 })
-
-vim.api.nvim_create_user_command('ColorColumnToggle', function()
-  local colorcolumn = tonumber(vim.api.nvim_get_option_value('colorcolumn', {
-    scope = 'local'
-  }))
-  if colorcolumn and colorcolumn > 0 then
-    vim.api.nvim_set_option_value('colorcolumn', '', { scope = 'local' })
-  else
-    vim.api.nvim_set_option_value('colorcolumn', '81', { scope = 'local' })
-  end
-end, {})
-
-vim.api.nvim_create_user_command(
-  'FormatOnSaveToggle',
-  function()
-    if vim.gg.format_on_save_autocmd_id ~= nil then
-      vim.api.nvim_del_autocmd(vim.gg.format_on_save_autocmd_id)
-      vim.gg.format_on_save_autocmd_id = nil
-    else
-      vim.gg.format_on_save_autocmd_id = vim.api.nvim_create_autocmd('BufWritePost', {
-        group = augroup,
-        callback = function()
-          vim.lsp.buf.format({ async = true })
-        end,
-      })
-    end
-  end,
-  {}
-)
 
 ------------ Custom AutoCommands ------------
 
@@ -195,12 +126,9 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'TermClose' }, {
-  callback = function()
-    vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes('<esc>', true, true, true),
-      'n',
-      true
-    )
+  callback = function(opts)
+    local is_valid = vim.api.nvim_buf_is_valid(opts.buf)
+    if is_valid then vim.api.nvim_input('<esc>') end
   end,
   group = augroup
 })
@@ -237,10 +165,10 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = { 'qf', 'help', 'man', 'netrw', 'gitsigns-blame' },
+  pattern = { 'qf', 'help', 'man', 'netrw', 'gitsigns-blame', 'markdown' },
   callback = function(opt)
     local opts = { noremap = true, silent = true, nowait = true };
-    if opt.match == 'qf' or opt.match == 'help' then
+    if opt.match == 'qf' or opt.match == 'help' or vim.bo.buftype == 'help' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
       vim.api.nvim_set_option_value('number', true, { win = 0 })
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
@@ -253,4 +181,18 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     end
   end,
   group = augroup
+})
+
+local prev = { new_name = '', old_name = '' } -- Prevents duplicate events
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'NvimTreeSetup',
+  callback = function()
+    local events = require('nvim-tree.api').events
+    events.subscribe(events.Event.NodeRenamed, function(data)
+      if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+        data = data
+        require('snacks').rename.on_rename_file(data.old_name, data.new_name)
+      end
+    end)
+  end,
 })

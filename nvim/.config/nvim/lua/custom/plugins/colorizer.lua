@@ -14,7 +14,7 @@ return {
           rgb_fn      = true, -- CSS rgb() and rgba()
           hsl_fn      = true, -- CSS hsl() and hsla()
           mode        = 'virtualtext', -- Set the display mode.
-          virtualtext = '󰚍', --  󰝤  󰚍
+          virtualtext = '󰚍', -- 󰄯    󰝤  󰚍 ▐██
           tailwind    = true,
         }
       }
