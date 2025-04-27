@@ -7,13 +7,16 @@ local M = {
 M.opts = function()
   local vscColors = require('vscode.colors').get_colors()
   local color_overrides = vim.tbl_extend('force', vim.gg.colors or {}, {
-    vscGitUntracked = '#38E54D',
     cursorline = '#323640',
-    inlayhint = '#727272',
-    info = '#0096FF',
-    warn = '#FF9933',
-    hint = '#FFFF00',
-    error = '#EF233C'
+    vscGitUntracked = '#38E54D',
+    gitUntracked = '#38E54D',
+    gitChanged = vscColors.vscMediumBlue,
+    gitDeleted = vscColors.vscRed,
+    inlayhint = vscColors.vscGray,
+    info = vscColors.vscBlue,
+    warn = vscColors.vscUiOrange,
+    hint = vscColors.vscDarkYellow,
+    error = vscColors.vscRed
   })
   local colors = vim.tbl_extend('force', vscColors, color_overrides)
   vim.gg.colors = colors;
@@ -37,20 +40,26 @@ M.opts = function()
       NvimTreeGitDeleted = { fg = colors.vscRed, bold = true },
       NvimTreeGitIgnored = { fg = colors.vscRed, },
       NvimTreeFolderIcon = { fg = colors.vscFront, },
-      NvimTreeGitNew = { fg = colors.vscGitUntracked, },
-      NvimTreeExecFile = { fg = colors.vscGitUntracked, },
-      GitSignsAdd = { fg = colors.vscGitUntracked, },
-      GitSignsChange = { fg = colors.vscMediumBlue, },
-      GitSignsDelete = { fg = colors.vscRed, },
-      GitSignsAddPreview = { fg = colors.vscGitUntracked, },
+      NvimTreeGitNew = { fg = colors.gitUntracked, },
+      NvimTreeExecFile = { fg = colors.gitUntracked, },
+      GitSignsAdd = { fg = colors.gitUntracked, },
+      GitSignsChange = { fg = colors.gitChanged, },
+      GitSignsDelete = { fg = colors.gitDeleted, },
+      GitSignsAddPreview = { fg = colors.gitUntracked, },
       GitSignsDeletePreview = { fg = colors.vscRed, },
       GitSignsCurrentLineBlame = { fg = colors.vscGray, },
-      DiagnosticWarn = { fg = colors.warn, },
-      DiagnosticError = { fg = colors.error, },
-      DiagnosticInfo = { fg = colors.info, },
-      DiagnosticHint = { fg = colors.hint, },
+      DiagnosticWarn = { fg = colors.vscUiOrange, },
+      DiagnosticError = { fg = colors.vscRed, },
+      DiagnosticInfo = { fg = colors.vscBlue, },
+      DiagnosticHint = { fg = colors.vscDarkYellow, },
       LspInlayHint = { fg = colors.inlayhint },
-      netrwMarkFile = { bg = colors.vscContext }
+      netrwMarkFile = { bg = colors.vscContext },
+      Folded = {
+        fg = colors.vscBlueGreen,
+        bg = colors.vscDarkBlue,
+        bold = true,
+        italic = true,
+      },
     }
   }
 end
@@ -72,7 +81,6 @@ M.config = function(_, opts)
   if vim.gg.opacity then
     vim.cmd([[
       hi Normal guibg=NONE
-      hi NormalFloat guibg=NONE
       hi LineNr guibg=NONE
       hi NvimTreeNormal guibg=NONE
       hi CursorLineNr guibg=NONE

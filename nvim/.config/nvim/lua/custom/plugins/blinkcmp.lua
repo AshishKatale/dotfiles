@@ -4,7 +4,6 @@ return {
   event = 'VeryLazy',
   dependencies = {
     'rafamadriz/friendly-snippets',
-    'L3MON4D3/LuaSnip',
   },
   version = '1.*',
 
@@ -63,13 +62,13 @@ return {
         preset = 'default',
         -- show with a list of providers
         ['<CR>'] = { 'accept', 'fallback' },
-        ['<Tab>'] = { 'accept', 'fallback' },
-        ['<C-space>'] = { 'show', 'fallback' },
+        ['<C-e>'] = {},
+        ['<Tab>'] = { 'snippet_forward', 'accept', 'fallback' },
         ['<C-x>'] = { 'hide_documentation', 'show_documentation', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-c>'] = { 'hide', 'fallback' },
-        ['<C-e>'] = {},
+        ['<C-space>'] = { 'show', 'fallback' },
       },
       completion = {
         ghost_text = { enabled = false },

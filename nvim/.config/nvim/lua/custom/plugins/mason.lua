@@ -32,45 +32,27 @@ M.opts = function()
       -- installed if they're not already installed.
       -- This setting has no relation with the `ensure_installed` setting.
       automatic_installation = false,
+
+      handlers = {
+        function(lsp_name) vim.lsp.enable(lsp_name) end
+      },
     }
   }
 end
 
 M.config = function(_, opts)
-  require('custom.plugins.utils.nvimlsp').setup()
-  require('mason').setup(opts.mason)
-  require('mason-lspconfig').setup(opts.mason_lspconfig)
-
-  local lspconfig = require('lspconfig')
-  local handlers = require('custom.plugins.utils.handlers')
-
-  local mason_lsp_handlers = {
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function(server_name) -- default handler (optional)
-      lspconfig[server_name].setup({
-        capabilities = handlers.capabilities
-      })
-    end,
-  }
-
-  -- customize settings for lang_servers
-  vim.iter(handlers.lang_servers):fold(
-    mason_lsp_handlers,
-    function(acc, _, ls_name)
-      acc[ls_name] = function(server_name)
-        lspconfig[server_name].setup(handlers.ls_settings[server_name])
-      end
-      return acc;
-    end
+  local capabilities = vim.tbl_deep_extend(
+    'force',
+    vim.lsp.protocol.make_client_capabilities(),
+    require('blink.cmp').get_lsp_capabilities({}, false)
   )
 
-  require('mason-lspconfig').setup_handlers(mason_lsp_handlers)
+  require('custom.plugins.utils.nvimlsp').setup()
+  vim.lsp.config('*', { capabilities = capabilities })
 
-  -- external lsp servers (not installed with mason)
-  lspconfig.rust_analyzer.setup(handlers.ls_settings[handlers.lang_servers.rust])
-  -- lspconfig.gopls.setup(handlers.lsp_settings[handlers.ls.go])
+  require('mason').setup(opts.mason)
+  require('mason-lspconfig').setup(opts.mason_lspconfig)
+  vim.lsp.enable('rust_analyzer')
 end
 
 return M

@@ -102,6 +102,8 @@ M.config = function(_, setup)
     { '<leader>j',  '<C-w>j',                       desc = 'Lower split' },
     { '<leader>k',  '<C-w>k',                       desc = 'Upper split' },
     { '<leader>l',  '<C-w>l',                       desc = 'Right split' },
+    { '<leader>|',  '<cmd>vnew<cr>',                desc = 'Split right' },
+    { '<leader>_',  '<cmd>new<cr>',                 desc = 'Split bottom' },
 
     { '<leader>b',  group = 'Buffer' },
     { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',       desc = 'Remove trailing' },
@@ -180,7 +182,7 @@ M.config = function(_, setup)
 
     { '<leader>o',  group = 'Open' },
     { '<leader>oL', '<cmd>Lazy<cr>',                desc = 'Lazy' },
-    { '<leader>ol', '<cmd>LspInfo<cr>',             desc = 'LspInfo' },
+    { '<leader>ol', '<cmd>checkhealth vim.lsp<cr>', desc = 'LspInfo' },
     { '<leader>om', '<cmd>Mason<cr>',               desc = 'Mason' },
 
     { '<leader>q',  group = 'QuickFix' },
@@ -267,7 +269,8 @@ M.config = function(_, setup)
     { '<leader>tg', '<cmd>Gitsigns toggle_signs<cr>', desc = 'Gitsigns' },
     { '<leader>tt', '<cmd>TSContextToggle<cr>',       desc = 'Treesitter context' },
     { '<leader>tT', '<cmd>TSToggle highlight<cr>',    desc = 'Treesitter highlight' },
-    { '<leader>tf', utils.toggle_format_on_save,      desc = 'Format on Save' },
+    { '<leader>tf', '<cmd>set foldenable!<cr>',       desc = 'Folding' },
+    { '<leader>tF', utils.toggle_format_on_save,      desc = 'Format on Save' },
     { '<leader>tC', utils.toggle_color_column,        desc = 'Color Column' },
     { '<leader>tb', utils.toggle_indent_guides,       desc = 'Blankline' },
     { '<leader>td', utils.toggle_diagnostic,          desc = 'Diagnostics' },

@@ -85,7 +85,8 @@ M.opts = function()
             Avante = 'Avante',
             AvanteInput = 'Avante',
             AvanteSelectedFiles = 'Avante',
-            NvimTree = 'NvimTree'
+            NvimTree = 'NvimTree',
+            checkhealth = 'Health',
           },
           symbols = {
             alternate_file = '', -- Text to show to identify the alternate file

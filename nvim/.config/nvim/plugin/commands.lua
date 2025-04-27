@@ -165,7 +165,10 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = { 'qf', 'help', 'man', 'netrw', 'gitsigns-blame', 'markdown' },
+  pattern = {
+    'qf', 'help', 'man', 'netrw', 'gitsigns-blame',
+    'markdown', 'checkhealth',
+  },
   callback = function(opt)
     local opts = { noremap = true, silent = true, nowait = true };
     if opt.match == 'qf' or opt.match == 'help' or vim.bo.buftype == 'help' then
@@ -178,6 +181,14 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
       vim.api.nvim_buf_set_keymap(0, 'n', 'Q', '<cmd>q<cr>', opts)
     elseif opt.match == 'gitsigns-blame' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<cr>', opts)
+    elseif opt.match == 'checkhealth' then
+      vim.api.nvim_create_autocmd({ 'BufLeave' }, {
+        buffer = 0,
+        callback = function()
+          require('snacks').bufdelete.delete(0)
+          vim.cmd.tabclose()
+        end
+      })
     end
   end,
   group = augroup

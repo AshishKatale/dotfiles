@@ -1,0 +1,16 @@
+{
+  "clg": {
+    "scope": "javascript,html",
+    "prefix": [
+      "clg"
+    ],
+    "body": "console.log($1)",
+    "description": "console.log"
+  },
+  "clt": {
+    "scope": "javascript,html",
+    "prefix": "clt",
+    "body": "console.table($1)",
+    "description": "console.table"
+  }
+}

@@ -39,14 +39,22 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.colorcolumn = '81'
 
-opt.list = true
+opt.foldlevelstart = 100 -- close fold at start
+-- opt.foldmethod = 'expr' -- to enable folding with foldexpr
+
+opt.fillchars:append('foldopen:') --   
+opt.fillchars:append('foldclose:') --  
+opt.fillchars:append('fold: ')
+opt.fillchars:append('foldsep: ')
 opt.fillchars:append('diff:·') -- render diff empty lines as ······
-opt.fillchars:append('eob: ') -- hide ~ on empty buffer
+opt.fillchars:append('eob: ')  -- hide ~ on empty buffer
+
+opt.list = true
 opt.listchars:append('trail:') -- render trailing spaces as ·
 opt.listchars:append('tab:  ') -- don't render tabs
 
 -- opt.whichwrap:append('h,l') -- wrap to next line
--- opt.shortmess:append("c")
+-- opt.shortmess:append("c") -- for avoiding hit-enter prompts / file messages
 -- opt.iskeyword:append('-') -- treat kebab cased text as a single word
 
 opt.guicursor = 'n-v-c-sm:block,' ..

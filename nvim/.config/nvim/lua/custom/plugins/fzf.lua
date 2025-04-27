@@ -80,7 +80,7 @@ return {
         border         = 'VertSplit',
         help_border    = 'VertSplit',
         preview_border = 'VertSplit',
-        title          = '@markup.heading',
+        title          = '@text.warning',
         scrollborder_f = 'PmenuThumb',
       },
 

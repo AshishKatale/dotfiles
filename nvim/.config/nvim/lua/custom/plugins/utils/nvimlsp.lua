@@ -26,6 +26,11 @@ local function enable_lsp_features(client, bufnr)
       group = augroup
     })
   end
+
+  if client.server_capabilities.foldingRangeProvider then
+    local win = vim.api.nvim_get_current_win()
+    vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+  end
 end
 
 local function set_lsp_keymaps(bufnr)
@@ -38,7 +43,6 @@ local function set_lsp_keymaps(bufnr)
       buffer = bufnr
     },
 
-    { '<leader>', group = 'Leader' },
     {
       '<leader>c',
       '<cmd>lua vim.lsp.buf.code_action()<CR>',
@@ -65,7 +69,7 @@ local function set_lsp_keymaps(bufnr)
       mode = { 'v' },
     },
 
-    { 'g',        group = 'Go to' },
+    { 'g', group = 'Go to' },
     {
       'gd',
       '<cmd>lua vim.lsp.buf.definition()<CR>',

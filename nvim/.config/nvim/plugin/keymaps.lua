@@ -34,7 +34,7 @@ map({ 'n' }, '<S-h>', '<cmd>bp<cr>', { silent = true })
 
 -- Press jk fast to enter normal mode
 map({ 'i' }, 'jk', '<ESC>', { silent = true })
-map({ 'v' }, 'ii', '<ESC>', { silent = true })
+map({ 'v', 's' }, 'ii', '<ESC>', { silent = true })
 map({ 't' }, 'ii', [[<C-\><C-n>]], { silent = true })
 
 -- Stay in indent mode
