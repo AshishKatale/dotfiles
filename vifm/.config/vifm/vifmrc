@@ -13,7 +13,7 @@
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 if executable('nvim')
-    set vicmd=nvim
+    set vicmd='nvim'
 elseif executable('vim')
     set vicmd=vim
 elseif executable('vi')
@@ -67,7 +67,7 @@ set vimhelp
 set norunexec
 
 " List of color schemes to try (picks the first one supported by the terminal)
-colorscheme gruvbox default-256 default
+colorscheme lscolors default-256 default
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -411,7 +411,8 @@ filextype */
 " set viewcolumns=-{name}..,6{}.
 
 " Show vertical border
-" set fillchars=vborder:│
+set fillchars=vborder:│
+set tuioptions=pv
 
 " Filter-out build and temporary files
 " filter! {*.lo,*.o,*.d,*.class,*.pyc,*.pyo,.*~}
@@ -507,6 +508,12 @@ nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
 nnoremap q :q<cr>
+nnoremap e :edit<cr>
+nnoremap <cr> :view<cr>
+nnoremap <c-l> :redraw<cr>
+vnoremap ii <esc>
+cnoremap <c-n> <tab>
+cnoremap <c-p> <s-tab>
 
 " Midnight commander alike mappings
 " Open current directory in the other pane

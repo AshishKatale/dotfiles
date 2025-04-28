@@ -96,7 +96,7 @@ M.config = function(_, setup)
 
   which_key.add({
     { '<leader>',   group = 'Leader' },
-    { '<leader>E',  '<cmd>tabnew term://vifm<cr>',  desc = 'Vifm' },
+    { '<leader>E',  '<cmd>FloatTerm vifm<cr>',      desc = 'Vifm' },
     { '<leader>e',  '<cmd>NvimTreeToggle<cr>',      desc = 'File tree' },
     { '<leader>h',  '<C-w>h',                       desc = 'Left split' },
     { '<leader>j',  '<C-w>j',                       desc = 'Lower split' },

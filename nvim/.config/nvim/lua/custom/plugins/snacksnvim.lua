@@ -22,7 +22,7 @@ return {
           { icon = '󰱽 ', key = 'b', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
           { icon = '󱎸 ', key = '/', desc = 'Search Text', action = ":lua Snacks.dashboard.pick('live_grep')" },
           { icon = '󰊢 ', key = 's', desc = 'Git Status', action = ":lua Snacks.dashboard.pick('git_status')" },
-          { icon = ' ', key = 'o', desc = 'Old Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
+          { icon = '󱀲 ', key = 'o', desc = 'Old Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
           { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
           {
@@ -76,7 +76,8 @@ return {
       },
       dashboard = {
         wo = {
-          winhighlight = 'SnacksDashboardHeader:SnacksPickerIdx',
+          winhighlight = 'SnacksDashboardHeader:SnacksPickerIdx,'
+              .. 'SnacksDashboardKey:@text.strong,',
         },
       }
     },

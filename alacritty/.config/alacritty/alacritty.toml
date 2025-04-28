@@ -3,6 +3,7 @@ TERM = "alacritty"
 
 [window]
 decorations = "none"
+dynamic_padding = true
 opacity     = 0.75
 
 [cursor]
@@ -19,7 +20,7 @@ offset.y = 0
 
 [font.normal]
 family = "JetBrainsMonoNerd Font"
-style  = "Medium"
+style  = "Regular"
 
 [font.bold]
 family = "JetBrainsMonoNerd Font"
@@ -29,30 +30,43 @@ style  = "ExtraBold"
 text   = "#4D4D4C"
 cursor = "#F5E0DC"
 
-[colors.bright]
-black   = "#3C4048"
-red     = "#FF1E1E"
-green   = "#40FF40"
-yellow  = "#F1FF8E"
-blue    = "#5EA1FF"
-magenta = "#BD5EFF"
-cyan    = "#00FFFF"
-white   = "#FFFFFF"
-
-[colors.normal]
-black   = "#16181A"
-red     = "#FF033E"
-green   = "#40FF80"
-yellow  = "#FFFF40"
-blue    = "#3BA1FF"
-magenta = "#BD5EFF"
-cyan    = "#9EF1FF"
-white   = "#F8F8F8"
-
 [colors.primary]
-background = "#11111b"
-foreground = "#EEEEEE"
+background = "#11111B"
+foreground = "#DBDBDB"
 
 [colors.selection]
 background = "#264F78"
 foreground = "#FFFFFF"
+
+# Dim colors
+[colors.dim]
+black   = '#232323'
+red     = '#FF6E6E'
+green   = '#40CC80'
+yellow  = '#DDDD40'
+blue    = '#3BA1DD'
+magenta = '#BD5EAA'
+cyan    = '#00BBBB'
+white   = '#BABABA'
+
+# Normal colors
+[colors.normal]
+black   = "#16181A"
+red     = "#FF4E4E"
+green   = "#40EE80"
+yellow  = "#EEEE40"
+blue    = "#2BA1EE"
+magenta = "#BD5ECC"
+cyan    = "#00DEDE"
+white   = "#DEDEDE"
+
+# Bright colors
+[colors.bright]
+black   = "#3C4048"
+red     = "#FF1E1E"
+green   = "#40FF40"
+yellow  = "#FFFF40"
+blue    = "#2EA1FF"
+magenta = "#BD5EFF"
+cyan    = "#00FFFF"
+white   = "#FFFFFF"

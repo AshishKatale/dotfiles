@@ -151,7 +151,7 @@ prompt() {
 		RP+="%F{cyan}%B %b%f"
 	fi
 
-	P+="%F{$BLUE}%f%F{white}%K{$BLUE}%B$TMUX_SYMBOL$PATH_INFO%b%k%f"
+	P+="%F{$BLUE}%f%F{255}%K{$BLUE}%B$TMUX_SYMBOL$PATH_INFO%b%k%f"
 	P+="$GIT_INFO"
 	P+="%F{$BLUE} %f"
 	PROMPT=$P

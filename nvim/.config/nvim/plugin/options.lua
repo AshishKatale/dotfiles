@@ -50,7 +50,7 @@ opt.fillchars:append('diff:·') -- render diff empty lines as ······
 opt.fillchars:append('eob: ')  -- hide ~ on empty buffer
 
 opt.list = true
-opt.listchars:append('trail:') -- render trailing spaces as ·
+opt.listchars:append('trail:') -- render trailing spaces as 
 opt.listchars:append('tab:  ') -- don't render tabs
 
 -- opt.whichwrap:append('h,l') -- wrap to next line

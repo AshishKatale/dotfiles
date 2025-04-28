@@ -27,8 +27,23 @@ M.show_line_history = function()
       [['%C(yellow)%h%Creset %s %C(magenta)%cr%Creset %C(blue)<%an>%Creset']] ..
       [[ -s -L ]] .. line .. [[,+1:]] .. file
 
-  require('fzf-lua').fzf_exec(line_hist_cmd, {
+  local fzflua        = require('fzf-lua')
+  fzflua.fzf_exec(line_hist_cmd, {
     preview = 'git show --color {1} -- ' .. file,
+    actions = {
+      ['enter']  = fzflua.actions.git_buf_edit,
+      ['ctrl-x'] = fzflua.actions.git_buf_split,
+      ['ctrl-v'] = fzflua.actions.git_buf_vsplit,
+      ['ctrl-y'] = {
+        reload = true,
+        desc = 'git-yank-commit',
+        fn = function(selected)
+          local hash = vim.split(selected[1], ' ')[1]
+          vim.fn.setreg('"', hash)
+          vim.notify('yanked commit hash: ' .. hash)
+        end,
+      },
+    },
     winopts = {
       title = ' Line history '
     }
@@ -51,18 +66,31 @@ M.search_selection = function()
 end
 
 M.toggle_opacity = function()
-  if vim.gg.opacity then
-    vim.gg.opacity = false
-    vim.cmd([[
-      hi! Normal guibg=#11111B
-      hi! NormalFloat guibg=#11111B
-    ]])
+  local is_alacritty = vim.env.ALACRITTY_WINDOW_ID
+  if is_alacritty then
+    if vim.gg.opacity then
+      vim.system({ 'alacritty', 'msg', 'config', 'window.opacity=1' },
+        { text = true })
+      vim.gg.opacity = false
+    else
+      vim.system({ 'alacritty', 'msg', 'config', 'window.opacity=0.75' },
+        { text = true })
+      vim.gg.opacity = true
+    end
   else
-    vim.gg.opacity = true
-    vim.cmd([[
-      hi! Normal guibg=NONE
-      hi! NormalFloat guibg=NONE
-    ]])
+    if vim.gg.opacity then
+      vim.cmd([[
+        hi! Normal guibg=#11111B
+        hi! NormalFloat guibg=#11111B
+      ]])
+      vim.gg.opacity = false
+    else
+      vim.cmd([[
+        hi! Normal guibg=NONE
+        hi! NormalFloat guibg=NONE
+      ]])
+      vim.gg.opacity = true
+    end
   end
 end
 
