@@ -109,6 +109,21 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end
 })
 
+-- delete unmodified no name buffers automatically on bufleave
+vim.api.nvim_create_autocmd({ 'BufLeave' }, {
+  pattern = { '{}' }, -- '[ No Name ]'
+  callback = function(opt)
+    if vim.bo.buflisted
+        and vim.bo.buftype == ''
+        and vim.bo.filetype == ''
+        and vim.bo.bufhidden == ''
+        and not vim.bo.modified
+    then
+      require('snacks').bufdelete.delete(opt.buf)
+    end
+  end
+})
+
 -- reset cursor style to underline before exiting
 vim.api.nvim_create_autocmd({ 'VimLeave' }, {
   callback = function() vim.opt.guicursor = 'a:hor20' end,

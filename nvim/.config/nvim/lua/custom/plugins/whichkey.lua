@@ -102,8 +102,8 @@ M.config = function(_, setup)
     { '<leader>j',  '<C-w>j',                       desc = 'Lower split' },
     { '<leader>k',  '<C-w>k',                       desc = 'Upper split' },
     { '<leader>l',  '<C-w>l',                       desc = 'Right split' },
-    { '<leader>|',  '<cmd>vnew<cr>',                desc = 'Split right' },
-    { '<leader>_',  '<cmd>new<cr>',                 desc = 'Split bottom' },
+    { '<leader>|',  '<cmd>vnew<cr>ia<bs><esc>',     desc = 'Split right' },
+    { '<leader>_',  '<cmd>new<cr>ia<bs><esc>',      desc = 'Split bottom' },
 
     { '<leader>a',  group = 'Avante' },
     { '<leader>aa', '<cmd>AvanteAsk<cr>',           desc = 'avante: ask' },
@@ -310,11 +310,7 @@ M.config = function(_, setup)
       mode = { 'n' },
       { '<C-k><C-x>', '<cmd>1,$bd!<cr>',           desc = 'Delete All Buffers' },
       { '<C-k>l',     '<cmd>FzfLua filetypes<cr>', desc = 'Set Filetype' },
-      {
-        '<C-k>x',
-        '<cmd>bd!<cr>',
-        desc = 'Delete Buffer'
-      },
+      { '<C-k>x',     '<cmd>bd!<cr>',              desc = 'Delete Buffer' },
     }
   })
 end
