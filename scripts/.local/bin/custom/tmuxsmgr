@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+help=$(cat<<EOF
+  -h --help        show this message
+     --info        show tmux session info for waybar
+  \$1=some_path     directory path for new tmux session
+EOF
+)
+
+case "$1" in
+  "-h"|"--help")
+    echo "$help"
+    exit 0
+  ;;
+  "status"|"info"|"--info")
+    if (tmux ls | grep -q attach) 2> /dev/null; then
+      SSN_NAME="$(tmux ls | grep attach | cut -d: -f1 | awk 'ORS=", "')"
+      TMUX_INFO="${SSN_NAME%", "}"
+      TOOLTIP="$(tmux ls -F '#S' | awk '{printf " %d %s \\n", NR, $0}')"
+    elif (tmux ls) &> /dev/null; then
+      TMUX_INFO="sessions: $(tmux ls | wc -l)"
+      TOOLTIP="$(tmux ls -F '#S' | awk '{printf " %d %s \\n", NR, $0}')"
+    fi
+    echo '{"text":"'$TMUX_INFO'","tooltip":"'${TOOLTIP%\\n}'","class":"tmuxinfo"}'
+    exit 0
+  ;;
+esac
+
+if [ -n "$1" ] && [ -d "$1" ]; then
+  selected=$(realpath $1)
+elif which fd &> /dev/null; then
+  projects=$(
+    echo $HOME/dotfiles
+    fd . --type=directory \
+         --exclude="src" \
+         --exclude="assets" \
+         --exclude="build" \
+         --exclude="public" \
+         --exclude="lua" \
+         --exclude="plugin" \
+         --exclude="node_modules" \
+         --exclude="target" \
+         --exclude="dist" \
+         $HOME/workspace
+  )
+else
+  projects=$(
+    echo $HOME/dotfiles
+    find $HOME/workspace -type d \
+                      \( -path "*/\.*" -o \
+                         -path "*/src*" -o \
+                         -path "*/assets*" -o \
+                         -path "*/build*" -o \
+                         -path "*/public*" -o \
+                         -path "*/lua*" -o \
+                         -path "*/plugin*" -o \
+                         -path "*/node_modules*" -o \
+                         -path "*/target*" -o \
+                         -path "*/dist*" \) -prune -o \
+                         -type d -print
+  )
+fi
+
+if [ -n "$projects" ]; then
+  selected=$(echo "$projects" | fzf --tmux='center,50%,45%' --scheme='path')
+fi
+
+if [ -z "$selected" ]; then
+    exit 0
+fi
+
+selected_dirname=$(basename "$selected" | tr . _)
+selected_parent_dirname="$(basename $(dirname "$selected") | tr . _)"
+session_name="$selected_parent_dirname/$selected_dirname"
+tmux_running="$(pgrep tmux)"
+
+if [ -z "$TMUX" ] && [ -z "$tmux_running" ]; then
+  tmux new-session -s "$session_name" -c "$selected"
+  exit 0
+fi
+
+if ! tmux has-session -t "$session_name" 2> /dev/null; then
+  tmux new-session -ds "$session_name" -c "$selected"
+fi
+
+if [ -n "$TMUX" ]; then
+  tmux switch-client -t "$session_name"
+else
+  tmux attach-session -t "$session_name"
+fi
+

@@ -1,0 +1,94 @@
+* {
+  bg-col:  #11111B;
+  bg-col-light: #313244;
+  selected-col: #313244;
+  blue: #89b4fa;
+  fg-col: #cdd6f4;
+  fg-col2: #f38ba8;
+  border-col: #6c7086;
+  font: "JetBrainsMono Nerd Font Bold 10";
+}
+
+element-text, element-icon , mode-switcher {
+  background-color: inherit;
+  text-color:       inherit;
+}
+
+window {
+  location: north;
+  margin: 4em 0em 0em 0em;
+  height: 25em;
+  width: 50em;
+  border: 2px;
+  border-color: @border-col;
+  border-radius: 0.5em;
+  background-color: @bg-col;
+}
+
+mainbox {
+  background-color: @bg-col;
+  padding: 0em 1em 0em 0em;
+}
+
+inputbar {
+  children: [prompt,entry];
+  background-color: @bg-col;
+  padding: 0.25em;
+}
+
+prompt {
+  background-color: @blue;
+  padding: 0.25em;
+  text-color: @bg-col;
+  border-radius: 0.25em;
+  margin: 1.25em 0em 0em 1.25em;
+}
+
+entry {
+  padding: 0.25em;
+  margin: 1.25em 0em 0em 0.5em;
+  text-color: @fg-col;
+  border-radius: 0.25em;
+  background-color: @bg-col;
+}
+
+listview {
+  padding: 0.25em 0em 0em 0em;
+  margin: 0.25em 0em 0em 1.25em;
+  columns: 3;
+  lines: 5;
+  background-color: @bg-col;
+}
+
+element {
+  padding: 0.45em;
+  background-color: @bg-col;
+  text-color: @fg-col;
+}
+
+element-icon {
+  size: 1.3em;
+}
+
+element selected {
+  background-color:  @selected-col ;
+  border-radius: 0.25em;
+  text-color: @fg-col2;
+}
+
+mode-switcher {
+  spacing: 0;
+}
+
+message {
+  background-color: @bg-col-light;
+  border-radius: 0.25em;
+  margin: 1.25em 0em 0em 1.25em;
+}
+
+textbox {
+  padding: 0.5em;
+  text-color: @blue;
+  background-color: @bg-col-light;
+}
+

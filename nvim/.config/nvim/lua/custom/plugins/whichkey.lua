@@ -306,11 +306,7 @@ M.config = function(_, setup)
       mode = { 'n' },
       { '<C-k><C-x>', '<cmd>1,$bd!<cr>',           desc = 'Delete All Buffers' },
       { '<C-k>l',     '<cmd>FzfLua filetypes<cr>', desc = 'Set Filetype' },
-      {
-        '<C-k>x',
-        '<cmd>bd!<cr>',
-        desc = 'Delete Buffer'
-      },
+      { '<C-k>x',     '<cmd>bd!<cr>',              desc = 'Delete Buffer' },
     }
   })
 end

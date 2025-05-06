@@ -1,0 +1,60 @@
+# vim: ft=cfg
+
+[global]
+follow = mouse
+font = JetBrainsMono Nerd Font Medium 9
+format = <span weight='bold' size='10pt'>%s</span>\n%b
+dmenu = /usr/bin/rofi -dmenu -p ' Action: '
+
+origin = top-right
+gap_size = 4
+width = (300, 420)
+height = (0, 180)
+padding = 8
+horizontal_padding = 12
+shrink = no
+
+frame_width = 2
+corner_radius = 8
+frame_color = "#E5C890"
+
+icon_theme = Adwaita
+icon_position = left
+icon_corner_radius = 4
+min_icon_size = 48
+max_icon_size = 64
+enable_recursive_icon_lookup = true
+default_icon = dialog-information
+
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+
+show_indicators = yes
+hide_duplicate_count = false
+word_wrap = false
+ellipsize = right
+
+# Ignore the dbus closeNotification message.
+# Useful to enforce the timeout set by dunst configuration. Without this
+# parameter, an application may close the notification sent before the
+# user defined timeout.
+ignore_dbusclose = false
+
+# none | do_action | open_url | close_current | close_all | context | context_all
+# will be executed in sequence.
+mouse_left_click = close_current
+mouse_middle_click = do_action, close_current
+mouse_right_click = close_all
+
+[urgency_low]
+frame_color = "#7287FD"
+default_icon = none
+
+[urgency_critical]
+frame_color = "#F23F59"
+default_icon = none
+
+# [transient_history_ignore]
+# match_transient = yes
+# history_ignore = yes
+

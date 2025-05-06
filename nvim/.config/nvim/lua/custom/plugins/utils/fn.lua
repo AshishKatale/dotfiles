@@ -69,11 +69,11 @@ M.toggle_opacity = function()
   local is_alacritty = vim.env.ALACRITTY_WINDOW_ID
   if is_alacritty then
     if vim.gg.opacity then
-      vim.system({ 'alacritty', 'msg', 'config', 'window.opacity=1' },
+      vim.system({ 'alacritty', 'msg', 'config', '--window-id=-1', 'window.opacity=1' },
         { text = true })
       vim.gg.opacity = false
     else
-      vim.system({ 'alacritty', 'msg', 'config', 'window.opacity=0.75' },
+      vim.system({ 'alacritty', 'msg', 'config', '--window-id=-1', 'window.opacity=0.75' },
         { text = true })
       vim.gg.opacity = true
     end

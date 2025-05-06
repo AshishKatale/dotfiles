@@ -50,7 +50,7 @@ return {
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
-          lsp = { name = ' LSP' },
+          lsp = { name = ' LSP', opts = { tailwind_color_icon = '󰚍 ' }, },
           path = { name = 'PATH' },
           snippets = { name = 'SNIP' },
           buffer = { name = ' BUF' },
@@ -72,6 +72,7 @@ return {
       },
       completion = {
         ghost_text = { enabled = false },
+        -- accept = { auto_brackets = { enabled = false } },
         list = {
           selection = { preselect = true, auto_insert = true },
           cycle = { from_bottom = true, from_top = true, },

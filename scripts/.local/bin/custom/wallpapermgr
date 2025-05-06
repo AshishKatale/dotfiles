@@ -1,0 +1,59 @@
+#!/bin/bash
+change_wallpaper(){
+  SWAY_BG_PID=$(pidof swaybg)
+  swaybg -i $1 -m fill &
+  rm $HOME/Pictures/_wallpaper.*
+  cp $1 $HOME/Pictures/_wallpaper."${1#*\.}"
+  sleep 1
+  kill -TERM $SWAY_BG_PID
+}
+
+change_greeter_wallpaper() {
+  if [[ $1 != *"jpg" ]]; then
+    echo "conventing $1 to JPG"
+    convertformat "$1" "/tmp/wall.jpg"
+    if [ "$?" -ne 0 ]; then
+      echo echo -e "\033[00;31mError conventing $1 to JPG"
+      exit 1
+    fi
+    sudo mv /tmp/wall.jpg /usr/share/sddm/themes/catppuccin-mocha/backgrounds/wall.jpg
+  else
+    sudo cp $1 /usr/share/sddm/themes/catppuccin-mocha/backgrounds/wall.jpg
+  fi
+}
+
+new_file=$1
+if [ -z "$new_file" ]; then
+  echo -e "\033[00;31mmissing file operand. provide wallpaper image file."
+  exit 1
+fi
+
+new_file_full_path=$(realpath $new_file)
+
+[ -s "$new_file_full_path" ] || {
+  echo -e "\033[00;31mfile $new_file_full_path does not exist"
+  exit 1
+}
+
+options=("main wallpaper" "greeter wallpaper")
+
+for i in "${!options[@]}"
+do
+  printf "%s. %s  " "$((i+1))" "${options[$i]}"
+done
+
+printf "\n"
+read -p "Select the wallpaper to change: " -n 1 OPTION
+echo
+
+# Check if any input was entered
+if [ -n "$OPTION" ]; then
+  case $OPTION in
+    "1")
+      change_wallpaper $new_file_full_path
+    ;;
+    "2")
+      change_greeter_wallpaper $new_file_full_path
+    ;;
+  esac
+fi

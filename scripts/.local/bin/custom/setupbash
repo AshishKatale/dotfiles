@@ -10,8 +10,8 @@ update_dotbashrc() {
   echo "PROMPT_STYLE=fancy" >> $HOME/.bashrc
   echo "export TERM=xterm-256color" >> $HOME/.bashrc
   echo "export DOTFILES=$DOTFILES" >> $HOME/.bashrc
-  echo "export PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.bashrc
   echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.bashrc
+  echo "export PATH=\"\$PATH:$HOME/.local/bin/custom\"" >> $HOME/.bashrc
   cat << EOF >> $HOME/.bashrc
 export FZF_DEFAULT_OPTS="\\
  --color='gutter:-1,prompt:12,pointer:10,marker:12,info=12,spinner=10'\\
@@ -29,8 +29,6 @@ update_dotprofile() {
   echo "EDITOR=vim" >> $HOME/.profile
   echo "export TERM=xterm-256color" >> $HOME/.profile
   echo "export DOTFILES=$DOTFILES" >> $HOME/.profile
-  echo "export PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.profile
-  echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.profile
 }
 
 read -p "Update .bashrc? (y/N) : " CONFIRM

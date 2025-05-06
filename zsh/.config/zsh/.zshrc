@@ -24,7 +24,7 @@ zmodload zsh/complist
 _comp_options+=(globdots)     # Include hidden files.
 autoload -Uz compinit && compinit
 
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select # enable builtin completion menu
 zstyle ':completion:*' list-colors 'ma=01;30;44:rs=0:di=01;34:ln=01;36:mh=00:pi=40;
 33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;
 43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32'
@@ -42,7 +42,7 @@ bindkey -M viins '^e' end-of-line
 bindkey -M viins '^l' clear-screen
 bindkey -M viins '^[w' emacs-forward-word
 bindkey -M viins '^[b' emacs-backward-word
-bindkey -M viins '	' menu-expand-or-complete # Tab key
+bindkey -M viins '\t' menu-expand-or-complete # Tab key
 bindkey -M viins '^ ' menu-expand-or-complete # C-Space
 
 bindkey -s -M visual 'i' '^[' # exit visual mode with i
@@ -73,13 +73,20 @@ source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin
 [ -e $HOME/.zshrc ] && source $HOME/.zshrc # to optionally override configs
 
 which lazygit &> /dev/null && bindkey -s -M viins '^g' '^E^U lazygit^M'
-[ -e $HOME/bin/tmux-sm ] && bindkey -s -M viins '^b' '^E^U tmux-sm^M'
+[ -x $HOME/.local/bin/custom/tmuxsmgr ] && bindkey -s -M viins '^b' '^E^U tmuxsmgr^M'
 
 # fzf key-bindings
-hash fzf &> /dev/null && {
+if command -v fzf &> /dev/null && [ -z "$LOCAL_DISABLE_ZSH_FZF" ]; then
+  if [ -f $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh ]; then
+    source $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
+    zstyle ':completion:*' menu ni # disable builtin completion menu
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes
+    zstyle ':fzf-tab:*' fzf-flags --height=~60%
+    bindkey -s -M viins '^ ' '\t'
+  fi
   source <(fzf --zsh)
   bindkey '^t' undefined-key # disable default fzf ^t
   bindkey '^x' fzf-cd-widget
   bindkey '^f' fzf-file-widget
   bindkey '^r' fzf-history-widget
-}
+fi
