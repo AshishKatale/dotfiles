@@ -3,19 +3,13 @@
 if (tmux ls | grep -q attach) 2> /dev/null; then
   SSN_NAME="$(tmux ls | grep attach | cut -d: -f1)"
   TMUX_INFO="$SSN_NAME"
-
-  # SSN_CNT="$(tmux ls | wc -l)"
-  # if [ $SSN_CNT -gt 1 ]; then
-  #   CUR_SSN="$(tmux ls | grep --line-number attached | cut -d: -f1)"
-  #   TMUX_INFO="$CUR_SSN/$SSN_CNT $TMUX_INFO"
-  # fi
+  TOOLTIP="$(tmux ls -F '#S' | awk '{printf " %d %s \\n", NR, $0}')"
 
   WIN_CNT="$(tmux lsw | wc -l)"
   if [ $WIN_CNT -gt 1 ]; then
     CUR_WIN="$(tmux lsw | grep --line-number active | cut -d: -f1)"
     TMUX_INFO="$TMUX_INFO $CUR_WIN/$WIN_CNT"
   fi
-
-  echo $TMUX_INFO
+  echo '{"text":"'$TMUX_INFO'","tooltip":"'${TOOLTIP%\\n}'","class":"tmuxinfo"}'
 fi
 

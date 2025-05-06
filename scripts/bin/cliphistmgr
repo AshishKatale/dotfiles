@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+message="$(cat<<EOF
+<span color="#6e738d">Actions:</span>
+<span color="#6e738d">Ctrl+D -> cliphist wipe</span>
+<span color="#6e738d">Ctrl+X -> cliphist delete current entry</span>
+EOF
+)"
+
+selected=$(cliphist list | rofi -i -p "   " -theme sidebar -no-show-icons -mesg "$message" -dmenu)
+exit_code=$?
+
+if [ -z "$selected" ]; then
+  exit 0
+fi
+
+selected_decoded=$(cliphist decode $selected)
+
+case "$exit_code" in
+   0) echo $selected_decoded | wl-copy
+  ;;
+  10)
+    echo $selected_decoded | xargs cliphist delete-query
+    notify-send -t 2000 -a 'cliphistmgr' -u low 'Removed clipboard entry' "$selected_decoded"
+  ;;
+  11)
+    cliphist wipe
+    notify-send -t 2000 -a 'cliphistmgr' -u low 'Cleared clipboard history'
+  ;;
+  *) exit 0
+  ;;
+esac
+

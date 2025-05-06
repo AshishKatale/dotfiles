@@ -1,0 +1,64 @@
+* {
+  bg-col: #11111B;
+  bg-col-light: #313244;
+  fg-col: #cdd6f4;
+  fg-col2: #89b4fa;
+  border-col: #6c7086;
+
+  background-color: #11111B;
+  border-color: #6c7086;
+  text-color: #cdd6f4;
+}
+
+window {
+  anchor: north;
+  location: north;
+  width: 100%;
+  margin: 0.25em;
+  children: [ horibox ];
+  border: 2px;
+  border-color: @border-col;
+  border-radius: 0.25em;
+}
+
+horibox {
+  orientation: horizontal;
+  children: [ prompt, entry, listview ];
+  margin: 0.25em;
+}
+
+listview {
+  layout: horizontal;
+  margin: 0.25em;
+  spacing: 0px;
+  lines: 100;
+}
+
+entry {
+  expand: false;
+  width: 16em;
+  padding: 0.5em;
+  margin: 0.25em;
+}
+
+prompt {
+  padding: 0.5em;
+  margin: 0.25em;
+  border-radius: 0.25em;
+  text-color: @bg-col;
+  background-color: @fg-col2;
+}
+
+element {
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+}
+
+element selected {
+  background-color: @bg-col-light;
+}
+
+element-text, element-icon {
+  background-color: inherit;
+  text-color: inherit;
+}

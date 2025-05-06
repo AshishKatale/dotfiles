@@ -1,0 +1,91 @@
+configuration {
+  kb-custom-1: "Control+x";
+  /* remove defauLt Control+d */
+  kb-remove-char-forward: "Delete";
+  kb-custom-2: "Control+d";
+}
+
+* {
+  bg-col:  #11111B;
+  bg-col-light: #313244;
+  fg-col: #cdd6f4;
+  fg-col2: #89b4fa;
+  border-col: #6c7086;
+
+  text-color: @fg-col;
+  background-color: @bg-col;
+  font: "JetBrainsMono Nerd Font Bold 9";
+}
+
+window {
+  location: west;
+  anchor: west;
+  height: 100%;
+  width: 24em;
+  margin: 0.5em;
+  text-color: @fg-col;
+  border: 2px;
+  border-color: @border-col;
+  border-radius: 0.5em;
+}
+
+message {
+  padding: 0.25em 1em 0.25em 1em;
+  margin: 0em 0.5em 0.5em 0.5em;
+}
+
+listview {
+  scrollbar: true;
+  message: true;
+}
+
+scrollbar {
+  handle-color: @border-col;
+  handle-width: 0.25em;
+}
+
+inputbar {
+  text-color: @fg-col;
+  padding: 0.5em;
+  margin: 0.5em 0em 0em 0.25em;
+}
+
+mainbox {
+  expand: true;
+  text-color: @fg-col2;
+}
+
+element-text {
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  margin: 0em 0.75em 0em 0.75em;
+  border-radius: 0.25em;
+  text-color: @fg-col;
+}
+
+element-icon {
+  size: 1em;
+  background-color: @bg-col-light;
+  margin: 0.25em 0em 0.25em 1em;
+  border-radius: 0.25em;
+}
+
+element-text selected {
+  background-color: @bg-col-light;
+  text-color: @fg-col2;
+}
+
+prompt {
+  padding: 0.5em;
+  margin: 0em 0.5em 0em 0em;
+  border-radius: 0.25em;
+  background-color: @bg-col-light;
+  text-color: @fg-col2;
+}
+
+entry {
+  padding: 0.5em 0em 0em 1em;
+  border-radius: 0.25em;
+  background-color: @bg-col-light;
+  text-color: @fg-col;
+}
+

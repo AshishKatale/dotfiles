@@ -1,0 +1,140 @@
+{
+  "bar_id": "bar-0",
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 0,
+  "margin": 2,
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/tmux",
+    "hyprland/submap"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "network",
+    "custom/separator",
+    "pulseaudio",
+    "custom/separator",
+    "backlight",
+    "custom/separator",
+    "cpu",
+    "custom/separator",
+    "memory",
+    "tray"
+  ],
+  "custom/separator": {
+    "format": " ",
+    "tooltip": false
+  },
+  "custom/tmux": {
+    "exec": "tmux-info",
+    "return-type": "json",
+    "exec-if": "tmux run &> /dev/null",
+    "format": " {}",
+    "tooltip": true,
+    "hide-empty-text": true,
+    "interval": 1
+  },
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "sort-by-number": true
+  },
+  "tray": {
+    "spacing": 8,
+    "tooltip": false
+  },
+  "clock": {
+    "format": "󰃰 {:%a, %d %b %I:%M %p}",
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#CBA6F7'><b>{}</b></span>",
+        "days": "<span color='#B7BDF8'><b>{}</b></span>",
+        "weeks": "<span color='#6C7086'>W{}</span>",
+        "weekdays": "<span color='#04A5E5'><b><i>{}</i></b></span>",
+        "today": "<span color='#75FF75'><b>{}</b></span>"
+      }
+    }
+  },
+  "load": {
+    "interval": 10,
+    "format": "load: {load1} {load5} {load15}",
+    "max-length": 10
+  },
+  "cpu": {
+    "interval": 2,
+    "format": " {usage:2d}%"
+  },
+  "bluetooth": {
+    // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+    "format": "",
+    "format-disabled": "", // an empty format will hide the module
+    "format-connected": " {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+  },
+  "backlight": {
+    "reverse-scrolling": true,
+    "device": "intel_backlight",
+    "tooltip": false,
+    "format": " {icon} {percent:2d}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "memory": {
+    "format": " {percentage:2d}%",
+    "tooltip-format": " Mem: {used:0.1f}GB / {total:0.1f}GB ({percentage}%) \n Swp: {swapUsed:0.1f}GB / {swapTotal:0.1f}GB ({swapPercentage:02d}%) ",
+    "interval": 2
+  },
+  "battery": {
+    "format": " {capacity}%",
+    "interval": 5,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "tooltip": false
+  },
+  "network": {
+    "format-wifi": "󰖩 {bandwidthDownBytes} 󰇚 {bandwidthUpBytes} 󰕒",
+    "format-ethernet": "󰈀 {bandwidthDownBits} 󰇚 {bandwidthUpBits} 󰕒",
+    "format-disconnected": "󰖪 No network",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "interval": 2,
+    "tooltip": true,
+    "tooltip-format": "<span> {essid} (<tt>{signalStrength:2d}</tt>%) \n {ipaddr}/{cidr} (<tt>{ifname}</tt>) </span>"
+  },
+  "pulseaudio": {
+    "scroll-step": 1,
+    "reverse-scrolling": true,
+    "max-volume": 100,
+    "format": " {volume}%",
+    "format-muted": " ",
+    "format-bluetooth": "󰕾 {volume}%",
+    "nospacing": 1,
+    "tooltip": false
+  }
+}
