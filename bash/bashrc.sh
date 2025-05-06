@@ -15,7 +15,7 @@ HISTTIMEFORMAT='%d-%m-%y %T %p  '
 # if the shell is interactive
 if [[ $- =~ i ]]; then
 
-  [ -e $HOME/bin/tmux-sm ] && bind '"\C-b":"\C-E\C-U tmux-sm\n"'
+  [ -x $HOME/.local/bin/custom/tmuxsmgr ] && bind '"\C-b":"\C-E\C-U tmuxsmgr\n"'
   which lazygit &> /dev/null && bind '"\C-g":"\C-E\C-U lazygit\n"'
 
   # tab completion forward and backwards

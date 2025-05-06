@@ -10,6 +10,7 @@ setup_zsh() {
   ZDOTDIR=$HOME/.config/zsh
   ZPLUGDIR="$ZDOTDIR/plugins"
 
+  git clone https://github.com/Aloxaf/fzf-tab.git $ZPLUGDIR/fzf-tab
   git clone https://github.com/zsh-users/zsh-completions $ZPLUGDIR/zsh-completions
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZPLUGDIR/zsh-autosuggestions
   git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $ZPLUGDIR/fast-syntax-highlighting
@@ -24,8 +25,8 @@ setup_zsh() {
   echo "export DOTFILES=$DOTFILES" >> $HOME/.zshenv
   echo "export TERM=xterm-256color" >> $HOME/.zshenv
   echo "export PROMPT_STYLE=fancy" >> $HOME/.zshenv
-  echo "export PATH=\"\$PATH:$HOME/bin\"" >> $HOME/.zshenv
   echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.zshenv
+  echo "export PATH=\"\$PATH:$HOME/.local/bin/custom\"" >> $HOME/.zshenv
   cat << EOF >> $HOME/.zshenv
 export FZF_DEFAULT_OPTS="\\
  --color='gutter:-1,prompt:12,pointer:10,marker:12,info=12,spinner=10'\\

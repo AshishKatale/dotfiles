@@ -1,0 +1,19 @@
+
+format=<span weight='800' size='10pt'>%s</span>\n%b
+font=JetBrainsMono Nerd Font Medium 9
+text-color=#cdd6f4
+progress-color=#636274
+background-color=#1e1e2e
+
+width=360
+padding=8,12
+border-size=2
+border-radius=8
+border-color=#e5c890
+icon-border-radius=4
+
+[urgency=low]
+border-color=#7287fd
+
+[urgency=critical]
+border-color=#f23f59

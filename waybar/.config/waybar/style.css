@@ -1,0 +1,141 @@
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  color: #DFDFDF;
+  background-color: transparent;
+  font-weight: bold;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+tooltip {
+  font-weight: bolder;
+  background-color: #1E1E2E;
+  border: 1px solid #585b70;
+  border-radius: 6px;
+}
+
+#workspaces button {
+  background-color: #45475A;
+  color: #BFBFBF;
+  border: 2px solid #45475A;
+  border-radius: 4px;
+  margin-right: 2px;
+  padding: 0px 2px;
+}
+
+#workspaces button.active {
+  background-color: #45475A;
+  border-bottom: 2px solid #EF9F76;
+}
+
+#workspaces button.urgent {
+  background-color: #E63533;
+  border-bottom: 2px solid #DFDFDF;
+  color: #DFDFDF;
+}
+
+#custom-tmux,
+#clock {
+  margin-left: 6px;
+  padding: 0px 12px;
+  background-color: #45475A;
+  border-radius: 12px;
+  border: 1px solid #585b70;
+}
+
+#submap {
+  margin-left: 6px;
+  padding: 0px 12px;
+  border-radius: 12px;
+  color: #11111B;
+  background-color: #EF9F76;
+}
+
+#idle_inhibitor,
+#tray {
+  background-color: #45475A;
+  padding: 0px 8px;
+  border-radius: 12px;
+  border: 1px solid #585b70;
+}
+
+#load,
+#battery,
+#bluetooth,
+#network,
+#pulseaudio,
+#wireplumber,
+#backlight,
+#cpu,
+#memory {
+  padding: 0px 6px;
+  background-color: #45475A;
+  border-top: 1px solid #585b70;
+  border-bottom: 1px solid #585b70;
+}
+
+#custom-separator {
+  color: #313244;
+  border-top: 1px solid #585b70;
+  border-bottom: 1px solid #585b70;
+  background: linear-gradient(90deg, #45475A, #585b70, #45475A);
+}
+
+#network {
+  padding-left: 12px;
+  background-color: #45475a;
+  border-left: 1px solid #585b70;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#idle_inhibitor,
+#memory {
+  margin-right: 6px;
+  padding-right: 12px;
+  background-color: #45475a;
+  border-right: 1px solid #585b70;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+#custom-tmux {
+  color: #BCC0CC;
+}
+
+#clock {
+  color: #74C7EC;
+}
+
+#network {
+  color: #F5C2E7;
+}
+
+#wireplumber,
+#pulseaudio {
+  color: #74C7EC;
+}
+
+#backlight {
+  color: #CBA6F7;
+}
+
+#cpu {
+  color: #94E2D5;
+}
+
+#bluetooth {
+  color: #E5C890;
+}
+
+#memory {
+  color: #A6DA95;
+}
+
+#idle_inhibitor {
+  color: #EF9F76;
+}

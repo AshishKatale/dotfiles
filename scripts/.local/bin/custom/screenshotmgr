@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+if [ ! -d "$HOME/Pictures/screenshots" ]; then
+  mkdir -p "$HOME/Pictures/screenshots"
+fi
+
+screenshot_file="$HOME/Pictures/screenshots/$(date +'screenshot-%Y%m%d-%H%M%S.png')"
+screenshot_exit=1
+help=$(cat<<EOF
+Targets \$1:
+  region    Manually select a region.
+  window    Currently active window.
+  screen    All visible outputs.
+EOF
+)
+
+  # output: Currently active output.
+case "$1" in
+  "region")
+    grimblast copysave area $screenshot_file
+    screenshot_exit=$?
+  ;;
+  "window")
+    grimblast copysave active $screenshot_file
+    screenshot_exit=$?
+  ;;
+  "screen")
+    grimblast copysave screen $screenshot_file
+    screenshot_exit=$?
+  ;;
+  *)
+   echo "$help"
+  ;;
+esac
+
+if [ 0 -eq $screenshot_exit ]; then
+  action=$(notify-send -t 3000 -u low -i $screenshot_file -a 'screenshotmgr' \
+    -A "default=imv $screenshot_file" 'Screenshot taken sucessfully' $screenshot_file)
+
+  if [ "$action" = 'default' ]; then
+    imv $screenshot_file
+  fi
+fi

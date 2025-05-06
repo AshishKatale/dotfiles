@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "togglecaps" ]; then
+  kb_options=$(hyprctl getoption input:kb_options | head -n 1 | cut -d: -f 2)
+  if [[ "$kb_options" =~ "caps" ]]; then
+    hyprctl -q keyword input:kb_options ''
+    notify-send "Capslock key enabled"
+  else
+    hyprctl -q keyword input:kb_options caps:none
+    notify-send "Capslock key disabled"
+  fi
+  exit 0
+fi
+
+RESIZE_SIZE=${1:?Missing resize size}
+
+RESIZE_PARAMS_X=0
+RESIZE_PARAMS_Y=0
+
+DIRECTION=${2:?Missing move direction}
+case $DIRECTION in
+l)
+	RESIZE_PARAMS_X=-$RESIZE_SIZE
+	;;
+r)
+	RESIZE_PARAMS_X=$RESIZE_SIZE
+	;;
+u)
+	RESIZE_PARAMS_Y=-$RESIZE_SIZE
+	;;
+d)
+	RESIZE_PARAMS_Y=$RESIZE_SIZE
+	;;
+*)
+	echo "Error: invalid direction"
+	return 1
+	;;
+esac
+
+ACTIVE_WINDOW=$(hyprctl activewindow -j)
+IS_FLOATING=$(echo "$ACTIVE_WINDOW" | jq .floating)
+
+if [ "$IS_FLOATING" = "true" ]; then
+	hyprctl -q dispatch moveactive "$RESIZE_PARAMS_X" "$RESIZE_PARAMS_Y"
+else
+	hyprctl -q dispatch movewindow "$DIRECTION"
+fi
