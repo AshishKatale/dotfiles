@@ -4,10 +4,10 @@ if [ "$1" = "togglecaps" ]; then
   kb_options=$(hyprctl getoption input:kb_options | head -n 1 | cut -d: -f 2)
   if [[ "$kb_options" =~ "caps" ]]; then
     hyprctl -q keyword input:kb_options ''
-    notify-send -t 2000 "Capslock key enabled"
+    notify-send -e -t 2000 "Capslock key enabled"
   else
     hyprctl -q keyword input:kb_options caps:none
-    notify-send -t 2000 "Capslock key disabled"
+    notify-send -e -t 2000 "Capslock key disabled"
   fi
   exit 0
 fi

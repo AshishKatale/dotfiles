@@ -21,14 +21,15 @@ case "$exit_code" in
    0) printf "%s" "$selected_decoded" | wl-copy
   ;;
   10)
-    echo "$selected_decoded" | xargs cliphist delete-query
-    notify-send -t 2000 -a 'cliphistmgr' -u low "Removed clipboard entry" \
-      "\n<span color='#949cbb'><b>$selected_decoded</b></span>"
+    cliphist delete <<<"$selected"
+    body=$(sed -n '1,2p; 3s/.*/\0 .../p'  <<<$selected_decoded)
+    notify-send -e -t 2000 -a 'cliphistmgr' -u low "Removed clipboard entry" \
+      "\n<span color='#949cbb'><b>$body</b></span>"
   ;;
   11)
     num_entries=$(cliphist list | wc -l)
     rm $HOME/.cache/cliphist/db
-    notify-send -t 2000 -a 'cliphistmgr' -u low 'Cleared clipboard history' \
+    notify-send -e -t 2000 -a 'cliphistmgr' -u low 'Cleared clipboard history' \
       "\n<span color='#949cbb'><b>$num_entries entries cleared</b></span>"
   ;;
   *) exit 0

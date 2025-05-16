@@ -1,7 +1,6 @@
 local M = {
   'nvim-lualine/lualine.nvim',
-  lazy = true,
-  event = { 'BufNew', 'BufNewFile' },
+  lazy = false,
   priority = 999,
   dependencies = {
     'arkav/lualine-lsp-progress'
