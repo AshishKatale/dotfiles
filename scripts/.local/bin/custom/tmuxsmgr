@@ -3,6 +3,7 @@
 help=$(cat<<EOF
   -h --help        show this message
      --info        show tmux session info for waybar
+     --special     create floating special session
   \$1=some_path     directory path for new tmux session
 EOF
 )
@@ -10,6 +11,15 @@ EOF
 case "$1" in
   "-h"|"--help")
     echo "$help"
+    exit 0
+  ;;
+  "--special")
+    special_attached=$(tmux ls | grep special: | grep attached | wc -l)
+    if [ 1 -eq $special_attached ]; then
+      tmux detach -s special
+    else
+      tmux display-popup -E -w '85%' -h '85%' "tmux new-session -A -D -s special"
+    fi
     exit 0
   ;;
   "status"|"info"|"--info")
