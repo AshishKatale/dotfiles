@@ -4,7 +4,7 @@ set runtimepath+=$HOME/.local/.vim
 set runtimepath-=$HOME/.vim
 
 let mapleader = " "
-let maplocalleader = " "
+let maplocalleader = "\\"
 let g:netrw_liststyle = 3
 " let g:netrw_altv = 1
 " let g:netrw_winsize = 25
@@ -58,28 +58,35 @@ highlight netrwMarkFile cterm=bold ctermbg=242
 
 " AutoCommands
 augroup myCmds
-au!
+	autocmd!
 
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
+	autocmd InsertEnter * :set norelativenumber
+	autocmd InsertLeave * :set relativenumber
 
-autocmd BufEnter * silent !echo -ne "\e[1 q"
-autocmd VimLeave * silent !echo -ne "\e[3 q"
+	autocmd BufEnter * silent !echo -ne "\e[1 q"
+	autocmd VimLeave * silent !echo -ne "\e[3 q"
 
-autocmd InsertEnter * silent !echo -ne "\e[3 q"
-autocmd InsertLeave * silent !echo -ne "\e[1 q"
+	autocmd InsertEnter * silent !echo -ne "\e[3 q"
+	autocmd InsertLeave * silent !echo -ne "\e[1 q"
 
-autocmd BufEnter * :setlocal cursorline
-autocmd WinLeave,BufLeave * :setlocal nocursorline
+	autocmd BufEnter * :setlocal cursorline
+	autocmd WinLeave,BufLeave * :setlocal nocursorline
 
+	autocmd FileType help,qf nnoremap <buffer> q :quit<CR>
+	autocmd TerminalOpen * if &buftype == 'terminal'
+	    \ | setlocal nonumber
+	    \ | setlocal norelativenumber
+	    \ | setlocal bufhidden=hide
+	    \ | endif
 augroup END
 
 " save on W
-command! W  write
+command! W write
 
 " Keymaps
 inoremap jk <esc>
 vnoremap ii <esc>
+tnoremap ii <C-\><C-n>
 nnoremap <C-l> :noh<CR>
 
 noremap <Up> <Nop>
@@ -105,20 +112,34 @@ nnoremap <C-Left> :vertical resize -2<CR>
 nnoremap <C-Right> :vertical resize +2<CR>
 
 nmap Y y$
-nmap <leader>y "+y
-vmap <leader>y "+y
 nmap <leader>Y "+Y
-nmap <leader>p "+p
-vmap <leader>p "+p
-nmap <leader>P "+P
-vmap <leader>P "+P
+
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>P "+P
 vnoremap p "_dP
 
-nmap H :bp<CR>
-nmap L :bn<CR>
-nmap <leader>e :Explore<cr>
-nmap <leader>h <c-w>h
-nmap <leader>j <c-w>j
-nmap <leader>k <c-w>k
-nmap <leader>l <c-w>l
+nnoremap H :bp<CR>
+nnoremap L :bn<CR>
+nnoremap <leader>e :Explore<CR>
+nnoremap <leader>h <c-w>h
+nnoremap <leader>j <c-w>j
+nnoremap <leader>k <c-w>k
+nnoremap <leader>l <c-w>l
+
+nnoremap <leader>qq :copen<CR>
+nnoremap <leader>qp :cprev<CR>
+nnoremap <leader>qn :cnext<CR>
+
+nnoremap <leader>\| :vnew<CR>
+nnoremap <leader>_ :new<CR>
+nnoremap <localleader>\| :vertical terminal<CR>
+nnoremap <localleader>_ :terminal<CR>
+nnoremap <localleader>\ :tab terminal<CR>
+
+let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.4 } }
+nnoremap <C-b> :FZF<CR>
 
