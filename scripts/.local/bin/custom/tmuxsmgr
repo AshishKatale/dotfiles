@@ -23,9 +23,12 @@ case "$1" in
     exit 0
   ;;
   "status"|"info"|"--info")
-    if (tmux ls | grep -q attach) 2> /dev/null; then
-      SSN_NAME="$(tmux ls | grep attach | cut -d: -f1 | awk 'ORS=", "')"
-      TMUX_INFO="${SSN_NAME%", "}"
+    if (tmux ls | grep -q attached) 2> /dev/null; then
+      if (tmux ls | grep -qv attached) 2> /dev/null; then
+        SSN_COUNT="<span color='#8C8FA1'> <i>+$(tmux ls | grep -v attached | wc -l)</i></span>"
+      fi
+      SSN_NAME="$(tmux ls | grep attached | cut -d: -f1 | awk 'ORS=", "')"
+      TMUX_INFO="${SSN_NAME%", "}${SSN_COUNT}"
       TOOLTIP="$(tmux ls -F '#S' | awk '{printf " %d %s \\n", NR, $0}')"
     elif (tmux ls) &> /dev/null; then
       TMUX_INFO="sessions: $(tmux ls | wc -l)"

@@ -1,23 +1,9 @@
-" vim: filetype=vifm :
-" Sample configuration file for vifm (last updated: 8 August, 2022)
-" You can edit this file by hand.
-" The " character at the beginning of a line comments out the line.
-" Blank lines are ignored.
-" The basic format for each item is shown with an example.
+" vim: filetype=vim :
 
-" ------------------------------------------------------------------------------
-" Main settings
-" ------------------------------------------------------------------------------
-
-" Command used to edit files in various contexts.  The default is vim.
-" If you would like to use another vi clone such as Elvis or Vile
-" you will need to change this setting.
 if executable('nvim')
-    set vicmd='nvim'
+    set vicmd=nvim
 elseif executable('vim')
     set vicmd=vim
-elseif executable('vi')
-    set vicmd=vi
 elseif executable('elvis')
     set vicmd=elvis\ -G\ termcap
 elseif executable('vile')
@@ -104,7 +90,23 @@ if !has('win')
 endif
 
 " Set custom status line look
-set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
+if !has('win')
+    set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
+else
+    set statusline="  Hint: %z%= %A %15s %20d  "
+endif
+
+" Add -s to the default value to suppress "Permission denied" errors
+set grepprg="grep -n -H -I -r -s %i %a %s"
+
+" Suppress "Permission denied" errors using syntax specific to GNU find
+if system("find --version | grep -c 'GNU findutils'") != 0
+    set findprg='find %s %a -print , -type d \( ! -readable -o ! -executable \) -prune'
+endif
+
+" Enable preview of files in the right miller column (add `set miller` to turn
+" it on)
+set milleroptions+=rpreview:all
 
 " ------------------------------------------------------------------------------
 " Bookmarks
@@ -112,8 +114,10 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 " :mark mark /full/directory/path [filename]
 
-mark b ~/bin/
 mark h ~/
+mark b ~/.local/bin/
+mark d ~/dotfiles/
+mark w ~/workspace/
 
 " ------------------------------------------------------------------------------
 " Commands
@@ -251,6 +255,8 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
+        \ {View in imv}
+        \ imv %f,
         \ {View in feh}
         \ feh -F %f,
         \ {View in sxiv}
@@ -509,7 +515,6 @@ nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
 nnoremap q :q<cr>
 nnoremap e :edit<cr>
-nnoremap <cr> :view<cr>
 nnoremap <c-l> :redraw<cr>
 vnoremap ii <esc>
 cnoremap <c-n> <tab>
@@ -522,6 +527,9 @@ nnoremap <a-i> :sync<cr>
 nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
+
+" show hidden files and dirs by default
+normal! zo
 
 " ------------------------------------------------------------------------------
 " Various customization examples
@@ -549,10 +557,8 @@ nnoremap <c-u> <c-w>x
 " screen!
 
 " ------------------------------------------------------------------------------
-" Icon decorations example
+" Icons
 " ------------------------------------------------------------------------------
-
-" https://github.com/cirala/vifm_devicons
 
 if $PROMPT_STYLE != 'plain'
 

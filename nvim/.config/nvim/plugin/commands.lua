@@ -13,71 +13,20 @@ vim.api.nvim_create_user_command(
 )
 
 vim.api.nvim_create_user_command('FloatTerm', function(cmd)
-  local snacks = require('snacks')
-  local term_win_opts = {
-    auto_close = true,
-    win = {
-      width = 0.85,
-      height = 0.85,
-      border = 'rounded',
-      keys = { { '<C-q>', function(self) self:hide() end, desc = 'hide' } },
-    },
-  }
-
-  local terminals = snacks.terminal.list()
-  local open_term = vim.iter(terminals):find(function(term)
-    return not term.closed
-  end)
-
-  if open_term then
-    -- close open terminal if any
-    snacks.terminal.toggle(open_term.cmd, term_win_opts)
-    return
-  end
-
-  if #cmd.fargs < 1 and #terminals > 1 then
-    -- check and force remove hidden terminals with [Process exited] message
-    vim.iter(terminals):each(function(term)
-      if term.closed and term:buf_valid() then
-        local exited = vim.iter(term:lines()):any(function(line)
-          return line:match('^%[Process exited %d+%]') ~= nil
-        end)
-        if exited then
-          snacks.bufdelete.delete(term.buf)
-        end
-      end
-    end)
-
-    terminals = snacks.terminal.list()
-    if #terminals == 1 then
-      -- open hidden terminal if only one
-      snacks.terminal.toggle(terminals[1].cmd, term_win_opts)
-      return
-    end
-
-    -- select hidden terminal to open
-    vim.ui.select(terminals, {
-      prompt = 'Select terminal',
-      format_item = function(term)
-        local _cmd = type(term.cmd) == 'table'
-            and table.concat(term.cmd, ' ')
-            or term.cmd
-        return term.id .. ': ' .. _cmd
-      end,
-    }, function(selected_term)
-      if not selected_term then
-        return
-      end
-      snacks.terminal.toggle(selected_term.cmd, term_win_opts)
-    end)
-    return
-  end
-
-  -- open terminal
   if #cmd.fargs > 0 then
-    snacks.terminal.toggle(cmd.fargs, term_win_opts)
+    require('lazy.util').float_term(cmd.fargs, {})
+  elseif vim.gg.term and
+      (vim.gg.term:win_valid() or vim.gg.term:buf_valid()) then
+    vim.gg.term:toggle()
   else
-    snacks.terminal.toggle({ vim.o.shell }, term_win_opts)
+    vim.gg.term = require('lazy.util').float_term(nil, {
+      persistent = true,
+      interactive = true
+    })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      buffer = vim.gg.term.buf,
+      callback = function() vim.cmd.startinsert() end,
+    })
   end
 end, {
   nargs = '*',

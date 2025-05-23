@@ -24,17 +24,6 @@ M.opts = function()
       disable = { '' },      -- list of language that will be disabled
       additional_vim_regex_highlighting = true,
     },
-    rainbow = {
-      enable = true,
-      -- disable = { "jsx", "cpp" }, list of languages you want to disable
-
-      -- highlight non-bracket delimiters like html tags,
-      -- boolean or table: lang -> boolean
-      extended_mode = true,
-      max_file_lines = 4000, -- Do not enable for files with more than n lines
-      -- colors = {}, -- table of hex strings
-      -- termcolors = {} -- table of colour name strings
-    },
     indent = { enable = true, disable = { 'yaml' } },
     incremental_selection = {
       enable = true,

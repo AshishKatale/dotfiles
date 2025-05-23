@@ -104,11 +104,11 @@ tooltip {
 }
 
 #custom-tmux {
-  color: #BCC0CC;
+  color: #BED6F4;
 }
 
 #clock {
-  color: #74C7EC;
+  color: #85ACFA;
 }
 
 #network {
@@ -117,25 +117,37 @@ tooltip {
 
 #wireplumber,
 #pulseaudio {
-  color: #74C7EC;
+  color: #D0AFF8;
 }
 
 #backlight {
-  color: #CBA6F7;
+  color: #74C7EC;
+}
+
+#battery {
+  color: #B8E1AA;
+}
+
+#battery.warning {
+  color: #FFA500;
+}
+
+#battery.critical {
+  color: #FF6666;
 }
 
 #cpu {
-  color: #94E2D5;
-}
-
-#bluetooth {
-  color: #E5C890;
+  color: #D3BE95;
 }
 
 #memory {
-  color: #A6DA95;
+  color: #7CD0C3;
+}
+
+#bluetooth {
+  color: #FFBA80;
 }
 
 #idle_inhibitor {
-  color: #EF9F76;
+  color: #FFBA80;
 }

@@ -7,6 +7,7 @@ format = <span weight='bold' size='10pt'>%s</span>\n%b
 dmenu = /usr/bin/rofi -dmenu -p ' Action: '
 
 origin = top-right
+offset = (12, 24)
 gap_size = 4
 width = (360, 420)
 height = (0, 120)

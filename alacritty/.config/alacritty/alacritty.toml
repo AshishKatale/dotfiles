@@ -45,7 +45,7 @@ red     = '#FF6E6E'
 green   = '#40CC80'
 yellow  = '#DDDD40'
 blue    = '#3BA1DD'
-magenta = '#BD5EAA'
+magenta = '#FF1AFF'
 cyan    = '#00BBBB'
 white   = '#BABABA'
 
@@ -56,7 +56,7 @@ red     = "#FF4E4E"
 green   = "#40EE80"
 yellow  = "#EEEE40"
 blue    = "#2BA1EE"
-magenta = "#BD5ECC"
+magenta = "#FF1AFF"
 cyan    = "#00DEDE"
 white   = "#DEDEDE"
 
@@ -67,6 +67,6 @@ red     = "#FF1E1E"
 green   = "#40FF40"
 yellow  = "#FFFF40"
 blue    = "#2EA1FF"
-magenta = "#BD5EFF"
+magenta = "#FF4DFF"
 cyan    = "#00FFFF"
 white   = "#FFFFFF"
