@@ -24,6 +24,8 @@
     "custom/separator",
     // "bluetooth",
     // "custom/separator",
+    // "battery",
+    // "custom/separator",
     "cpu",
     "custom/separator",
     "memory",
@@ -122,12 +124,23 @@
     "interval": 2
   },
   "battery": {
-    "format": " {capacity}%",
-    "interval": 5,
+    "format": "{icon} {capacity:2d}%",
+    "format-charging": "󰂄 {capacity:2d}%",
+    "format-plugged": "󱐥 {capacity:2d}%",
+    "format-alt": "{icon} {time}",
+    "interval": 1,
     "states": {
-      "warning": 20,
+      "warning": 30,
       "critical": 10
     },
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "max-length": 25,
     "tooltip": false
   },
   "network": {
