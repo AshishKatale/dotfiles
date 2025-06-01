@@ -10,6 +10,7 @@ configuration {
   bg-col-light: #313244;
   fg-col: #cdd6f4;
   fg-col2: #89b4fa;
+  fg-col3: #f38ba8;
   border-col: #6c7086;
 
   text-color: @fg-col;
@@ -29,9 +30,13 @@ window {
   border-radius: 0.5em;
 }
 
+mainbox {
+  spacing: 0.75em;
+  children: [ inputbar, message, listview ];
+}
+
 message {
-  padding: 0.25em 1em 0.25em 1em;
-  margin: 0em 0.5em 0.5em 0.5em;
+  padding: 0em 1em;
 }
 
 listview {
@@ -46,46 +51,67 @@ scrollbar {
 
 inputbar {
   text-color: @fg-col;
-  padding: 0.5em;
-  margin: 0.5em 0em 0em 0.25em;
+  spacing: 0.25em;
+  margin: 0.75em 0.75em 0em 0.75em;
+  children: [ prompt, entry ];
 }
 
-mainbox {
-  expand: true;
+count {
+  orientation: horizontal;
+  expand: false;
+  background-color: @bg-col-light;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  border-radius: 0.25em;
+  children: [ num-filtered-rows, textbox-sep, num-rows ];
+}
+
+textbox-sep, num-filtered-rows, num-rows {
+  str: "";
+  expand: false;
+  background-color: @bg-col-light;
   text-color: @fg-col2;
+  vertical-align: 0.5;
+}
+
+element {
+  margin: 0em 0.5em;
+  spacing: 1em;
 }
 
 element-text {
-  padding: 0.25em 0.5em 0.25em 0.5em;
-  margin: 0em 0.75em 0em 0.75em;
+  padding: 0.25em 0.5em;
   border-radius: 0.25em;
   text-color: @fg-col;
 }
 
 element-icon {
-  size: 1em;
-  background-color: @bg-col-light;
+  size: 1.25em;
   margin: 0.25em 0em 0.25em 1em;
   border-radius: 0.25em;
 }
 
 element-text selected {
   background-color: @bg-col-light;
-  text-color: @fg-col2;
+  text-color: @fg-col3;
 }
 
 prompt {
   padding: 0.5em;
-  margin: 0em 0.5em 0em 0em;
   border-radius: 0.25em;
   background-color: @bg-col-light;
   text-color: @fg-col2;
 }
 
 entry {
-  padding: 0.5em 0em 0em 1em;
+  vertical-align: 0.5;
+  padding: 0em 0.5em;
   border-radius: 0.25em;
   background-color: @bg-col-light;
   text-color: @fg-col;
 }
 
+@media (enabled: env(SHOW_COUNT, false)) {
+  inputbar {
+    children: [ prompt, entry, count ];
+  }
+}

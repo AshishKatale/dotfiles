@@ -8,6 +8,7 @@
   background-color: #11111B;
   border-color: #6c7086;
   text-color: #cdd6f4;
+  font: "JetBrainsMono Nerd Font Bold 9";
 }
 
 window {
@@ -23,8 +24,26 @@ window {
 
 horibox {
   orientation: horizontal;
-  children: [ prompt, entry, listview ];
+  children: [ prompt, entry, listview, count ];
   margin: 0.25em;
+}
+
+count {
+  orientation: horizontal;
+  expand: false;
+  children: [ num-filtered-rows, textbox-sep, num-rows ];
+  background-color: @bg-col-light;
+  padding: 0.5em;
+  margin: 0.25em;
+  border-radius: 0.25em;
+}
+
+textbox-sep, num-filtered-rows, num-rows {
+  str: "";
+  expand: false;
+  background-color: @bg-col-light;
+  text-color: @fg-col2;
+  vertical-align: 0.5;
 }
 
 listview {

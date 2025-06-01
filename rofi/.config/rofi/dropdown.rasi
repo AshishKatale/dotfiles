@@ -1,0 +1,104 @@
+* {
+  bg-col:  #11111B;
+  bg-col-light: #313244;
+  selected-col: #313244;
+  blue: #89b4fa;
+  fg-col: #cdd6f4;
+  fg-col2: #f38ba8;
+  border-col: #6c7086;
+  font: "JetBrainsMono Nerd Font Bold 10";
+  background-color: @bg-col;
+  text-color: @fg-col;
+}
+
+element-text, element-icon , mode-switcher {
+  background-color: inherit;
+  text-color:       inherit;
+}
+
+window {
+  location: north;
+  margin: 2em 0em 1em 0em;
+  height: 24em;
+  width: 48em;
+  border: 2px;
+  border-color: @border-col;
+  border-radius: 0.5em;
+  padding: 1em;
+  spacing: 1em;
+  children: [ inputbar, message, listview ];
+}
+
+inputbar {
+  spacing: 0.5em;
+  children: [ prompt, entry, count ];
+}
+
+listview {
+  columns: 3;
+}
+
+prompt {
+  background-color: @blue;
+  text-color: @bg-col;
+  border-radius: 0.25em;
+  vertical-align: 0.5;
+}
+
+entry {
+  border-radius: 0.25em;
+  padding: 0.25em;
+}
+
+count {
+  orientation: horizontal;
+  expand: false;
+  children: [ num-filtered-rows, textbox-sep, num-rows ];
+  background-color: @bg-col-light;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  border-radius: 0.25em;
+}
+
+textbox-sep, num-filtered-rows, num-rows {
+  str: "";
+  expand: false;
+  background-color: @bg-col-light;
+  text-color: @blue;
+  vertical-align: 0.5;
+}
+
+element {
+  padding: 0.5em;
+}
+
+element-icon {
+  size: 1.25em;
+}
+
+element selected {
+  background-color:  @selected-col ;
+  border-radius: 0.25em;
+  text-color: @fg-col2;
+}
+
+textbox {
+  text-color: @fg-col2;
+}
+
+@media (enabled: env(ONE_COLUMN, false)) {
+  listview {
+      columns: 1;
+  }
+}
+
+@media (enabled: env(HIDE_COUNT, false)) {
+  inputbar {
+    children: [ prompt, entry ];
+  }
+}
+
+@media (enabled: env(HIDE_MESSAGE, false)) {
+  window {
+    children: [ inputbar, listview ];
+  }
+}

@@ -3,11 +3,13 @@ configuration {
 	display-drun : "   ";
 	display-window : "   ";
 	display-ssh : "   ";
+	display-recursivebrowser : "   ";
 	display-filebrowser : "   ";
 	modi: "window,run,drun,ssh,filebrowser,recursivebrowser";
 	font: "JetBrainsMono Nerd Font 9";
 	drun-display-format: "{icon} {name}";
 	show-icons: true;
+  hover-select: true;
 
   /* remove default Control+c */
   kb-secondary-copy: "";
@@ -16,4 +18,4 @@ configuration {
 
 // @theme "topbar"
 // @theme "sidebar"
-@theme "dropdown_menu"
+@theme "dropdown"

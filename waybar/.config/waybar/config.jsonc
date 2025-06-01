@@ -147,13 +147,6 @@
     "format-wifi": "󰖩 {bandwidthDownBytes} 󰇚 {bandwidthUpBytes} 󰕒",
     "format-ethernet": "󰈀 {bandwidthDownBits} 󰇚 {bandwidthUpBits} 󰕒",
     "format-disconnected": "󰖪 No network",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
     "interval": 2,
     "tooltip": true,
     "tooltip-format": "<span> {essid} (<tt>{signalStrength:2d}</tt>%) \n {ipaddr}/{cidr} (<tt>{ifname}</tt>) </span>"
