@@ -116,7 +116,16 @@
       "",
       "",
       ""
-    ]
+    ],
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/power_menu.xml",
+    "menu-actions": {
+      "lock": "hyprlock",
+      "suspend": "systemctl -q suspend",
+      "reboot": "systemctl -q reboot",
+      "hibernate": "systemctl -q hibernate",
+      "shutdown": "systemctl -q shutdown"
+    }
   },
   "memory": {
     "format": " {percentage:2d}%",
@@ -144,8 +153,8 @@
     "tooltip": false
   },
   "network": {
-    "format-wifi": "󰖩 {bandwidthDownBytes} 󰇚 {bandwidthUpBytes} 󰕒",
-    "format-ethernet": "󰈀 {bandwidthDownBits} 󰇚 {bandwidthUpBits} 󰕒",
+    "format-wifi": "󰖩 {bandwidthDownBytes:>} 󰄠 {bandwidthUpBytes:>} ",
+    "format-ethernet": "󰈀 {bandwidthDownBits} 󰄠 {bandwidthUpBits} ",
     "format-disconnected": "󰖪 No network",
     "interval": 2,
     "tooltip": true,
