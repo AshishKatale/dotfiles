@@ -1,75 +1,75 @@
 * {
-  bg-col: #11111B;
-  bg-col-light: #313244;
-  fg-col: #cdd6f4;
-  fg-col2: #89b4fa;
-  border-col: #6c7086;
-
+  bg-col:           #11111B;
+  bg-col-light:     #313244;
+  fg-col:           #cdd6f4;
+  fg-col2:          #89b4fa;
+  border-col:       #6c7086;
+  border-color:     #6c7086;
+  text-color:       #cdd6f4;
   background-color: #11111B;
-  border-color: #6c7086;
-  text-color: #cdd6f4;
-  font: "JetBrainsMono Nerd Font Bold 9";
+
+  font:             "JetBrainsMono Nerd Font Bold 9";
 }
 
 window {
-  anchor: north;
-  location: north;
-  width: 100%;
-  margin: 0.25em;
-  children: [ horibox ];
-  border: 2px;
-  border-color: @border-col;
+  anchor:        north;
+  location:      north;
+  width:         100%;
+  margin:        0.25em;
+  children:      [ horibox ];
+  border:        2px;
+  border-color:  @border-col;
   border-radius: 0.25em;
 }
 
 horibox {
   orientation: horizontal;
-  children: [ prompt, entry, listview, count ];
-  margin: 0.25em;
+  children:    [ prompt, entry, listview, count ];
+  margin:      0.25em;
 }
 
 count {
-  orientation: horizontal;
-  expand: false;
-  children: [ num-filtered-rows, textbox-sep, num-rows ];
   background-color: @bg-col-light;
-  padding: 0.5em;
-  margin: 0.25em;
-  border-radius: 0.25em;
+  orientation:      horizontal;
+  expand:           false;
+  children:         [ num-filtered-rows, textbox-sep, num-rows ];
+  padding:          0.5em;
+  margin:           0.25em;
+  border-radius:    0.25em;
 }
 
 textbox-sep, num-filtered-rows, num-rows {
-  str: "";
-  expand: false;
   background-color: @bg-col-light;
-  text-color: @fg-col2;
-  vertical-align: 0.5;
+  str:              "";
+  expand:           false;
+  text-color:       @fg-col2;
+  vertical-align:   0.5;
 }
 
 listview {
-  layout: horizontal;
-  margin: 0.25em;
+  layout:  horizontal;
+  margin:  0.25em;
   spacing: 0px;
-  lines: 100;
+  lines:   100;
 }
 
 entry {
-  expand: false;
-  width: 16em;
+  expand:  false;
+  width:   16em;
   padding: 0.5em;
-  margin: 0.25em;
+  margin:  0.25em;
 }
 
 prompt {
-  padding: 0.5em;
-  margin: 0.25em;
-  border-radius: 0.25em;
-  text-color: @bg-col;
   background-color: @fg-col2;
+  padding:          0.5em;
+  margin:           0.25em;
+  border-radius:    0.25em;
+  text-color:       @bg-col;
 }
 
 element {
-  padding: 0.5em 1em;
+  padding:       0.5em 1em;
   border-radius: 0.25em;
 }
 
@@ -79,5 +79,5 @@ element selected {
 
 element-text, element-icon {
   background-color: inherit;
-  text-color: inherit;
+  text-color:       inherit;
 }

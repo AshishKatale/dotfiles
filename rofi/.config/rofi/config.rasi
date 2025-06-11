@@ -1,19 +1,20 @@
 configuration {
-	display-run : "   ";
-	display-drun : "   ";
-	display-window : "   ";
-	display-ssh : "   ";
-	display-recursivebrowser : "   ";
-	display-filebrowser : "   ";
+	display-run:              "   ";
+	display-drun:             "   ";
+	display-window:           "   ";
+	display-ssh:              "   ";
+	display-recursivebrowser: "   ";
+	display-filebrowser:      "   ";
+	drun-display-format:      "{icon} {name}";
+	show-icons:               true;
+  hover-select:             true;
+
 	modi: "window,run,drun,ssh,filebrowser,recursivebrowser";
 	font: "JetBrainsMono Nerd Font 9";
-	drun-display-format: "{icon} {name}";
-	show-icons: true;
-  hover-select: true;
 
   /* remove default Control+c */
   kb-secondary-copy: "";
-  kb-cancel: "Escape,Control+c";
+  kb-cancel:         "Escape,Control+c";
 }
 
 // @theme "topbar"
