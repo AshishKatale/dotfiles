@@ -9,24 +9,20 @@ __powerline() {
       echo "\[$(tput setaf $1)\]"
     }
 
+    readonly HOME_SYM=" "
     readonly GIT_BRANCH_CHANGED_SYMBOL='+'
     readonly GIT_NEED_PUSH_SYMBOL='↑'
     readonly GIT_NEED_PULL_SYMBOL='↓'
 
-    readonly FG_GRAY=$(FG 240)
-    readonly FG_BLUE=$(FG 27)
+    readonly FG_BLUE=$(FG 33)
     readonly FG_YELLOW=$(FG 3)
-    readonly FG_GREEN=$(FG 46)
-    readonly FG_RED=$(FG 9)
+    readonly FG_GREEN=$(FG 40)
     readonly FG_WHITE=$(FG 7)
     readonly FG_BRIGHTYELLOW=$(FG 11)
 
     readonly BG_GRAY=$(BG 240)
-    readonly BG_BLUE=$(BG 27)
-    readonly BG_YELLOW=$(BG 3)
-    readonly BG_GREEN=$(BG 46)
-    readonly BG_RED=$(BG 9)
-    readonly BG_BRIGHTYELLOW=$(BG 11)
+    readonly BG_BLUE=$(BG 33)
+    readonly BG_GREEN=$(BG 40)
 
     readonly DIM="\[$(tput dim)\]"
     readonly REVERSE="\[$(tput rev)\]"
@@ -47,7 +43,7 @@ __powerline() {
         local checked_out
         local git_checkout_symbol
         local current_branch=$(git branch --show-current 2> /dev/null)
-        local current_tag=$(git tag --points-at=HEAD 2>/dev/null | tail -n1 )
+        local current_tag=$(git tag --points-at=HEAD 2>/dev/null | tail -n1)
         local current_commit=$(git rev-parse --short HEAD 2>/dev/null)
 
         [ -n $current_branch ] && {
@@ -80,7 +76,7 @@ __powerline() {
         [ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
         [ -n "$behindN" ] && marks+=" $behindN$GIT_NEED_PULL_SYMBOL"
 
-				printf "$BG_GRAY$FG_BLUE$RESET$BG_GRAY$BOLD$FG_YELLOW$git_checkout_symbol$checked_out$marks"
+        printf "$BG_GRAY$FG_BLUE$RESET$BG_GRAY$BOLD$FG_YELLOW$git_checkout_symbol$checked_out$marks"
     }
 
     pathinfo() {
@@ -92,12 +88,11 @@ __powerline() {
         CHAR_CNT=3
       fi
 
-      local HOME_SYM=" "
       if [ "$PROMPT_STYLE" = "plain" ]; then
         HOME_SYM="~"
       fi
       local HOME_PATH="$(realpath ~)"
-      local PWD_FULL="$(/usr/bin/pwd)"
+      local PWD_FULL="$(pwd)"
       if [ "$HOME_PATH" = "$PWD_FULL" ]; then
         echo "$HOME_SYM"
         return
@@ -126,7 +121,7 @@ __powerline() {
 
     ps1() {
         # Check the exit code of the previous command and display different
-        # colors in the prompt accordingly. 
+        # colors in the prompt accordingly.
         if [ "$?" -eq "0" ]; then
           local BG_EXIT="$BG_GREEN"
           local FG_EXIT="$FG_GREEN"
@@ -134,7 +129,7 @@ __powerline() {
           local BG_EXIT="\e[48;2;255;100;100m"
           local FG_EXIT="\e[38;2;255;100;100m"
         fi
-				
+
         if [ "$PROMPT_STYLE" = "plain" ]; then
           PS1="$BOLD$FG_YELLOW$(tmuxinfo) $FG_BLUE$(pathinfo)"
           PS1+="$RESET$FG_BLUE"

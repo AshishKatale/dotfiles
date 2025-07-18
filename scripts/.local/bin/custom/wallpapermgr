@@ -11,7 +11,7 @@ change_wallpaper(){
 change_greeter_wallpaper() {
   if [[ $1 != *"jpg" ]]; then
     echo "conventing $1 to JPG"
-    convertformat "$1" "/tmp/wall.jpg"
+    ffmpeg -i "$1" "/tmp/wall.jpg"
     if [ "$?" -ne 0 ]; then
       echo echo -e "\033[00;31mError conventing $1 to JPG"
       exit 1

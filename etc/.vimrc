@@ -51,7 +51,8 @@ highlight DiffDelete cterm=bold ctermfg=124 ctermbg=124
 highlight QuickFixLine ctermfg=15 ctermbg=8
 highlight Pmenu ctermfg=white ctermbg=8
 highlight PmenuSel ctermfg=0 ctermbg=7
-highlight PmenuThumb ctermbg=0 ctermbg=240
+highlight PmenuSbar ctermbg=240
+highlight PmenuThumb ctermbg=246
 highlight TabLineSel ctermbg=234 ctermfg=white
 highlight TabLineFill cterm=none ctermbg=242
 highlight netrwMarkFile cterm=bold ctermbg=242

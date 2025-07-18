@@ -6,31 +6,31 @@ lazynvm() {
 
 nvm() {
   lazynvm
-  nvm $@
+  nvm "$@"
 }
 
 node() {
   lazynvm
-  node $@
+  node "$@"
 }
 
 npm() {
   lazynvm
-  npm $@
+  npm "$@"
 }
 
 npx() {
   lazynvm
-  npx $@
+  npx "$@"
 }
 
 pnpm() {
   lazynvm
-  pnpm $@
+  pnpm "$@"
 }
 
 nvim() {
   lazynvm
-  nvim $@
+  nvim "$@"
 }
 

@@ -29,8 +29,8 @@ map({ 'n', 't' }, '<c-left>', '<cmd>vertical resize -2<cr>', { silent = true })
 map({ 'n', 't' }, '<C-Right>', '<cmd>vertical resize +2<cr>', { silent = true })
 
 -- Navigate buffers
-map({ 'n' }, '<S-l>', '<cmd>bn<cr>', { silent = true })
-map({ 'n' }, '<S-h>', '<cmd>bp<cr>', { silent = true })
+map({ 'n' }, '<S-l>', '<cmd>lua vim.cmd.bn({count=vim.v.count})<cr>', { silent = true })
+map({ 'n' }, '<S-h>', '<cmd>lua vim.cmd.bp({count=vim.v.count})<cr>', { silent = true })
 
 -- Press jk fast to enter normal mode
 map({ 'i' }, 'jk', '<ESC>', { silent = true })
