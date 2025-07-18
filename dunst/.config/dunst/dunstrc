@@ -2,49 +2,49 @@
 
 [global]
 follow = mouse
-font = JetBrainsMono Nerd Font Medium 9
+font   = JetBrainsMono Nerd Font Medium 9
 format = <span weight='bold' size='10pt'>%s</span>\n%b
-dmenu = /usr/bin/rofi -dmenu -p ' Action: '
+dmenu  = /usr/bin/rofi -dmenu -p ' Action: '
 
-origin = top-right
-offset = (12, 24)
-gap_size = 4
-width = (360, 420)
-height = (0, 120)
-padding = 8
+origin             = top-right
+offset             = (12, 24)
+gap_size           = 4
+width              = (360, 420)
+height             = (0, 120)
+padding            = 8
 horizontal_padding = 12
 
-frame_width = 2
+frame_width   = 2
 corner_radius = 8
-frame_color = "#7287FD"
+frame_color   = "#7287FD"
 
-icon_theme = Adwaita
-icon_position = left
-icon_corner_radius = 4
-min_icon_size = 32
-max_icon_size = 64
+icon_theme                   = Adwaita
+icon_position                = left
+icon_corner_radius           = 4
+min_icon_size                = 32
+max_icon_size                = 64
 enable_recursive_icon_lookup = true
 
 background = "#1E1E2E"
 foreground = "#CDD6F4"
 
-show_indicators = yes
+show_indicators      = yes
 hide_duplicate_count = false
-# word_wrap = false
-# ellipsize = end
+# word_wrap            = false
+# ellipsize            = end
 
 # none | do_action | open_url | close_current | close_all | context | context_all
 # will be executed in sequence.
-mouse_left_click = do_action, open_url
+mouse_left_click   = do_action, open_url
 mouse_middle_click = context
-mouse_right_click = close_current
+mouse_right_click  = close_current
 
 enable_posix_regex = true
 
 [transient_history_ignore]
 match_transient = yes
-history_ignore = yes
-frame_color = "#BCC0CC"
+history_ignore  = yes
+frame_color     = "#BCC0CC"
 
 [urgency_low]
 frame_color = "#95D890"
@@ -53,6 +53,6 @@ frame_color = "#95D890"
 frame_color = "#F23F59"
 
 [screenshotmgr]
-summary = "^Screenshot.*$"
+summary       = "^Screenshot.*$"
 min_icon_size = 64
 

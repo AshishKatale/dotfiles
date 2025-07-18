@@ -2,9 +2,9 @@
 TERM = "alacritty"
 
 [window]
-decorations = "none"
+decorations     = "none"
 dynamic_padding = true
-opacity     = 0.75
+opacity         = 0.75
 
 [cursor]
 thickness = 0.2
@@ -14,17 +14,17 @@ blinking = "On"
 shape    = "Underline"
 
 [font]
-size     = 10
+size     = 9.5
 offset.x = 0
 offset.y = 0
 
 [font.normal]
-family = "JetBrainsMonoNerd Font"
+family = "BlexMonoNerdFont"
 style  = "Regular"
 
 [font.bold]
-family = "JetBrainsMonoNerd Font"
-style  = "ExtraBold"
+family = "BlexMonoNerdFont"
+style  = "Bold"
 
 [colors.cursor]
 text   = "#4D4D4C"
