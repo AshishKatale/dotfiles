@@ -5,7 +5,6 @@ return {
   opts = {
     notifier = { enabled = false },
     explorer = { enabled = false },
-    picker = { enabled = false },
     words = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = false },
@@ -94,13 +93,99 @@ return {
         statusline = false, -- can only be shown when using the global statusline
         tabline = false,
       }
-    }
+    },
+
+    picker = {
+      prompt = '   ',
+      toggles = {
+        follow = 'F',
+        hidden = 'H',
+        ignored = 'I',
+        modified = 'M',
+        regex = { icon = 'R', value = false },
+      },
+      formatters = {
+        selected = {
+          show_always = false, -- only show the selected column when there are multiple selections
+          unselected = false,  -- use the unselected icon for unselected items
+        },
+      },
+      layout = {
+        cycle = true,
+        preset = function(picker)
+          local preferred_layout = {
+            files = 'dropdown_centered',
+          }
+          return preferred_layout[picker] or 'default'
+          -- return vim.o.columns >= 120 and 'default' or 'vertical'
+        end,
+      }
+    },
 
   },
   config = function(_, opts)
+    local defaults = require('snacks.picker.config.defaults')
+    local layouts = require('snacks.picker.config.layouts')
+
+    defaults.defaults.icons = vim.tbl_deep_extend('keep', {
+      ui = {
+        follow = 'F',
+        hidden = 'H',
+        ignored = 'I',
+        live = '󰐰 ',
+        selected = '󰗠 ',
+        unselected = ' '
+      },
+      diagnostics = {
+        Error = '󰅚 ',
+        Hint = '󰘥 ',
+        Info = ' ',
+        Warn = ' '
+      },
+      git = {
+        enabled = true,
+        commit = '󰜘 ',
+        added = '󰐙',
+        modified = '󰐙',
+        staged = '󰗡',
+        unmerged = '',
+        renamed = '󰳠',
+        deleted = '󰮈',
+        untracked = '󰘥',
+        ignored = '󰍷',
+      },
+    }, defaults.defaults.icons)
+
+    layouts.default = vim.tbl_deep_extend('keep', {
+      layout = {
+        height = 0.85,
+        width = 0.85,
+      }
+    }, layouts.default)
+    layouts.default.layout[2].width = 0.55
+
+    layouts.dropdown_centered = vim.tbl_deep_extend('keep', {
+      preview = false,
+      layout = {
+        height = 0.45,
+        row = 0.27,
+        width = 0.5,
+      }
+    }, layouts.dropdown)
+
+    layouts.select = vim.tbl_deep_extend('keep', {
+      layout = {
+        height = 0.45,
+        width = 0.5,
+        min_height = 15,
+      },
+    }, layouts.select)
+
     require('snacks').setup(opts)
     vim.cmd([[
       hi! link SnacksPickerBorder FloatBorder
+      hi! link SnacksPickerPathHidden Text
+      hi! Directory guifg=#569cd6 guibg=NONE
     ]])
   end,
   keys = nil

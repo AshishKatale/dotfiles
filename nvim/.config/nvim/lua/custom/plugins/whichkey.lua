@@ -95,20 +95,44 @@ M.config = function(_, setup)
   which_key.setup(setup)
 
   which_key.add({
-    { '<leader>',   group = 'Leader' },
-    { '<leader>E',  '<cmd>FloatTerm vifm<cr>',      desc = 'Vifm' },
-    { '<leader>e',  '<cmd>NvimTreeToggle<cr>',      desc = 'File tree' },
-    { '<leader>h',  '<C-w>h',                       desc = 'Left split' },
-    { '<leader>j',  '<C-w>j',                       desc = 'Lower split' },
-    { '<leader>k',  '<C-w>k',                       desc = 'Upper split' },
-    { '<leader>l',  '<C-w>l',                       desc = 'Right split' },
-    { '<leader>|',  '<cmd>vnew<cr>',                desc = 'Split right' },
-    { '<leader>_',  '<cmd>new<cr>',                 desc = 'Split bottom' },
+    { '<leader>',  group = 'Leader' },
+    { '<leader>E', '<cmd>FloatTerm vifm<cr>', desc = 'Vifm' },
+    {
+      '<leader>e',
+      function()
+        require('snacks').picker.explorer({
+          hidden = true,
+          git_status_open = false,
+          follow_file = true,
+          layout = {
+            preset = 'right',
+            preview = false,
+            layout = { width = 0.3 },
+          },
+        })
+      end,
+      desc = 'File tree'
+    },
+    { '<leader>h',  '<C-w>h',                        desc = 'Left split' },
+    { '<leader>j',  '<C-w>j',                        desc = 'Lower split' },
+    { '<leader>k',  '<C-w>k',                        desc = 'Upper split' },
+    { '<leader>l',  '<C-w>l',                        desc = 'Right split' },
+    { '<leader>_',  '<cmd>new term://$SHELL<cr>',    desc = 'Terminal bottom' },
+    { '<leader>|',  '<cmd>vnew term://$SHELL<cr>',   desc = 'Terminal right' },
+    { '<leader>\\', '<cmd>tabnew term://$SHELL<cr>', desc = 'Terminal tab' },
 
     { '<leader>b',  group = 'Buffer' },
-    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',       desc = 'Remove trailing' },
-    { '<leader>bf', '<cmd>FzfLua buffers<cr>',      desc = 'Open Buffers' },
-    { '<leader>bo', '<cmd>FzfLua oldfiles<cr>',     desc = 'Old Files' },
+    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',        desc = 'Remove trailing' },
+    {
+      '<leader>bf',
+      function() require('snacks').picker.buffers() end,
+      desc = 'Open Buffers'
+    },
+    {
+      '<leader>bo',
+      function() require('snacks').picker.recent() end,
+      desc = 'Old Files'
+    },
     { '<leader>bu', '<cmd>UndotreeToggle<cr>',      desc = 'Undo Tree' },
     { '<leader>by', '<cmd>%y<cr>',                  desc = 'Yank buffer' },
     { '<leader>bY', '<cmd>%y+<cr>',                 desc = 'Copy buffer' },
@@ -120,18 +144,34 @@ M.config = function(_, setup)
 
     { '<leader>g',  group = 'Git' },
     { '<leader>gg', utils.lazy_git,                 desc = 'LazyGit' },
-    { '<leader>gf', '<cmd>FzfLua git_files<cr>',    desc = 'Git Files' },
-    { '<leader>gs', '<cmd>FzfLua git_status<cr>',   desc = 'Git status' },
-    { '<leader>gb', '<cmd>FzfLua git_branches<cr>', desc = 'Branches' },
-    { '<leader>gl', utils.show_line_history,        desc = 'Git line history' },
+    {
+      '<leader>gf',
+      function() require('snacks').picker.git_files() end,
+      desc = 'Git Files'
+    },
+    {
+      '<leader>gs',
+      function() require('snacks').picker.git_status() end,
+      desc = 'Git status'
+    },
+    {
+      '<leader>gb',
+      function() require('snacks').picker.git_branches() end,
+      desc = 'Branches'
+    },
+    {
+      '<leader>gl',
+      function() require('snacks').picker.git_log_line() end,
+      desc = 'Git line history'
+    },
     {
       '<leader>gc',
-      [[<cmd>FzfLua git_commits winopts.title=\ Git\ log\ <cr>]],
+      function() require('snacks').picker.git_log() end,
       desc = 'Git commit log'
     },
     {
       '<leader>gh',
-      [[<cmd>FzfLua git_bcommits winopts.title=\ File\ history\ <cr>]],
+      function() require('snacks').picker.git_log_file() end,
       desc = 'File history'
     },
     {
@@ -219,29 +259,46 @@ M.config = function(_, setup)
     },
 
     { '<leader>s',  group = 'Search' },
-    { '<leader>sc', '<cmd>FzfLua commands<cr>',     desc = 'Commands' },
-    { '<leader>sC', '<cmd>FzfLua colorscheme<cr>',  desc = 'Colorscheme' },
-    { '<leader>sh', '<cmd>FzfLua helptags<cr>',     desc = 'Find Help' },
-    { '<leader>sH', '<cmd>FzfLua highlights<cr>',   desc = 'HL Groups' },
-    { '<leader>sk', '<cmd>FzfLua keymaps<cr>',      desc = 'Keymaps' },
-    { '<leader>sm', '<cmd>Man<cr>',                 desc = 'Man Pages' },
-    { '<leader>sM', '<cmd>FzfLua manpages<cr>',     desc = 'FzfLua Man' },
-    { '<leader>sr', '<cmd>FzfLua registers<cr>',    desc = 'Registers' },
-    { '<leader>so', '<cmd>FzfLua nvim_options<cr>', desc = 'Vim Options' },
+    {
+      '<leader>sc',
+      function() require('snacks').picker.commands() end,
+      desc = 'Commands'
+    },
+    {
+      '<leader>sC',
+      function() require('snacks').picker.colorschemes() end,
+      desc = 'Colorscheme'
+    },
+    {
+      '<leader>sH',
+      function() require('snacks').picker.highlights() end,
+      desc = 'HL Groups'
+    },
+    {
+      '<leader>sk',
+      function() require('snacks').picker.keymaps() end,
+      desc = 'Keymaps'
+    },
+    { '<leader>sm', '<cmd>Man<cr>',  desc = 'Man Pages' },
+    {
+      '<leader>sM',
+      function() require('snacks').picker.man() end,
+      desc = 'Find Manpage'
+    },
+    {
+      '<leader>sr',
+      function() require('snacks').picker.registers() end,
+      desc = 'Registers'
+    },
     {
       '<leader>ss',
-      '<cmd>FzfLua live_grep<cr>',
-      desc = 'Search Workspace'
+      function() require('snacks').picker.grep({ hidden = true }) end,
+      desc = 'search workspace'
     },
     {
-      '<leader>sg',
-      '<cmd>FzfLua live_grep_glob<cr>',
-      desc = 'Glob search Workspace'
-    },
-    {
-      '<leader>sf',
-      '<cmd>FzfLua grep<cr>',
-      desc = 'Glob search Workspace'
+      '<leader>sh',
+      function() require('snacks').picker.help() end,
+      desc = 'Find HelpTags'
     },
     {
       '<leader>sw',
@@ -282,29 +339,16 @@ M.config = function(_, setup)
       desc = 'Git Blame'
     },
 
-    { '<leader>zz',    '<cmd>lua Snacks.zen()<cr>', desc = 'Zen mode' },
+    { '<leader>zz',     '<cmd>lua Snacks.zen()<cr>', desc = 'Zen mode' },
 
-    { '<localleader>', group = 'Local Leader' },
-    {
-      '<localleader><localleader>',
-      '<cmd>tabnew term://$SHELL<cr>',
-      desc = 'Terminal tab'
-    },
-    {
-      '<localleader>_',
-      '<cmd>new term://$SHELL<cr>',
-      desc = 'Terminal bottom'
-    },
-    {
-      '<localleader>|',
-      '<cmd>vnew term://$SHELL<cr>',
-      desc = 'Terminal right'
-    },
+    { '<localleader>',  group = 'Local Leader' },
+    { '<localleader>|', '<cmd>vnew<cr>',             desc = 'Split right' },
+    { '<localleader>_', '<cmd>new<cr>',              desc = 'Split bottom' },
 
-    { '<C-k>', group = 'Control-K' },
+    { '<C-k>',          group = 'Control-K' },
     {
       mode = { 'n' },
-      { '<C-k>l', '<cmd>FzfLua filetypes<cr>', desc = 'Set Filetype' },
+      -- { '<C-k>l', '<cmd>FzfLua filetypes<cr>', desc = 'Set Filetype' },
       {
         '<C-k><C-x>',
         function() require('snacks').bufdelete.all() end,

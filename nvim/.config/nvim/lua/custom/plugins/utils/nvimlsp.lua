@@ -31,6 +31,10 @@ local function enable_lsp_features(client, bufnr)
     local win = vim.api.nvim_get_current_win()
     vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
   end
+
+  if client and client.name == 'clangd' then
+    client.server_capabilities.semanticTokensProvider = nil
+  end
 end
 
 local function set_lsp_keymaps(bufnr)
@@ -84,19 +88,19 @@ local function set_lsp_keymaps(bufnr)
     },
     {
       'gR',
-      '<cmd>FzfLua lsp_references<CR>',
+      function() require('snacks').picker.lsp_references() end,
       desc = 'References',
       buffer = bufnr
     },
     {
       'gs',
-      '<cmd>FzfLua lsp_document_symbols<CR>',
+      function() require('snacks').picker.lsp_symbols() end,
       desc = 'File symbols',
       buffer = bufnr
     },
     {
       'gS',
-      '<cmd>FzfLua lsp_workspace_symbols<CR>',
+      function() require('snacks').picker.lsp_workspace_symbols() end,
       desc = 'Workspace symbols',
       buffer = bufnr
     },

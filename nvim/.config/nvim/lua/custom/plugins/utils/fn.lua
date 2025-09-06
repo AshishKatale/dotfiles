@@ -1,52 +1,17 @@
 M = {}
 
 M.search_string = function(text)
-  require('fzf-lua').live_grep({
+  require('snacks').picker.grep({
     search = text,
     hidden = true
   })
 end
 
 M.find_in_dir = function(cwd_path, dirname)
-  require('fzf-lua').live_grep({
+  require('snacks').picker.grep({
     cwd = cwd_path,
     hidden = true,
     ['winopts.title'] = ' Find in [' .. dirname .. '] ',
-  })
-end
-
-M.show_line_history = function()
-  local line          = vim.api.nvim_win_get_cursor(0)[1]
-  local file          = vim.api.nvim_buf_get_name(0)
-  local git_root      = vim.trim(
-    vim.system({ 'git', 'rev-parse', '--show-toplevel' }, { text = true })
-    :wait().stdout
-  )
-
-  local line_hist_cmd = [[git -C ]] .. git_root .. [[ log --color --pretty=format:]] ..
-      [['%C(yellow)%h%Creset %s %C(magenta)%cr%Creset %C(blue)<%an>%Creset']] ..
-      [[ -s -L ]] .. line .. [[,+1:]] .. file
-
-  local fzflua        = require('fzf-lua')
-  fzflua.fzf_exec(line_hist_cmd, {
-    preview = 'git show --color {1} -- ' .. file,
-    actions = {
-      ['enter']  = fzflua.actions.git_buf_edit,
-      ['ctrl-x'] = fzflua.actions.git_buf_split,
-      ['ctrl-v'] = fzflua.actions.git_buf_vsplit,
-      ['ctrl-y'] = {
-        reload = true,
-        desc = 'git-yank-commit',
-        fn = function(selected)
-          local hash = vim.split(selected[1], ' ')[1]
-          vim.fn.setreg('"', hash)
-          vim.notify('yanked commit hash: ' .. hash)
-        end,
-      },
-    },
-    winopts = {
-      title = ' Line history '
-    }
   })
 end
 
@@ -123,13 +88,16 @@ M.toggle_color_column = function()
   end
 end
 
-M.toggle_indent_guides = function()
+M.toggle_indent_guides = function(off)
   local snacks = require('snacks')
+
   if snacks.indent.enabled then
     snacks.indent.disable()
   else
     snacks.indent.enable()
   end
+
+  if off then return end
 
   if not vim.gg.listchars then
     vim.opt.listchars:append('eol:↲') -- render eol as ↴

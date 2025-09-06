@@ -2,7 +2,8 @@ return {
   'folke/todo-comments.nvim',
   lazy = true,
   event = 'BufEnter',
-  cmd = { 'TodoQuickfix', 'TodoTrouble', 'TodoFzfLua' },
+  dependencies = { 'nvim-lua/plenary.nvim' },
+  cmd = { 'TodoQuickfix', 'TodoTrouble' },
   config = function()
     require('todo-comments').setup({
       signs = false,     -- show icons in the signs column
@@ -46,16 +47,18 @@ return {
       -- keyword: highlights of the keyword
       -- after: highlights after the keyword (todo text)
       highlight = {
-        multiline = true,            -- enable multine todo comments
-        multiline_pattern = '^.',    -- lua pattern to match the next multiline from the start of the matched keyword
-        multiline_context = 10,      -- extra lines that will be re-evaluated when changing a line
-        before = '',                 -- "fg" or "bg" or empty
-        keyword = 'wide',            -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty.
-        after = 'fg',                -- "fg" or "bg" or empty
-        pattern = [[\s(KEYWORDS):]], -- pattern or table of patterns, used for highlighting (vim regex)
-        comments_only = true,        -- uses treesitter to match keywords in comments only
-        max_line_len = 400,          -- ignore lines longer than this
-        exclude = {},                -- list of file types to exclude highlighting
+        multiline = true,         -- enable multine todo comments
+        multiline_pattern = '^.', -- lua pattern to match the next multiline from the start of the matched keyword
+        multiline_context = 10,   -- extra lines that will be re-evaluated when changing a line
+        before = '',              -- "fg" or "bg" or empty
+        keyword = 'wide',         -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty.
+        after = 'fg',             -- "fg" or "bg" or empty
+        pattern = {               -- pattern or table of patterns, used for highlighting (vim regex)
+          [[.*\s(KEYWORDS):\s.*]],
+        },
+        comments_only = true, -- uses treesitter to match keywords in comments only
+        max_line_len = 400,   -- ignore lines longer than this
+        exclude = {},         -- list of file types to exclude highlighting
       },
       -- list of named colors where we try to extract the guifg from the
       -- list of highlight groups or use the hex color if hl not found as a fallback
@@ -77,10 +80,13 @@ return {
           '--with-filename',
           '--line-number',
           '--column',
+          '--hidden',
+          '--glob', -- ignore .git folder
+          '!.git',
         },
         -- INFO regex that will be used to match keywords.
         -- don't replace the (KEYWORDS) placeholder
-        pattern = [[\s\b(KEYWORDS):]], -- ripgrep regex
+        pattern = [[\s(KEYWORDS):\s]], -- ripgrep regex
       },
     })
   end,
