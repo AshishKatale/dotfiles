@@ -78,7 +78,7 @@ else
 fi
 
 if [ -n "$projects" ]; then
-  selected=$(echo "$projects" | fzf --tmux='center,50%,45%' --scheme='path')
+  selected=$(echo "$projects" | fzf --tmux='center,50%,40%' --scheme='path')
   # selected=$(echo "$projects" | ONE_COLUMN=true rofi -dmenu -p "  tmux ")
 fi
 

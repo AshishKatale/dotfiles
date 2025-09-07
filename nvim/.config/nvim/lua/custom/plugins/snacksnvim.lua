@@ -1,5 +1,7 @@
 return {
   'folke/snacks.nvim',
+  -- dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = { 'nvim-mini/mini.icons' },
   priority = 1000, -- theme.lua is 1000
   lazy = false,
   opts = {
@@ -227,8 +229,8 @@ return {
     layouts.dropdown_centered = vim.tbl_deep_extend('keep', {
       preview = false,
       layout = {
-        height = 0.45,
-        row = 0.27,
+        height = 0.4,
+        row = 0.3,
         width = 0.5,
       }
     }, layouts.dropdown)

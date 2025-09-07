@@ -5,7 +5,7 @@ if not which_key_status_ok then
 end
 
 local augroup = vim.api.nvim_create_augroup('lspcursor', { clear = true })
-local function enable_lsp_features(client, bufnr)
+local function configure_lsp_features(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorMoved' }, {
       callback = function(ev)
@@ -157,7 +157,7 @@ M.setup = function()
     callback = function(ev)
       local client = vim.lsp.get_client_by_id(ev.data.client_id)
       set_lsp_keymaps(ev.buf)
-      enable_lsp_features(client, ev.buf)
+      configure_lsp_features(client, ev.buf)
     end
   })
 end

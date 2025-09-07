@@ -50,7 +50,7 @@ M.opts = function()
       SnacksPickerGitStatusAdded     = { fg = colors.gitUntracked },
       SnacksPickerGitStatusRenamed   = { fg = colors.gitUntracked },
       SnacksPickerPathIgnored        = { fg = colors.vscRed },
-      SnacksPickerListCursorLine     = { bg = colors.cursorline, },
+      SnacksPickerListCursorLine     = { bg = colors.vscPopupHighlightBlue, },
       GitSignsAdd                    = { fg = colors.gitUntracked, },
       GitSignsChange                 = { fg = colors.gitChanged, },
       GitSignsDelete                 = { fg = colors.gitDeleted, },
