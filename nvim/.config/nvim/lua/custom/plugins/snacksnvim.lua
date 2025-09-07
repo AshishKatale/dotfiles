@@ -124,10 +124,11 @@ return {
 
   },
   config = function(_, opts)
-    local defaults = require('snacks.picker.config.defaults')
+    local defaults = require('snacks.picker.config.defaults').defaults
+    local sources = require('snacks.picker.config.sources')
     local layouts = require('snacks.picker.config.layouts')
 
-    defaults.defaults.icons = vim.tbl_deep_extend('keep', {
+    defaults.icons = vim.tbl_deep_extend('keep', {
       ui = {
         follow = 'F',
         hidden = 'H',
@@ -154,7 +155,66 @@ return {
         untracked = '󰘥',
         ignored = '󰍷',
       },
-    }, defaults.defaults.icons)
+      tree = {
+        last = '└╴',
+        middle = '├╴',
+        vertical = '┆ '
+      },
+    }, defaults.icons)
+
+    defaults.win = vim.tbl_deep_extend('keep', {
+        input = {
+          keys = {
+            ['j'] = 'toggle_focus',
+            ['<C-Down>'] = { 'history_forward', mode = { 'i', 'n' } },
+            ['<C-Up>'] = { 'history_back', mode = { 'i', 'n' } },
+            ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
+            ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
+            ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
+            ['<c-b>'] = { 'list_scroll_up', mode = { 'i', 'n' } },
+            ['<a-p>'] = { 'history_back', mode = { 'i', 'n' } },
+            ['<a-n>'] = { 'history_forward', mode = { 'i', 'n' } },
+            ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
+            ['<c-a-p>'] = { 'toggle_preview', mode = { 'i', 'n' } },
+          }
+        },
+        list = {
+          keys = {
+            ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
+            ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
+            ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
+            ['<c-b>'] = { 'list_scroll_up', mode = { 'i', 'n' } },
+            ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
+            ['<c-a-p>'] = { 'toggle_preview', mode = { 'i', 'n' } },
+          }
+        }
+      },
+      defaults.win);
+
+    sources.explorer = vim.tbl_deep_extend('keep', {
+      auto_close = true,
+      hidden = true,
+      git_status = true,
+      git_status_open = true,
+      layout = {
+        preset = 'right',
+        preview = false,
+        layout = { width = 0.275 },
+      },
+      win = {
+        list = {
+          keys = {
+            ['-'] = 'explorer_up',
+            ['='] = 'explorer_focus',
+            ['n'] = 'explorer_add',
+            ['w'] = 'explorer_close_all',
+            ['<c-l>'] = 'explorer_update',
+            ['<c-p>'] = 'explorer_git_prev',
+            ['<c-n>'] = 'explorer_git_next',
+          },
+        },
+      },
+    }, sources.explorer);
 
     layouts.default = vim.tbl_deep_extend('keep', {
       layout = {
@@ -175,9 +235,8 @@ return {
 
     layouts.select = vim.tbl_deep_extend('keep', {
       layout = {
-        height = 0.45,
         width = 0.5,
-        min_height = 15,
+        max_height = 15,
       },
     }, layouts.select)
 
@@ -185,6 +244,8 @@ return {
     vim.cmd([[
       hi! link SnacksPickerBorder FloatBorder
       hi! link SnacksPickerPathHidden Text
+      hi! SnacksPickerMatch guifg=#18a2fe gui=bold
+      hi! SnacksPickerGitBranch guifg=#d7ba7d gui=bold
       hi! Directory guifg=#569cd6 guibg=NONE
     ]])
   end,

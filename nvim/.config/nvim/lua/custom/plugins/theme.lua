@@ -40,15 +40,17 @@ M.opts = function()
       NvimTreeGitDeleted             = { fg = colors.vscRed, bold = true },
       NvimTreeGitIgnored             = { fg = colors.vscRed, },
       NvimTreeFolderIcon             = { fg = colors.vscFront, },
+      NvimTreeGitNew                 = { fg = colors.gitUntracked, },
+      NvimTreeExecFile               = { fg = colors.gitUntracked, },
       SnacksPickerGitStatusModified  = { fg = colors.vscGitModified },
       SnacksPickerGitStatusUntracked = { fg = colors.gitUntracked },
       SnacksPickerGitStatusDeleted   = { fg = colors.vscRed },
+      SnacksPickerGitStatusIgnored   = { fg = colors.vscRed },
       SnacksPickerGitStatusStaged    = { fg = colors.vscGitModified },
       SnacksPickerGitStatusAdded     = { fg = colors.gitUntracked },
+      SnacksPickerGitStatusRenamed   = { fg = colors.gitUntracked },
       SnacksPickerPathIgnored        = { fg = colors.vscRed },
       SnacksPickerListCursorLine     = { bg = colors.cursorline, },
-      NvimTreeGitNew                 = { fg = colors.gitUntracked, },
-      NvimTreeExecFile               = { fg = colors.gitUntracked, },
       GitSignsAdd                    = { fg = colors.gitUntracked, },
       GitSignsChange                 = { fg = colors.gitChanged, },
       GitSignsDelete                 = { fg = colors.gitDeleted, },
@@ -94,6 +96,8 @@ M.config = function(_, opts)
       hi! link NormalFloat Normal
       hi! link CurSearch Search
       hi! link FloatBorder VertSplit
+      hi! link LazyDimmed LspInlayHint
+      hi! link LazyProp LspInlayHint
     ]])
   end
 end

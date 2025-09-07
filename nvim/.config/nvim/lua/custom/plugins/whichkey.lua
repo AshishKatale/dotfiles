@@ -95,24 +95,7 @@ M.config = function(_, setup)
   which_key.setup(setup)
 
   which_key.add({
-    { '<leader>',  group = 'Leader' },
-    { '<leader>E', '<cmd>FloatTerm vifm<cr>', desc = 'Vifm' },
-    {
-      '<leader>e',
-      function()
-        require('snacks').picker.explorer({
-          hidden = true,
-          git_status_open = false,
-          follow_file = true,
-          layout = {
-            preset = 'right',
-            preview = false,
-            layout = { width = 0.3 },
-          },
-        })
-      end,
-      desc = 'File tree'
-    },
+    { '<leader>',   group = 'Leader' },
     { '<leader>h',  '<C-w>h',                        desc = 'Left split' },
     { '<leader>j',  '<C-w>j',                        desc = 'Lower split' },
     { '<leader>k',  '<C-w>k',                        desc = 'Upper split' },
@@ -123,6 +106,12 @@ M.config = function(_, setup)
 
     { '<leader>b',  group = 'Buffer' },
     { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',        desc = 'Remove trailing' },
+    { '<leader>E',  '<cmd>FloatTerm vifm<cr>',       desc = 'Vifm' },
+    {
+      '<leader>e',
+      function() require('snacks').picker.explorer() end,
+      desc = 'File tree'
+    },
     {
       '<leader>bf',
       function() require('snacks').picker.buffers() end,
