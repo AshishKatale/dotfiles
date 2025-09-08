@@ -168,8 +168,8 @@ return {
         input = {
           keys = {
             ['j'] = 'toggle_focus',
-            ['<C-Down>'] = { 'history_forward', mode = { 'i', 'n' } },
-            ['<C-Up>'] = { 'history_back', mode = { 'i', 'n' } },
+            ['k'] = 'focus_preview',
+            ['<c-c>'] = { 'close', mode = { 'i', 'n' } },
             ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
             ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
             ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
@@ -182,14 +182,21 @@ return {
         },
         list = {
           keys = {
-            ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
-            ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
-            ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
-            ['<c-b>'] = { 'list_scroll_up', mode = { 'i', 'n' } },
-            ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
-            ['<c-a-p>'] = { 'toggle_preview', mode = { 'i', 'n' } },
+            ['<c-c>'] = 'close',
+            ['<c-d>'] = 'preview_scroll_down',
+            ['<c-u>'] = 'preview_scroll_up',
+            ['<c-f>'] = 'list_scroll_down',
+            ['<c-b>'] = 'list_scroll_up',
+            ['<c-x>'] = 'edit_split',
+            ['<c-a-p>'] = 'toggle_preview',
           }
-        }
+        },
+        preview = {
+          keys = {
+            ['<c-c>'] = 'cancel',
+            ['<c-a-p>'] = 'toggle_preview'
+          },
+        },
       },
       defaults.win);
 
