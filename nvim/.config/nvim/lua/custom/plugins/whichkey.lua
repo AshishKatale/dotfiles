@@ -205,7 +205,7 @@ M.config = function(_, setup)
     },
     {
       '<leader>gd',
-      "<cmd>lua require('gitsigns').diffthis()<cr>",
+      "<cmd>exec \"lua require('gitsigns').diffthis()\" | wincmd h<cr>",
       desc = 'File diff'
     },
 

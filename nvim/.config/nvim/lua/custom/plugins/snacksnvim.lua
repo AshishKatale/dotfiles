@@ -109,17 +109,17 @@ return {
       formatters = {
         selected = {
           show_always = false, -- only show the selected column when there are multiple selections
-          unselected = false,  -- use the unselected icon for unselected items
+          unselected = true,   -- use the unselected icon for unselected items
         },
       },
       layout = {
         cycle = true,
         preset = function(picker)
-          local preferred_layout = {
-            files = 'dropdown_centered',
-          }
-          return preferred_layout[picker] or 'default'
-          -- return vim.o.columns >= 120 and 'default' or 'vertical'
+          local preferred_layout = { files = 'dropdown_centered' }
+          if preferred_layout[picker] then
+            return preferred_layout[picker]
+          end
+          return vim.o.columns >= 120 and 'default' or 'vertical'
         end,
       }
     },
@@ -135,9 +135,9 @@ return {
         follow = 'F',
         hidden = 'H',
         ignored = 'I',
-        live = '󰐰 ',
-        selected = '󰗠 ',
-        unselected = ' '
+        live = '󰐰',
+        selected = '   ',
+        unselected = '   '
       },
       diagnostics = {
         Error = '󰅚 ',
@@ -210,6 +210,7 @@ return {
             ['='] = 'explorer_focus',
             ['n'] = 'explorer_add',
             ['w'] = 'explorer_close_all',
+            ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
             ['<c-p>'] = 'explorer_git_prev',
             ['<c-n>'] = 'explorer_git_next',
@@ -224,7 +225,7 @@ return {
         width = 0.85,
       }
     }, layouts.default)
-    layouts.default.layout[2].width = 0.55
+    layouts.default.layout[2].width = 0.55 -- preview width
 
     layouts.dropdown_centered = vim.tbl_deep_extend('keep', {
       preview = false,
@@ -245,7 +246,7 @@ return {
     require('snacks').setup(opts)
     vim.cmd([[
       hi! link SnacksPickerBorder FloatBorder
-      hi! link SnacksPickerPathHidden Text
+      hi! link SnacksPickerPathHidden SnacksPickerFile
       hi! SnacksPickerMatch guifg=#18a2fe gui=bold
       hi! SnacksPickerGitBranch guifg=#d7ba7d gui=bold
       hi! Directory guifg=#569cd6 guibg=NONE
