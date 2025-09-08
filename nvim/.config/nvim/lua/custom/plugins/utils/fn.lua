@@ -180,4 +180,15 @@ M.scratch_buffer = function()
   })
 end
 
+M.set_filetype = function()
+  local filetypes = vim.fn.getcompletion('', 'filetype')
+  require('snacks').picker.select(filetypes, {
+    prompt = 'Set Filetype',
+    format_item = function(item) return item end,
+  }, function(choice)
+    if not choice then return end
+    vim.cmd.setfiletype(choice)
+  end)
+end
+
 return M;

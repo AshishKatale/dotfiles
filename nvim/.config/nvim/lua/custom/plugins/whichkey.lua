@@ -337,7 +337,7 @@ M.config = function(_, setup)
     { '<C-k>',          group = 'Control-K' },
     {
       mode = { 'n' },
-      -- { '<C-k>l', '<cmd>FzfLua filetypes<cr>', desc = 'Set Filetype' },
+      { '<C-k>l', utils.set_filetype, desc = 'Set Filetype' },
       {
         '<C-k><C-x>',
         function() require('snacks').bufdelete.all() end,
@@ -346,7 +346,7 @@ M.config = function(_, setup)
       {
         '<C-k>X',
         function() require('snacks').bufdelete.other() end,
-        desc = 'Delete All Buffers'
+        desc = 'Delete All Other Buffers'
       },
       {
         '<C-k>x',
