@@ -15,8 +15,8 @@ M.opts = function()
       ui = {
         check_outdated_packages_on_open = true,
         border = 'rounded',
-        width = 0.8,
-        height = 0.8,
+        width = 0.85,
+        height = 0.85,
       }
     },
     mason_lspconfig = {

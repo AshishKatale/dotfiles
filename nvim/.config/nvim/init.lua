@@ -24,7 +24,7 @@ vim.gg = {
 
 local opts = {
   ui = {
-    size = { width = 0.85, height = 0.8 },
+    size = { width = 0.85, height = 0.85 },
     wrap = true, -- wrap the lines in the ui
     border = 'rounded',
     icons = {

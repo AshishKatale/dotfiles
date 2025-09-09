@@ -16,15 +16,15 @@ return {
     input = { icon = '' },
 
     dashboard = {
-      enabled = false,
+      enabled = true,
       preset = {
         keys = {
-          { icon = '󰻭 ', key = 'e', desc = 'New File', action = ':enew' },
-          { icon = '󰱽 ', key = 'b', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = '󱎸 ', key = '/', desc = 'Search Text', action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = '󰊢 ', key = 's', desc = 'Git Status', action = ":lua Snacks.dashboard.pick('git_status')" },
+          { icon = '󰻭 ', key = 'n', desc = 'New File', action = ':enew' },
+          { icon = '󰱽 ', key = 'b', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files', { hidden = true })" },
+          { icon = '󱎸 ', key = 's', desc = 'Search Text', action = ":lua Snacks.dashboard.pick('live_grep', { hidden = true })" },
+          { icon = '󰊢 ', key = 'g', desc = 'Git Status', action = ":lua Snacks.dashboard.pick('git_status')" },
           { icon = '󱀲 ', key = 'o', desc = 'Old Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+          { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
           { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
           {
             icon = ' ',
