@@ -47,7 +47,7 @@ if [ -n "$1" ] && [ -d "$1" ]; then
 elif which fd &> /dev/null; then
   projects=$(
     echo $HOME/dotfiles
-    fd . --type=directory \
+    fd . --type=directory --min-depth=1 --max-depth=2 \
          --exclude="src" \
          --exclude="assets" \
          --exclude="build" \
@@ -62,7 +62,7 @@ elif which fd &> /dev/null; then
 else
   projects=$(
     echo $HOME/dotfiles
-    find $HOME/workspace -type d \
+    find $HOME/workspace -mindepth 1 -maxdepth 2 -type d \
                       \( -path "*/\.*" -o \
                          -path "*/src*" -o \
                          -path "*/assets*" -o \
