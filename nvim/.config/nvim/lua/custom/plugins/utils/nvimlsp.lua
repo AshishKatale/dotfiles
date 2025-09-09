@@ -4,6 +4,9 @@ if not which_key_status_ok then
   return
 end
 
+local diagnostic_open_float = function()
+  _, vim.gg.diagnostic_win = vim.diagnostic.open_float({ max_width = 100 })
+end
 local augroup = vim.api.nvim_create_augroup('lspcursor', { clear = true })
 local function configure_lsp_features(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
@@ -11,7 +14,7 @@ local function configure_lsp_features(client, bufnr)
       callback = function(ev)
         if ev.event == 'CursorHold' then
           vim.lsp.buf.document_highlight()
-          vim.diagnostic.open_float({ max_width = 100 })
+          diagnostic_open_float()
         else
           vim.lsp.buf.clear_references()
         end
@@ -21,7 +24,7 @@ local function configure_lsp_features(client, bufnr)
     })
   else
     vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-      callback = function() vim.diagnostic.open_float({ max_width = 100 }) end,
+      callback = diagnostic_open_float,
       buffer = bufnr,
       group = augroup
     })
@@ -74,6 +77,12 @@ local function set_lsp_keymaps(bufnr)
     },
 
     { 'g', group = 'Go to' },
+    {
+      'grf',
+      function() vim.api.nvim_set_current_win(vim.gg.diagnostic_win or 0) end,
+      desc = 'Focus diagnostic float window',
+      buffer = bufnr
+    },
     {
       'gd',
       '<cmd>lua vim.lsp.buf.definition()<CR>',
