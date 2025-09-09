@@ -12,31 +12,17 @@ vim.api.nvim_create_user_command(
   { nargs = '?' }
 )
 
-vim.api.nvim_create_user_command('FloatTerm', function(cmd)
-  if #cmd.fargs > 0 then
-    require('lazy.util').float_term(cmd.fargs, {})
-  elseif vim.gg.term and
-      (vim.gg.term:win_valid() or vim.gg.term:buf_valid()) then
-    vim.gg.term:toggle()
-  else
-    vim.gg.term = require('lazy.util').float_term(nil, {
-      persistent = true,
-      interactive = true
-    })
-    vim.api.nvim_create_autocmd('BufEnter', {
-      buffer = vim.gg.term.buf,
-      callback = function() vim.cmd.startinsert() end,
-    })
-  end
-end, {
-  nargs = '*',
-  complete = function(cmd)
-    local cmds = { 'btop', 'top', 'git log --oneline', 'lazygit' }
-    return vim.iter(cmds):filter(
-      function(c) return string.match(c, cmd) end
-    ):totable()
-  end,
-})
+vim.api.nvim_create_user_command('FloatTerm', function()
+  require('snacks').terminal(nil, {
+    auto_close = true,
+    win = {
+      position = 'float',
+      border = 'rounded',
+      height = 0.85,
+      width = 0.85,
+    }
+  })
+end, {})
 
 ------------ Custom AutoCommands ------------
 

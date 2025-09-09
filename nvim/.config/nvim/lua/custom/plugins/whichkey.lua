@@ -96,17 +96,17 @@ M.config = function(_, setup)
 
   which_key.add({
     { '<leader>',   group = 'Leader' },
-    { '<leader>h',  '<C-w>h',                        desc = 'Left split' },
-    { '<leader>j',  '<C-w>j',                        desc = 'Lower split' },
-    { '<leader>k',  '<C-w>k',                        desc = 'Upper split' },
-    { '<leader>l',  '<C-w>l',                        desc = 'Right split' },
-    { '<leader>_',  '<cmd>new term://$SHELL<cr>',    desc = 'Terminal bottom' },
-    { '<leader>|',  '<cmd>vnew term://$SHELL<cr>',   desc = 'Terminal right' },
-    { '<leader>\\', '<cmd>tabnew term://$SHELL<cr>', desc = 'Terminal tab' },
+    { '<leader>h',  '<C-w>h',                  desc = 'Left split' },
+    { '<leader>j',  '<C-w>j',                  desc = 'Lower split' },
+    { '<leader>k',  '<C-w>k',                  desc = 'Upper split' },
+    { '<leader>l',  '<C-w>l',                  desc = 'Right split' },
+    { '<leader>|',  '<cmd>vnew<cr>',           desc = 'New buffer right' },
+    { '<leader>_',  '<cmd>new<cr>',            desc = 'New buffer bottom' },
+    { '<leader>\\', '<cmd>enew<cr>',           desc = 'New buffer' },
 
     { '<leader>b',  group = 'Buffer' },
-    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',        desc = 'Remove trailing' },
-    { '<leader>E',  '<cmd>FloatTerm vifm<cr>',       desc = 'Vifm' },
+    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',  desc = 'Remove trailing' },
+    { '<leader>E',  '<cmd>FloatTerm vifm<cr>', desc = 'Vifm' },
     {
       '<leader>e',
       function() require('snacks').picker.explorer() end,
@@ -328,13 +328,14 @@ M.config = function(_, setup)
       desc = 'Git Blame'
     },
 
-    { '<leader>zz',     '<cmd>lua Snacks.zen()<cr>', desc = 'Zen mode' },
+    { '<leader>zz',      '<cmd>lua Snacks.zen()<cr>',     desc = 'Zen mode' },
 
-    { '<localleader>',  group = 'Local Leader' },
-    { '<localleader>|', '<cmd>vnew<cr>',             desc = 'Split right' },
-    { '<localleader>_', '<cmd>new<cr>',              desc = 'Split bottom' },
+    { '<localleader>',   group = 'Local Leader' },
+    { '<localleader>_',  '<cmd>new term://$SHELL<cr>',    desc = 'Terminal bottom' },
+    { '<localleader>|',  '<cmd>vnew term://$SHELL<cr>',   desc = 'Terminal right' },
+    { '<localleader>\\', '<cmd>tabnew term://$SHELL<cr>', desc = 'Terminal tab' },
 
-    { '<C-k>',          group = 'Control-K' },
+    { '<C-k>',           group = 'Control-K' },
     {
       mode = { 'n' },
       { '<C-k>l', utils.set_filetype, desc = 'Set Filetype' },
