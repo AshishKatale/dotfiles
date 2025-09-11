@@ -31,7 +31,7 @@ setup_zsh() {
 export FZF_DEFAULT_OPTS="\\
  --color='gutter:-1,prompt:12,pointer:10,marker:12,info:12,spinner:10'\\
  --color='fg:253,fg+:12,bg+:-1,hl:12,hl:bold,hl+:10'\\
- --layout=reverse --info=inline-right --border=rounded --cycle\\
+ --layout=reverse --info=inline-right --border=rounded --scroll-off=2 --cycle\\
  --height=15 --prompt=' ' --marker='' --pointer='' --scrollbar='┃'"
 EOF
 }

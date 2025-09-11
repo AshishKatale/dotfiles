@@ -189,7 +189,10 @@ return {
             ['<c-b>'] = 'list_scroll_up',
             ['<c-x>'] = 'edit_split',
             ['<c-a-p>'] = 'toggle_preview',
-          }
+          },
+          wo = {
+            scrolloff = 2,
+          },
         },
         preview = {
           keys = {
