@@ -4,10 +4,10 @@ gui:
   timeFormat: "02 Jan 06 15:04 MST"
   theme:
     activeBorderColor:
-      - "cyan"
+      - "#d787ff"
       - bold
     inactiveBorderColor:
-      - "#bdbdbd"
+      - "#a8a8a8"
       - bold
     optionsTextColor:
       - "#3b7dff"
