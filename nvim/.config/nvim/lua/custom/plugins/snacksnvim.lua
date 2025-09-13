@@ -78,6 +78,7 @@ return {
       dashboard = {
         wo = {
           winhighlight = 'SnacksDashboardHeader:SnacksPickerIdx,'
+              .. 'SnacksDashboardFooter:@label,'
               .. 'SnacksDashboardKey:@text.strong,',
         },
       }
@@ -121,6 +122,11 @@ return {
           end
           return vim.o.columns >= 120 and 'default' or 'vertical'
         end,
+      },
+      actions = {
+        toggle_select = function(picker)
+          picker.list:select()
+        end
       }
     },
 
@@ -170,6 +176,7 @@ return {
             ['j'] = 'toggle_focus',
             ['k'] = 'focus_preview',
             ['<c-c>'] = { 'close', mode = { 'i', 'n' } },
+            ['<c-o>'] = { 'toggle_select', mode = { 'i', 'n' } },
             ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
             ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
             ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
@@ -183,6 +190,7 @@ return {
         list = {
           keys = {
             ['<c-c>'] = 'close',
+            ['<c-o>'] = 'toggle_select',
             ['<c-d>'] = 'preview_scroll_down',
             ['<c-u>'] = 'preview_scroll_up',
             ['<c-f>'] = 'list_scroll_down',
@@ -256,6 +264,7 @@ return {
     require('snacks').setup(opts)
     vim.cmd([[
       hi! link SnacksPickerBorder FloatBorder
+      hi! link SnacksPickerDimmed LspInlayHint
       hi! link SnacksPickerPathHidden SnacksPickerFile
       hi! SnacksPickerMatch guifg=#18a2fe gui=bold
       hi! SnacksPickerGitBranch guifg=#d7ba7d gui=bold
