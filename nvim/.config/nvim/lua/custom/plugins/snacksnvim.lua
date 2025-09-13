@@ -78,6 +78,7 @@ return {
       dashboard = {
         wo = {
           winhighlight = 'SnacksDashboardHeader:SnacksPickerIdx,'
+              .. 'SnacksDashboardFooter:@label,'
               .. 'SnacksDashboardKey:@text.strong,',
         },
       }
@@ -129,6 +130,11 @@ return {
     local defaults = require('snacks.picker.config.defaults').defaults
     local sources = require('snacks.picker.config.sources')
     local layouts = require('snacks.picker.config.layouts')
+    local actions = require('snacks.picker.actions')
+
+    actions.toggle_select = function(picker)
+      picker.list:select()
+    end
 
     defaults.icons = vim.tbl_deep_extend('keep', {
       ui = {
@@ -170,6 +176,7 @@ return {
             ['j'] = 'toggle_focus',
             ['k'] = 'focus_preview',
             ['<c-c>'] = { 'close', mode = { 'i', 'n' } },
+            ['<c-o>'] = { 'toggle_select', mode = { 'i', 'n' } },
             ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
             ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
             ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
@@ -183,6 +190,7 @@ return {
         list = {
           keys = {
             ['<c-c>'] = 'close',
+            ['<c-o>'] = 'toggle_select',
             ['<c-d>'] = 'preview_scroll_down',
             ['<c-u>'] = 'preview_scroll_up',
             ['<c-f>'] = 'list_scroll_down',
