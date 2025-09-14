@@ -81,10 +81,9 @@ vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
 vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   callback = function()
     local fts = {
-      'trouble', 'lazy', 'help', 'startup',
-      'fzf', 'snacks_input', 'NvimTree',
+      'trouble', 'lazy', 'help', 'startup', 'fzf',
       'dapui_breakpoints', 'dapui_scopes', 'dapui_stacks',
-      'dapui_watches', 'dapui_console', 'dap-repl',
+      'dapui_watches', 'dapui_console', 'dap-repl', 'snacks_input',
       'snacks_picker_list', 'snacks_picker_preview', 'snacks_dashboard',
     }
     if vim.iter(fts):any(function(ft)
@@ -128,18 +127,4 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     end
   end,
   group = augroup
-})
-
-local prev = { new_name = '', old_name = '' } -- Prevents duplicate events
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'NvimTreeSetup',
-  callback = function()
-    local events = require('nvim-tree.api').events
-    events.subscribe(events.Event.NodeRenamed, function(data)
-      if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
-        data = data
-        require('snacks').rename.on_rename_file(data.old_name, data.new_name)
-      end
-    end)
-  end,
 })

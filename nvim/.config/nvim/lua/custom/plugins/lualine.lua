@@ -88,7 +88,6 @@ M.opts = function()
             Avante = 'Avante',
             AvanteInput = 'Avante',
             AvanteSelectedFiles = 'Avante',
-            NvimTree = 'NvimTree',
             checkhealth = 'Health',
           },
           symbols = {

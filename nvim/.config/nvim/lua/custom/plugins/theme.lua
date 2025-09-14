@@ -26,7 +26,6 @@ M.opts = function()
     -- transparent = true,
     terminal_colors = false,
     italic_comments = true,
-    disable_nvimtree_bg = true,
 
     -- Override colors (see ./lua/vscode/colors.lua)
     color_overrides,
@@ -36,12 +35,6 @@ M.opts = function()
       CursorLine                     = { bg = colors.cursorline, },
       ColorColumn                    = { bg = colors.cursorline, },
       QuickFixLine                   = { bg = colors.cursorline, bold = true },
-      NvimTreeCursorLine             = { bg = colors.cursorline, },
-      NvimTreeGitDeleted             = { fg = colors.vscRed, bold = true },
-      NvimTreeGitIgnored             = { fg = colors.vscRed, },
-      NvimTreeFolderIcon             = { fg = colors.vscFront, },
-      NvimTreeGitNew                 = { fg = colors.gitUntracked, },
-      NvimTreeExecFile               = { fg = colors.gitUntracked, },
       SnacksPickerGitStatusModified  = { fg = colors.vscGitModified },
       SnacksPickerGitStatusUntracked = { fg = colors.gitUntracked },
       SnacksPickerGitStatusDeleted   = { fg = colors.vscRed },
@@ -86,7 +79,6 @@ M.config = function(_, opts)
     vim.cmd([[
       hi Normal guibg=NONE
       hi LineNr guibg=NONE
-      hi NvimTreeNormal guibg=NONE
       hi CursorLineNr guibg=NONE
       hi SignColumn guibg=NONE
       hi netrwDir guifg=#569CD6 guibg=NONE
