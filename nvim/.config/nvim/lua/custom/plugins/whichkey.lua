@@ -285,6 +285,11 @@ M.config = function(_, setup)
       desc = 'search workspace'
     },
     {
+      '<leader>sp',
+      function() require('snacks').picker.pickers() end,
+      desc = 'search workspace'
+    },
+    {
       '<leader>sh',
       function() require('snacks').picker.help() end,
       desc = 'Find HelpTags'
