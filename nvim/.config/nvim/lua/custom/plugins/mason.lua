@@ -28,14 +28,7 @@ M.opts = function()
         'eslint', 'tailwindcss', 'yamlls',
         'texlab', 'gopls', 'dockerls',
       },
-      -- Whether servers that are set up (via lspconfig) should be automatically
-      -- installed if they're not already installed.
-      -- This setting has no relation with the `ensure_installed` setting.
-      automatic_installation = false,
-
-      handlers = {
-        function(lsp_name) vim.lsp.enable(lsp_name) end
-      },
+      automatic_enable = true,
     }
   }
 end
