@@ -238,6 +238,11 @@ M.config = function(_, setup)
 
     { '<leader>s',  group = 'Search' },
     {
+      '<leader>sb',
+      function() require('snacks').picker.grep_buffers() end,
+      desc = 'Search in Buffers'
+    },
+    {
       '<leader>sc',
       function() require('snacks').picker.commands() end,
       desc = 'Commands'
@@ -246,6 +251,26 @@ M.config = function(_, setup)
       '<leader>sC',
       function() require('snacks').picker.colorschemes() end,
       desc = 'Colorscheme'
+    },
+    {
+      '<leader>sd',
+      function() require('snacks').picker.diagnostics_buffer() end,
+      desc = 'Diagnostics Buffer'
+    },
+    {
+      '<leader>sD',
+      function() require('snacks').picker.diagnostics() end,
+      desc = 'Diagnostics Workspace'
+    },
+    {
+      '<leader>si',
+      function() require('snacks').picker.icons() end,
+      desc = 'Find Icons'
+    },
+    {
+      '<leader>s\'',
+      function() require('snacks').picker.marks() end,
+      desc = 'Find Marks'
     },
     {
       '<leader>sH',
@@ -269,14 +294,24 @@ M.config = function(_, setup)
       desc = 'Registers'
     },
     {
+      '<leader>sg',
+      function() require('snacks').picker.git_grep({ hidden = true }) end,
+      desc = 'Search Git Files'
+    },
+    {
       '<leader>ss',
       function() require('snacks').picker.grep({ hidden = true }) end,
-      desc = 'search workspace'
+      desc = 'Search in Workspace'
+    },
+    {
+      '<leader>sS',
+      function() require('snacks').picker.lsp_workspace_symbols() end,
+      desc = 'Find Workspace Symbols'
     },
     {
       '<leader>sp',
       function() require('snacks').picker.pickers() end,
-      desc = 'search workspace'
+      desc = 'Select Picker'
     },
     {
       '<leader>sh',
@@ -284,14 +319,19 @@ M.config = function(_, setup)
       desc = 'Find HelpTags'
     },
     {
+      '<leader>sz',
+      function() require('snacks').picker.resume() end,
+      desc = 'Resume Picker'
+    },
+    {
       '<leader>sw',
       function() utils.search_string(vim.fn.expand('<cword>')) end,
-      desc = 'Find word Under Cursor'
+      desc = 'Find cword'
     },
     {
       '<leader>sW',
       function() utils.search_string(vim.fn.expand('<cWORD>')) end,
-      desc = 'Find WORD Under Cursor'
+      desc = 'Find cWORD'
     },
     {
       '<leader>s',

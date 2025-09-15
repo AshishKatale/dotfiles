@@ -175,7 +175,7 @@ return {
           keys = {
             ['j'] = 'toggle_focus',
             ['k'] = 'focus_preview',
-            ['<c-c>'] = { 'close', mode = { 'i', 'n' } },
+            ['<c-c>'] = { 'cancel', mode = { 'i', 'n' } },
             ['<c-o>'] = { 'toggle_select', mode = { 'i', 'n' } },
             ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
             ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
@@ -189,7 +189,7 @@ return {
         },
         list = {
           keys = {
-            ['<c-c>'] = 'close',
+            ['<c-c>'] = 'cancel',
             ['<c-o>'] = 'toggle_select',
             ['<c-d>'] = 'preview_scroll_down',
             ['<c-u>'] = 'preview_scroll_up',
