@@ -230,8 +230,6 @@ return {
             ['w'] = 'explorer_close_all',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
-            ['<c-p>'] = 'explorer_git_prev',
-            ['<c-n>'] = 'explorer_git_next',
           },
         },
       },

@@ -50,7 +50,11 @@ return {
         col = 1
       },
     })
-    vim.keymap.set({ 'n' }, '<C-p>', gitsigns.prev_hunk, { silent = true })
-    vim.keymap.set({ 'n' }, '<C-n>', gitsigns.next_hunk, { silent = true })
+    require('which-key').add({
+      { '<C-P>', gitsigns.prev_hunk, desc = 'Git hunk previous' },
+      { '[g',    gitsigns.prev_hunk, desc = 'Git hunk previous' },
+      { '<C-N>', gitsigns.next_hunk, desc = 'Git hunk next' },
+      { ']g',    gitsigns.next_hunk, desc = 'Git hunk next' },
+    })
   end,
 }
