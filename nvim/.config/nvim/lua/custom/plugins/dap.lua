@@ -3,6 +3,11 @@ return {
     'mfussenegger/nvim-dap',
     lazy = true,
     cmd = { 'DapContinue', 'DapToggleBreakpoint' },
+    keys = {
+      { '<leader>d',  desc = 'Debug' },
+      { '<leader>dd', '<cmd>DapContinue<cr>',         desc = 'DAP Continue' },
+      { '<leader>db', '<cmd>DapToggleBreakpoint<cr>', desc = 'Breakpoint' },
+    },
     dependencies = {
       'nvim-neotest/nvim-nio',
       'rcarriga/nvim-dap-ui',
@@ -40,11 +45,7 @@ return {
       vim.fn.sign_define('DapLogPoint', { text = '󰄯', texthl = 'DiagnosticSignHint' })
 
       which_key.add({
-        -- already added in which_key.lua
-        -- { '<leader>d',  group = 'Debug' },
-        -- { '<leader>dd', '<cmd>DapContinue<cr>',         desc = 'DAP Continue' },
-        -- { '<leader>db', '<cmd>DapToggleBreakpoint<cr>', desc = 'Breakpoint' },
-
+        { '<leader>d',  group = 'Debug' },
         { '<leader>dD', dap.disconnect,        desc = 'Disconnect' },
         { '<leader>dc', dap.continue,          desc = 'Continue' },
         { '<leader>dC', dap.run_to_cursor,     desc = 'Run to Cursor' },

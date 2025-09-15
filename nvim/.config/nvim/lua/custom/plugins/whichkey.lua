@@ -105,7 +105,7 @@ M.config = function(_, setup)
     { '<leader>\\', '<cmd>enew<cr>',           desc = 'New buffer' },
 
     { '<leader>b',  group = 'Buffer' },
-    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',  desc = 'Remove trailing' },
+    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',  desc = 'Trim trailing spaces' },
     { '<leader>E',  '<cmd>FloatTerm vifm<cr>', desc = 'Vifm' },
     {
       '<leader>e',
@@ -122,17 +122,13 @@ M.config = function(_, setup)
       function() require('snacks').picker.recent() end,
       desc = 'Old Files'
     },
-    { '<leader>bu', '<cmd>UndotreeToggle<cr>',      desc = 'Undo Tree' },
-    { '<leader>by', '<cmd>%y<cr>',                  desc = 'Yank buffer' },
-    { '<leader>bY', '<cmd>%y+<cr>',                 desc = 'Copy buffer' },
-    { '<leader>bb', utils.scratch_buffer,           desc = 'Scratch Pad' },
-
-    { '<leader>d',  group = 'Debug' },
-    { '<leader>dd', '<cmd>DapContinue<cr>',         desc = 'DAP Continue' },
-    { '<leader>db', '<cmd>DapToggleBreakpoint<cr>', desc = 'Breakpoint' },
+    { '<leader>bu', '<cmd>UndotreeToggle<cr>', desc = 'Undo Tree' },
+    { '<leader>by', '<cmd>%y<cr>',             desc = 'Yank buffer' },
+    { '<leader>bY', '<cmd>%y+<cr>',            desc = 'Copy buffer' },
+    { '<leader>bb', utils.scratch_buffer,      desc = 'Scratch Pad' },
 
     { '<leader>g',  group = 'Git' },
-    { '<leader>gg', utils.lazy_git,                 desc = 'LazyGit' },
+    { '<leader>gg', utils.lazy_git,            desc = 'LazyGit' },
     {
       '<leader>gf',
       function() require('snacks').picker.git_files() end,
@@ -162,11 +158,6 @@ M.config = function(_, setup)
       '<leader>gh',
       function() require('snacks').picker.git_log_file() end,
       desc = 'File history'
-    },
-    {
-      '<leader>gB',
-      "<cmd>lua require('gitsigns').blame()<cr>",
-      desc = 'Blame'
     },
     {
       '<leader>gG',
@@ -202,6 +193,11 @@ M.config = function(_, setup)
       '<leader>gU',
       "<cmd>lua require('gitsigns').undo_stage_hunk()<cr>",
       desc = 'Undo stage hunk'
+    },
+    {
+      '<leader>gB',
+      "<cmd>exec \"lua require('gitsigns').blame()\" | wincmd h<cr>",
+      desc = 'Blame'
     },
     {
       '<leader>gd',
