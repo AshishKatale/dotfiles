@@ -215,6 +215,7 @@ M.config = function(_, setup)
     { '<leader>om', '<cmd>Mason<cr>',               desc = 'Mason' },
 
     { '<leader>q',  group = 'QuickFix' },
+    { '<leader>qq', '<cmd>copen<cr>',               desc = 'QuickFix List' },
     { '<leader>qf', '<cmd>Trouble qflist<cr>',      desc = 'Trouble QfList' },
     { '<leader>qp', '<cmd>cprev<cr>',               desc = 'QuickFix Prev' },
     { '<leader>qn', '<cmd>cnext<cr>',               desc = 'QuickFix Next' },
@@ -223,14 +224,6 @@ M.config = function(_, setup)
     { '<leader>qt', '<cmd>TodoTrouble<cr>',         desc = 'Todos' },
     { '<leader>qd', '<cmd>Trouble diagnostics<cr>', desc = 'Diagnostics' },
     { '<leader>qg', '<cmd>Gitsigns setqflist<cr>',  desc = 'Git Hunks' },
-    {
-      '<leader>qq',
-      function()
-        require('nvim-tree.api').tree.close()
-        vim.cmd('copen')
-      end,
-      desc = 'QuickFix List'
-    },
     {
       '<leader>qi',
       '<cmd>Trouble lsp_implementations<cr>',
