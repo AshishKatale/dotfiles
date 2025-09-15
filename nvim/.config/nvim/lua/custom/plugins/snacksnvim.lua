@@ -24,7 +24,7 @@ return {
           { icon = '󱎸 ', key = 's', desc = 'Search Text', action = ":lua Snacks.dashboard.pick('live_grep', { hidden = true })" },
           { icon = '󰊢 ', key = 'g', desc = 'Git Status', action = ":lua Snacks.dashboard.pick('git_status')" },
           { icon = '󱀲 ', key = 'o', desc = 'Old Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+          { icon = '󰒲 ', key = 'z', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
           { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
           {
             icon = ' ',

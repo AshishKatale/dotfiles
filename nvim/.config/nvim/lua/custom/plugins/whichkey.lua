@@ -210,7 +210,7 @@ M.config = function(_, setup)
     },
 
     { '<leader>o',  group = 'Open' },
-    { '<leader>oL', '<cmd>Lazy<cr>',                desc = 'Lazy' },
+    { '<leader>oz', '<cmd>Lazy<cr>',                desc = 'Lazy' },
     { '<leader>ol', '<cmd>checkhealth vim.lsp<cr>', desc = 'LspInfo' },
     { '<leader>om', '<cmd>Mason<cr>',               desc = 'Mason' },
 
