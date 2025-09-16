@@ -126,6 +126,16 @@ return {
       actions = {
         toggle_select = function(picker)
           picker.list:select()
+        end,
+        picker_grep_prompt = function(_, item)
+          if item then
+            local cwd = require('snacks').picker.util.dir(item)
+            require('snacks').picker.grep({
+              cwd = cwd,
+              hidden = true,
+              title = ' Grep [' .. vim.fn.fnamemodify(cwd, ':t') .. '] ',
+            })
+          end
         end
       }
     },
@@ -228,6 +238,7 @@ return {
             ['='] = 'explorer_focus',
             ['n'] = 'explorer_add',
             ['w'] = 'explorer_close_all',
+            ['/'] = 'picker_grep_prompt',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
           },
