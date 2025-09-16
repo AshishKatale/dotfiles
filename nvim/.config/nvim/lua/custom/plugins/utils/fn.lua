@@ -7,14 +7,6 @@ M.search_string = function(text)
   })
 end
 
-M.find_in_dir = function(cwd_path, dirname)
-  require('snacks').picker.grep({
-    cwd = cwd_path,
-    hidden = true,
-    ['winopts.title'] = ' Find in [' .. dirname .. '] ',
-  })
-end
-
 M.search_selection = function()
   local sel_start, sel_end = vim.fn.getpos('v'), vim.fn.getpos('.')
   local line_start, col_start = sel_start[2], sel_start[3]
@@ -184,7 +176,6 @@ M.set_filetype = function()
   local filetypes = vim.fn.getcompletion('', 'filetype')
   require('snacks').picker.select(filetypes, {
     prompt = 'Set Filetype',
-    format_item = function(item) return item end,
   }, function(choice)
     if not choice then return end
     vim.cmd.setfiletype(choice)
