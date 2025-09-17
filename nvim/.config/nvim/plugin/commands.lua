@@ -12,18 +12,6 @@ vim.api.nvim_create_user_command(
   { nargs = '?' }
 )
 
-vim.api.nvim_create_user_command('FloatTerm', function()
-  require('snacks').terminal(nil, {
-    auto_close = true,
-    win = {
-      position = 'float',
-      border = 'rounded',
-      height = 0.85,
-      width = 0.85,
-    }
-  })
-end, {})
-
 ------------ Custom AutoCommands ------------
 
 -- highlight text on yank

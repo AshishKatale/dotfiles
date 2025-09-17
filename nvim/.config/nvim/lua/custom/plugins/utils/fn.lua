@@ -7,6 +7,35 @@ M.search_string = function(text)
   })
 end
 
+M.toggle_term = function(position)
+  if not position then
+    position = 'float'
+  end
+
+  if position == 'float' then
+    require('snacks').terminal(nil, {
+      auto_close = true,
+      win = {
+        position = 'float',
+        border = 'rounded',
+        height = 0.85,
+        width = 0.85,
+      }
+    })
+  elseif position == 'bottom' then
+    require('snacks').terminal(nil, {
+      win = { wo = { winbar = '' } }
+    })
+  elseif position == 'right' then
+    require('snacks').terminal(nil, {
+      win = {
+        position = 'right',
+        wo = { winbar = '' }
+      }
+    })
+  end
+end
+
 M.search_selection = function()
   local sel_start, sel_end = vim.fn.getpos('v'), vim.fn.getpos('.')
   local line_start, col_start = sel_start[2], sel_start[3]

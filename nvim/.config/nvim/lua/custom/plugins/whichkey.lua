@@ -365,11 +365,24 @@ M.config = function(_, setup)
     { '<leader>zz',      '<cmd>lua Snacks.zen()<cr>',     desc = 'Zen mode' },
 
     { '<localleader>',   group = 'Local Leader' },
-    { '<localleader>_',  '<cmd>new term://$SHELL<cr>',    desc = 'Terminal bottom' },
-    { '<localleader>|',  '<cmd>vnew term://$SHELL<cr>',   desc = 'Terminal right' },
     { '<localleader>\\', '<cmd>tabnew term://$SHELL<cr>', desc = 'Terminal tab' },
+    {
+      '<localleader>-',
+      function() utils.toggle_term('float') end,
+      desc = 'Terminal bottom'
+    },
+    {
+      '<localleader>_',
+      function() utils.toggle_term('bottom') end,
+      desc = 'Terminal bottom'
+    },
+    {
+      '<localleader>|',
+      function() utils.toggle_term('right') end,
+      desc = 'Terminal bottom'
+    },
 
-    { '<C-k>',           group = 'Control-K' },
+    { '<C-k>', group = 'Control-K' },
     {
       mode = { 'n' },
       { '<C-k>l', utils.set_filetype, desc = 'Set Filetype' },
