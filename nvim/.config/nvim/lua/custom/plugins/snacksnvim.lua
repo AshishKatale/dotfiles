@@ -215,6 +215,7 @@ return {
         preview = {
           keys = {
             ['<c-c>'] = 'cancel',
+            ['<a-m>'] = 'toggle_maximize',
             ['<c-a-p>'] = 'toggle_preview'
           },
         },

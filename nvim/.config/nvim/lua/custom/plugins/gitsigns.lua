@@ -51,10 +51,86 @@ return {
       },
     })
     require('which-key').add({
-      { '<C-P>', gitsigns.prev_hunk, desc = 'Git hunk previous' },
-      { '[g',    gitsigns.prev_hunk, desc = 'Git hunk previous' },
-      { '<C-N>', gitsigns.next_hunk, desc = 'Git hunk next' },
-      { ']g',    gitsigns.next_hunk, desc = 'Git hunk next' },
+      { '<C-P>',      gitsigns.prev_hunk,           desc = 'Git hunk previous' },
+      { '[g',         gitsigns.prev_hunk,           desc = 'Git hunk previous' },
+      { '<C-N>',      gitsigns.next_hunk,           desc = 'Git hunk next' },
+      { ']g',         gitsigns.next_hunk,           desc = 'Git hunk next' },
+
+      { '<leader>g',  group = 'Git' },
+      { '<leader>gp', gitsigns.preview_hunk,        desc = 'Preview hunk' },
+      { '<leader>gP', gitsigns.preview_hunk_inline, desc = 'Preview hunk inline' },
+      { '<leader>gr', gitsigns.reset_hunk,          desc = 'Reset hunk' },
+      { '<leader>gR', gitsigns.reset_buffer,        desc = 'Reset buffer' },
+      { '<leader>gS', gitsigns.stage_hunk,          desc = 'Stage hunk' },
+      { '<leader>gU', gitsigns.undo_stage_hunk,     desc = 'Undo stage hunk' },
+      { '<leader>gG', '<cmd>Gitsigns<cr>',          desc = 'GitSigns menu' },
+      {
+        '<leader>gg',
+        require('custom.plugins.utils.fn').lazy_git,
+        desc = 'LazyGit'
+      },
+      {
+        '<leader>gB',
+        "<cmd>exec \"lua require('gitsigns').blame()\" | wincmd h<cr>",
+        desc = 'Blame'
+      },
+      {
+        '<leader>gd',
+        "<cmd>exec \"lua require('gitsigns').diffthis()\" | wincmd h<cr>",
+        desc = 'File diff'
+      },
+      {
+        '<leader>gf',
+        function() require('snacks').picker.git_files() end,
+        desc = 'Git Files'
+      },
+      {
+        '<leader>gs',
+        function() require('snacks').picker.git_status() end,
+        desc = 'Git status'
+      },
+      {
+        '<leader>gb',
+        function() require('snacks').picker.git_branches() end,
+        desc = 'Branches'
+      },
+      {
+        '<leader>gl',
+        function() require('snacks').picker.git_log_line() end,
+        desc = 'Git line history'
+      },
+      {
+        '<leader>gc',
+        function() require('snacks').picker.git_log() end,
+        desc = 'Git commit log'
+      },
+      {
+        '<leader>gh',
+        function() require('snacks').picker.git_log_file() end,
+        desc = 'File history'
+      },
+
+      { '<leader>go', group = 'Browse' },
+      {
+        '<leader>gob',
+        function() require('snacks').gitbrowse.open({ what = 'branch' }) end,
+        desc = 'Branch'
+      },
+      {
+        '<leader>goc',
+        function() require('snacks').gitbrowse.open({ what = 'commit' }) end,
+        desc = 'Commit'
+      },
+      {
+        '<leader>gor',
+        function() require('snacks').gitbrowse.open({ what = 'repo' }) end,
+        desc = 'Repo'
+      },
+      {
+        '<leader>gof',
+        function() require('snacks').gitbrowse.open({ what = 'file' }) end,
+        desc = 'File'
+      },
     })
   end,
 }
