@@ -6,12 +6,12 @@ return {
   lazy = false,
   opts = {
     notifier = { enabled = false },
-    explorer = { enabled = false },
     words = { enabled = false },
     scope = { enabled = false },
     scroll = { enabled = false },
 
     bigfile = { enabled = true },
+    explorer = { enabled = true },
     quickfile = { enabled = true },
     input = { icon = '' },
 
@@ -21,8 +21,8 @@ return {
         keys = {
           { icon = '󰻭 ', key = 'n', desc = 'New File', action = ':enew' },
           { icon = '󰱽 ', key = 'b', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files', { hidden = true })" },
-          { icon = '󱎸 ', key = 's', desc = 'Search Text', action = ":lua Snacks.dashboard.pick('live_grep', { hidden = true })" },
-          { icon = '󰊢 ', key = 'g', desc = 'Git Status', action = ":lua Snacks.dashboard.pick('git_status')" },
+          { icon = '󱎸 ', key = 'f', desc = 'Search Text', action = ":lua Snacks.dashboard.pick('live_grep', { hidden = true })" },
+          { icon = '󰊢 ', key = 's', desc = 'Git Status', action = ":lua Snacks.dashboard.pick('git_status')" },
           { icon = '󱀲 ', key = 'o', desc = 'Old Files', action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = '󰒲 ', key = 'z', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
           { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
@@ -127,7 +127,7 @@ return {
         toggle_select = function(picker)
           picker.list:select()
         end,
-        picker_grep_prompt = function(_, item)
+        picker_grep_dir = function(_, item)
           if item then
             local cwd = require('snacks').picker.util.dir(item)
             require('snacks').picker.grep({
@@ -136,7 +136,18 @@ return {
               title = ' Grep [' .. vim.fn.fnamemodify(cwd, ':t') .. '] ',
             })
           end
-        end
+        end,
+        toggle_maximize_preview = function(picker)
+          if picker._fullscreen then
+            picker._fullscreen = false
+            picker:set_layout('default')
+          else
+            picker._fullscreen = true
+            picker:set_layout('preview_maximized')
+          end
+          picker.layout.opts.fullscreen = picker._fullscreen
+          picker.layout:update()
+        end,
       }
     },
 
@@ -191,9 +202,9 @@ return {
             ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
             ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
             ['<c-b>'] = { 'list_scroll_up', mode = { 'i', 'n' } },
+            ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
             ['<a-p>'] = { 'history_back', mode = { 'i', 'n' } },
             ['<a-n>'] = { 'history_forward', mode = { 'i', 'n' } },
-            ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
             ['<c-a-p>'] = { 'toggle_preview', mode = { 'i', 'n' } },
           }
         },
@@ -214,8 +225,8 @@ return {
         },
         preview = {
           keys = {
+            ['<a-m>'] = 'toggle_maximize_preview',
             ['<c-c>'] = 'cancel',
-            ['<a-m>'] = 'toggle_maximize',
             ['<c-a-p>'] = 'toggle_preview'
           },
         },
@@ -239,7 +250,7 @@ return {
             ['='] = 'explorer_focus',
             ['n'] = 'explorer_add',
             ['w'] = 'explorer_close_all',
-            ['/'] = 'picker_grep_prompt',
+            ['f'] = 'picker_grep_dir',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
           },
@@ -254,6 +265,17 @@ return {
       }
     }, layouts.default)
     layouts.default.layout[2].width = 0.55 -- preview width
+
+    layouts.preview_maximized = {
+      layout = {
+        box = 'horizontal',
+        {
+          win = 'preview',
+          border = 'rounded',
+          wo = { statuscolumn = '%l ' }
+        },
+      },
+    }
 
     layouts.dropdown_centered = vim.tbl_deep_extend('keep', {
       preview = false,
