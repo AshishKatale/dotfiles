@@ -264,7 +264,10 @@ return {
         width = 0.85,
       }
     }, layouts.default)
-    layouts.default.layout[2].width = 0.55 -- preview width
+    layouts.default.layout[2].width = 0.55   -- preview width
+
+    layouts.vertical.layout.height = 0.85
+    layouts.vertical.layout[3].height = 0.65 -- preview height (vertical)
 
     layouts.preview_maximized = {
       layout = {

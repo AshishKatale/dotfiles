@@ -69,20 +69,23 @@ vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
 vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   callback = function()
     local fts = {
-      'trouble', 'lazy', 'help', 'startup', 'fzf',
-      'dapui_breakpoints', 'dapui_scopes', 'dapui_stacks',
-      'dapui_watches', 'dapui_console', 'dap-repl', 'snacks_input',
-      'snacks_picker_list', 'snacks_picker_preview', 'snacks_dashboard',
+      lazy = true,
+      help = true,
+      trouble = true,
+      startup = true,
+      ['dap-repl'] = true,
+      dapui_scopes = true,
+      dapui_stacks = true,
+      dapui_watches = true,
+      dapui_console = true,
+      dapui_breakpoints = true,
+      snacks_input = true,
+      snacks_dashboard = true,
+      snacks_picker_list = true,
+      snacks_picker_preview = true,
     }
-    if vim.iter(fts):any(function(ft)
-          return ft == vim.bo.filetype
-        end)
-    then
-      return
-    end
-    if not vim.o.relativenumber then
-      vim.api.nvim_set_option_value('relativenumber', true, { win = 0 })
-    end
+    if fts[vim.bo.filetype] then return end
+    vim.api.nvim_set_option_value('relativenumber', true, { win = 0 })
   end,
   group = augroup
 })
@@ -97,6 +100,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     if opt.match == 'qf' or opt.match == 'help' or vim.bo.buftype == 'help' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
       vim.api.nvim_set_option_value('number', true, { win = 0 })
+      vim.api.nvim_set_option_value('statuscolumn', ' %l  ', { win = 0 })
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
     elseif opt.match == 'man' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
