@@ -52,10 +52,9 @@ return {
         git_hl = true,                   -- use Git Signs hl for fold icons
       },
       git = {
-        -- patterns to match Git signs
-        patterns = { 'GitSign' },
+        patterns = { 'GitSign' }, -- patterns to match Git signs
       },
-      refresh = 50, -- refresh at most every 50ms
+      refresh = 50,               -- refresh at most every 50ms
     },
 
     styles = {
@@ -258,16 +257,18 @@ return {
       },
     }, sources.explorer);
 
-    layouts.default = vim.tbl_deep_extend('keep', {
-      layout = {
-        height = 0.85,
-        width = 0.85,
-      }
-    }, layouts.default)
-    layouts.default.layout[2].width = 0.55   -- preview width
+    -- default layout
+    layouts.default.layout.height = 0.85   -- layout height
+    layouts.default.layout.width = 0.85    -- layout width
+    layouts.default.layout[2].width = 0.55 -- preview width
 
-    layouts.vertical.layout.height = 0.85
-    layouts.vertical.layout[3].height = 0.65 -- preview height (vertical)
+    -- vertical layout
+    layouts.vertical.layout.height = 0.85    -- layout height
+    layouts.vertical.layout[3].height = 0.65 -- preview height
+
+    -- select layout
+    layouts.select.layout.width = 0.5     -- height
+    layouts.select.layout.max_height = 15 -- height
 
     layouts.preview_maximized = {
       layout = {
@@ -288,13 +289,6 @@ return {
         width = 0.5,
       }
     }, layouts.dropdown)
-
-    layouts.select = vim.tbl_deep_extend('keep', {
-      layout = {
-        width = 0.5,
-        max_height = 15,
-      },
-    }, layouts.select)
 
     require('snacks').setup(opts)
     vim.cmd([[
