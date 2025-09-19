@@ -42,35 +42,49 @@ case "$1" in
   ;;
 esac
 
+tmux_pgrep="$(pgrep tmux)"
+if [ -n "$tmux_pgrep" ] && [ -n "$(tmux ls | wc -l)" ]; then
+  existing_sessions=$(
+    tmux ls -F '#S' | xargs -I{} tmux display-message -p -t {} '#S #{pane_start_path}'
+    echo " "
+  )
+fi
+
 if [ -n "$1" ] && [ -d "$1" ]; then
   selected=$(realpath $1)
 elif which fd &> /dev/null; then
   projects=$(
+    echo -n "$existing_sessions"
     echo $HOME/dotfiles
     fd --type=directory --min-depth=1 --max-depth=2 . $HOME/workspace | sed 's/\/$//'
   )
 else
   projects=$(
+    echo -n "$existing_sessions"
     echo $HOME/dotfiles
     find $HOME/workspace -mindepth 1 -maxdepth 2 -type d
   )
 fi
 
 if [ -n "$projects" ]; then
-  selected=$(echo "$projects" | fzf --tmux='center,50%,40%' --scheme='path')
-  # selected=$(echo "$projects" | ONE_COLUMN=true rofi -dmenu -p "  tmux ")
+  selected=$( echo "$projects" | fzf \
+      --with-nth=1 --delimiter=' ' --tmux='center,50%,40%' --scheme='path')
 fi
 
-if [ -z "$selected" ]; then
-    exit 0
+existing_session_pwd=$(echo "$selected" | cut -s -d' ' -f2)
+if [ -n "$existing_session_pwd" ]; then
+  selected="$existing_session_pwd"
+fi
+
+if [ -z "$selected" ] || [ "$selected" = " " ]; then
+  exit 0
 fi
 
 selected_dirname=$(basename "$selected" | tr . _)
 selected_parent_dirname="$(basename $(dirname "$selected") | tr . _)"
 session_name="$selected_parent_dirname/$selected_dirname"
-tmux_running="$(pgrep tmux)"
 
-if [ -z "$TMUX" ] && [ -z "$tmux_running" ]; then
+if [ -z "$TMUX" ] && [ -z "$tmux_pgrep" ]; then
   tmux new-session -s "$session_name" -c "$selected"
   exit 0
 fi
