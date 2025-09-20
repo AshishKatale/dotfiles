@@ -122,10 +122,10 @@ M.config = function(_, setup)
       function() require('snacks').picker.recent() end,
       desc = 'Old Files'
     },
-    { '<leader>bu', '<cmd>UndotreeToggle<cr>', desc = 'Undo Tree' },
-    { '<leader>by', '<cmd>%y<cr>',             desc = 'Yank buffer' },
-    { '<leader>bY', '<cmd>%y+<cr>',            desc = 'Copy buffer' },
-    { '<leader>bb', utils.scratch_buffer,      desc = 'Scratch Pad' },
+    { '<leader>bu', '<cmd>UndotreeToggle<cr>',      desc = 'Undo Tree' },
+    { '<leader>by', '<cmd>%y<cr>',                  desc = 'Yank buffer' },
+    { '<leader>bY', '<cmd>%y+<cr>',                 desc = 'Copy buffer' },
+    { '<leader>bb', utils.scratch_buffer,           desc = 'Scratch Pad' },
 
     { '<leader>o',  group = 'Open' },
     { '<leader>oz', '<cmd>Lazy<cr>',                desc = 'Lazy' },
@@ -226,11 +226,6 @@ M.config = function(_, setup)
       desc = 'Search in Workspace'
     },
     {
-      '<leader>sS',
-      function() require('snacks').picker.lsp_workspace_symbols() end,
-      desc = 'Find Workspace Symbols'
-    },
-    {
       '<leader>sp',
       function() require('snacks').picker.pickers() end,
       desc = 'Select Picker'
@@ -264,22 +259,26 @@ M.config = function(_, setup)
 
     { '<leader>t',  group = 'Toggle' },
     { '<leader>tw', '<cmd>set wrap!<cr>',             desc = 'Line wrap' },
-    { '<leader>tm', '<cmd>RenderMarkdown toggle<cr>', desc = 'Render markdown' },
-    { '<leader>tM', '<cmd>set showmode!<cr>',         desc = 'Show mode' },
+    { '<leader>tm', '<cmd>set showmode!<cr>',         desc = 'Show mode' },
     { '<leader>ts', '<cmd>set spell!<cr>',            desc = 'Spell check' },
+    { '<leader>tf', '<cmd>set foldenable!<cr>',       desc = 'Folding' },
     { '<leader>tc', '<cmd>ColorizerToggle<cr>',       desc = 'Colorizer' },
     { '<leader>tg', '<cmd>Gitsigns toggle_signs<cr>', desc = 'Gitsigns' },
-    { '<leader>tt', '<cmd>TSContextToggle<cr>',       desc = 'Treesitter context' },
-    { '<leader>tT', '<cmd>TSToggle highlight<cr>',    desc = 'Treesitter highlight' },
-    { '<leader>tf', '<cmd>set foldenable!<cr>',       desc = 'Folding' },
-    { '<leader>tF', utils.toggle_format_on_save,      desc = 'Format on Save' },
-    { '<leader>tC', utils.toggle_color_column,        desc = 'Color Column' },
-    { '<leader>tb', utils.toggle_indent_guides,       desc = 'Blankline' },
-    { '<leader>td', utils.toggle_diagnostic,          desc = 'Diagnostics' },
+    { '<leader>tH', '<cmd>TSToggle highlight<cr>',    desc = 'Treesitter highlight' },
     { '<leader>th', utils.toggle_inlay_hints,         desc = 'Inlay hints' },
-    { '<leader>to', utils.toggle_opacity,             desc = 'Background Opacity' },
+    { '<leader>td', utils.toggle_diagnostic,          desc = 'Diagnostics' },
+    { '<leader>to', utils.toggle_opacity,             desc = 'Background opacity' },
+    { '<leader>ti', utils.toggle_indent_guides,       desc = 'Indent guides' },
+    { '<leader>tl', utils.toggle_list_chars,          desc = 'List chars' },
+    { '<leader>tF', utils.toggle_format_on_save,      desc = 'Format on Save' },
+    { '<leader>tC', utils.toggle_color_column,        desc = 'Color column' },
     {
-      '<leader>tB',
+      '<leader>tt',
+      function() require('treesitter-context').toggle() end,
+      desc = 'Treesitter context'
+    },
+    {
+      '<leader>tb',
       '<cmd>Gitsigns toggle_current_line_blame<cr>',
       desc = 'Git Blame'
     },

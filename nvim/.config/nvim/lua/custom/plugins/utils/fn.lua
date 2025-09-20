@@ -99,27 +99,19 @@ M.toggle_diagnostic = function()
 end
 
 M.toggle_color_column = function()
-  local colorcolumn = tonumber(vim.api.nvim_get_option_value('colorcolumn', {
-    scope = 'local'
-  }))
-  if colorcolumn and colorcolumn > 0 then
-    vim.api.nvim_set_option_value('colorcolumn', '', { scope = 'local' })
-  else
-    vim.api.nvim_set_option_value('colorcolumn', '81', { scope = 'local' })
-  end
+  vim.wo.colorcolumn = (vim.wo.colorcolumn == '81') and '' or '81'
 end
 
-M.toggle_indent_guides = function(off)
+M.toggle_indent_guides = function()
   local snacks = require('snacks')
-
   if snacks.indent.enabled then
     snacks.indent.disable()
   else
     snacks.indent.enable()
   end
+end
 
-  if off then return end
-
+M.toggle_list_chars = function()
   if not vim.gg.listchars then
     vim.opt.listchars:append('eol:↲') -- render eol as ↴
     vim.opt.listchars:append('tab:→ ') -- render tab as →

@@ -43,7 +43,7 @@ local function set_lsp_keymaps(bufnr)
     {
       'K',
       '<cmd>lua vim.lsp.buf.hover({max_width=100,max_height=24,border="rounded"})<CR>',
-      desc = 'LSP Code action',
+      desc = 'LSP hover',
       buffer = bufnr
     },
 
@@ -74,12 +74,6 @@ local function set_lsp_keymaps(bufnr)
     },
 
     { 'g', group = 'Go to' },
-    {
-      'grf',
-      vim.diagnostic.open_float,
-      desc = 'Focus diagnostic float window',
-      buffer = bufnr
-    },
     {
       'gd',
       '<cmd>lua vim.lsp.buf.definition()<CR>',
@@ -120,12 +114,6 @@ local function set_lsp_keymaps(bufnr)
       'gn',
       '<cmd>lua vim.diagnostic.goto_next()<CR>',
       desc = 'Next diagnostic',
-      buffer = bufnr
-    },
-    {
-      'gt',
-      '<cmd>lua vim.lsp.buf.type_definition()<CR>',
-      desc = 'Type Definition',
       buffer = bufnr
     },
   })
