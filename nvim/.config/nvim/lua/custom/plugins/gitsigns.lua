@@ -51,19 +51,13 @@ return {
       },
     })
     require('which-key').add({
-      { '<C-P>',      gitsigns.prev_hunk,           desc = 'Git hunk previous' },
-      { '[g',         gitsigns.prev_hunk,           desc = 'Git hunk previous' },
-      { '<C-N>',      gitsigns.next_hunk,           desc = 'Git hunk next' },
-      { ']g',         gitsigns.next_hunk,           desc = 'Git hunk next' },
-
       { '<leader>g',  group = 'Git' },
       { '<leader>gp', gitsigns.preview_hunk,        desc = 'Preview hunk' },
       { '<leader>gP', gitsigns.preview_hunk_inline, desc = 'Preview hunk inline' },
       { '<leader>gr', gitsigns.reset_hunk,          desc = 'Reset hunk' },
       { '<leader>gR', gitsigns.reset_buffer,        desc = 'Reset buffer' },
-      { '<leader>gS', gitsigns.stage_hunk,          desc = 'Stage hunk' },
-      { '<leader>gU', gitsigns.undo_stage_hunk,     desc = 'Undo stage hunk' },
       { '<leader>gG', '<cmd>Gitsigns<cr>',          desc = 'GitSigns menu' },
+      { '<leader>gS', gitsigns.stage_hunk,          desc = 'Stage hunk' },
       {
         '<leader>gg',
         require('custom.plugins.utils.fn').lazy_git,
@@ -130,6 +124,28 @@ return {
         '<leader>gof',
         function() require('snacks').gitbrowse.open({ what = 'file' }) end,
         desc = 'File'
+      },
+
+      ---@diagnostic disable: param-type-mismatch
+      {
+        '[g',
+        function() gitsigns.nav_hunk('prev') end,
+        desc = 'Git hunk previous'
+      },
+      {
+        ']g',
+        function() gitsigns.nav_hunk('next') end,
+        desc = 'Git hunk next'
+      },
+      {
+        '<C-P>',
+        function() gitsigns.nav_hunk('prev') end,
+        desc = 'Git hunk previous'
+      },
+      {
+        '<C-N>',
+        function() gitsigns.nav_hunk('next') end,
+        desc = 'Git hunk next'
       },
     })
   end,

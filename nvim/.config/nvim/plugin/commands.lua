@@ -102,6 +102,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
       vim.api.nvim_set_option_value('number', true, { win = 0 })
       vim.api.nvim_set_option_value('statuscolumn', ' %l  ', { win = 0 })
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
+      vim.api.nvim_set_option_value('wrap', false, { win = 0 })
     elseif opt.match == 'man' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
     elseif opt.match == 'netrw' then

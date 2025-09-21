@@ -48,13 +48,18 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'lazydev', 'path', 'snippets', 'buffer' },
         providers = {
           lsp = { name = ' LSP', opts = { tailwind_color_icon = '󰚍 ' }, },
           path = { name = 'PATH' },
           snippets = { name = 'SNIP' },
           buffer = { name = ' BUF' },
           cmdline = { name = ' CMD' },
+          lazydev = {
+            name = 'LazyDev',
+            module = 'lazydev.integrations.blink',
+            score_offset = 100,
+          },
         },
       },
 

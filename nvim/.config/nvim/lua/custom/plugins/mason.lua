@@ -34,11 +34,7 @@ M.opts = function()
 end
 
 M.config = function(_, opts)
-  local capabilities = vim.tbl_deep_extend(
-    'force',
-    vim.lsp.protocol.make_client_capabilities(),
-    require('blink.cmp').get_lsp_capabilities({}, false)
-  )
+  local capabilities = require('blink.cmp').get_lsp_capabilities({}, true)
 
   require('custom.plugins.utils.nvimlsp').setup()
   vim.lsp.config('*', { capabilities = capabilities })

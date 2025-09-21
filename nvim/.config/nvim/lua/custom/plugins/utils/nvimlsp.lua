@@ -48,7 +48,7 @@ local function set_lsp_keymaps(bufnr)
     },
 
     {
-      '<leader>c',
+      '<leader>a',
       '<cmd>lua vim.lsp.buf.code_action()<CR>',
       desc = 'LSP Code action',
       buffer = bufnr
