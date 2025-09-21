@@ -270,6 +270,7 @@ M.config = function(_, setup)
     { '<leader>to', utils.toggle_opacity,             desc = 'Background opacity' },
     { '<leader>ti', utils.toggle_indent_guides,       desc = 'Indent guides' },
     { '<leader>tl', utils.toggle_list_chars,          desc = 'List chars' },
+    { '<leader>tn', utils.toggle_number,              desc = 'Line numbers' },
     { '<leader>tF', utils.toggle_format_on_save,      desc = 'Format on Save' },
     { '<leader>tC', utils.toggle_color_column,        desc = 'Color column' },
     {

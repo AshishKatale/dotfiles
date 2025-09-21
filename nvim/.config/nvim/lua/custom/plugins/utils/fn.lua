@@ -7,6 +7,31 @@ M.search_string = function(text)
   })
 end
 
+M.search_selection = function()
+  local sel_start, sel_end = vim.fn.getpos('v'), vim.fn.getpos('.')
+  local line_start, col_start = sel_start[2], sel_start[3]
+  local line_end, col_end = sel_end[2], sel_end[3]
+  if col_end < col_start then
+    col_start, col_end = col_end, col_start
+  end
+  local visual_select = vim.api.nvim_buf_get_text(
+    0, line_start - 1, col_start - 1,
+    line_end - 1, col_end, {}
+  )
+  local text = vim.tbl_get(visual_select, 1)
+  M.search_string(text)
+end
+
+M.range_format = function()
+  vim.lsp.buf.format({
+    async = true,
+    range = {
+      ['start'] = vim.api.nvim_buf_get_mark(0, '<'),
+      ['end'] = vim.api.nvim_buf_get_mark(0, '>'),
+    }
+  })
+end
+
 M.toggle_term = function(position)
   if not position then
     position = 'float'
@@ -34,21 +59,6 @@ M.toggle_term = function(position)
       }
     })
   end
-end
-
-M.search_selection = function()
-  local sel_start, sel_end = vim.fn.getpos('v'), vim.fn.getpos('.')
-  local line_start, col_start = sel_start[2], sel_start[3]
-  local line_end, col_end = sel_end[2], sel_end[3]
-  if col_end < col_start then
-    col_start, col_end = col_end, col_start
-  end
-  local visual_select = vim.api.nvim_buf_get_text(
-    0, line_start - 1, col_start - 1,
-    line_end - 1, col_end, {}
-  )
-  local text = vim.tbl_get(visual_select, 1)
-  M.search_string(text)
 end
 
 M.toggle_opacity = function()
@@ -80,16 +90,6 @@ M.toggle_opacity = function()
   end
 end
 
-M.range_format = function()
-  vim.lsp.buf.format({
-    async = true,
-    range = {
-      ['start'] = vim.api.nvim_buf_get_mark(0, '<'),
-      ['end'] = vim.api.nvim_buf_get_mark(0, '>'),
-    }
-  })
-end
-
 M.toggle_inlay_hints = function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end
@@ -100,6 +100,11 @@ end
 
 M.toggle_color_column = function()
   vim.wo.colorcolumn = (vim.wo.colorcolumn == '81') and '' or '81'
+end
+
+M.toggle_number = function()
+  vim.wo.number = not vim.wo.number
+  vim.wo.relativenumber = not vim.wo.relativenumber
 end
 
 M.toggle_indent_guides = function()
