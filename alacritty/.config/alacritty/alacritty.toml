@@ -70,3 +70,9 @@ blue    = "#2EA1FF"
 magenta = "#FF4DFF"
 cyan    = "#00FFFF"
 white   = "#FFFFFF"
+
+[keyboard]
+bindings = [
+  { key = "R", mods = "Control|Shift", command = { program = "alacritty", args = ["msg", "config", "-r"] } },
+  { key = "T", mods = "Control|Shift", command = { program = "alacritty", args = ["msg", "config", "window.opacity=1"] } }
+]

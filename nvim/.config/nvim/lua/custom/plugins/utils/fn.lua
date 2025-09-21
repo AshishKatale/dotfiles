@@ -62,31 +62,18 @@ M.toggle_term = function(position)
 end
 
 M.toggle_opacity = function()
-  local is_alacritty = vim.env.ALACRITTY_WINDOW_ID
-  if is_alacritty then
-    if vim.gg.opacity then
-      vim.system({ 'alacritty', 'msg', 'config', '--window-id=-1', 'window.opacity=1' },
-        { text = true })
-      vim.gg.opacity = false
-    else
-      vim.system({ 'alacritty', 'msg', 'config', '--window-id=-1', 'window.opacity=0.75' },
-        { text = true })
-      vim.gg.opacity = true
-    end
-  else
-    if vim.gg.opacity then
-      vim.cmd([[
+  if vim.gg.opacity then
+    vim.cmd([[
         hi! Normal guibg=#11111B
         hi! NormalFloat guibg=#11111B
       ]])
-      vim.gg.opacity = false
-    else
-      vim.cmd([[
+    vim.gg.opacity = false
+  else
+    vim.cmd([[
         hi! Normal guibg=NONE
         hi! NormalFloat guibg=NONE
       ]])
-      vim.gg.opacity = true
-    end
+    vim.gg.opacity = true
   end
 end
 
