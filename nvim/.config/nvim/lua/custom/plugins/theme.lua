@@ -81,14 +81,14 @@ M.config = function(_, opts)
       hi LineNr guibg=NONE
       hi CursorLineNr guibg=NONE
       hi SignColumn guibg=NONE
-      hi netrwDir guifg=#569CD6 guibg=NONE
-      hi VertSplit guifg=#777777 guibg=NONE
-      hi PmenuThumb guifg=NONE guibg=#777777
-      hi Folded guifg=#FE833C
       hi ModeMsg guibg=NONE
       hi MoreMsg guibg=NONE
       hi ErrorMsg guibg=NONE
       hi WarningMsg guibg=NONE
+      hi netrwDir guifg=#569CD6 guibg=NONE
+      hi VertSplit guifg=#777777 guibg=NONE
+      hi PmenuThumb guifg=NONE guibg=#777777
+      hi Folded guifg=#FE833C
       hi! link NormalFloat Normal
       hi! link CurSearch Search
       hi! link FloatBorder VertSplit

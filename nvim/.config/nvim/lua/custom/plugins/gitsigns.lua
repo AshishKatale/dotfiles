@@ -96,7 +96,7 @@ return {
       {
         '<leader>gc',
         function() require('snacks').picker.git_log() end,
-        desc = 'Git commit log'
+        desc = 'Commit log'
       },
       {
         '<leader>gh',

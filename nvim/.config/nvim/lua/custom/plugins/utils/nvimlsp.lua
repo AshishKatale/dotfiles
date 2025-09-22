@@ -87,12 +87,6 @@ local function set_lsp_keymaps(bufnr)
       buffer = bufnr
     },
     {
-      'gR',
-      function() require('snacks').picker.lsp_references() end,
-      desc = 'References',
-      buffer = bufnr
-    },
-    {
       'gs',
       function() require('snacks').picker.lsp_symbols() end,
       desc = 'File symbols',
