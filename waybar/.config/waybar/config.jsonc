@@ -160,8 +160,9 @@
       "max-length": 25
     },
     "network": {
-      "format-wifi": "󰖩 {bandwidthDownBytes} 󰄠 {bandwidthUpBytes} ",
-      "format-ethernet": "󰈀 {bandwidthDownBits} 󰄠 {bandwidthUpBits} ",
+      "format-wifi": "󰖩 {bandwidthDownBytes}",
+      "format-alt": "󰖩 {bandwidthDownBytes} 󰄠 {bandwidthUpBytes} ",
+      "format-ethernet": "󰈀 {bandwidthDownBits}",
       "format-disconnected": "󰖪 No network",
       "interval": 2,
       "tooltip": true,
@@ -348,8 +349,9 @@
       "max-length": 25
     },
     "network": {
-      "format-wifi": "󰖩 {bandwidthDownBytes} 󰄠 {bandwidthUpBytes} ",
-      "format-ethernet": "󰈀 {bandwidthDownBits} 󰄠 {bandwidthUpBits} ",
+      "format-wifi": "󰖩 {bandwidthDownBytes}",
+      "format-alt": "󰖩 {bandwidthDownBytes} 󰄠 {bandwidthUpBytes} ",
+      "format-ethernet": "󰈀 {bandwidthDownBits}",
       "format-disconnected": "󰖪 No network",
       "interval": 2,
       "tooltip": true,

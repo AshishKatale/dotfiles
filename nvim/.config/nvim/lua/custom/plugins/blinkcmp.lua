@@ -56,7 +56,7 @@ return {
           buffer = { name = ' BUF' },
           cmdline = { name = ' CMD' },
           lazydev = {
-            name = 'LazyDev',
+            name = 'LZDV',
             module = 'lazydev.integrations.blink',
             score_offset = 100,
           },
