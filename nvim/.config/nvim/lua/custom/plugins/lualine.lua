@@ -8,15 +8,15 @@ local M = {
 }
 
 M.opts = function()
-  local colors = vim.gg.colors
+  -- local colors = vim.gg.colors
   local lsp_progress = {
     'lsp_progress',
     colors = {
-      percentage      = colors.info,
-      title           = colors.warn,
-      message         = colors.info,
-      spinner         = colors.hint,
-      lsp_client_name = colors.warn,
+      -- percentage      = colors.info,
+      -- title           = colors.warn,
+      -- message         = colors.info,
+      -- spinner         = colors.hint,
+      -- lsp_client_name = colors.warn,
       use             = true,
     },
     display_components = {
@@ -48,7 +48,7 @@ M.opts = function()
         {
           'branch',
           icon = { '' },
-          color = { fg = colors.info }
+          -- color = { fg = colors.info }
         },
         'diff',
         'diagnostics'
@@ -59,7 +59,7 @@ M.opts = function()
         {
           require('lazy.status').updates,
           cond = require('lazy.status').has_updates,
-          color = { fg = colors.warn },
+          -- color = { fg = colors.warn },
         },
       },
       lualine_y = { 'encoding', 'filetype', 'progress' },

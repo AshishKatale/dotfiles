@@ -43,7 +43,7 @@ M.config = function(_, opts)
     enable = true,
     min_window_height = 24,
   })
-  vim.cmd('hi! link TreesitterContextLineNumber CursorLineNr')
+  -- vim.cmd('hi! link TreesitterContextLineNumber CursorLineNr')
 end
 
 return M

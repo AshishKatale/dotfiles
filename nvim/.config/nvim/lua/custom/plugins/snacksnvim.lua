@@ -291,14 +291,14 @@ return {
     }, layouts.dropdown)
 
     require('snacks').setup(opts)
-    vim.cmd([[
-      hi! link SnacksPickerBorder FloatBorder
-      hi! link SnacksPickerDimmed LspInlayHint
-      hi! link SnacksPickerPathHidden SnacksPickerFile
-      hi! SnacksPickerMatch guifg=#18a2fe gui=bold
-      hi! SnacksPickerGitBranch guifg=#d7ba7d gui=bold
-      hi! Directory guifg=#569cd6 guibg=NONE
-    ]])
+    -- vim.cmd([[
+    --   hi! link SnacksPickerBorder FloatBorder
+    --   hi! link SnacksPickerDimmed LspInlayHint
+    --   hi! link SnacksPickerPathHidden SnacksPickerFile
+    --   hi! SnacksPickerMatch guifg=#18a2fe gui=bold
+    --   hi! SnacksPickerGitBranch guifg=#d7ba7d gui=bold
+    --   hi! Directory guifg=#569cd6 guibg=NONE
+    -- ]])
   end,
   keys = nil
 }

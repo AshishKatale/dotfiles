@@ -13,10 +13,10 @@ return {
     vim.g.undotree_TreeVertShape      = '│'
     vim.g.undotree_TreeSplitShape     = '╱'
 
-    vim.cmd [[
-        hi! UndotreeNode guifg=#569CD6 guibg=NONE
-        hi! UndotreeSavedBig guifg=#4EC9B0 guibg=NONE gui=bold
-        hi! UndotreeSavedSmall guifg=#B5CEA8 guibg=NONE
-    ]]
+    -- vim.cmd [[
+    --     hi! UndotreeNode guifg=#569CD6 guibg=NONE
+    --     hi! UndotreeSavedBig guifg=#4EC9B0 guibg=NONE gui=bold
+    --     hi! UndotreeSavedSmall guifg=#B5CEA8 guibg=NONE
+    -- ]]
   end,
 }
