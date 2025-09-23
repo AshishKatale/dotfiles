@@ -103,29 +103,24 @@ M.config = function(_, setup)
     { '<leader>|',  '<cmd>vnew<cr>',           desc = 'New buffer right' },
     { '<leader>_',  '<cmd>new<cr>',            desc = 'New buffer bottom' },
     { '<leader>\\', '<cmd>enew<cr>',           desc = 'New buffer' },
-
-    { '<leader>b',  group = 'Buffer' },
-    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',  desc = 'Trim trailing spaces' },
     { '<leader>E',  '<cmd>FloatTerm vifm<cr>', desc = 'Vifm' },
     {
       '<leader>e',
       function() require('snacks').picker.explorer() end,
       desc = 'File tree'
     },
+
+    { '<leader>b',  group = 'Buffer' },
+    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',  desc = 'Trim trailing spaces' },
+    { '<leader>bu', '<cmd>UndotreeToggle<cr>', desc = 'Undo Tree' },
+    { '<leader>by', '<cmd>%y<cr>',             desc = 'Yank buffer' },
+    { '<leader>bY', '<cmd>%y+<cr>',            desc = 'Copy buffer' },
+    { '<leader>bb', utils.scratch_buffer,      desc = 'Scratch Pad' },
     {
       '<leader>bf',
       function() require('snacks').picker.buffers() end,
       desc = 'Open Buffers'
     },
-    {
-      '<leader>bo',
-      function() require('snacks').picker.recent() end,
-      desc = 'Old Files'
-    },
-    { '<leader>bu', '<cmd>UndotreeToggle<cr>',         desc = 'Undo Tree' },
-    { '<leader>by', '<cmd>%y<cr>',                     desc = 'Yank buffer' },
-    { '<leader>bY', '<cmd>%y+<cr>',                    desc = 'Copy buffer' },
-    { '<leader>bb', utils.scratch_buffer,              desc = 'Scratch Pad' },
 
     { '<leader>o',  group = 'Open' },
     { '<leader>oz', '<cmd>Lazy<cr>',                   desc = 'Lazy' },
@@ -229,6 +224,11 @@ M.config = function(_, setup)
     {
       '<leader>sp',
       function() require('snacks').picker.pickers() end,
+      desc = 'Select Picker'
+    },
+    {
+      '<leader>so',
+      function() require('snacks').picker.recent() end,
       desc = 'Select Picker'
     },
     {
