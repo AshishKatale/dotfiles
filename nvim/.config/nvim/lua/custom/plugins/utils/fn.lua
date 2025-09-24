@@ -32,29 +32,25 @@ M.range_format = function()
   })
 end
 
-M.toggle_term = function(position)
-  if not position then
-    position = 'float'
-  end
-
+M.toggle_term = function(position, cmd, title)
+  position = position or 'float'
   if position == 'float' then
-    require('snacks').terminal(nil, {
+    require('snacks').terminal(cmd, {
       auto_close = true,
       win = {
+        title = title,
+        title_pos = 'center',
         position = 'float',
         border = 'rounded',
         height = 0.85,
         width = 0.85,
       }
     })
-  elseif position == 'bottom' then
-    require('snacks').terminal(nil, {
-      win = { wo = { winbar = '' } }
-    })
-  elseif position == 'right' then
-    require('snacks').terminal(nil, {
+  else
+    require('snacks').terminal(cmd, {
+      auto_close = true,
       win = {
-        position = 'right',
+        position = position,
         wo = { winbar = '' }
       }
     })

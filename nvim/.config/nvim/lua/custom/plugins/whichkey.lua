@@ -96,18 +96,22 @@ M.config = function(_, setup)
 
   which_key.add({
     { '<leader>',   group = 'Leader' },
-    { '<leader>h',  '<C-w>h',                  desc = 'Left split' },
-    { '<leader>j',  '<C-w>j',                  desc = 'Lower split' },
-    { '<leader>k',  '<C-w>k',                  desc = 'Upper split' },
-    { '<leader>l',  '<C-w>l',                  desc = 'Right split' },
-    { '<leader>|',  '<cmd>vnew<cr>',           desc = 'New buffer right' },
-    { '<leader>_',  '<cmd>new<cr>',            desc = 'New buffer bottom' },
-    { '<leader>\\', '<cmd>enew<cr>',           desc = 'New buffer' },
-    { '<leader>E',  '<cmd>FloatTerm vifm<cr>', desc = 'Vifm' },
+    { '<leader>h',  '<C-w>h',        desc = 'Left split' },
+    { '<leader>j',  '<C-w>j',        desc = 'Lower split' },
+    { '<leader>k',  '<C-w>k',        desc = 'Upper split' },
+    { '<leader>l',  '<C-w>l',        desc = 'Right split' },
+    { '<leader>|',  '<cmd>vnew<cr>', desc = 'New buffer right' },
+    { '<leader>_',  '<cmd>new<cr>',  desc = 'New buffer bottom' },
+    { '<leader>\\', '<cmd>enew<cr>', desc = 'New buffer' },
     {
       '<leader>e',
       function() require('snacks').picker.explorer() end,
       desc = 'File tree'
+    },
+    {
+      '<leader>E',
+      function() utils.toggle_term('float', 'vifm', ' Vifm ') end,
+      desc = 'Vifm'
     },
 
     { '<leader>b',  group = 'Buffer' },
