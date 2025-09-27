@@ -126,7 +126,7 @@ return {
         toggle_select = function(picker)
           picker.list:select()
         end,
-        picker_grep_dir = function(_, item)
+        picker_explorer_grep_dir = function(_, item)
           if item then
             local cwd = require('snacks').picker.util.dir(item)
             require('snacks').picker.grep({
@@ -134,6 +134,15 @@ return {
               hidden = true,
               title = ' Grep [' .. vim.fn.fnamemodify(cwd, ':t') .. '] ',
             })
+          end
+        end,
+        picker_explorer_exec = function(_, item)
+          if item then
+            local keys = vim.api.nvim_replace_termcodes(
+              ':! ' .. item.file .. '<C-b><Right>',
+              false, false, true
+            )
+            vim.api.nvim_feedkeys(keys, 'n', true)
           end
         end,
         toggle_maximize_preview = function(picker)
@@ -249,7 +258,8 @@ return {
             ['='] = 'explorer_focus',
             ['n'] = 'explorer_add',
             ['w'] = 'explorer_close_all',
-            ['f'] = 'picker_grep_dir',
+            ['f'] = 'picker_explorer_grep_dir',
+            ['.'] = 'picker_explorer_exec',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
           },
