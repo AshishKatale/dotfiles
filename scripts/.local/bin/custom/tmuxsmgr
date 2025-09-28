@@ -54,13 +54,13 @@ if [ -n "$1" ] && [ -d "$1" ]; then
   selected=$(realpath $1)
 elif which fd &> /dev/null; then
   projects=$(
-    echo -n "$existing_sessions"
+    [ -n "$existing_sessions" ] && echo "$existing_sessions"
     echo $HOME/dotfiles
     fd --type=directory --min-depth=1 --max-depth=2 . $HOME/workspace | sed 's/\/$//'
   )
 else
   projects=$(
-    echo -n "$existing_sessions"
+    [ -n "$existing_sessions" ] && echo "$existing_sessions"
     echo $HOME/dotfiles
     find $HOME/workspace -mindepth 1 -maxdepth 2 -type d
   )

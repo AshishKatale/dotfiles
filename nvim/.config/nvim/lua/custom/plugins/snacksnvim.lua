@@ -260,6 +260,7 @@ return {
             ['w'] = 'explorer_close_all',
             ['f'] = 'picker_explorer_grep_dir',
             ['.'] = 'picker_explorer_exec',
+            ['x'] = 'picker_explorer_exec',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
           },
