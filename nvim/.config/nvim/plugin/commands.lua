@@ -12,6 +12,32 @@ vim.api.nvim_create_user_command(
   { nargs = '?' }
 )
 
+vim.api.nvim_create_user_command(
+  'WrapMarginToggle',
+  function(cmd)
+    if cmd.args == 'on' then
+      vim.gg.wrap_margin = true
+    elseif cmd.args == 'off' then
+      vim.gg.wrap_margin = false
+    else
+      vim.gg.wrap_margin = not vim.gg.wrap_margin
+    end
+
+    if vim.gg.wrap_margin then
+      local width = vim.api.nvim_win_get_width(0)
+      local margin = width > 100 and width - 100 or 1
+      vim.cmd('setlocal wrapmargin=' .. margin)
+      vim.cmd('e')
+      vim.cmd('setlocal colorcolumn=101')
+    else
+      vim.cmd('setlocal wrapmargin=' .. 1)
+      vim.cmd('e')
+      vim.cmd('setlocal colorcolumn=')
+    end
+  end,
+  { nargs = '?' }
+)
+
 ------------ Custom AutoCommands ------------
 
 -- highlight text on yank
@@ -105,6 +131,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
       vim.api.nvim_set_option_value('wrap', false, { win = 0 })
     elseif opt.match == 'man' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
+      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tw', '<cmd>WrapMarginToggle<cr>', opts)
     elseif opt.match == 'netrw' then
       vim.api.nvim_buf_set_keymap(0, 'n', 'Q', '<cmd>q<cr>', opts)
     elseif opt.match == 'gitsigns-blame' then
