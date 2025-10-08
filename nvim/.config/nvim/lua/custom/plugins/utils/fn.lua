@@ -191,4 +191,45 @@ M.set_filetype = function()
   end)
 end
 
+M.show_file_info = function(item)
+  local output = vim.fn.system({
+    'sh', '-c',
+    [[ stat -c "%n|%F|%s|%W|%X|%Y|%Z|%a|%A|%i|%h|%g|%G|%u|%U" ]] .. item.file .. [[ | ]] ..
+    [[ while IFS='|' read file type size btime atime mtime ctime nperm perm ino links gid grp uid owner;
+       do
+         echo "Name   : $(basename $file)  ($type)"
+         echo "Perm   : $perm  ($nperm)"
+         echo "User   : $owner($uid)    Group: $grp($gid)"
+         echo "Size   : $(numfmt --to=iec $size)    Inode: $ino    Links: $links"
+         echo "Birth  : $(date -d @$btime '+%Y-%m-%d %I:%M:%S %p')"
+         echo "Access : $(date -d @$atime '+%Y-%m-%d %I:%M:%S %p')"
+         echo "Modify : $(date -d @$mtime '+%Y-%m-%d %I:%M:%S %p')"
+         echo "Change : $(date -d @$ctime '+%Y-%m-%d %I:%M:%S %p')"
+       done
+    ]]
+  })
+
+  local lines = vim.split(output, '\n')
+  if lines[#lines] == '' then table.remove(lines) end
+  local max_line_length = vim.iter(lines)
+      :map(function(l) return #l end)
+      :fold(0, function(acc, v) return math.max(v, acc) end)
+
+  require('snacks').win({
+    text = lines,
+    anchor = 'NE',
+    relative = 'cursor',
+    height = #lines,
+    width = max_line_length + 4,
+    fixbuf = true,
+    scratch_ft = 'help',
+    border = 'rounded',
+    minimal = true,
+    row = #lines / -2,
+    col = -1,
+    bo = { modifiable = false },
+    wo = { signcolumn = 'yes:1' },
+  })
+end
+
 return M;
