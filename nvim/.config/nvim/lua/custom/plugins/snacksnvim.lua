@@ -145,6 +145,36 @@ return {
             vim.api.nvim_feedkeys(keys, 'n', true)
           end
         end,
+        picker_explorer_node_info = function(_, item)
+          if item then
+            local info = vim.uv.fs_stat(item.file)
+            local info_str =
+                '       Name: ' .. vim.fn.fnamemodify(item.file, ':t') ..
+                '\n       Perm: ' ..
+                vim.trim(vim.fn.system({ 'stat', '-c', '%A', '/home/ashish/dotfiles/README.md' })) ..
+                ((info and info.size) and
+                  '\n       Size: ' .. vim.trim(vim.fn.system('numfmt --to=iec ' .. info.size)) or '') ..
+                ((info and info.type) and
+                  '\n       Type: ' .. info.type or '') ..
+                ((info and info.ino) and
+                  '\n  Inode ino: ' .. info.ino or '') ..
+                ((info and info.birthtime and info.birthtime.sec) and
+                  '\n Birth Time: ' ..
+                  vim.fn.strftime('%Y-%m-%d %H:%M:%S', info.birthtime.sec) or '') ..
+                ((info and info.atime and info.atime.sec) and
+                  '\nAccess Time: ' ..
+                  vim.fn.strftime('%Y-%m-%d %H:%M:%S', info.atime.sec) or '') ..
+                ((info and info.mtime and info.mtime.sec) and
+                  '\nModify Time: ' ..
+                  vim.fn.strftime('%Y-%m-%d %H:%M:%S', info.mtime.sec) or '') ..
+                ((info and info.ctime and info.ctime.sec) and
+                  '\nChange Time: ' ..
+                  vim.fn.strftime('%Y-%m-%d %H:%M:%S', info.ctime.sec) or '') ..
+                ((info and info.nlink) and
+                  '\nTotal Links: ' .. info.nlink or '')
+            vim.print(info_str)
+          end
+        end,
         toggle_maximize_preview = function(picker)
           if picker._fullscreen then
             picker._fullscreen = false
@@ -261,6 +291,7 @@ return {
             ['f'] = 'picker_explorer_grep_dir',
             ['.'] = 'picker_explorer_exec',
             ['x'] = 'picker_explorer_exec',
+            ['<c-k>'] = 'picker_explorer_node_info',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
           },
