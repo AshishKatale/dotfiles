@@ -196,7 +196,7 @@ M.set_filetype = function()
 end
 
 M.show_file_info = function(item)
-  local output = vim.fn.system({
+  local output = vim.system({
     'sh', '-c',
     [[ stat -c "%n|%F|%s|%W|%X|%Y|%Z|%a|%A|%i|%h|%g|%G|%u|%U" ]] .. item.file .. ' | ' ..
     [[ while IFS='|' read file type size btime atime mtime ctime nperm perm ino links gid grp uid owner;
@@ -211,9 +211,17 @@ M.show_file_info = function(item)
          echo "Change : $(date -d @$ctime '+%d %h %Y, %I:%M:%S %p')"
        done
     ]]
-  })
+  }, {
+    text = true
+  }):wait()
 
-  local lines = vim.split(output, '\n')
+  if output.code > 0 then
+    vim.notify('Error: running stat on file\n' .. output.stderr,
+      vim.log.levels.ERROR, { history = false })
+    return
+  end
+
+  local lines = vim.split(output.stdout, '\n')
   if lines[#lines] == '' then table.remove(lines) end
   local max_line_length = vim.iter(lines)
       :map(function(l) return #l end)
