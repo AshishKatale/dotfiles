@@ -194,17 +194,17 @@ end
 M.show_file_info = function(item)
   local output = vim.fn.system({
     'sh', '-c',
-    [[ stat -c "%n|%F|%s|%W|%X|%Y|%Z|%a|%A|%i|%h|%g|%G|%u|%U" ]] .. item.file .. [[ | ]] ..
+    [[ stat -c "%n|%F|%s|%W|%X|%Y|%Z|%a|%A|%i|%h|%g|%G|%u|%U" ]] .. item.file .. ' | ' ..
     [[ while IFS='|' read file type size btime atime mtime ctime nperm perm ino links gid grp uid owner;
        do
-         echo "Name   : $(basename $file)  ($type)"
-         echo "Perm   : $perm  ($nperm)"
-         echo "User   : $owner($uid)    Group: $grp($gid)"
+         echo "Type   : $type"
+         echo "Perms  : $perm ($nperm)"
          echo "Size   : $(numfmt --to=iec $size)    Inode: $ino    Links: $links"
-         echo "Birth  : $(date -d @$btime '+%Y-%m-%d %I:%M:%S %p')"
-         echo "Access : $(date -d @$atime '+%Y-%m-%d %I:%M:%S %p')"
-         echo "Modify : $(date -d @$mtime '+%Y-%m-%d %I:%M:%S %p')"
-         echo "Change : $(date -d @$ctime '+%Y-%m-%d %I:%M:%S %p')"
+         echo "Owner  : $owner($uid)    Group: $grp($gid)"
+         echo "Birth  : $(date -d @$btime '+%d %h %Y, %I:%M:%S %p')"
+         echo "Access : $(date -d @$atime '+%d %h %Y, %I:%M:%S %p')"
+         echo "Modify : $(date -d @$mtime '+%d %h %Y, %I:%M:%S %p')"
+         echo "Change : $(date -d @$ctime '+%d %h %Y, %I:%M:%S %p')"
        done
     ]]
   })
@@ -218,6 +218,8 @@ M.show_file_info = function(item)
   require('snacks').win({
     text = lines,
     anchor = 'NE',
+    title_pos = 'center',
+    title = ' ' .. vim.fn.fnamemodify(item.file, ':t') .. ' ',
     relative = 'cursor',
     height = #lines,
     width = max_line_length + 4,
