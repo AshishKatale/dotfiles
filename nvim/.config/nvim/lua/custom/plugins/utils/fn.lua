@@ -62,12 +62,16 @@ M.toggle_opacity = function()
     vim.cmd([[
         hi! Normal guibg=#11111B
         hi! NormalFloat guibg=#11111B
+        hi! TreesitterContext guibg=#181828
+        hi! TreesitterContextLineNumber guibg=#181828
       ]])
     vim.gg.opacity = false
   else
     vim.cmd([[
         hi! Normal guibg=NONE
         hi! NormalFloat guibg=NONE
+        hi! TreesitterContext guibg=NONE
+        hi! TreesitterContextLineNumber guibg=NONE
       ]])
     vim.gg.opacity = true
   end
@@ -199,8 +203,8 @@ M.show_file_info = function(item)
        do
          echo "Type   : $type"
          echo "Perms  : $perm ($nperm)"
-         echo "Size   : $(numfmt --to=iec $size)    Inode: $ino    Links: $links"
-         echo "Owner  : $owner($uid)    Group: $grp($gid)"
+         echo "Size   : $(numfmt --to=iec $size)  Inode: $ino  Links: $links"
+         echo "Owner  : $owner($uid)  Group: $grp($gid)"
          echo "Birth  : $(date -d @$btime '+%d %h %Y, %I:%M:%S %p')"
          echo "Access : $(date -d @$atime '+%d %h %Y, %I:%M:%S %p')"
          echo "Modify : $(date -d @$mtime '+%d %h %Y, %I:%M:%S %p')"
