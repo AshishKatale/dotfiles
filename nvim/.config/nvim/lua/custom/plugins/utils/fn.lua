@@ -203,7 +203,7 @@ M.show_file_info = function(item)
        do
          echo "Type   : $type"
          echo "Perms  : $perm ($nperm)"
-         echo "Size   : $(numfmt --to=iec $size)  Inode: $ino  Links: $links"
+         echo "Size   : $(numfmt --to=iec $size)B  Inode: $ino  Links: $links"
          echo "Owner  : $owner($uid)  Group: $grp($gid)"
          echo "Birth  : $(date -d @$btime '+%d %h %Y, %I:%M:%S %p')"
          echo "Access : $(date -d @$atime '+%d %h %Y, %I:%M:%S %p')"
@@ -224,6 +224,7 @@ M.show_file_info = function(item)
     anchor = 'NE',
     title_pos = 'center',
     title = ' ' .. vim.fn.fnamemodify(item.file, ':t') .. ' ',
+    backdrop = false,
     relative = 'cursor',
     height = #lines,
     width = max_line_length + 4,
