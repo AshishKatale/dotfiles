@@ -266,7 +266,7 @@ return {
             ['f'] = 'picker_explorer_grep_dir',
             ['.'] = 'picker_explorer_exec',
             ['x'] = 'picker_explorer_exec',
-            ['<c-k>'] = 'picker_explorer_node_info',
+            ['K'] = 'picker_explorer_node_info',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
           },

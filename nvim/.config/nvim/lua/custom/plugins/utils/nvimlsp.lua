@@ -4,24 +4,29 @@ if not which_key_status_ok then
   return
 end
 
+local diagnostic_open_float = function()
+  _, vim.gg.diagnostic_win = vim.diagnostic.open_float()
+end
+
 local augroup = vim.api.nvim_create_augroup('lspcursor', { clear = true })
 local function configure_lsp_features(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorMoved' }, {
-      callback = function(ev)
-        if ev.event == 'CursorHold' then
-          vim.lsp.buf.document_highlight()
-          vim.diagnostic.open_float()
-        else
-          vim.lsp.buf.clear_references()
-        end
+    vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+      callback = function()
+        vim.lsp.buf.document_highlight()
+        diagnostic_open_float()
       end,
+      buffer = bufnr,
+      group = augroup
+    })
+    vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+      callback = vim.lsp.buf.clear_references,
       buffer = bufnr,
       group = augroup
     })
   else
     vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-      callback = vim.diagnostic.open_float,
+      callback = diagnostic_open_float,
       buffer = bufnr,
       group = augroup
     })
@@ -42,26 +47,31 @@ local function set_lsp_keymaps(bufnr)
   which_key.add({
     {
       'K',
-      '<cmd>lua vim.lsp.buf.hover({max_width=100,max_height=24,border="rounded"})<CR>',
+      function()
+        if vim.gg.diagnostic_win and vim.api.nvim_win_is_valid(vim.gg.diagnostic_win) then
+          return vim.api.nvim_set_current_win(vim.gg.diagnostic_win or 0)
+        end
+        vim.lsp.buf.hover({ max_width = 100, max_height = 24, border = 'rounded' })
+      end,
       desc = 'LSP hover',
       buffer = bufnr
     },
 
     {
       '<leader>a',
-      '<cmd>lua vim.lsp.buf.code_action()<CR>',
+      '<cmd>lua vim.lsp.buf.code_action()<cr>',
       desc = 'LSP Code action',
       buffer = bufnr
     },
     {
       '<leader>r',
-      '<cmd>lua vim.lsp.buf.rename()<CR>',
+      '<cmd>lua vim.lsp.buf.rename()<cr>',
       desc = 'LSP rename',
       buffer = bufnr
     },
     {
       '<leader>f',
-      '<cmd>lua vim.lsp.buf.format({ timeout_ms = 10000 })<CR>',
+      '<cmd>lua vim.lsp.buf.format({ timeout_ms = 10000 })<cr>',
       desc = 'Format Document',
       buffer = bufnr
     },
@@ -76,13 +86,13 @@ local function set_lsp_keymaps(bufnr)
     { 'g', group = 'Go to' },
     {
       'gd',
-      '<cmd>lua vim.lsp.buf.definition()<CR>',
+      '<cmd>lua vim.lsp.buf.definition()<cr>',
       desc = 'Definition',
       buffer = bufnr
     },
     {
       'gD',
-      '<cmd>lua vim.lsp.buf.declaration()<CR>',
+      '<cmd>lua vim.lsp.buf.declaration()<cr>',
       desc = 'Declaration',
       buffer = bufnr
     },
@@ -100,13 +110,13 @@ local function set_lsp_keymaps(bufnr)
     },
     {
       'gp',
-      '<cmd>lua vim.diagnostic.goto_prev()<CR>',
+      '<cmd>lua vim.diagnostic.goto_prev()<cr>',
       desc = 'Pervious diagnostic',
       buffer = bufnr
     },
     {
       'gn',
-      '<cmd>lua vim.diagnostic.goto_next()<CR>',
+      '<cmd>lua vim.diagnostic.goto_next()<cr>',
       desc = 'Next diagnostic',
       buffer = bufnr
     },
@@ -133,7 +143,7 @@ M.setup = function()
     severity_sort = true,
     float = {
       max_width = 100,
-      focusable = true,
+      focusable = false,
       style = 'minimal',
       border = 'rounded',
       source = true,
