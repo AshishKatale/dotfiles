@@ -284,8 +284,31 @@ return {
     layouts.vertical.layout[3].height = 0.65 -- preview height
 
     -- select layout
-    layouts.select.layout.width = 0.5     -- height
-    layouts.select.layout.max_height = 15 -- height
+    layouts.select.layout.width = 0.5     -- width
+    layouts.select.layout.max_height = 15 -- max height
+
+    --- HACK: fix select layout list overflow issue after update
+    local _pselect = require('snacks.picker.select').select;
+    ---@diagnostic disable-next-line: duplicate-set-field
+    require('snacks.picker.select').select = function(_items, _opts, _on_choice)
+      local new_opts = {
+        picker = {
+          layout = {
+            preview = false,
+            config = function(layout)
+              layout.layout.height = math.floor(
+                math.min(
+                  vim.o.lines * 0.8 - 10,
+                  #_items + 2
+                ) + 0.5
+              )
+            end,
+          }
+        }
+      }
+      new_opts = vim.tbl_deep_extend('force', new_opts, _opts)
+      _pselect(_items, new_opts, _on_choice)
+    end
 
     layouts.preview_maximized = {
       layout = {
