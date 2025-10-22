@@ -59,10 +59,10 @@ local opts = {
   checker = {
     -- automatically check for plugin updates
     enabled = true,
-    concurrency = nil,    -- set to 1 to check for updates very slowly
-    notify = false,       -- get a notification when new updates are found
-    frequency = 24 * 3600, -- check for updates every 24 hours
-    check_pinned = false, -- check for pinned packages that can't be updated
+    concurrency = nil,         -- set to 1 to check for updates very slowly
+    notify = false,            -- get a notification when new updates are found
+    frequency = 7 * 24 * 3600, -- auto check for updates once every week
+    check_pinned = false,      -- check for pinned packages that can't be updated
   },
   change_detection = {
     -- automatically check for config file changes and reload the ui
