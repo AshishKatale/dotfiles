@@ -19,7 +19,7 @@ return {
       enabled = true,
       preset = {
         keys = {
-          { icon = '󰻭 ', key = 'n', desc = 'New File', action = ':enew' },
+          { icon = '󰻭 ', key = 'e', desc = 'New File', action = ':enew' },
           { icon = '󰱽 ', key = 'b', desc = 'Find File', action = ":lua Snacks.dashboard.pick('files', { hidden = true })" },
           { icon = '󱎸 ', key = 'f', desc = 'Search Text', action = ":lua Snacks.dashboard.pick('live_grep', { hidden = true })" },
           { icon = '󰊢 ', key = 's', desc = 'Git Status', action = ":lua Snacks.dashboard.pick('git_status')" },
@@ -27,10 +27,24 @@ return {
           { icon = '󰒲 ', key = 'z', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
           { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
           {
+            icon = '󰻭 ',
+            key = 'n',
+            desc = 'New File',
+            action = ':enew',
+            hidden = true
+          },
+          {
+            icon = '󱎸 ',
+            key = '/',
+            desc = 'Search Text',
+            action = ":lua Snacks.dashboard.pick('live_grep', { hidden = true })",
+            hidden = true,
+          },
+          {
             icon = ' ',
             key = 'c',
             desc = 'Config',
-            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
+            action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config'), title='Nvim Config'})",
             hidden = true,
           },
         },
@@ -264,6 +278,7 @@ return {
             ['n'] = 'explorer_add',
             ['w'] = 'explorer_close_all',
             ['f'] = 'picker_explorer_grep_dir',
+            ['/'] = 'picker_explorer_grep_dir',
             ['.'] = 'picker_explorer_exec',
             ['x'] = 'picker_explorer_exec',
             ['K'] = 'picker_explorer_node_info',
@@ -284,7 +299,7 @@ return {
     layouts.vertical.layout[3].height = 0.65 -- preview height
 
     -- select layout
-    layouts.select.layout.width = 0.5     -- width
+    layouts.select.layout.width = 0.5 -- width
 
     layouts.preview_maximized = {
       layout = {
