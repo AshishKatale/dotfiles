@@ -115,11 +115,15 @@ M.config = function(_, setup)
     },
 
     { '<leader>b',  group = 'Buffer' },
-    { '<leader>b ', '<cmd>%s/\\s\\+$//e<cr>',  desc = 'Trim trailing spaces' },
     { '<leader>bu', '<cmd>UndotreeToggle<cr>', desc = 'Undo Tree' },
     { '<leader>by', '<cmd>%y<cr>',             desc = 'Yank buffer' },
     { '<leader>bY', '<cmd>%y+<cr>',            desc = 'Copy buffer' },
     { '<leader>bb', utils.scratch_buffer,      desc = 'Scratch Pad' },
+    {
+      '<leader>b ',
+      '<cmd>%s/\\s\\+$//e | echo "Trimmed trailing whitespaces!"<cr>',
+      desc = 'Trim trailing spaces'
+    },
     {
       '<leader>bf',
       function() require('snacks').picker.buffers() end,
