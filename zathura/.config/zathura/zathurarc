@@ -1,0 +1,57 @@
+# Zathura configuration file
+# See man `man zathurarc'
+
+set adjust-open "best-fit"
+set search-hadjust "false"
+set show-hidden "true"
+set statusbar-page-percent "true"
+set statusbar-basename "true"
+set window-title-basename "true"
+
+set zoom-step 5
+set scroll-step 50
+set guioptions "sch" # statusbar, commandline, h-scrollbar
+
+set font "JetBrainsMono Nerd Font 9"
+set default-bg "#11111B"
+set default-fg "#F7F7F6"
+
+set highlight-color "rgba(38,99,198,0.5)"
+set highlight-fg "#FFFF10"
+
+set statusbar-fg "#BAC2DE"
+set statusbar-bg "#262626"
+
+set inputbar-bg "#11111B"
+set inputbar-fg "#FFFFFF"
+
+set index-bg "#11111B"
+set index-fg "#BAC2DE"
+set index-active-bg "#2BA1EE"
+set index-active-fg "#11111B"
+
+set notification-bg "#11111B"
+set notification-fg "#2BA1EE"
+set notification-error-bg "#9A0F02"
+set notification-error-fg "#F7F7F6"
+set notification-warning-bg "#F28B25"
+set notification-warning-fg "#11111B"
+
+set completion-bg "#11111B"
+set completion-fg "#BAC2DE"
+set completion-group-bg "#1E1E2E"
+set completion-highlight-fg "#151515"
+set completion-highlight-bg "#2BA1EE"
+
+set recolor "true"
+set recolor-lightcolor "#11111B"
+set recolor-darkcolor "#F7F7F6"
+set recolor-reverse-video "true"
+set recolor-keephue "true"
+
+map _ zoom out # same as minus -
+map <C-l> abort
+map <C-r> rotate
+map <C-t> set recolor
+map <A-f> display_link
+
