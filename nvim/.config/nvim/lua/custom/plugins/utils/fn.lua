@@ -198,7 +198,7 @@ end
 M.show_file_info = function(item)
   local output = vim.system({
     'sh', '-c',
-    [[ stat -c "%n|%F|%s|%W|%X|%Y|%Z|%a|%A|%i|%h|%g|%G|%u|%U" ]] .. item.file .. ' | ' ..
+    [[ stat -c "%n|%F|%s|%W|%X|%Y|%Z|%a|%A|%i|%h|%g|%G|%u|%U"]] .. ' "' .. item.file .. '" ' .. '|' ..
     [[ while IFS='|' read file type size btime atime mtime ctime nperm perm ino links gid grp uid owner;
        do
          echo "Type   : $type"
@@ -215,7 +215,7 @@ M.show_file_info = function(item)
     text = true
   }):wait()
 
-  if output.code > 0 then
+  if output.code > 0 or #output.stderr > 0 then
     vim.notify('Error: running stat on file\n' .. output.stderr,
       vim.log.levels.ERROR, { history = false })
     return
