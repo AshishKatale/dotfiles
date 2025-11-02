@@ -36,9 +36,9 @@ tooltip {
 }
 
 #workspaces button {
-  background-color: #45475A;
+  background-color: #313244;
   color: #BFBFBF;
-  border: 2px solid #45475A;
+  border: 2px solid #313244;
   border-radius: 4px;
   margin-right: 2px;
   padding: 0px 5px;
@@ -46,8 +46,8 @@ tooltip {
 
 #workspaces button.special.visible,
 #workspaces button.active {
-  background-color: #313244;
-  border: 2px solid #313244;
+  background-color: #1E1E2E;
+  border: 2px solid #1E1E2E;
   border-bottom: 2px solid #EF9F76;
 }
 
@@ -67,7 +67,7 @@ tooltip {
 #clock {
   margin-left: 6px;
   padding: 0px 8px;
-  background-color: #45475A;
+  background-color: #1E1E2E;
   border-radius: 12px;
   border: 1px solid #585b70;
 }
@@ -82,7 +82,7 @@ tooltip {
 
 #idle_inhibitor,
 #tray {
-  background-color: #45475A;
+  background-color: #1E1E2E;
   padding: 0px 6px;
   border-radius: 12px;
   border: 1px solid #585b70;
@@ -98,7 +98,7 @@ tooltip {
 #cpu,
 #memory {
   padding: 0px 6px;
-  background-color: #45475A;
+  background-color: #1E1E2E;
   border-top: 1px solid #585b70;
   border-bottom: 1px solid #585b70;
 }
@@ -107,12 +107,12 @@ tooltip {
   color: #313244;
   border-top: 1px solid #585b70;
   border-bottom: 1px solid #585b70;
-  background: linear-gradient(90deg, #45475A, #585b70, #45475A);
+  background: linear-gradient(90deg, #1E1E2E 20%, #45475A 50%, #1E1E2E 80%);
 }
 
 #network {
   padding-left: 8px;
-  background-color: #45475a;
+  background-color: #1E1E2E;
   border-left: 1px solid #585b70;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
@@ -122,7 +122,7 @@ tooltip {
 #memory {
   margin-right: 6px;
   padding-right: 8px;
-  background-color: #45475a;
+  background-color: #1E1E2E;
   border-right: 1px solid #585b70;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
@@ -134,6 +134,7 @@ tooltip {
 
 #clock {
   color: #85ACFA;
+  background-color: #1E1E2E;
 }
 
 #network {
