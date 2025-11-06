@@ -49,9 +49,11 @@ set recolor-darkcolor "#F7F7F6"
 set recolor-reverse-video "true"
 set recolor-keephue "true"
 
+unmap q
 map _ zoom out # same as minus -
 map <C-l> abort
 map <C-r> rotate
 map <C-t> set recolor
+map <C-q> set recolor
 map <A-f> display_link
 
