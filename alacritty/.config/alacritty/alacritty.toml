@@ -33,6 +33,8 @@ cursor = "#F5E0DC"
 [colors.primary]
 background = "#11111B"
 foreground = "#DBDBDB"
+dim_foreground = "#7F849C"
+bright_foreground = "#FFFFFF"
 
 [colors.selection]
 background = "#264F78"
