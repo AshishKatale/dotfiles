@@ -10,7 +10,9 @@ HISTTIMEFORMAT='%d-%m-%y %T %p  '
 
 [ -e $HOME/dotfiles/bash/prompt.sh ] && source $HOME/dotfiles/bash/prompt.sh
 [ -e $HOME/dotfiles/bash/aliases.sh ] && source $HOME/dotfiles/bash/aliases.sh
-[ -e $HOME/dotfiles/bash/nvm.sh ] && source $HOME/dotfiles/bash/nvm.sh
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env --use-on-cd --shell bash)"
+fi
 
 # if the shell is interactive
 if [[ $- =~ i ]]; then

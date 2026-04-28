@@ -67,13 +67,16 @@ bindkey -M viins '^y' autosuggest-accept
 
 source $ZDOTDIR/scripts/aliases.zsh
 source $ZDOTDIR/scripts/prompt.zsh
-source $ZDOTDIR/scripts/nvm.zsh
 source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 [ -e $HOME/.zshrc ] && source $HOME/.zshrc # to optionally override configs
 
 which lazygit &> /dev/null && bindkey -s -M viins '^g' '^E^U lazygit^M'
 [ -x $HOME/.local/bin/custom/tmuxsmgr ] && bindkey -s -M viins '^b' '^E^U tmuxsmgr^M'
+
+if command -v fnm &> /dev/null; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 # fzf key-bindings
 if command -v fzf &> /dev/null && [ -z "$LOCAL_DISABLE_ZSH_FZF" ]; then
