@@ -1,6 +1,6 @@
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignorespace:erasedups       # ignorespace/ignoredups/ignoreboth
-
+HISTIGNORE="export *:exit:ll"
 # append to the history file, don't overwrite it
 shopt -s histappend
 

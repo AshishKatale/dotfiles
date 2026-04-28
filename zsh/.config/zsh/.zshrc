@@ -1,4 +1,5 @@
 HISTFILE="$ZDOTDIR/.zsh_history"
+HISTORY_IGNORE='(export *|ll|exit)'
 SAVEHIST=10000
 HISTSIZE=2000
 
@@ -32,7 +33,12 @@ zstyle ':completion:*' list-colors 'ma=01;30;44:rs=0:di=01;34:ln=01;36:mh=00:pi=
 bindkey -M vicmd 'j' undefined-key
 bindkey -M vicmd 'k' undefined-key
 
-bindkey -M viins '^j' undefined-key
+function add-space-to-beginning {
+    LBUFFER=" $LBUFFER" # Insert a space at the very beginning
+}
+zle -N add-space-to-beginning
+
+bindkey -M viins '^j' add-space-to-beginning
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins '^w' backward-kill-word
 bindkey -M viins '^k' kill-line
