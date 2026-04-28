@@ -1,7 +1,7 @@
 return {
   'folke/snacks.nvim',
-  -- dependencies = { 'nvim-tree/nvim-web-devicons' },
-  dependencies = { 'nvim-mini/mini.icons' },
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  -- dependencies = { 'nvim-mini/mini.icons' },
   priority = 1000, -- theme.lua is 1000
   lazy = false,
   opts = {
@@ -284,6 +284,8 @@ return {
             ['K'] = 'picker_explorer_node_info',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
+            ['<c-n>'] = 'explorer_git_next',
+            ['<c-p>'] = 'explorer_git_prev',
           },
         },
       },

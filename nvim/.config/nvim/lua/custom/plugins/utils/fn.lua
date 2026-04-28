@@ -81,6 +81,10 @@ M.toggle_inlay_hints = function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end
 
+M.toggle_codelens = function()
+  vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+end
+
 M.toggle_diagnostic = function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end
@@ -140,6 +144,7 @@ M.lazy_git = function()
 
   if is_inside_git_work_tree then
     vim.cmd('tabnew term://lazygit')
+    vim.cmd('set filetype=lazygit')
     vim.keymap.set({ 't' }, 'ii', '<Nop>', { silent = true, buffer = 0 })
     vim.keymap.set(
       { 't' }, [[<C-\>]], [[<C-\><C-n>0M]],

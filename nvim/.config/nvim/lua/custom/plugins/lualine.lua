@@ -38,7 +38,7 @@ M.opts = function()
       icons_enabled = true,
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
-      disabled_filetypes = {},
+      disabled_filetypes = { 'lazygit' }, -- List of filetypes to hide statusline
       always_divide_middle = true,
       globalstatus = true,
     },
@@ -102,8 +102,14 @@ M.opts = function()
       lualine_y = {},
       lualine_z = { 'tabs' }
     },
-    extensions = {}
+    extensions = { 'lazy', 'quickfix', 'trouble', 'man', 'mason' }
   }
+end
+
+M.config = function(_, opts)
+  require('lualine').setup(opts)
+  local lazy = require('lualine.extensions.lazy').sections;
+  lazy.lualine_a = { function() return 'Lazy 󰒲' end }
 end
 
 return M

@@ -274,6 +274,7 @@ M.config = function(_, setup)
     { '<leader>tc', '<cmd>ColorizerToggle<cr>',       desc = 'Colorizer' },
     { '<leader>tg', '<cmd>Gitsigns toggle_signs<cr>', desc = 'Gitsigns' },
     { '<leader>tH', '<cmd>TSToggle highlight<cr>',    desc = 'Treesitter highlight' },
+    { '<leader>tC', utils.toggle_codelens,            desc = 'Codelens' },
     { '<leader>th', utils.toggle_inlay_hints,         desc = 'Inlay hints' },
     { '<leader>td', utils.toggle_diagnostic,          desc = 'Diagnostics' },
     { '<leader>to', utils.toggle_opacity,             desc = 'Background opacity' },
@@ -281,7 +282,7 @@ M.config = function(_, setup)
     { '<leader>tl', utils.toggle_list_chars,          desc = 'List chars' },
     { '<leader>tn', utils.toggle_number,              desc = 'Line numbers' },
     { '<leader>tF', utils.toggle_format_on_save,      desc = 'Format on Save' },
-    { '<leader>tC', utils.toggle_color_column,        desc = 'Color column' },
+    { '<leader>t|', utils.toggle_color_column,        desc = 'Color column' },
     {
       '<leader>tt',
       function() require('treesitter-context').toggle() end,

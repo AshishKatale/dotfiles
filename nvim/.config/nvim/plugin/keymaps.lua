@@ -54,10 +54,6 @@ map({ 'n', 'v' }, '<leader>y', '"+y', { silent = true })
 map({ 'n', 'v' }, '<leader>p', '"+p', { silent = true })
 map({ 'n', 'v' }, '<leader>P', '"+P', { silent = true })
 
--- Visual Block --
-map({ 'x' }, '<A-j>', "<cmd>move '>+1<cr>gv-gv", { silent = true })
-map({ 'x' }, '<A-k>', "<cmd>move '<-2<cr>gv-gv", { silent = true })
-
 map({ 'n', 't' }, '<C-\\>', function()
   require('custom.plugins.utils.fn').toggle_term('float')
 end, { silent = true })

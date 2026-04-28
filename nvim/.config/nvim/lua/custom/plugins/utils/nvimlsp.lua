@@ -48,9 +48,6 @@ local function set_lsp_keymaps(bufnr)
     {
       'K',
       function()
-        if vim.gg.diagnostic_win and vim.api.nvim_win_is_valid(vim.gg.diagnostic_win) then
-          return vim.api.nvim_set_current_win(vim.gg.diagnostic_win or 0)
-        end
         vim.lsp.buf.hover({ max_width = 100, max_height = 24, border = 'rounded' })
       end,
       desc = 'LSP hover',
@@ -110,14 +107,25 @@ local function set_lsp_keymaps(bufnr)
     },
     {
       'gp',
-      '<cmd>lua vim.diagnostic.goto_prev()<cr>',
+      '<cmd>lua vim.diagnostic.jump({count=-1})<cr>',
       desc = 'Pervious diagnostic',
       buffer = bufnr
     },
     {
       'gn',
-      '<cmd>lua vim.diagnostic.goto_next()<cr>',
+      '<cmd>lua vim.diagnostic.jump({count=1})<cr>',
       desc = 'Next diagnostic',
+      buffer = bufnr
+    },
+
+    {
+      'grd',
+      function()
+        if vim.gg.diagnostic_win and vim.api.nvim_win_is_valid(vim.gg.diagnostic_win) then
+          return vim.api.nvim_set_current_win(vim.gg.diagnostic_win or 0)
+        end
+      end,
+      desc = 'Focus diagnostic',
       buffer = bufnr
     },
   })
@@ -126,16 +134,18 @@ end
 local M = {}
 
 M.setup = function()
+  local severity = vim.diagnostic.severity
   vim.diagnostic.config({
     -- disable virtual text
     virtual_text = false,
+    virtual_lines = false,
     -- show signs
     signs = {
       text = {
-        [vim.diagnostic.severity.INFO] = '',
-        [vim.diagnostic.severity.HINT] = '󰘥',
-        [vim.diagnostic.severity.WARN] = '',
-        [vim.diagnostic.severity.ERROR] = '󰅚',
+        [severity.INFO] = '',
+        [severity.HINT] = '󰘥',
+        [severity.WARN] = '',
+        [severity.ERROR] = '󰅚',
       }
     },
     update_in_insert = true,
@@ -144,11 +154,10 @@ M.setup = function()
     float = {
       max_width = 100,
       focusable = false,
-      style = 'minimal',
       border = 'rounded',
       source = true,
       header = '',
-      prefix = '',
+      prefix = ' ',
     },
   })
 

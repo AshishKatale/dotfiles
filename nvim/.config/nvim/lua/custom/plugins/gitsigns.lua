@@ -116,6 +116,11 @@ return {
         desc = 'Commit'
       },
       {
+        '<leader>gop',
+        function() require('snacks').gitbrowse.open({ what = 'permalink' }) end,
+        desc = 'Permalink'
+      },
+      {
         '<leader>gor',
         function() require('snacks').gitbrowse.open({ what = 'repo' }) end,
         desc = 'Repo'

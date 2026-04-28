@@ -11,6 +11,8 @@ opt.hlsearch = true                         -- highlight all matches on search
 opt.ignorecase = true                       -- ignore case in search patterns
 opt.mouse = ''                              -- disable mouse inside neovim
 opt.pumheight = 15                          -- popup menu height
+opt.pumborder = 'rounded'                   -- popup menu border
+opt.winborder = 'rounded'                   -- floating window border
 opt.showmode = false                        -- hide -- INSERT -- in cmd line
 opt.showtabline = 2                         -- always show tabs
 opt.smartcase = true                        -- smart case
@@ -25,6 +27,7 @@ opt.undofile = true                         -- enable persistent undo
 opt.updatetime = 500                        -- faster completion default 4000ms
 opt.writebackup = false                     -- disable editing file being edited by other program
 
+opt.nrformats = 'unsigned'                  -- for unsigned <C-A> & <C-X>
 opt.expandtab = true                        -- convert tabs to spaces
 opt.shiftwidth = 2                          -- the number of spaces inserted for each indentation
 opt.tabstop = 2                             -- insert 2 spaces for a tab
@@ -54,10 +57,18 @@ opt.listchars:append('trail:') -- render trailing spaces as 
 opt.listchars:append('tab:  ') -- don't render tabs
 
 -- opt.whichwrap:append('h,l') -- wrap to next line
--- opt.shortmess:append("c") -- for avoiding hit-enter prompts / file messages
+-- opt.shortmess:append('S') -- do not show search count, e.g. "[1/5]".
 -- opt.iskeyword:append('-') -- treat kebab cased text as a single word
 
 opt.guicursor = 'n-v-c-sm:block,' ..
     'ci-ve:ver25,' ..
     'i-r-cr-o:hor20,' .. -- cursor style '_' in insert mode
     'i:blinkwait1000-blinkoff400-blinkon300';
+
+opt.exrc = true -- allow project specific config file .nvim.lua .exrc or .nvimrc
+require('editorconfig').properties.makeprg = function(_, build_cmd, _)
+  ---@diagnostic disable-next-line: undefined-field :get()
+  if vim.opt.makeprg:get() == build_cmd then return end
+  vim.opt.makeprg = build_cmd
+  vim.print('makeprg set to [' .. build_cmd .. ']')
+end
