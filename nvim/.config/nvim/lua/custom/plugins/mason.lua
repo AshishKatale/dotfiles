@@ -43,6 +43,7 @@ M.config = function(_, opts)
   require('mason-lspconfig').setup(opts.mason_lspconfig)
 
   -- externally installed language servers (without meson)
+  vim.lsp.enable('clangd')
   vim.lsp.enable('rust_analyzer')
   vim.lsp.enable('hls')
 end
