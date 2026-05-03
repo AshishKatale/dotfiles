@@ -1,16 +1,16 @@
 configuration {
-	display-run:              "   ";
-	display-drun:             "   ";
-	display-window:           "   ";
-	display-ssh:              "   ";
-	display-recursivebrowser: "   ";
-	display-filebrowser:      "   ";
-	drun-display-format:      "{icon} {name}";
-	show-icons:               true;
+  display-run:              "   ";
+  display-drun:             "   ";
+  display-window:           "   ";
+  display-ssh:              "   ";
+  display-recursivebrowser: "   ";
+  display-filebrowser:      "   ";
+  drun-display-format:      "{icon} {name}";
+  show-icons:               true;
   hover-select:             true;
 
-	modi: "window,run,drun,ssh,filebrowser,recursivebrowser";
-	font: "JetBrainsMono Nerd Font 9";
+  modi: "window,run,drun,ssh,filebrowser,recursivebrowser";
+  font: "JetBrainsMono Nerd Font 9";
 
   /* remove default Control+c */
   kb-secondary-copy: "";
