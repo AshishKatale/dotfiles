@@ -1,7 +1,7 @@
 configuration {
   display-run:              "   ";
   display-drun:             "   ";
-  display-window:           "   ";
+  display-window:           "   ";
   display-ssh:              "   ";
   display-recursivebrowser: "   ";
   display-filebrowser:      "   ";

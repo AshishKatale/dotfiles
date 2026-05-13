@@ -4,7 +4,7 @@
 follow = mouse
 font   = JetBrainsMono Nerd Font Medium 9
 format = <span weight='bold' size='10pt'>%s</span>\n%b
-dmenu  = /usr/bin/rofi -dmenu -p ' Action: '
+dmenu  = "/usr/bin/rofi -dmenu -p Action: -theme-str prompt{padding:0.5em;} -theme-str entry{padding:0.5em;}"
 
 origin             = top-right
 offset             = (12, 24)

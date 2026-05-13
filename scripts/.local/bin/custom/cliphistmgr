@@ -15,12 +15,11 @@ if [ -z "$selected" ]; then
   exit 0
 fi
 
-selected_decoded=$(cliphist decode <<<"$selected")
-
 case "$exit_code" in
-   0) printf "%s" "$selected_decoded" | wl-copy
+   0) printf "%s" "$selected" | cliphist decode | wl-copy
   ;;
   10)
+    selected_decoded=$(printf "%s" "$selected" | cliphist decode)
     cliphist delete <<<"$selected"
     body=$(sed -n '1,2p; 3s/.*/\0 .../p'  <<<$selected_decoded)
     notify-send -e -t 2000 -a 'cliphistmgr' -u low "Removed clipboard entry" \
