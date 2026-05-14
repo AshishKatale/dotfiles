@@ -319,6 +319,7 @@
       "menu-file": "~/.config/waybar/power_menu.xml",
       "menu-actions": {
         "lock": "hyprlock",
+        "logout": "hyprctl dispatch 'hl.dsp.exit()'",
         "suspend": "systemctl -q suspend",
         "reboot": "systemctl -q reboot",
         "hibernate": "systemctl -q hibernate",

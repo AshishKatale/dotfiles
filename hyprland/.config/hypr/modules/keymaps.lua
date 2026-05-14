@@ -162,7 +162,7 @@ hl.define_submap(lock_submap, function()
   hl.bind('R', hl.dsp.exec_cmd('systemctl -q reboot'))
   hl.bind('S', hl.dsp.exec_cmd('systemctl -q poweroff'))
   hl.bind('SHIFT + L',
-    hl.dsp.exec_cmd('command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch "hl.dsp.exit()"'))
+    hl.dsp.exec_cmd('hyprctl dispatch "hl.dsp.exit()"'))
 
   hl.bind('L', hl.dsp.submap('reset'))
 end)

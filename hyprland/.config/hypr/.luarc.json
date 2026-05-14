@@ -5,6 +5,11 @@
       "/usr/share/hypr/stubs"
     ]
   },
+  "diagnostics": {
+    "globals": [
+      "hl"
+    ]
+  },
   "Lua.format.defaultConfig": {
     "quote_style": "single"
   }
