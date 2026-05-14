@@ -134,6 +134,7 @@ local resize_submap = 'Resize'
 hl.bind(MOD .. ' + SHIFT + R', hl.dsp.submap(resize_submap))
 hl.define_submap(resize_submap, function()
   hl.bind('ESCAPE', hl.dsp.submap('reset'))
+  hl.bind('CTRL + C', hl.dsp.submap('reset'))
 
   hl.bind('L', hl.dsp.window.resize({ x = 40, y = 0, relative = true }), { repeating = true })
   hl.bind('H', hl.dsp.window.resize({ x = -40, y = 0, relative = true }), { repeating = true })
@@ -157,6 +158,7 @@ local lock_submap = 'PowerMenu:[<i>l</i>]ock-[<i>L</i>]ogout-[<i>r</i>]eboot-[<i
 hl.bind(MOD .. ' + SHIFT + E', hl.dsp.submap(lock_submap))
 hl.define_submap(lock_submap, function()
   hl.bind('ESCAPE', hl.dsp.submap('reset'))
+  hl.bind('CTRL + C', hl.dsp.submap('reset'))
 
   hl.bind('L', hl.dsp.exec_cmd('hyprlock'))
   hl.bind('R', hl.dsp.exec_cmd('systemctl -q reboot'))
@@ -183,6 +185,8 @@ hl.bind(MOD .. ' + SHIFT + Z', hl.dsp.submap(zoom_submap))
 hl.define_submap(zoom_submap, function()
   hl.bind('ESCAPE', function() cursor_zoom(0) end, { repeating = true })
   hl.bind('ESCAPE', hl.dsp.submap('reset'))
+  hl.bind('CTRL + C', function() cursor_zoom(0) end, { repeating = true })
+  hl.bind('CTRL + C', hl.dsp.submap('reset'))
 
   hl.bind('0', function() cursor_zoom(0) end, { repeating = true })
   hl.bind('MINUS', function() cursor_zoom(-0.1) end, { repeating = true })
