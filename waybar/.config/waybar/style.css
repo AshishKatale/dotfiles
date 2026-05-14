@@ -111,7 +111,7 @@ tooltip {
 }
 
 #network {
-  padding-left: 8px;
+  padding-left: 10px;
   background-color: #1E1E2E;
   border-left: 1px solid #585b70;
   border-top-left-radius: 12px;
@@ -121,7 +121,7 @@ tooltip {
 #idle_inhibitor,
 #memory {
   margin-right: 6px;
-  padding-right: 8px;
+  padding-right: 10px;
   background-color: #1E1E2E;
   border-right: 1px solid #585b70;
   border-top-right-radius: 12px;

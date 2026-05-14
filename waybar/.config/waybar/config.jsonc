@@ -54,7 +54,7 @@
       "tooltip-format-activated": "Idle inhibitor: Active",
       "tooltip-format-deactivated": "Idle inhibitor: Inactive",
       "format-icons": {
-        "activated": "󰛐",
+        "activated": "",
         "deactivated": ""
       }
     },
