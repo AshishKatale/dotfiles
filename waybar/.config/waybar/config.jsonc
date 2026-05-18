@@ -161,6 +161,7 @@
       "max-length": 25
     },
     "network": {
+      "interface": "wl*",
       "format-wifi": "󰖩 {bandwidthDownBytes}",
       "format-alt": "󰖩 {bandwidthDownBytes} 󰄠 {bandwidthUpBytes} ",
       "format-ethernet": "󰈀 {bandwidthDownBits}",
@@ -352,6 +353,7 @@
       "max-length": 25
     },
     "network": {
+      "interface": "wl*",
       "format-wifi": "󰖩 {bandwidthDownBytes}",
       "format-alt": "󰖩 {bandwidthDownBytes} 󰄠 {bandwidthUpBytes} ",
       "format-ethernet": "󰈀 {bandwidthDownBits}",
