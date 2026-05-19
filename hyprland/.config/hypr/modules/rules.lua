@@ -51,14 +51,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-  match = { initial_class = '^(nm-.*)$' },
-  float = true,
-  center = true,
-  size = { '(monitor_w*0.5)', '(monitor_h*0.5)' }
-})
-
-hl.window_rule({
-  match = { initial_class = 'hyprland-share-picker' },
+  match = { initial_class = '^(nm-.*|blueman-manager|hyprland-share-picker)$' },
   float = true,
   center = true,
   size = { '(monitor_w*0.5)', '(monitor_h*0.5)' }
