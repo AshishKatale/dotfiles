@@ -46,7 +46,8 @@
       "format": " {}",
       "tooltip": true,
       "hide-empty-text": true,
-      "interval": 1
+      "interval": "once",
+      "signal": 1
     },
     "idle_inhibitor": {
       "format": "{icon}",
@@ -239,7 +240,8 @@
       "format": " {}",
       "tooltip": true,
       "hide-empty-text": true,
-      "interval": 1
+      "interval": "once",
+      "signal": 1
     },
     "idle_inhibitor": {
       "format": "{icon}",
