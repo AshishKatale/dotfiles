@@ -67,7 +67,7 @@ function send_notification() {
       -t "$NOTIF_TIMEOUT"
     )
 
-    [ $CLIPBOARD -eq 1 ] || args+=(-A "default,Open")
+    [ $CLIPBOARD -eq 1 ] && args+=(--transient) || args+=(-A "default,Open")
     action=$(dunstify "${args[@]}" --wait)
 
     case "$action" in

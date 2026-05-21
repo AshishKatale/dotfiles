@@ -44,7 +44,7 @@ enable_posix_regex = true
 [transient_history_ignore]
 match_transient = yes
 history_ignore  = yes
-frame_color     = "#BCC0CC"
+frame_color     = "#7D7D7E"
 
 [urgency_low]
 frame_color = "#95D890"
