@@ -31,5 +31,10 @@
         <property name="label">  Shutdown</property>
       </object>
     </child>
+    <child>
+      <object class="GtkMenuItem" id="idle">
+        <property name="label">  Idle Inhibitor</property>
+      </object>
+    </child>
   </object>
 </interface>

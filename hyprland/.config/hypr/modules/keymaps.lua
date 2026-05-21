@@ -36,6 +36,7 @@ hl.bind(MOD .. ' + W', hl.dsp.exec_cmd('pkill rofi || rofi -show window -no-show
 
 hl.bind(MOD .. ' + RETURN', hl.dsp.exec_cmd('alacritty'))
 hl.bind(MOD .. ' + SHIFT + RETURN', hl.dsp.exec_cmd('brave'))
+hl.bind(MOD .. ' + ALT + I', hl.dsp.exec_cmd('idle-inhibitor toggle'))
 hl.bind(MOD .. ' + SHIFT + C', hl.dsp.exec_cmd('hyprpicker -a'))
 hl.bind(MOD .. ' + SHIFT + P', hl.dsp.exec_cmd('pkill -SIGUSR1 waybar'))
 hl.bind(MOD .. ' + CTRL + P', hl.dsp.exec_cmd('pkill -SIGUSR2 waybar'))

@@ -11,7 +11,8 @@
     "modules-left": [
       "hyprland/workspaces",
       "custom/tmux",
-      "hyprland/submap"
+      "hyprland/submap",
+      "custom/yay"
     ],
     "modules-center": [
       "clock"
@@ -31,6 +32,7 @@
       "cpu",
       "custom/separator",
       "memory",
+      "custom/idle_inhibitor",
       // "idle_inhibitor",
       "tray"
     ],
@@ -48,6 +50,25 @@
       "hide-empty-text": true,
       "interval": "once",
       "signal": 1
+    },
+    "custom/idle_inhibitor": {
+      "exec": "idle-inhibitor",
+      "format": "{}",
+      "hide-empty-text": true,
+      "tooltip": true,
+      "tooltip-format": "  Idle inhibitor on",
+      "on-click": "idle-inhibitor off",
+      "interval": "once",
+      "signal": 2
+    },
+    "custom/yay": {
+      "exec": "NUM_PKG=$(yay -Qu | wc -l); [ $NUM_PKG -gt 0 ] && echo $NUM_PKG",
+      "format": "  {}",
+      "hide-empty-text": true,
+      "tooltip": true,
+      "tooltip-format": "{} AUR/Pacman updates available",
+      "on-click": "alacritty --hold -e yay",
+      "interval": "once"
     },
     "idle_inhibitor": {
       "format": "{icon}",
@@ -110,9 +131,8 @@
     },
     "backlight": {
       "reverse-scrolling": true,
-      "device": "intel_backlight",
-      "tooltip": false,
       "format": "{icon} {percent:2d}%",
+      "tooltip": false,
       "format-icons": [
         "",
         "",
@@ -125,17 +145,7 @@
         "",
         "",
         ""
-      ],
-      "menu": "on-click",
-      "menu-file": "~/.config/waybar/power_menu.xml",
-      "menu-actions": {
-        "lock": "hyprlock",
-        "logout": "hyprctl dispatch 'hl.dsp.exit()'",
-        "suspend": "systemctl -q suspend",
-        "reboot": "systemctl -q reboot",
-        "hibernate": "systemctl -q hibernate",
-        "shutdown": "systemctl -q poweroff"
-      }
+      ]
     },
     "memory": {
       "format": " {percentage:2d}%",
@@ -147,7 +157,8 @@
       "format-charging": "󰂉 {capacity:2d}%",
       "format-plugged": "󱐥 {capacity:2d}%",
       "tooltip": true,
-      "tooltip-format": " {time} remaining ",
+      "format-time": " {H}hr {M}min remaining \n",
+      "tooltip-format": "{time} Click for power menu ",
       "interval": 5,
       "states": {
         "warning": 30,
@@ -160,7 +171,17 @@
         "",
         ""
       ],
-      "max-length": 25
+      "menu": "on-click",
+      "menu-file": "~/.config/waybar/power_menu.xml",
+      "menu-actions": {
+        "lock": "hyprlock",
+        "idle": "idle-inhibitor toggle",
+        "logout": "hyprctl dispatch 'hl.dsp.exit()'",
+        "suspend": "systemctl -q suspend",
+        "reboot": "systemctl -q reboot",
+        "hibernate": "systemctl -q hibernate",
+        "shutdown": "systemctl -q poweroff"
+      }
     },
     "network": {
       "interface": "wl*",
@@ -168,7 +189,7 @@
       "format-alt": "󰖩 {bandwidthDownBytes} 󰄠 {bandwidthUpBytes} ",
       "format-ethernet": "󰈀 {bandwidthDownBits}",
       "format-disconnected": "󰖪 No network",
-      "interval": 2,
+      "interval": 1,
       "tooltip": true,
       "tooltip-format": "<span> {essid} (<tt>{signalStrength:2d}</tt>%) \n {ipaddr}/{cidr} (<tt>{ifname}</tt>) </span>"
     },

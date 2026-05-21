@@ -80,6 +80,8 @@ tooltip {
   background-color: #EF9F76;
 }
 
+#custom-yay,
+#custom-idle_inhibitor,
 #idle_inhibitor,
 #tray {
   background-color: #1E1E2E;
@@ -118,6 +120,8 @@ tooltip {
   border-bottom-left-radius: 12px;
 }
 
+#custom-yay,
+#custom-idle_inhibitor,
 #idle_inhibitor,
 #memory {
   margin-right: 6px;
@@ -174,6 +178,8 @@ tooltip {
   color: #FFBA80;
 }
 
+#custom-yay,
+#custom-idle_inhibitor,
 #idle_inhibitor {
   color: #FFBA80;
 }
