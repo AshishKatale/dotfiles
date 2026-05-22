@@ -11,8 +11,7 @@
     "modules-left": [
       "hyprland/workspaces",
       "custom/tmux",
-      "hyprland/submap",
-      "custom/yay"
+      "hyprland/submap"
     ],
     "modules-center": [
       "clock"
@@ -60,15 +59,6 @@
       "on-click": "idle-inhibitor off",
       "interval": "once",
       "signal": 2
-    },
-    "custom/yay": {
-      "exec": "NUM_PKG=$(yay -Qu | wc -l); [ $NUM_PKG -gt 0 ] && echo $NUM_PKG",
-      "format": "  {}",
-      "hide-empty-text": true,
-      "tooltip": true,
-      "tooltip-format": "{} AUR/Pacman updates available",
-      "on-click": "alacritty --hold -e yay",
-      "interval": "once"
     },
     "idle_inhibitor": {
       "format": "{icon}",
@@ -133,6 +123,10 @@
       "reverse-scrolling": true,
       "format": "{icon} {percent:2d}%",
       "tooltip": false,
+      "on-click": "brightnessctl set 5%+",
+      "on-click-right": "brightnessctl set 5%-",
+      "on-click-middle": "brightnessctl set 25%",
+      "tooltip-format": "{controller_alias}\t{controller_address}",
       "format-icons": [
         "",
         "",
@@ -202,7 +196,8 @@
       "reverse-scrolling": true,
       "max-volume": 100,
       "nospacing": 1,
-      "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle"
+      "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
+      "on-click-right": "wpctl set-volume @DEFAULT_SINK@ 5%+"
     },
     "pulseaudio": {
       "scroll-step": 1,
