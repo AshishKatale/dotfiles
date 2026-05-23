@@ -36,8 +36,7 @@
       "tray"
     ],
     "custom/separator": {
-      "format": "{}",
-      "exec": "echo -n ' '",
+      "format": " ",
       "tooltip": false
     },
     "custom/tmux": {

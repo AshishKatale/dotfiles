@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <object class="GtkMenu" id="menu">
+
+    <!-- Title -->
+    <child>
+      <object class="GtkMenuItem" id="title">
+        <property name="label">⏻  Power Menu </property>
+        <property name="sensitive">False</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkMenuItem">
+        <property name="label">─────────────────</property>
+        <property name="sensitive">False</property>
+      </object>
+    </child>
+
     <child>
       <object class="GtkMenuItem" id="lock">
         <property name="label">  Lock</property>
@@ -23,7 +39,7 @@
     </child>
     <child>
       <object class="GtkMenuItem" id="hibernate">
-        <property name="label">  Hibernate</property>
+        <property name="label">  Hibernate</property>
       </object>
     </child>
     <child>

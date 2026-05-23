@@ -8,11 +8,11 @@ fi
 
 if pgrep systemd-inhibit &> /dev/null; then
   pkill systemd-inhibit
-  notify-send -e -u low -t 2000 'Idle inhibitor' '<span fgcolor="#F38BA8"><i>Deactivated</i></span>'
+  notify-send -e -u low -t 1000 'Idle inhibitor' '<span fgcolor="#F38BA8"><i>Deactivated</i></span>'
   pkill -SIGRTMIN+2 waybar
   exit 0
 fi
 
 systemd-inhibit --what=sleep:handle-lid-switch:idle sleep 10000 &
 pkill -SIGRTMIN+2 waybar
-notify-send -e -u low -t 2000 'Idle inhibitor' '<span fgcolor="#4EC9B0"><i>Activated</i></span>'
+notify-send -e -u low -t 1000 'Idle inhibitor' '<span fgcolor="#4EC9B0"><i>Activated</i></span>'
