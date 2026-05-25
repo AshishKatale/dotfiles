@@ -1,7 +1,7 @@
 HISTFILE="$ZDOTDIR/.zsh_history"
 HISTORY_IGNORE='(export *|ll|exit)'
 SAVEHIST=10000
-HISTSIZE=2000
+HISTSIZE=5000
 
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
