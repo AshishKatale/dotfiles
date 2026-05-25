@@ -30,9 +30,9 @@ hl.bind(MOD .. ' + ALT + N', hl.dsp.exec_cmd('dunstctl history-pop'))
 hl.bind(MOD .. ' + CTRL + N', hl.dsp.exec_cmd('dunstctl context'))
 hl.bind(MOD .. ' + SHIFT + N', hl.dsp.exec_cmd('dunstctl close-all'))
 
--- Rofi
-hl.bind(MOD .. ' + B', hl.dsp.exec_cmd('pkill rofi || rofi -show drun'))
 hl.bind(MOD .. ' + W', hl.dsp.exec_cmd('pkill rofi || rofi -show window -no-show-icons'))
+hl.bind(MOD .. ' + B', hl.dsp.exec_cmd('pkill rofi || rofi -show drun'))
+hl.bind(MOD .. ' + SHIFT + B', hl.dsp.exec_cmd('pkill blueman-applet && pkill blueman-manager || blueman-manager'))
 
 hl.bind(MOD .. ' + RETURN', hl.dsp.exec_cmd('alacritty'))
 hl.bind(MOD .. ' + SHIFT + RETURN', hl.dsp.exec_cmd('brave'))
