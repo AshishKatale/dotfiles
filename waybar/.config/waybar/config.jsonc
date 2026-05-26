@@ -124,7 +124,7 @@
       "tooltip": false,
       "on-click": "brightnessctl set 5%+",
       "on-click-right": "brightnessctl set 5%-",
-      "on-click-middle": "brightnessctl set 25%",
+      "on-click-middle": "brightnessctl set 20%",
       "tooltip-format": "{controller_alias}\t{controller_address}",
       "format-icons": [
         "",

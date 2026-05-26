@@ -9,8 +9,8 @@ dmenu  = "/usr/bin/rofi -dmenu -p Action: -theme-str prompt{padding:0.5em;} -the
 origin             = top-right
 offset             = (12, 24)
 gap_size           = 4
-width              = (360, 420)
-height             = (0, 120)
+width              = (240, 420)
+height             = (0, 360)
 padding            = 8
 horizontal_padding = 12
 
@@ -51,8 +51,3 @@ frame_color = "#95D890"
 
 [urgency_critical]
 frame_color = "#F23F59"
-
-[screenshotmgr]
-summary       = "^Screenshot.*$"
-min_icon_size = 64
-
