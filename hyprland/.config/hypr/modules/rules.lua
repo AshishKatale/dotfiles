@@ -7,6 +7,7 @@ overlayLayerRule:set_enabled(true)
 
 hl.workspace_rule({
   workspace = 'special:special',
+  layout = 'scrolling',
   on_created_empty =
   '[float; size (monitor_w*0.75) (monitor_h*0.75)] alacritty'
 })
