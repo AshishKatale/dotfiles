@@ -1,5 +1,7 @@
+# vim: set filetype=dosini :
+
 [options]
-suppress_default_binds = true # Suppress built-in key bindings,
+suppress_default_binds = true
 overlay = true
 overlay_font = "Roboto:10"
 
