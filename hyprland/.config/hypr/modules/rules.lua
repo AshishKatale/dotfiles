@@ -35,10 +35,10 @@ hl.window_rule({
 
 hl.window_rule({ match = { float = false, workspace = 'w[tv1]s[false]' }, border_size = 0 })
 hl.window_rule({ match = { pin = true }, border_color = 'rgba(005A9CEE)' })
-hl.window_rule({ match = { workspace = 's[true]' }, border_color = 'rgba(5D9FBDEE)' })
+hl.window_rule({ match = { workspace = 's[true]' }, border_color = 'rgba(5D9FBDEE)', border_size = 1 })
 
 hl.window_rule({
-  match = { title = '^(DevTools|Save File|.*wants to save|Open File|.*wants to open)$' },
+  match = { title = '^(DevTools|Save File|.*wants to save|Open File|.*wants to open|Save screenshot)$' },
   float = true,
   center = true,
   size = { '(monitor_w*0.75)', '(monitor_h*0.75)' }
