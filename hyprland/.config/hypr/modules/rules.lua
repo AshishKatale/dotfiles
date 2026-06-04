@@ -57,3 +57,9 @@ hl.window_rule({
   center = true,
   size = { '(monitor_w*0.5)', '(monitor_h*0.5)' }
 })
+
+hl.window_rule({
+  match = { class = 'flameshot', title = '^(Configuration|Capture Launcher)$' }, -- flameshot launcher
+  float = true,
+  center = true,
+})
