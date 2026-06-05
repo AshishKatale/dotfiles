@@ -94,8 +94,11 @@ M.toggle_color_column = function()
 end
 
 M.toggle_number = function()
-  vim.wo.number = not vim.wo.number
-  vim.wo.relativenumber = not vim.wo.relativenumber
+  if vim.wo.number then
+    vim.wo.number, vim.wo.relativenumber = false, false
+  else
+    vim.wo.number, vim.wo.relativenumber = true, true
+  end
 end
 
 M.toggle_indent_guides = function()
