@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 help=$(cat<<EOF
-  -h --help        show this message
-     --info        show tmux session info for waybar
-     --special     create floating special session
-  \$1=some_path     directory path for new tmux session
+  -h       --help                show this message
+  -j       --info                print tmux session info json for waybar
+  ${0##*/} /path/to/dir          create new tmux session at given path
 EOF
 )
 
@@ -13,7 +12,7 @@ case "$1" in
     echo "$help"
     exit 0
   ;;
-  "--special")
+  "-s"|"--special")
     current_session=$(tmux display-message -p "#S")
     special_attached=$(tmux ls | grep "special_$current_session:" | grep attached | wc -l)
     if [ "${current_session:0:8}" = "special_" ]; then
@@ -21,11 +20,11 @@ case "$1" in
     elif [ 1 -eq $special_attached ]; then
       tmux detach -s "special_$current_session"
     else
-      tmux display-popup -T " Special " -E -w '85%' -h '85%' "tmux new-session -A -D -s special_$current_session"
+      tmux display-popup -T ' Special ' -E -w '85%' -h '85%' "tmux new-session -A -D -s special_$current_session"
     fi
     exit 0
   ;;
-  "status"|"info"|"--info")
+  "-j"|"--info")
     if (tmux ls | grep -q attached) 2> /dev/null; then
       if (tmux ls | grep -qv attached) 2> /dev/null; then
         SSN_COUNT="<span color='#8C8FA1'> <i>+$(tmux ls | grep -v attached | wc -l)</i></span>"
@@ -42,56 +41,54 @@ case "$1" in
   ;;
 esac
 
+SEPARATOR=' '
 tmux_pgrep="$(pgrep tmux)"
 if [ -n "$tmux_pgrep" ] && [ -n "$(tmux ls | wc -l)" ]; then
   existing_sessions=$(
-    tmux ls -F '#S' | xargs -I{} tmux display-message -p -t {} '#S #{pane_start_path}'
-    echo " "
+    tmux ls -F '#S #{pane_start_path}'
+    echo "$SEPARATOR"
   )
 fi
 
 if [ -n "$1" ] && [ -d "$1" ]; then
-  selected=$(realpath $1)
-elif which fd &> /dev/null; then
+  selected_dirpath=$(realpath "$1")
+elif command -v fd &> /dev/null; then
   projects=$(
-    [ -n "$existing_sessions" ] && echo "$existing_sessions"
-    echo $HOME/dotfiles
-    fd --type=directory --min-depth=1 --max-depth=2 . $HOME/workspace | sed 's/\/$//'
+    [ -n "$existing_sessions" ] && echo "$existing_sessions"                            # contains fields - session name, session's cwd
+    echo $HOME/dotfiles $HOME/dotfiles                                                  # duplicate dir names for 2 required fields
+    fd --type=directory --min-depth=1 --max-depth=2 . $HOME/workspace --exec echo {} {} # ^?
   )
 else
   projects=$(
-    [ -n "$existing_sessions" ] && echo "$existing_sessions"
-    echo $HOME/dotfiles
-    find $HOME/workspace -mindepth 1 -maxdepth 2 -type d
+    [ -n "$existing_sessions" ] && echo "$existing_sessions"                 # contains fields - session name, session's cwd
+    echo $HOME/dotfiles $HOME/dotfiles                                       # duplicate dir names for 2 required fields
+    find $HOME/workspace -mindepth 1 -maxdepth 2 -type d -exec echo {} {} \; # ^?
   )
 fi
 
 if [ -n "$projects" ]; then
-  selected=$(echo "$projects" | fzf \
-    --bind 'ctrl-x:execute-silent(bash -c "tmux kill-session -t \"\${1%% *}\"" _ {})+abort' \
-    --with-nth=1 --delimiter=' ' --tmux='center,50%,40%' --scheme='path')
+  selected_dirpath=$(echo "$projects" | fzf \
+    --bind 'ctrl-x:execute-silent(tmux kill-session -t {1})+abort' \
+    --tmux='center,50%,40%' --border-label 'TMUX Session Manager' --scheme='path' \
+    --delimiter=' ' --with-nth=1 --accept-nth=2 # display 1st field - session name, return 2nd field - dir path on selection
+  )
 fi
 
-existing_session_pwd=$(echo "$selected" | cut -s -d' ' -f2)
-if [ -n "$existing_session_pwd" ]; then
-  selected="$existing_session_pwd"
-fi
-
-if [ -z "$selected" ] || [ "$selected" = " " ]; then
+if [ -z "$selected_dirpath" ] || [ "$selected_dirpath" = "$SEPARATOR" ]; then
   exit 0
 fi
 
-selected_dirname=$(basename "$selected" | tr . _)
-selected_parent_dirname="$(basename $(dirname "$selected") | tr . _)"
+selected_dirname=$(basename "$selected_dirpath" | tr . _)
+selected_parent_dirname="$(basename $(dirname "$selected_dirpath") | tr . _)"
 session_name="$selected_parent_dirname/$selected_dirname"
 
 if [ -z "$TMUX" ] && [ -z "$tmux_pgrep" ]; then
-  tmux new-session -s "$session_name" -c "$selected"
+  tmux new-session -s "$session_name" -c "$selected_dirpath"
   exit 0
 fi
 
 if ! tmux has-session -t "$session_name" 2> /dev/null; then
-  tmux new-session -ds "$session_name" -c "$selected"
+  tmux new-session -ds "$session_name" -c "$selected_dirpath"
 fi
 
 if [ -n "$TMUX" ]; then

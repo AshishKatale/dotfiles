@@ -77,8 +77,8 @@ source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 [ -e $HOME/.zshrc ] && source $HOME/.zshrc # to optionally override configs
 
-which lazygit &> /dev/null && bindkey -s -M viins '^g' '^E^U lazygit^M'
-[ -x $HOME/.local/bin/custom/tmuxsmgr ] && bindkey -s -M viins '^b' '^E^U tmuxsmgr^M'
+command -v lazygit &> /dev/null && bindkey -s -M viins '^g' '^E^U lazygit^M'
+command -v tmuxsmgr &> /dev/null && bindkey -s -M viins '^b' '^E^U tmuxsmgr^M'
 
 if command -v fnm &> /dev/null; then
   eval "$(fnm env --use-on-cd --shell zsh)"

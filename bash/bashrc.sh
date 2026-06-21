@@ -16,9 +16,8 @@ fi
 
 # if the shell is interactive
 if [[ $- =~ i ]]; then
-
-  [ -x $HOME/.local/bin/custom/tmuxsmgr ] && bind '"\C-b":"\C-E\C-U tmuxsmgr\n"'
-  which lazygit &> /dev/null && bind '"\C-g":"\C-E\C-U lazygit\n"'
+  command -v tmuxsmgr &> /dev/null && bind '"\C-b":"\C-E\C-U tmuxsmgr\n"'
+  command -v lazygit &> /dev/null && bind '"\C-g":"\C-E\C-U lazygit\n"'
 
   # tab completion forward and backwards
   bind 'TAB:menu-complete'
