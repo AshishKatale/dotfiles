@@ -67,8 +67,9 @@ else
 fi
 
 if [ -n "$projects" ]; then
-  selected=$( echo "$projects" | fzf \
-      --with-nth=1 --delimiter=' ' --tmux='center,50%,40%' --scheme='path')
+  selected=$(echo "$projects" | fzf \
+    --bind 'ctrl-x:execute-silent(bash -c "tmux kill-session -t \"\${1%% *}\"" _ {})+abort' \
+    --with-nth=1 --delimiter=' ' --tmux='center,50%,40%' --scheme='path')
 fi
 
 existing_session_pwd=$(echo "$selected" | cut -s -d' ' -f2)
