@@ -69,7 +69,7 @@ fi
 if [ -n "$projects" ]; then
   selected_dirpath=$(echo "$projects" | fzf \
     --bind 'ctrl-x:execute-silent(tmux kill-session -t {1})+abort' \
-    --tmux='center,50%,40%' --border-label 'TMUX Session Manager' --scheme='path' \
+    --tmux='center,50%,40%' --border-label ' TMUX Session Manager ' --scheme='path' \
     --delimiter=' ' --with-nth=1 --accept-nth=2 # display 1st field - session name, return 2nd field - dir path on selection
   )
 fi
