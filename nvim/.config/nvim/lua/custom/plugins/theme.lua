@@ -93,6 +93,7 @@ M.config = function(_, opts)
       hi! link NormalFloat Normal
       hi! link CurSearch Search
       hi! link FloatBorder VertSplit
+      hi! link qfLineNr LspInlayHint
       hi! link LazyDimmed LspInlayHint
       hi! link LazyProp LspInlayHint
     ]])
