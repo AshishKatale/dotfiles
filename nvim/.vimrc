@@ -37,7 +37,10 @@ highlight Search cterm=bold ctermfg=15 ctermbg=52
 highlight CurSearch cterm=bold ctermfg=15 ctermbg=172
 highlight MatchParen ctermfg=0 ctermbg=7
 highlight VertSplit cterm=NONE ctermfg=242 ctermbg=NONE
+highlight TabLine cterm=NONE ctermbg=240 ctermfg=252
+highlight TabLineSel cterm=NONE ctermbg=240 ctermfg=252
 highlight StatusLine cterm=NONE ctermbg=240
+highlight StatusLineTerm cterm=NONE ctermbg=240
 highlight CursorLine cterm=NONE ctermbg=236
 highlight StatusLineNC cterm=NONE ctermbg=237
 highlight LineNr cterm=NONE ctermfg=244

@@ -35,7 +35,6 @@ map({ 'n' }, '<S-h>', '<cmd>lua vim.cmd.bp({count=vim.v.count})<cr>', { silent =
 -- Press jk fast to enter normal mode
 map({ 'i' }, 'jk', '<ESC>', { silent = true })
 map({ 'v', 's' }, 'ii', '<ESC>', { silent = true })
-map({ 't' }, 'ii', [[<C-\><C-n>]], { silent = true })
 
 -- Stay in indent mode
 map({ 'v' }, '<', '<gv', { silent = true })

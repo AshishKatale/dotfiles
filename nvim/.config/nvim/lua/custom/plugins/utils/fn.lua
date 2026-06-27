@@ -148,11 +148,9 @@ M.lazy_git = function()
   if is_inside_git_work_tree then
     vim.cmd('tabnew term://lazygit')
     vim.cmd('set filetype=lazygit')
-    vim.keymap.set({ 't' }, 'ii', '<Nop>', { silent = true, buffer = 0 })
-    vim.keymap.set(
-      { 't' }, [[<C-\>]], [[<C-\><C-n>0M]],
-      { silent = true, buffer = 0 }
-    )
+    vim.keymap.set({ 't' }, [[<C-\>]], [[<C-\><C-n>0M]], { silent = true, buf = 0 })
+    vim.keymap.set({ 'n' }, 'q', vim.cmd.startinsert, { silent = true, buf = 0 })
+    vim.keymap.del({ 't' }, 'ii', { buf = 0 })
   else
     vim.notify('Error: lazygit must be run inside a git repository',
       vim.log.levels.ERROR, { history = false })

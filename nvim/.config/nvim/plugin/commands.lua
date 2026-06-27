@@ -69,6 +69,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
     vim.api.nvim_set_option_value('number', false, { win = 0 })
     vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
     vim.api.nvim_set_option_value('signcolumn', 'no', { win = 0 })
+    vim.keymap.set({ 't' }, 'ii', [[<C-\><C-n>]], { silent = true, buf = 0 })
     vim.cmd.startinsert()
   end,
   group = augroup

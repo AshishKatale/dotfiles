@@ -145,11 +145,13 @@ return {
       {
         '<C-P>',
         function() gitsigns.nav_hunk('prev') end,
-        desc = 'Git hunk previous'
+        mode = { 'n', 'v' },
+        desc = 'Git hunk previous',
       },
       {
         '<C-N>',
         function() gitsigns.nav_hunk('next') end,
+        mode = { 'n', 'v' },
         desc = 'Git hunk next'
       },
     })
