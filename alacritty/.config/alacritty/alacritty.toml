@@ -19,12 +19,12 @@ offset.x = 0
 offset.y = 0
 
 [font.normal]
-family = "BlexMonoNerdFont"
-style  = "Regular"
+family = "JetBrainsMonoNerdFont"
+style  = "Light"
 
 [font.bold]
-family = "BlexMonoNerdFont"
-style  = "Bold"
+family = "JetBrainsMonoNerdFont"
+style  = "ExtraBold"
 
 [colors.cursor]
 text   = "#4D4D4C"
