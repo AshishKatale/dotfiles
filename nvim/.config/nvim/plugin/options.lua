@@ -24,10 +24,10 @@ opt.termguicolors = true                    -- set term gui colors
 opt.timeout = true
 opt.timeoutlen = 500                        -- time to wait for mapped sequence
 opt.undofile = true                         -- enable persistent undo
-opt.updatetime = 500                        -- faster completion default 4000ms
+opt.updatetime = 500                        -- faster cursorhold, default 4000ms
 opt.writebackup = false                     -- disable editing file being edited by other program
 
-opt.nrformats = 'unsigned'                  -- for unsigned <C-A> & <C-X>
+opt.nrformats = 'blank,bin,hex'             -- for better <C-A> & <C-X>
 opt.expandtab = true                        -- convert tabs to spaces
 opt.shiftwidth = 4                          -- the number of spaces inserted for each indentation
 opt.tabstop = 4                             -- insert spaces for a tab

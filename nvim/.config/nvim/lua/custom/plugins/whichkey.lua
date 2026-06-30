@@ -237,7 +237,7 @@ M.config = function(_, setup)
     {
       '<leader>so',
       function() require('snacks').picker.recent() end,
-      desc = 'Select Picker'
+      desc = 'Old Files'
     },
     {
       '<leader>sh',

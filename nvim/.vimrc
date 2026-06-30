@@ -19,32 +19,36 @@ set number
 set relativenumber
 set cursorline
 set hlsearch
+set splitbelow
+set splitright
+set ignorecase
+set smartcase
 set fixendofline
 set expandtab
 set tabstop=4
 set shiftwidth=4
 set signcolumn=yes
-set pumheight=15
+set foldcolumn=1
 set colorcolumn=81
 set laststatus=2
 set scrolloff=8
 set showtabline=1
-set splitbelow
-set splitright
-set path+=**
+set shortmess-=S
+set nrformats=blank,bin,hex
 set wildmenu
 set wildoptions+=pum
-set listchars=tab:>\ ,space:·,trail:•,eol:$
-set fillchars=eob:\ ,vert:\│,fold:-
+set pumheight=15
+set pumborder=round
+set path+=**
+set listchars=tab:>\ ,lead:·,trail:•,eol:\\
+set fillchars=eob:\ ,vert:\│,fold:\ ,foldsep:\ 
 set statusline=[%n]\ %t\ %m\ %r\ %h\ %=\ %y\ [%l,%v]\ [%P]\ [%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
-set pumborder=custom:─;│;─;│;╭;╮;╯;╰
 set grepformat=%f:%l:%c:%m
 set grepprg=rg\ --vimgrep\ --hidden\ --glob\ \"!**/.git/**\"\ --glob\ \"!**/node_modules/**\"\ --glob\ \"!**/target/**\"
 
-highlight Comment ctermfg=71
 highlight Normal ctermbg=NONE
-"highlight Normal ctermbg=234
-highlight NonText ctermfg=245 ctermbg=NONE
+" highlight Normal ctermbg=234
+highlight NonText ctermfg=242 ctermbg=NONE
 highlight SpecialKey ctermfg=245 ctermbg=NONE
 highlight Search cterm=bold ctermfg=255 ctermbg=130
 highlight CurSearch cterm=bold ctermfg=255 ctermbg=130
@@ -70,9 +74,13 @@ highlight PmenuBorder ctermfg=246 ctermbg=NONE
 highlight PmenuMatch ctermfg=39 ctermbg=NONE cterm=bold
 highlight PmenuMatchSel ctermfg=18 cterm=bold
 highlight DiffAdd cterm=bold ctermfg=15 ctermbg=28
-highlight DiffText   cterm=bold ctermfg=15 ctermbg=18
+highlight DiffText cterm=bold ctermfg=15 ctermbg=18
 highlight DiffChange cterm=bold ctermfg=15 ctermbg=130
 highlight DiffDelete cterm=bold ctermfg=124 ctermbg=124
+highlight Folded ctermfg=177 ctermbg=NONE cterm=bold
+highlight FoldColumn ctermfg=177 ctermbg=NONE cterm=bold
+highlight CursorLineFold ctermfg=177 ctermbg=NONE cterm=bold
+highlight Comment ctermfg=71
 
 " AutoCommands
 augroup myCmds
@@ -98,6 +106,7 @@ augroup myCmds
         \ | setlocal norelativenumber
         \ | setlocal nocursorline
         \ | setlocal bufhidden=hide
+        \ | setlocal foldcolumn=0
         \ | setlocal signcolumn=
         \ | setlocal colorcolumn=
         \ | endif
