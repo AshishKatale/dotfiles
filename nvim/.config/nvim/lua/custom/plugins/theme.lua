@@ -56,7 +56,7 @@ M.opts = function()
       DiagnosticHint                 = { fg = colors.vscDarkYellow, },
       LspInlayHint                   = { fg = colors.inlayhint },
       netrwMarkFile                  = { bg = colors.vscContext },
-      Folded                         = { bold = true, italic = true, },
+      Folded                         = { bold = true },
     }
   }
 end
@@ -89,7 +89,7 @@ M.config = function(_, opts)
       hi netrwDir guifg=#569CD6 guibg=NONE
       hi VertSplit guifg=#777777 guibg=NONE
       hi PmenuThumb guifg=NONE guibg=#777777
-      hi Folded guifg=#D0AEF8
+      hi Folded guifg=#D787FF
       hi! link NormalFloat Normal
       hi! link CurSearch Search
       hi! link FloatBorder VertSplit

@@ -65,13 +65,20 @@ return {
       },
       {
         '<leader>gB',
-        "<cmd>exec \"lua require('gitsigns').blame()\" | wincmd h<cr>",
+        -- "<cmd>exec \"lua require('gitsigns').blame()\" | wincmd h<cr>",
+        function() require('gitsigns').blame() end,
         desc = 'Blame'
       },
       {
         '<leader>gd',
-        "<cmd>exec \"lua require('gitsigns').diffthis()\" | wincmd h<cr>",
+        -- "<cmd>exec \"lua require('gitsigns').diffthis()\" | wincmd h<cr>",
+        function() require('gitsigns').diffthis() end,
         desc = 'File diff'
+      },
+      {
+        '<leader>gq',
+        function() require('gitsigns').setqflist() end,
+        desc = 'File history'
       },
       {
         '<leader>gf',

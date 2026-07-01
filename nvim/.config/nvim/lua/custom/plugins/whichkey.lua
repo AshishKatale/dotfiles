@@ -140,11 +140,10 @@ M.config = function(_, setup)
     { '<leader>qf', '<cmd>Trouble qflist<cr>',         desc = 'Trouble QfList' },
     { '<leader>qp', '<cmd>cprev<cr>',                  desc = 'QuickFix Prev' },
     { '<leader>qn', '<cmd>cnext<cr>',                  desc = 'QuickFix Next' },
-    { '<leader>q0', '<cmd>cfirst<cr>',                 desc = 'QuickFix First' },
-    { '<leader>q$', '<cmd>clast<cr>',                  desc = 'QuickFix Last' },
+    { '<leader>qg', '<cmd>cfirst<cr>',                 desc = 'QuickFix First' },
+    { '<leader>qG', '<cmd>clast<cr>',                  desc = 'QuickFix Last' },
     { '<leader>qt', '<cmd>TodoTrouble<cr>',            desc = 'Todos' },
     { '<leader>qd', '<cmd>Trouble diagnostics<cr>',    desc = 'Diagnostics' },
-    { '<leader>qg', '<cmd>Gitsigns setqflist<cr>',     desc = 'Git Hunks' },
     { '<leader>qr', '<cmd>Trouble lsp_references<cr>', desc = 'LSP references' },
     {
       '<leader>qi',

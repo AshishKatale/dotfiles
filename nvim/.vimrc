@@ -1,4 +1,4 @@
-"lOptions
+" Options
 set viminfofile=$HOME/.local/.vim/viminfo
 set runtimepath+=$HOME/.local/.vim
 set runtimepath-=$HOME/.vim
@@ -46,41 +46,44 @@ set statusline=[%n]\ %t\ %m\ %r\ %h\ %=\ %y\ [%l,%v]\ [%P]\ [%{len(filter(range(
 set grepformat=%f:%l:%c:%m
 set grepprg=rg\ --vimgrep\ --hidden\ --glob\ \"!**/.git/**\"\ --glob\ \"!**/node_modules/**\"\ --glob\ \"!**/target/**\"
 
-highlight Normal ctermbg=NONE
-" highlight Normal ctermbg=234
-highlight NonText ctermfg=242 ctermbg=NONE
-highlight SpecialKey ctermfg=245 ctermbg=NONE
-highlight Search cterm=bold ctermfg=255 ctermbg=130
-highlight CurSearch cterm=bold ctermfg=255 ctermbg=130
-highlight MatchParen ctermfg=0 ctermbg=248
-highlight VertSplit cterm=NONE ctermfg=242 ctermbg=NONE
-highlight TabLine cterm=NONE ctermfg=255 ctermbg=242 cterm=bold
-highlight TabLineSel cterm=bold ctermfg=0
-highlight TabLineFill ctermbg=240
-highlight StatusLine cterm=NONE ctermfg=255 ctermbg=240 cterm=bold
-highlight StatusLineNC cterm=NONE ctermfg=248 ctermbg=240
-highlight StatusLineTerm cterm=NONE ctermfg=255 ctermbg=240 cterm=bold
-highlight StatusLineTermNC cterm=NONE ctermfg=248 ctermbg=240
-highlight CursorLine cterm=NONE ctermbg=238
-highlight CursorLineSign ctermbg=NONE
-highlight LineNr cterm=NONE ctermfg=244
-highlight CursorLineNr cterm=NONE ctermfg=252
-highlight ColorColumn cterm=NONE ctermbg=238
-highlight visual cterm=NONE ctermbg=24 ctermfg=15
-highlight QuickFixLine cterm=bold ctermfg=15 ctermbg=8
-highlight Pmenu ctermbg=NONE
-highlight PmenuSbar ctermbg=240
-highlight PmenuBorder ctermfg=246 ctermbg=NONE
-highlight PmenuMatch ctermfg=39 ctermbg=NONE cterm=bold
-highlight PmenuMatchSel ctermfg=18 cterm=bold
-highlight DiffAdd cterm=bold ctermfg=15 ctermbg=28
-highlight DiffText cterm=bold ctermfg=15 ctermbg=18
-highlight DiffChange cterm=bold ctermfg=15 ctermbg=130
-highlight DiffDelete cterm=bold ctermfg=124 ctermbg=124
-highlight Folded ctermfg=177 ctermbg=NONE cterm=bold
-highlight FoldColumn ctermfg=177 ctermbg=NONE cterm=bold
-highlight CursorLineFold ctermfg=177 ctermbg=NONE cterm=bold
-highlight Comment ctermfg=71
+highlight Normal                         ctermbg=NONE
+" highlight Normal                         ctermbg=233
+highlight NonText          ctermfg=240   ctermbg=NONE
+highlight SpecialKey       ctermfg=240   ctermbg=NONE
+highlight Search           ctermfg=NONE  ctermbg=52    cterm=bold
+highlight CurSearch        ctermfg=NONE  ctermbg=52    cterm=bold
+highlight MatchParen       ctermfg=16    ctermbg=253
+highlight VertSplit        ctermfg=243   ctermbg=NONE  cterm=NONE
+highlight VertSplitNC      ctermfg=243   ctermbg=NONE  cterm=NONE
+highlight TabLine          ctermfg=253   ctermbg=235   cterm=bold
+highlight TabLineSel       ctermfg=16                  cterm=bold
+highlight TabLineFill                    ctermbg=235
+highlight StatusLine       ctermfg=253   ctermbg=235   cterm=bold
+highlight StatusLineNC     ctermfg=246   ctermbg=235   cterm=NONE
+highlight StatusLineTerm   ctermfg=253   ctermbg=235   cterm=bold
+highlight StatusLineTermNC ctermfg=246   ctermbg=235   cterm=NONE
+highlight QuickFixLine     ctermfg=253   ctermbg=238   cterm=bold
+highlight CursorLine                     ctermbg=238   cterm=NONE
+highlight CursorLineSign                 ctermbg=NONE
+highlight LineNr           ctermfg=243                 cterm=NONE
+highlight CursorLineNr     ctermfg=253                 cterm=NONE
+highlight ColorColumn                    ctermbg=238   cterm=NONE
+highlight Visual           ctermfg=253   ctermbg=24    cterm=NONE
+highlight Pmenu            ctermfg=253   ctermbg=NONE
+highlight PmenuSel         ctermfg=253   ctermbg=24
+highlight PmenuSbar                      ctermbg=238
+highlight PmenuThumb                     ctermbg=243
+highlight PmenuBorder      ctermfg=243   ctermbg=NONE
+highlight PmenuMatch       ctermfg=39    ctermbg=NONE  cterm=bold
+highlight PmenuMatchSel    ctermfg=231   ctermbg=NONE  cterm=bold
+highlight DiffAdd          ctermfg=253   ctermbg=22    cterm=NONE
+highlight DiffText         ctermfg=253   ctermbg=18    cterm=bold
+highlight DiffChange       ctermfg=253   ctermbg=130   cterm=NONE
+highlight DiffDelete       ctermfg=52    ctermbg=52    cterm=NONE
+highlight Folded           ctermfg=177   ctermbg=NONE  cterm=bold
+highlight FoldColumn       ctermfg=177   ctermbg=NONE  cterm=bold
+highlight CursorLineFold   ctermfg=177   ctermbg=NONE  cterm=bold
+highlight Comment          ctermfg=71
 
 " AutoCommands
 augroup myCmds
@@ -129,7 +132,7 @@ endif
 let g:opacity = v:true
 function! ToggleOpacity()
     if g:opacity
-        highlight Normal ctermbg=234
+        highlight Normal ctermbg=233
     else
         highlight Normal ctermbg=NONE
     endif
@@ -201,6 +204,8 @@ nnoremap <leader>l <c-w>l
 nnoremap <leader>qq :copen<CR>
 nnoremap <leader>qp :cprev<CR>
 nnoremap <leader>qn :cnext<CR>
+nnoremap <leader>qg :cfirst<CR>
+nnoremap <leader>qG :clast<CR>
 
 nnoremap <leader>tc :ColorColumnToggle<CR>
 nnoremap <leader>to :OpacityToggle<CR>
