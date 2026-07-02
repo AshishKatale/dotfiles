@@ -32,11 +32,12 @@ M.range_format = function()
   })
 end
 
-M.toggle_term = function(position, cmd, title)
+M.toggle_term = function(position, cwd, cmd, title)
   position = position or 'float'
   if position == 'float' then
     require('snacks').terminal(cmd, {
       auto_close = true,
+      cwd = cwd,
       win = {
         title = title,
         title_pos = 'center',
@@ -49,6 +50,7 @@ M.toggle_term = function(position, cmd, title)
   else
     require('snacks').terminal(cmd, {
       auto_close = true,
+      cwd = cwd,
       win = {
         position = position,
         wo = { winbar = '' }

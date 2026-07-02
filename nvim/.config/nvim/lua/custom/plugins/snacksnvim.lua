@@ -150,7 +150,7 @@ return {
             })
           end
         end,
-        picker_explorer_exec = function(_, item)
+        picker_explorer_exec_cmd = function(_, item)
           if item then
             local keys = vim.api.nvim_replace_termcodes(
               ':! ' .. item.file .. '<C-b><Right>',
@@ -162,6 +162,12 @@ return {
         picker_explorer_node_info = function(_, item)
           if item then
             require('custom.plugins.utils.fn').show_file_info(item)
+          end
+        end,
+        picker_explorer_open_term = function(_, item)
+          if item then
+            local cwd = require('snacks').picker.util.dir(item)
+            require('custom.plugins.utils.fn').toggle_term('float', cwd, nil, nil)
           end
         end,
         toggle_maximize_preview = function(picker)
@@ -280,9 +286,10 @@ return {
             ['W'] = 'explorer_close_all',
             ['f'] = 'picker_explorer_grep_dir',
             ['/'] = 'picker_explorer_grep_dir',
-            ['.'] = 'picker_explorer_exec',
-            ['x'] = 'picker_explorer_exec',
+            ['.'] = 'picker_explorer_exec_cmd',
+            ['x'] = 'picker_explorer_exec_cmd',
             ['K'] = 'picker_explorer_node_info',
+            ['<s-x>'] = 'picker_explorer_open_term',
             ['<c-c>'] = 'close',
             ['<c-l>'] = 'explorer_update',
             ['<c-n>'] = 'explorer_git_next',
