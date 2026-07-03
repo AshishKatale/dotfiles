@@ -88,6 +88,7 @@ M.config = function(_, opts)
       hi Pmenu guibg=NONE
       hi netrwDir guifg=#569CD6 guibg=NONE
       hi VertSplit guifg=#777777 guibg=NONE
+      hi PmenuBorder guifg=#777777
       hi PmenuThumb guifg=NONE guibg=#777777
       hi Folded guifg=#D787FF
       hi! link NormalFloat Normal
