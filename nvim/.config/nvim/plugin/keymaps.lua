@@ -47,7 +47,6 @@ map({ 'v' }, '>', '>gv', { silent = true })
 -- map({ 'i' }, '<A-k>', '<Esc><cmd>m .-2<cr>==a', { silent = true })
 
 -- copy-paste
-map({ 'v' }, 'p', '\"_dP', { silent = true })
 map({ 'n' }, '<leader>Y', '"+y$', { silent = true })
 map({ 'n', 'v' }, '<leader>y', '"+y', { silent = true })
 map({ 'n', 'v' }, '<leader>p', '"+p', { silent = true })
