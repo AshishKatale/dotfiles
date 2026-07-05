@@ -1,7 +1,7 @@
 hl.config({
-  animations = {
-    enabled = true
-  },
+    animations = {
+        enabled = true
+    },
 })
 
 hl.curve('easeInOutSine', { type = 'bezier', points = { { 0.45, 0.05 }, { 0.55, 0.95 } } })
