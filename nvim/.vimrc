@@ -44,7 +44,7 @@ set listchars=tab:>\ ,lead:·,trail:•,eol:\\
 set fillchars=eob:\ ,vert:\│,fold:\ ,foldsep:\ 
 set statusline=[%n]\ %t\ %m\ %r\ %h\ %=\ %y\ [%l,%v]\ [%P]\ [%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
 set grepformat=%f:%l:%c:%m
-set grepprg=rg\ --vimgrep\ --hidden\ --glob\ \"!**/.git/**\"\ --glob\ \"!**/node_modules/**\"\ --glob\ \"!**/target/**\"
+set grepprg=rg\ --vimgrep\ --hidden\ --glob\ \"!**/.git/**\"
 
 highlight Normal                         ctermbg=NONE
 " highlight Normal                         ctermbg=233
