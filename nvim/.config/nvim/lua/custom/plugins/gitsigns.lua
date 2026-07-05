@@ -65,14 +65,18 @@ return {
       },
       {
         '<leader>gB',
-        -- "<cmd>exec \"lua require('gitsigns').blame()\" | wincmd h<cr>",
-        function() require('gitsigns').blame() end,
+        function()
+          require('gitsigns').blame()
+          vim.cmd.wincmd('h')
+        end,
         desc = 'Blame'
       },
       {
         '<leader>gd',
-        -- "<cmd>exec \"lua require('gitsigns').diffthis()\" | wincmd h<cr>",
-        function() require('gitsigns').diffthis() end,
+        function()
+          require('gitsigns').diffthis()
+          vim.cmd.wincmd('h');
+        end,
         desc = 'File diff'
       },
       {
