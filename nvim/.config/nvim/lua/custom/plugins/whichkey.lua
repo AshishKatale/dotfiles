@@ -207,7 +207,7 @@ M.config = function(_, setup)
       function() require('snacks').picker.keymaps() end,
       desc = 'Keymaps'
     },
-    { '<leader>sm', '<cmd>Man | WrapMarginToggle on<cr>', desc = 'Man' },
+    { '<leader>sm', '<cmd>Man<cr>', desc = 'Man' },
     {
       '<leader>sM',
       function() require('snacks').picker.man() end,

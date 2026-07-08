@@ -26,6 +26,7 @@ alias tls='tmux list-sessions'
 alias tks='tmux kill-session -t'
 alias tkill='tmux kill-server'
 function tns() { tmuxsmgr "${1:-$PWD}" }
+alias man='MANWIDTH=80 man --no-hyphenation'
 
 function v() {
   if command -v nvim &> /dev/null; then

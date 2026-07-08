@@ -12,32 +12,6 @@ vim.api.nvim_create_user_command(
   { nargs = '?' }
 )
 
-vim.api.nvim_create_user_command(
-  'WrapMarginToggle',
-  function(cmd)
-    if cmd.args == 'on' then
-      vim.gg.wrap_margin = true
-    elseif cmd.args == 'off' then
-      vim.gg.wrap_margin = false
-    else
-      vim.gg.wrap_margin = not vim.gg.wrap_margin
-    end
-
-    if vim.gg.wrap_margin then
-      local width = vim.api.nvim_win_get_width(0)
-      local margin = width > 100 and width - 100 or 1
-      vim.cmd('setlocal wrapmargin=' .. margin)
-      vim.cmd('e')
-      vim.cmd('setlocal colorcolumn=101')
-    else
-      vim.cmd('setlocal wrapmargin=' .. 1)
-      vim.cmd('e')
-      vim.cmd('setlocal colorcolumn=')
-    end
-  end,
-  { nargs = '?' }
-)
-
 ------------ Custom AutoCommands ------------
 
 -- highlight text on yank

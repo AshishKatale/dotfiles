@@ -30,6 +30,7 @@ alias ta='tmux attach -t'
 alias tls='tmux list-sessions'
 alias tks='tmux kill-session -t'
 alias tkill='tmux kill-server'
+alias man='MANWIDTH=80 man --no-hyphenation'
 
 function tns() {
   tmuxsmgr "${1:-$PWD}"

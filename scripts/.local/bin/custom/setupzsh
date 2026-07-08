@@ -27,6 +27,7 @@ setup_zsh() {
   echo "export PROMPT_STYLE=fancy" >> $HOME/.zshenv
   echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.zshenv
   echo "export PATH=\"\$PATH:$HOME/.local/bin/custom\"" >> $HOME/.zshenv
+  echo "export MANPAGER='nvim -c \"set laststatus=0 showtabline=0 cmdheight=0 noruler noshowmode\" -c \"Man!\" -c \"nnoremap <buffer><silent> q :qa!<CR>\"'"
   cat << EOF >> $HOME/.zshenv
 export FZF_DEFAULT_OPTS="\\
  --color='gutter:-1,prompt:12,pointer:10,marker:12,info:12,spinner:10'\\

@@ -58,6 +58,7 @@ return {
       { '<leader>gR', gitsigns.reset_buffer,        desc = 'Reset buffer' },
       { '<leader>gG', '<cmd>Gitsigns<cr>',          desc = 'GitSigns menu' },
       { '<leader>gS', gitsigns.stage_hunk,          desc = 'Stage hunk' },
+      { '<leader>gU', gitsigns.stage_hunk,          desc = 'Unstage hunk' },
       {
         '<leader>gg',
         require('custom.plugins.utils.fn').lazy_git,
