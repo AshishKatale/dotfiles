@@ -12,6 +12,9 @@ return {
       workspace = {
         checkThirdParty = false,
       },
+      diagnostics = {
+        unusedLocalExclude = { '_*' },
+      },
     },
     telemetry = {
       enable = false,
