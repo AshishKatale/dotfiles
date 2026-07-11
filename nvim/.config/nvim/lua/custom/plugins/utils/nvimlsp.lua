@@ -5,7 +5,9 @@ if not which_key_status_ok then
 end
 
 local diagnostic_open_float = function()
-  _, vim.gg.diagnostic_win = vim.diagnostic.open_float()
+  if vim.diagnostic.is_enabled() then
+    _, vim._usr_diagnostic_win = vim.diagnostic.open_float()
+  end
 end
 
 local augroup = vim.api.nvim_create_augroup('lspcursor', { clear = true })
@@ -121,8 +123,8 @@ local function set_lsp_keymaps(bufnr)
     {
       'grd',
       function()
-        if vim.gg.diagnostic_win and vim.api.nvim_win_is_valid(vim.gg.diagnostic_win) then
-          return vim.api.nvim_set_current_win(vim.gg.diagnostic_win or 0)
+        if vim._usr_diagnostic_win and vim.api.nvim_win_is_valid(vim._usr_diagnostic_win) then
+          return vim.api.nvim_set_current_win(vim._usr_diagnostic_win or 0)
         end
       end,
       desc = 'Focus diagnostic',

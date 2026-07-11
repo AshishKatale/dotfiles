@@ -6,7 +6,7 @@ local M = {
 
 M.opts = function()
   local vscColors = require('vscode.colors').get_colors()
-  local color_overrides = vim.tbl_extend('force', vim.gg.colors or {}, {
+  local color_overrides = vim.tbl_extend('force', vim._usr_colors or {}, {
     cursorline = '#313244',
     vscGitUntracked = '#38E54D',
     gitUntracked = '#38E54D',
@@ -19,7 +19,7 @@ M.opts = function()
     error = vscColors.vscRed
   })
   local colors = vim.tbl_extend('force', vscColors, color_overrides)
-  vim.gg.colors = colors;
+  vim._usr_colors = colors;
 
   return {
     -- style = 'light',
@@ -75,7 +75,7 @@ M.config = function(_, opts)
     return
   end
 
-  if vim.gg.opacity then
+  if vim._usr_opacity then
     vim.cmd([[
       hi Normal guibg=NONE
       hi LineNr guibg=NONE

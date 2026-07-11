@@ -8,7 +8,7 @@ local M = {
 }
 
 M.opts = function()
-  local colors = vim.gg.colors
+  local colors = vim._usr_colors
   local lsp_progress = {
     'lsp_progress',
     colors = {
