@@ -120,6 +120,9 @@ __powerline() {
     }
 
     ps1() {
+        printf '\e]133;A\e\\'; # emmit osc 133 signal to mark start of the prompt
+                               # nvim uses this to locate prompt line in :term
+
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly.
         if [ "$?" -eq "0" ]; then

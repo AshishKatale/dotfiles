@@ -165,8 +165,16 @@ zle -N zle-line-finish
 zle -N zle-keymap-select
 
 precmd() {
-  prompt
+    print -Pn '\e]133;A\e\\' # emmit osc 133 signal to mark start of the prompt
+                             # nvim uses this to locate prompt line in :term
+    prompt
 }
+
+# osc7_cwd() {
+#     printf '\e]7;file://%s\e\\' "${PWD}" # emmit osc 7 signal
+# }
+# autoload -Uz add-zsh-hook
+# add-zsh-hook chpwd osc7_cwd # emmit osc 7 signal to notify changed pwd
 
 zle_highlight=('region:bg=24,fg=254')
 export PROMPT_EOL_MARK='' # fix for random % sign before prompt
