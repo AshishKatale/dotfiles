@@ -12,6 +12,7 @@ update_dotbashrc() {
   echo "export DOTFILES=$DOTFILES" >> $HOME/.bashrc
   echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.bashrc
   echo "export PATH=\"\$PATH:$HOME/.local/bin/custom\"" >> $HOME/.bashrc
+  echo "export MANWIDTH=80" >> $HOME/.bashrc
   cat << EOF >> $HOME/.bashrc
 export FZF_DEFAULT_OPTS="\\
  --color='gutter:-1,prompt:12,pointer:10,marker:12,info:12,spinner:10'\\
