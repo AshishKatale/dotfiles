@@ -6,7 +6,7 @@ end
 
 local diagnostic_open_float = function()
   if vim.diagnostic.is_enabled() then
-    _, vim._usr_diagnostic_win = vim.diagnostic.open_float()
+    _, vim.g._usr_diagnostic_win = vim.diagnostic.open_float()
   end
 end
 
@@ -123,8 +123,8 @@ local function set_lsp_keymaps(bufnr)
     {
       'grd',
       function()
-        if vim._usr_diagnostic_win and vim.api.nvim_win_is_valid(vim._usr_diagnostic_win) then
-          return vim.api.nvim_set_current_win(vim._usr_diagnostic_win or 0)
+        if vim.g._usr_diagnostic_win and vim.api.nvim_win_is_valid(vim.g._usr_diagnostic_win) then
+          return vim.api.nvim_set_current_win(vim.g._usr_diagnostic_win or 0)
         end
       end,
       desc = 'Focus diagnostic',

@@ -17,8 +17,8 @@ vim.g.maplocalleader = '\\'
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
 
-vim._usr_opacity = true
-vim._usr_listchars = false
+vim.g._usr_opacity = true
+vim.g._usr_listchars = false
 
 local opts = {
   ui = {
