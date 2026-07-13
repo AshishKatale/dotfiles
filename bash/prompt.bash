@@ -1,12 +1,10 @@
-#!/usr/bin/env bash
-
 __powerline() {
 
     BG () {
-      echo "\[$(tput setab $1)\]"
+        echo "\[$(tput setab $1)\]"
     }
     FG () {
-      echo "\[$(tput setaf $1)\]"
+        echo "\[$(tput setaf $1)\]"
     }
 
     readonly HOME_SYM=" "
@@ -47,25 +45,25 @@ __powerline() {
         local current_commit=$(git rev-parse --short HEAD 2>/dev/null)
 
         [ -n $current_branch ] && {
-          checked_out=$current_branch
-          git_checkout_symbol='󰊢 '
+            checked_out=$current_branch
+            git_checkout_symbol='󰊢 '
         }
         [ -n $current_tag ] && [ -z $current_branch ] && {
-          checked_out=$current_tag
-          git_checkout_symbol='󰓻 '
+            checked_out=$current_tag
+            git_checkout_symbol='󰓻 '
         }
         [ -n $current_commit ] &&  [ -z $current_branch ] && [ -z $current_tag ] && {
-          checked_out=$current_commit
-          git_checkout_symbol=' '
+            checked_out=$current_commit
+            git_checkout_symbol=' '
         }
 
         local git_status=$(git status --porcelain | wc -l)
         local marks
         if [ "$PROMPT_STYLE" = "plain" ]
         then
-          [ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
-          printf " $FG_BRIGHTYELLOW$checked_out$marks"
-          return
+            [ "$git_status" -gt "0" ] && marks+=" $git_status$GIT_BRANCH_CHANGED_SYMBOL"
+            printf " $FG_BRIGHTYELLOW$checked_out$marks"
+            return
         fi
 
         # how many commits local branch is ahead/behind of remote?
@@ -83,19 +81,19 @@ __powerline() {
       local CHAR_CNT=8
       local COLS="$(tput cols)"
       if [ "$COLS" -lt "80" ]; then
-        CHAR_CNT=2
+          CHAR_CNT=2
       elif [ "$COLS" -lt "120" ]; then
-        CHAR_CNT=3
+          CHAR_CNT=3
       fi
 
       if [ "$PROMPT_STYLE" = "plain" ]; then
-        HOME_SYM="~"
+          HOME_SYM="~"
       fi
       local HOME_PATH="$(realpath ~)"
       local PWD_FULL="$(pwd)"
       if [ "$HOME_PATH" = "$PWD_FULL" ]; then
-        echo "$HOME_SYM"
-        return
+          echo "$HOME_SYM"
+          return
       fi
 
       local PWD_PATH="$(echo "$PWD_FULL" | sed 's|^\(.*\)/.*|\1|')"
@@ -107,16 +105,16 @@ __powerline() {
     }
 
     tmuxinfo(){
-      if [ "$PROMPT_STYLE" = "plain" ]
-      then
-        if [ -n "$TMUX" ]; then
-            echo "[T]"
+        if [ "$PROMPT_STYLE" = "plain" ]
+        then
+            if [ -n "$TMUX" ]; then
+                echo "[T]"
+            fi
+        else
+            if [ -n "$TMUX" ]; then
+                echo " "
+            fi
         fi
-      else
-        if [ -n "$TMUX" ]; then
-            echo " "
-        fi
-      fi
     }
 
     ps1() {
@@ -126,19 +124,19 @@ __powerline() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly.
         if [ "$?" -eq "0" ]; then
-          local BG_EXIT="$BG_GREEN"
-          local FG_EXIT="$FG_GREEN"
+            local BG_EXIT="$BG_GREEN"
+            local FG_EXIT="$FG_GREEN"
         else
-          local BG_EXIT="\e[48;2;255;100;100m"
-          local FG_EXIT="\e[38;2;255;100;100m"
+            local BG_EXIT="\e[48;2;255;100;100m"
+            local FG_EXIT="\e[38;2;255;100;100m"
         fi
 
         if [ "$PROMPT_STYLE" = "plain" ]; then
-          PS1="$BOLD$FG_YELLOW$(tmuxinfo) $FG_BLUE$(pathinfo)"
-          PS1+="$RESET$FG_BLUE"
-          PS1+="$(gitinfo)"
-          PS1+="$FG_EXIT$BOLD \$$RESET "
-          return
+            PS1="$BOLD$FG_YELLOW$(tmuxinfo) $FG_BLUE$(pathinfo)"
+            PS1+="$RESET$FG_BLUE"
+            PS1+="$(gitinfo)"
+            PS1+="$FG_EXIT$BOLD \$$RESET "
+            return
         fi
 
         PS1="$BOLD$FG_BLUE$BG_BLUE$FG_WHITE$(tmuxinfo)$(pathinfo)"

@@ -4,13 +4,13 @@ alias bashrc="vim $HOME/.bashrc"
 alias ls='ls --color=auto'
 
 function ll() {
-  ls -Alh --color=always $@
+    ls -Alh --color=always $@
 }
 function lsf() {
-  ls --color=always -alhA $@ | grep --color=never -v "^d.*"
+    ls --color=always -alhA $@ | grep --color=never -v "^d.*"
 }
 function lsd() {
-  ls --color=always -alhA $@ | grep --color=never "^d.*"
+    ls --color=always -alhA $@ | grep --color=never "^d.*"
 }
 
 alias gst='git status'
@@ -33,20 +33,20 @@ alias tkill='tmux kill-server'
 alias man='man --no-hyphenation'
 
 function tns() {
-  tmuxsmgr "${1:-$PWD}"
+    tmuxsmgr "${1:-$PWD}"
 }
 
 function v() {
-  if command -v nvim &> /dev/null; then
-    nvim $@
-  elif command -v vim &> /dev/null; then
-    vim $@
-  elif command -v vi &> /dev/null; then
-    vi $@
-  fi
+    if command -v nvim &> /dev/null; then
+        nvim $@
+    elif command -v vim &> /dev/null; then
+        vim $@
+    elif command -v vi &> /dev/null; then
+        vi $@
+    fi
 }
 
 function serve() {
-  python3 -m http.server ${1:-3000}
+    python3 -m http.server ${1:-3000}
 }
 

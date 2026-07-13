@@ -20,7 +20,7 @@ export FZF_DEFAULT_OPTS="\\
  --layout=reverse --info=inline-right --border=rounded --scroll-off=2 --cycle\\
  --height=15 --prompt=' ' --marker='' --pointer='' --gutter=' ' --scrollbar='┃'"
 EOF
-  echo "source $DOTFILES/bash/bashrc.sh" >> $HOME/.bashrc
+  echo "source $DOTFILES/bash/bashrc.bash" >> $HOME/.bashrc
 }
 
 update_dotprofile() {
