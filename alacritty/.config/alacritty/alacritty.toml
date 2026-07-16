@@ -27,18 +27,18 @@ family = "JetBrainsMonoNerdFont"
 style  = "ExtraBold"
 
 [colors.cursor]
-text   = "#4D4D4C"
+text   = "#11111E"
 cursor = "#F5E0DC"
 
 [colors.primary]
-background = "#11111B"
+background = "#11111E"
 foreground = "#DBDBDB"
 dim_foreground = "#7F849C"
 bright_foreground = "#FFFFFF"
 
 [colors.selection]
 background = "#264F78"
-foreground = "#FFFFFF"
+foreground = "CellForeground"
 
 # Dim colors
 [colors.dim]
