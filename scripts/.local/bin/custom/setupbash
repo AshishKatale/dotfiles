@@ -8,7 +8,7 @@ update_dotbashrc() {
   fi
   echo "EDITOR=vim" >> $HOME/.bashrc
   echo "PROMPT_STYLE=fancy" >> $HOME/.bashrc
-  echo "export TERM=xterm-256color" >> $HOME/.bashrc
+  echo "# export TERM=xterm-256color" >> $HOME/.bashrc
   echo "export DOTFILES=$DOTFILES" >> $HOME/.bashrc
   echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $HOME/.bashrc
   echo "export PATH=\"\$PATH:$HOME/.local/bin/custom\"" >> $HOME/.bashrc
@@ -28,7 +28,7 @@ update_dotprofile() {
     touch $HOME/.profile
   fi
   echo "EDITOR=vim" >> $HOME/.profile
-  echo "export TERM=xterm-256color" >> $HOME/.profile
+  echo "# export TERM=xterm-256color" >> $HOME/.profile
   echo "export DOTFILES=$DOTFILES" >> $HOME/.profile
 }
 

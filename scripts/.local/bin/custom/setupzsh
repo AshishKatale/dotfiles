@@ -23,7 +23,7 @@ setup_zsh() {
 
   echo "export EDITOR=vim" >> $ZDOTDIR/.zshenv
   echo "export DOTFILES=$DOTFILES" >> $ZDOTDIR/.zshenv
-  echo "export TERM=xterm-256color" >> $ZDOTDIR/.zshenv
+  echo "# export TERM=xterm-256color" >> $ZDOTDIR/.zshenv
   echo "export PROMPT_STYLE=fancy" >> $ZDOTDIR/.zshenv
   echo "export PATH=\"\$PATH:$HOME/.local/bin\"" >> $ZDOTDIR/.zshenv
   echo "export PATH=\"\$PATH:$HOME/.local/bin/custom\"" >> $ZDOTDIR/.zshenv
