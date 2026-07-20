@@ -14,7 +14,6 @@ opt.pumheight = 15                          -- popup menu height
 opt.pumborder = 'rounded'                   -- popup menu border
 opt.winborder = 'rounded'                   -- floating window border
 opt.showmode = false                        -- hide -- INSERT -- in cmd line
-opt.showtabline = 2                         -- always show tabs
 opt.smartcase = true                        -- smart case
 opt.smartindent = true                      -- make indenting smarter again
 opt.splitbelow = true                       -- force horizontal splits below

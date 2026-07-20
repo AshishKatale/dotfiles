@@ -92,7 +92,7 @@ M.opts = function()
           },
           symbols = {
             alternate_file = '', -- Text to show to identify the alternate file
-            modified = '', -- Text to show when the buffer is modified
+            modified = ' ⦿', -- Text to show when the buffer is modified
           },
         },
       },
