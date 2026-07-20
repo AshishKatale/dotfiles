@@ -20,6 +20,11 @@ setup_zsh() {
     touch $HOME/.zshenv
   fi
   echo "export ZDOTDIR=$ZDOTDIR" >> $HOME/.zshenv
+  cat <<EOF >> $HOME/.zshenv
+if [[ -e "\$ZDOTDIR/.zshenv" ]]; then
+    source "\$ZDOTDIR/.zshenv"
+fi
+EOF
 
   echo "export EDITOR=vim" >> $ZDOTDIR/.zshenv
   echo "export DOTFILES=$DOTFILES" >> $ZDOTDIR/.zshenv
