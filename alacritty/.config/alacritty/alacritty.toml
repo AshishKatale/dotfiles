@@ -42,34 +42,34 @@ foreground = "CellForeground"
 
 # Dim colors
 [colors.dim]
-black   = '#232323'
+black   = '#1E1E1E'
 red     = '#FF6E6E'
 green   = '#40CC80'
-yellow  = '#DDDD40'
+yellow  = '#AAAA40'
 blue    = '#3BA1DD'
-magenta = '#FF1AFF'
-cyan    = '#00BBBB'
+magenta = '#CC1AAC'
+cyan    = '#00ABAB'
 white   = '#BABABA'
 
 # Normal colors
 [colors.normal]
-black   = "#16181A"
+black   = "#2C2C2C"
 red     = "#FF4E4E"
 green   = "#40EE80"
-yellow  = "#EEEE40"
-blue    = "#2BA1EE"
-magenta = "#FF1AFF"
-cyan    = "#00DEDE"
+yellow  = "#CCCC40"
+blue    = "#00A1FF"
+magenta = "#EC4DEC"
+cyan    = "#00CCCC"
 white   = "#DEDEDE"
 
 # Bright colors
 [colors.bright]
 black   = "#3C4048"
 red     = "#FF1E1E"
-green   = "#40FF40"
+green   = "#20FF20"
 yellow  = "#FFFF40"
 blue    = "#2EA1FF"
-magenta = "#FF4DFF"
+magenta = "#FF1FFF"
 cyan    = "#00FFFF"
 white   = "#FFFFFF"
 
