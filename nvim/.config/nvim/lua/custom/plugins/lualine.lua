@@ -1,6 +1,9 @@
 local M = {
   'nvim-lualine/lualine.nvim',
   lazy = false,
+  enabled = function()
+    return vim.env.NVIM_NO_LUALINE ~= '1'
+  end,
   priority = 999,
   dependencies = {
     'arkav/lualine-lsp-progress'
