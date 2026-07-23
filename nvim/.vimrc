@@ -1,7 +1,20 @@
 " Options
-set viminfofile=$HOME/.local/.vim/viminfo
-set runtimepath+=$HOME/.local/.vim
 set runtimepath-=$HOME/.vim
+set runtimepath+=$HOME/.local/state/vim
+runtime ftplugin/man.vim
+
+let s:viminfo_dir = expand('$HOME/.local/state/vim')
+if !isdirectory(s:viminfo_dir)
+  call mkdir(s:viminfo_dir, 'p')
+endif
+set viminfofile=$HOME/.local/state/vim/viminfo
+
+let s:undo_dir = expand('$HOME/.local/state/vim/undo')
+if !isdirectory(s:undo_dir)
+  call mkdir(s:undo_dir, 'p')
+endif
+execute 'set undodir=' . s:undo_dir
+set undofile
 
 let mapleader = " "
 let maplocalleader = "\\"
@@ -99,7 +112,7 @@ augroup myCmds
     autocmd InsertLeave * silent !echo -ne "\e[1 q"
 
     autocmd FileType netrw nnoremap <silent> <buffer> Q :bd<CR>
-    autocmd FileType help,qf nnoremap <silent> <buffer> q :quit<CR>
+    autocmd FileType help,qf,man nnoremap <silent> <buffer> q :quit<CR>
 
     autocmd BufEnter * if &buftype != 'terminal' | setlocal cursorline | endif
     autocmd WinLeave,BufLeave * :setlocal nocursorline
@@ -207,6 +220,8 @@ nnoremap <leader>qn :cnext<CR>
 nnoremap <leader>qg :cfirst<CR>
 nnoremap <leader>qG :clast<CR>
 
+nnoremap <leader>tn :set number! relativenumber!<CR>
+nnoremap <leader>tN :set nonumber norelativenumber<CR>
 nnoremap <leader>tc :ColorColumnToggle<CR>
 nnoremap <leader>to :OpacityToggle<CR>
 nnoremap <leader>tw :set wrap!<CR>
