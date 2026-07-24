@@ -19,11 +19,11 @@ offset.x = 0
 offset.y = 0
 
 [font.normal]
-family = "JetBrainsMonoNerdFont"
+family = "JetBrainsMono Nerd Font"
 style  = "Light"
 
 [font.bold]
-family = "JetBrainsMonoNerdFont"
+family = "JetBrainsMono Nerd Font"
 style  = "ExtraBold"
 
 [colors.cursor]

@@ -11,15 +11,14 @@ local M = {
 }
 
 M.opts = function()
-  local colors = vim.g._usr_colors
   local lsp_progress = {
     'lsp_progress',
     colors = {
-      percentage      = colors.info,
-      title           = colors.warn,
-      message         = colors.info,
-      spinner         = colors.hint,
-      lsp_client_name = colors.warn,
+      percentage      = '#18A2FE',
+      title           = '#F28B25',
+      message         = '#18A2FE',
+      spinner         = '#FFD602',
+      lsp_client_name = '#F28B25',
       use             = true,
     },
     display_components = {
@@ -32,29 +31,57 @@ M.opts = function()
       spinner = 300,
       lsp_client_name_enddelay = 300
     },
-    -- spinner_symbols = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏", },
-    -- spinner_symbols = { "⣾", "⣻", "⣷", "⣯", "⣟", "⡿", "⢿", "⣻", "⣽" },
     spinner_symbols = { '󰪞 ', '󰪟 ', '󰪠 ', '󰪠 ', '󰪢 ', '󰪣 ', '󰪤 ', '󰪥 ' },
   }
+
+  -- override theme colors
+  local lualine_theme = vim.tbl_deep_extend('force', require 'lualine.themes.auto', {
+    command = {
+      a = { bg = '#008701', fg = '#181825' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    inactive = {
+      a = { bg = '#373737', fg = '#18A1FD' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    insert = {
+      a = { bg = '#179299', fg = '#181825' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    normal = {
+      a = { bg = '#0A7ACA', fg = '#181825' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    replace = {
+      a = { bg = '#AF0000', fg = '#181825' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    terminal = {
+      a = { bg = '#00AF50', fg = '#181825' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    visual = {
+      a = { bg = '#CA6702', fg = '#181825' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    }
+  })
+
   return {
     options = {
-      icons_enabled = true,
+      icons_enabled        = true,
+      theme                = lualine_theme,
       component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
-      disabled_filetypes = { 'lazygit' }, -- List of filetypes to hide statusline
+      section_separators   = { left = '', right = '' },
+      disabled_filetypes   = { 'lazygit' }, -- List of filetypes to hide statusline
       always_divide_middle = true,
-      globalstatus = true,
+      globalstatus         = true,
     },
     sections = {
       lualine_a = { 'mode' },
       lualine_b = {
-        {
-          'branch',
-          icon = { '' },
-          color = { fg = colors.info }
-        },
+        { 'branch', icon = { '' } },
         'diff',
-        'diagnostics'
+        'diagnostics',
       },
       lualine_c = {},
       lualine_x = {
@@ -62,7 +89,7 @@ M.opts = function()
         {
           require('lazy.status').updates,
           cond = require('lazy.status').has_updates,
-          color = { fg = colors.warn },
+          color = { fg = "#F28B25" },
         },
       },
       lualine_y = { 'encoding', 'filetype', 'progress' },

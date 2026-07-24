@@ -6,20 +6,15 @@ local M = {
 
 M.opts = function()
   local vscColors = require('vscode.colors').get_colors()
-  local color_overrides = vim.tbl_extend('force', vim.g._usr_colors or {}, {
+  local color_overrides = {
     cursorline = '#313244',
-    vscGitUntracked = '#38E54D',
-    gitUntracked = '#38E54D',
+    vscGitUntracked = '#00D763',
+    gitUntracked = '#00D763',
     gitChanged = vscColors.vscMediumBlue,
     gitDeleted = vscColors.vscRed,
     inlayhint = vscColors.vscGray,
-    info = vscColors.vscBlue,
-    warn = vscColors.vscUiOrange,
-    hint = vscColors.vscDarkYellow,
-    error = vscColors.vscRed
-  })
+  }
   local colors = vim.tbl_extend('force', vscColors, color_overrides)
-  vim.g._usr_colors = colors;
 
   return {
     -- style = 'light',
