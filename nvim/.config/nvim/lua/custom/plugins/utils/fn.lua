@@ -153,6 +153,23 @@ M.lazy_git = function()
     vim.keymap.set({ 't' }, [[<C-\>]], [[<C-\><C-n>0M]], { silent = true, buf = 0 })
     vim.keymap.set({ 'n' }, 'q', vim.cmd.startinsert, { silent = true, buf = 0 })
     vim.keymap.del({ 't' }, 'ii', { buf = 0 })
+
+    local function toggle_opts(on)
+      vim.api.nvim_set_option_value('laststatus', on and 3 or 0, { scope = 'local' })
+      vim.api.nvim_set_option_value('cmdheight', on and 1 or 0, { scope = 'local' })
+      vim.api.nvim_set_option_value('ruler', on, { scope = 'local' })
+    end
+
+    toggle_opts(false)
+    vim.api.nvim_create_autocmd('BufEnter', {
+      callback = function() toggle_opts(false) end,
+      buffer = 0,
+    })
+
+    vim.api.nvim_create_autocmd('BufUnload', {
+      callback = function() toggle_opts(true) end,
+      buffer = 0,
+    })
   else
     vim.notify('Error: lazygit must be run inside a git repository',
       vim.log.levels.ERROR, { history = false })

@@ -1,5 +1,4 @@
 ----------- Custom User Commands ------------
-local augroup = vim.api.nvim_create_augroup('customcmd', { clear = true })
 vim.api.nvim_create_user_command('W', 'write', {})
 
 vim.api.nvim_create_user_command(
@@ -13,6 +12,7 @@ vim.api.nvim_create_user_command(
 )
 
 ------------ Custom AutoCommands ------------
+local augroup = vim.api.nvim_create_augroup('customcmd', { clear = true })
 
 -- highlight text on yank
 vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
@@ -39,49 +39,36 @@ vim.api.nvim_create_autocmd({ 'VimLeave' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  group = augroup,
   callback = function()
     vim.api.nvim_set_option_value('number', false, { win = 0 })
     vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
     vim.api.nvim_set_option_value('signcolumn', 'no', { win = 0 })
     vim.keymap.set({ 't' }, 'ii', [[<C-\><C-n>]], { silent = true, buf = 0 })
     vim.cmd.startinsert()
-  end,
-  group = augroup
+  end
 })
 
 vim.api.nvim_create_autocmd({ 'TermClose' }, {
+  group = augroup,
   callback = function(opts)
     local is_valid = vim.api.nvim_buf_is_valid(opts.buf)
     if is_valid then vim.api.nvim_input('<esc>') end
-  end,
-  group = augroup
+  end
 })
-
--- vim.api.nvim_create_autocmd({ 'TermRequest' }, {
---   desc = 'Handles OSC 7 dir change requests',
---   callback = function(ev)
---     local cwd, n = string.gsub(ev.data.sequence, '\027]7;file://', '')
---     if n > 0 and vim.fn.isdirectory(cwd) == 1 then
---       vim.b[ev.buf].osc7_dir = cwd
---       if vim.api.nvim_get_current_buf() == ev.buf then
---         vim.cmd.lcd(cwd)
---         vim.print('lcd: ' .. cwd)
---       end
---     end
---   end
--- })
 
 -- set absolute line numbers in insert mode
 vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+  group = augroup,
   callback = function()
     if vim.o.relativenumber then
       vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
     end
   end,
-  group = augroup
 })
 
 vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+  group = augroup,
   callback = function()
     local fts = {
       lazy = true,
@@ -102,38 +89,36 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     if fts[vim.bo.filetype] then return end
     vim.api.nvim_set_option_value('relativenumber', true, { win = 0 })
   end,
-  group = augroup
+})
+
+local opts = { noremap = true, silent = true, nowait = true };
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = { 'qf', 'help' },
+  group = augroup,
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
+    vim.api.nvim_set_option_value('number', true, { win = 0 })
+    vim.api.nvim_set_option_value('statuscolumn', ' %l  ', { win = 0 })
+    vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
+    vim.api.nvim_set_option_value('wrap', false, { win = 0 })
+  end,
 })
 
 vim.api.nvim_create_autocmd({ 'FileType' }, {
-  pattern = {
-    'qf', 'help', 'man', 'netrw', 'gitsigns-blame',
-    'markdown', 'checkhealth',
-  },
-  callback = function(opt)
-    local opts = { noremap = true, silent = true, nowait = true };
-    if opt.match == 'qf' or opt.match == 'help' or vim.bo.buftype == 'help' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
-      vim.api.nvim_set_option_value('number', true, { win = 0 })
-      vim.api.nvim_set_option_value('statuscolumn', ' %l  ', { win = 0 })
-      vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
-      vim.api.nvim_set_option_value('wrap', false, { win = 0 })
-    elseif opt.match == 'man' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
-      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tw', '<cmd>WrapMarginToggle<cr>', opts)
-    elseif opt.match == 'netrw' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'Q', '<cmd>q<cr>', opts)
-    elseif opt.match == 'gitsigns-blame' then
-      vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<cr>', opts)
-    elseif opt.match == 'checkhealth' then
-      vim.api.nvim_create_autocmd({ 'BufLeave' }, {
-        buffer = 0,
-        callback = function()
-          require('snacks').bufdelete.delete(0)
-          vim.cmd.tabclose()
-        end
-      })
-    end
+  pattern = 'man',
+  group = augroup,
+  callback = function()
+    vim.api.nvim_set_option_value('number', true, { win = 0 })
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tw', '<cmd>WrapMarginToggle<cr>', opts)
   end,
-  group = augroup
 })
+
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = 'gitsigns-blame',
+  group = augroup,
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<cr>', opts)
+  end,
+})
+
