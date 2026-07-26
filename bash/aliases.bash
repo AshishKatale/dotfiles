@@ -1,4 +1,5 @@
 alias c='clear'
+alias yz='yazi'
 alias nvm='fnm'
 alias bashrc="vim $HOME/.bashrc"
 alias ls='ls --color=auto'

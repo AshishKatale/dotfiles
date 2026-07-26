@@ -18,7 +18,6 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
 
 vim.g._usr_opacity = true
-vim.g._usr_listchars = false
 
 local opts = {
   ui = {

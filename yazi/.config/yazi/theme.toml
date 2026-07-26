@@ -1,0 +1,143 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+
+[mgr]
+cwd = { fg = "cyan", bold = true }
+
+border_symbol = "│"
+border_style  = { fg = "#777777" }
+
+marker_symbol   = "┃"
+marker_copied   = { fg = "#3FB950", bold = true }
+marker_cut      = { fg = "#CA6702", bold = true }
+marker_selected = { fg = "#B5CEA8", bold = true }
+marker_marked   = { fg = "cyan", bold = true }
+
+count_copied   = { fg = "#181825", bg = "#3FB950", bold = true }
+count_cut      = { fg = "#181825", bg = "#CA6702", bold = true }
+count_selected = { fg = "#181825", bg = "#0A7ACA", bold = true }
+
+find_keyword  = { bg = "#613315" }
+
+symlink_target = { fg = "gray", bold = false }
+
+[tabs]
+active   = { fg = "#181825", bg = "#0A7ACA", bold = true }
+inactive = { fg = "#18A1FD", bg = "#373737", bold = true }
+
+# Separator
+sep_inner = { open = "█", close = "" }
+sep_outer = { open = "█", close = "" }
+
+[status]
+sep_left  = { open = " ", close = "" }
+sep_right = { open = "", close = " " }
+
+# Permissions
+perm_type  = { fg = "cyan" }
+perm_read  = { fg = "yellow" }
+perm_write = { fg = "magenta" }
+perm_exec  = { fg = "green" }
+
+# Task/Progress
+progress_label  = { bold = true }
+progress_normal = { fg = "green", bg = "black" }
+progress_error  = { fg = "red", bg = "black" }
+
+[indicator]
+preview = {}
+current = { bg = "#04395E" }
+parent  = { bg = "#04395E", bold = true }
+padding = { open = "█", close = " " }
+
+[mode]
+normal_main = { fg = "#181825", bg = "#0A7ACA", bold = true }
+normal_alt  = { fg = "#18A1FD", bg = "#373737" }
+
+select_main = { fg = "#181825", bg = "#CA6702", bold = true }
+select_alt  = { fg = "#18A1FD", bg = "#373737" }
+
+unset_main  = { fg = "#181825", bg = "#CA6702", bold = true }
+unset_alt   = { fg = "#18A1FD", bg = "#373737" }
+
+[spot]
+border   = { fg = "#777777" }
+title    = { fg = "gray", bold = true }
+tbl_col  = { fg = "#8cc3e4" }
+tbl_cell = { bg = "#04395E" }
+
+[confirm]
+border     = { fg = "#777777" }
+title      = { fg = "cyan", bold = true }
+btn_yes    = { bg = "#04395E" }
+btn_labels = [ "  [Y]es  ", "  (N)o  " ]
+
+[which]
+cols            = 3
+mask            = { bg = "#222330" }
+cand            = { fg = "lightcyan" }
+rest            = { fg = "darkgray" }
+desc            = { fg = "magenta" }
+separator       = " -> "
+separator_style = { fg = "#777777" }
+
+[help]
+on      = { fg = "cyan" }
+run     = { fg = "magenta" }
+hovered = { bg = "#04395E", bold = true }
+footer  = { fg = "white", bg = "#262626" }
+
+[cmp]
+border   = { fg = "#777777" }
+inactive = { fg = "gray" }
+active   = { fg = "blue", bg = "#04395E", bold = true }
+
+[tasks]
+border   = { fg = "#777777" }
+title    = { fg = "gray", bold = true }
+
+[input]
+border   = { fg = "#777777" }
+title    = { fg = "cyan", bold = true }
+selected = { bg = "#264F78" }
+
+[pick]
+border   = { fg = "#777777", bold = true }
+active   = { fg = "blue", bg = "#04395E", bold = true }
+
+[filetype]
+rules = [
+	{ url = "*",  is = "link",   fg = "cyan",    bold = true },
+	{ url = "*",  is = "sock",   fg = "magenta", bold = true },
+	{ url = "*",  is = "fifo",   fg = "magenta", bold = true },
+	{ url = "*",  is = "char",   fg = "yellow" },
+	{ url = "*",  is = "block",  fg = "yellow" },
+    { url = "*",  is = "exec",   fg = "green" },
+	{ url = "*/", is = "link",   fg = "cyan",    bold = true },
+	{ url = "*/", is = "sticky", fg = "green",   bold = true },
+	{ url = "*/", fg = "blue",   bold = true },
+]
+
+[icon]
+dirs  = [
+	{ name = ".config", text = "󱂀" },
+	{ name = ".cache", text = "" },
+	{ name = ".local", text = "󱙌" },
+	{ name = ".git", text = "" },
+	{ name = ".github", text = "" },
+	{ name = ".npm", text = "" },
+	{ name = "Desktop", text = "󰇄" },
+	{ name = "Documents", text = "" },
+	{ name = "Downloads", text = "" },
+	{ name = "Movies", text = "󱜎" },
+	{ name = "Music", text = "󰝚" },
+	{ name = "Pictures", text = "" },
+	{ name = "Videos", text = "" },
+]
+prepend_conds = [
+	{ if = "link", text = "", fg = "cyan" },
+	{ if = "sticky", text = "", fg = "green" },
+
+	{ if = "dir & hovered", text = "", fg = "blue" },
+	{ if = "dir", text = "", fg = "blue" },
+    { if = "exec", text = "", fg = "green" },
+]

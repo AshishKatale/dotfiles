@@ -1,0 +1,31 @@
+[mgr]
+ratio            = [ 2, 4, 6 ]
+sort_by          = "alphabetical"
+show_hidden      = true
+show_symlink     = true
+scrolloff        = 4
+
+[input]
+cd_title         = " Change directory: "
+create_title     = [ " Create: ", " Create (dir): " ]
+rename_title     = " Rename: "
+filter_title     = " Filter: "
+find_title       = [ " Find: ", "Find previous:" ]
+search_title     = " Search with {n}: "
+shell_title      = [ " Shell: ", " Shell (blocking): " ]
+
+[confirm]
+trash_title 	 = " Trash {n} selected file{s}? "
+delete_title 	 = " Permanently delete {n} selected file{s}? "
+overwrite_title  = " Overwrite file? "
+quit_title       = " Quit? "
+
+trash_offset	 = [ 0, 0, 70, 10 ]
+delete_offset	 = [ 0, 0, 70, 10 ]
+overwrite_offset = [ 0, 0, 50, 10 ]
+
+[pick]
+open_title       = " Open with: "
+
+[which]
+sort_by      	 = "key"

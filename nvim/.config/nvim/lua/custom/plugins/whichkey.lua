@@ -110,7 +110,7 @@ M.config = function(_, setup)
     },
     {
       '<leader>E',
-      function() utils.toggle_term('float', 'vifm', ' Vifm ') end,
+      function() utils.toggle_term('float', nil, 'yazi ' .. vim.fn.getcwd(), ' Yazi ') end,
       desc = 'Vifm'
     },
 
@@ -207,7 +207,7 @@ M.config = function(_, setup)
       function() require('snacks').picker.keymaps() end,
       desc = 'Keymaps'
     },
-    { '<leader>sm', '<cmd>Man<cr>', desc = 'Man' },
+    { '<leader>sm', '<cmd>Man<cr>',  desc = 'Man' },
     {
       '<leader>sM',
       function() require('snacks').picker.man() end,

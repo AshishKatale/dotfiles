@@ -39,6 +39,10 @@ local function configure_lsp_features(client, bufnr)
     vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
   end
 
+  if client.server_capabilities.colorProvider then
+    vim.lsp.document_color.enable(false, { bufnr = bufnr })
+  end
+
   if client and client.name == 'clangd' then
     client.server_capabilities.semanticTokensProvider = nil
   end

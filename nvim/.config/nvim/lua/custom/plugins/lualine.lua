@@ -36,34 +36,34 @@ M.opts = function()
 
   -- override theme colors
   local lualine_theme = vim.tbl_deep_extend('force', require 'lualine.themes.auto', {
+    normal = {
+      a = { bg = '#0A7ACA', fg = '#11111E' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    insert = {
+      a = { bg = '#479077', fg = '#11111E' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
     command = {
-      a = { bg = '#008701', fg = '#181825' },
+      a = { bg = '#1A801A', fg = '#11111E' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    visual = {
+      a = { bg = '#CA6702', fg = '#11111E' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    replace = {
+      a = { bg = '#AF0000', fg = '#11111E' },
+      b = { bg = '#373737', fg = '#18A1FD' },
+    },
+    terminal = {
+      a = { bg = '#479077', fg = '#11111E' },
       b = { bg = '#373737', fg = '#18A1FD' },
     },
     inactive = {
       a = { bg = '#373737', fg = '#18A1FD' },
       b = { bg = '#373737', fg = '#18A1FD' },
     },
-    insert = {
-      a = { bg = '#179299', fg = '#181825' },
-      b = { bg = '#373737', fg = '#18A1FD' },
-    },
-    normal = {
-      a = { bg = '#0A7ACA', fg = '#181825' },
-      b = { bg = '#373737', fg = '#18A1FD' },
-    },
-    replace = {
-      a = { bg = '#AF0000', fg = '#181825' },
-      b = { bg = '#373737', fg = '#18A1FD' },
-    },
-    terminal = {
-      a = { bg = '#00AF50', fg = '#181825' },
-      b = { bg = '#373737', fg = '#18A1FD' },
-    },
-    visual = {
-      a = { bg = '#CA6702', fg = '#181825' },
-      b = { bg = '#373737', fg = '#18A1FD' },
-    }
   })
 
   return {
@@ -79,7 +79,7 @@ M.opts = function()
     sections = {
       lualine_a = { 'mode' },
       lualine_b = {
-        { 'branch', icon = { '' } },
+        { 'branch', icon = { '' }, color = { gui = 'bold' } },
         'diff',
         'diagnostics',
       },
@@ -89,7 +89,7 @@ M.opts = function()
         {
           require('lazy.status').updates,
           cond = require('lazy.status').has_updates,
-          color = { fg = "#F28B25" },
+          color = { fg = '#F28B25' },
         },
       },
       lualine_y = { 'encoding', 'filetype', 'progress' },
