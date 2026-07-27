@@ -91,12 +91,12 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
   end,
 })
 
-local opts = { noremap = true, silent = true, nowait = true };
+local keymap_opts = { noremap = true, silent = true, nowait = true };
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = { 'qf', 'help' },
   group = augroup,
   callback = function()
-    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', keymap_opts)
     vim.api.nvim_set_option_value('number', true, { win = 0 })
     vim.api.nvim_set_option_value('statuscolumn', ' %l  ', { win = 0 })
     vim.api.nvim_set_option_value('relativenumber', false, { win = 0 })
@@ -109,8 +109,8 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = augroup,
   callback = function()
     vim.api.nvim_set_option_value('number', true, { win = 0 })
-    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', opts)
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tw', '<cmd>WrapMarginToggle<cr>', opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>bd<cr>', keymap_opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tw', '<cmd>WrapMarginToggle<cr>', keymap_opts)
   end,
 })
 
@@ -118,7 +118,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   pattern = 'gitsigns-blame',
   group = augroup,
   callback = function()
-    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<cr>', opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>q<cr>', keymap_opts)
   end,
 })
 

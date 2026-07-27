@@ -3,6 +3,7 @@ alias yz='yazi'
 alias grep="grep --color=auto"
 alias bashrc="vim $HOME/.bashrc"
 alias zshrc="vim $ZDOTDIR/.zshrc"
+alias zshenv="vim $ZDOTDIR/.zshenv"
 alias ls='ls --color=auto'
 
 function ll() { ls -Alh --color=always $@ }

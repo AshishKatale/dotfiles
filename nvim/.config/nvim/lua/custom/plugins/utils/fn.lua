@@ -103,9 +103,9 @@ M.toggle_number = function()
   end
 end
 
-M.toggle_indent_guides = function()
+M.toggle_indent_guides = function(force_disable)
   local snacks = require('snacks')
-  if snacks.indent.enabled then
+  if force_disable or snacks.indent.enabled then
     snacks.indent.disable()
   else
     snacks.indent.enable()
@@ -117,12 +117,14 @@ M.toggle_list_chars = function()
     vim.opt.listchars:append('eol:↲') -- render eol as ↴
     vim.opt.listchars:append('tab:→ ') -- render tab as →
     vim.opt.listchars:append('lead:·') -- render space as ·
+    M.toggle_indent_guides(true)
     vim.g._usr_listchars = true
   else
     vim.opt.listchars:remove('eol')
     vim.opt.listchars:remove('tab')
     vim.opt.listchars:remove('lead')
     vim.opt.listchars:append('tab:  ')
+    M.toggle_indent_guides(false)
     vim.g._usr_listchars = false
   end
 end
