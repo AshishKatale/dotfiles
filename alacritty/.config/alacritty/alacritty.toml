@@ -75,6 +75,9 @@ white   = "#FFFFFF"
 
 [keyboard]
 bindings = [
+  { key = "+", mods = "Control|Shift", action = "IncreaseFontSize" },
+  { key = "_", mods = "Control|Shift", action = "DecreaseFontSize" },
+  { key = ")", mods = "Control|Shift", action = "ResetFontSize" },
   { key = "R", mods = "Control|Shift", command = { program = "alacritty", args = ["msg", "config", "-r"] } },
   { key = "T", mods = "Control|Shift", command = { program = "alacritty", args = ["msg", "config", "window.opacity=1"] } },
 ]

@@ -23,13 +23,7 @@ M.opts = function()
     },
     display_components = {
       { 'title', 'percentage' },
-      'lsp_client_name',
-      'spinner'
-    },
-    timer = {
-      progress_enddelay = 100,
-      spinner = 300,
-      lsp_client_name_enddelay = 300
+      'lsp_client_name', 'spinner'
     },
     spinner_symbols = { '󰪞 ', '󰪟 ', '󰪠 ', '󰪠 ', '󰪢 ', '󰪣 ', '󰪤 ', '󰪥 ' },
   }
@@ -39,30 +33,37 @@ M.opts = function()
     normal = {
       a = { bg = '#0A7ACA', fg = '#11111E' },
       b = { bg = '#373737', fg = '#18A1FD' },
+      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
     insert = {
       a = { bg = '#479077', fg = '#11111E' },
       b = { bg = '#373737', fg = '#18A1FD' },
+      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
     command = {
       a = { bg = '#1A801A', fg = '#11111E' },
       b = { bg = '#373737', fg = '#18A1FD' },
+      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
     visual = {
       a = { bg = '#CA6702', fg = '#11111E' },
       b = { bg = '#373737', fg = '#18A1FD' },
+      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
     replace = {
       a = { bg = '#AF0000', fg = '#11111E' },
       b = { bg = '#373737', fg = '#18A1FD' },
+      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
     terminal = {
       a = { bg = '#479077', fg = '#11111E' },
       b = { bg = '#373737', fg = '#18A1FD' },
+      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
     inactive = {
       a = { bg = '#373737', fg = '#18A1FD' },
       b = { bg = '#373737', fg = '#18A1FD' },
+      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
   })
 
