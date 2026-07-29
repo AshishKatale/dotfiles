@@ -66,7 +66,6 @@ return {
       keymap = {
         preset = 'default',
         -- show with a list of providers
-        ['<CR>'] = { 'accept', 'fallback' },
         ['<C-e>'] = {},
         ['<Tab>'] = { 'snippet_forward', 'accept', 'fallback' },
         ['<C-x>'] = { 'hide_documentation', 'show_documentation', 'fallback' },

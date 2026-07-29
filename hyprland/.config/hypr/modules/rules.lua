@@ -38,7 +38,19 @@ hl.window_rule({ match = { pin = true }, border_color = 'rgba(005A9CEE)' })
 hl.window_rule({ match = { workspace = 's[true]' }, border_color = 'rgba(5D9FBDEE)', border_size = 1 })
 
 hl.window_rule({
-    match = { title = '^(DevTools|Save File|.*wants to save|Open File|.*wants to open|Save screenshot)$' },
+    match = {
+        title = '^(' ..
+            'DevTools' ..
+            '|All Files' ..
+            '|Save As.*' ..
+            '|Save File' ..
+            '|Enter name of file to save to.*' ..
+            '|.*wants to save' ..
+            '|Open File.*' ..
+            '|.*wants to open' ..
+            '|Save screenshot' ..
+            ')$'
+    },
     float = true,
     center = true,
     size = { '(monitor_w*0.75)', '(monitor_h*0.75)' }
@@ -52,7 +64,13 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    match = { initial_class = '^(nm-.*|blueman-manager|hyprland-share-picker)$' },
+    match = {
+        initial_class = '^(' ..
+            'nm-.*' ..
+            '|blueman-manager' ..
+            '|hyprland-share-picker' ..
+            ')$'
+    },
     float = true,
     center = true,
     size = { '(monitor_w*0.5)', '(monitor_h*0.5)' }
@@ -62,4 +80,10 @@ hl.window_rule({
     match = { class = 'flameshot', title = '^(Configuration|Capture Launcher)$' }, -- flameshot launcher
     float = true,
     center = true,
+})
+
+hl.window_rule({
+    match = { title = '(test-.*|quickshell)' },
+    no_anim = true,
+    float = true,
 })
