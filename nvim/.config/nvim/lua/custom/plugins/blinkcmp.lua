@@ -64,14 +64,16 @@ return {
       },
 
       keymap = {
-        preset = 'default',
-        -- show with a list of providers
-        ['<C-e>'] = {},
-        ['<Tab>'] = { 'snippet_forward', 'accept', 'fallback' },
-        ['<C-x>'] = { 'hide_documentation', 'show_documentation', 'fallback' },
-        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
-        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-c>'] = { 'hide', 'fallback' },
+        preset        = 'default',
+        ['<C-e>']     = false,
+        ['<C-k>']     = false,
+        ['<CR>']      = { 'accept', 'fallback' },
+        ['<C-h>']     = { 'show_signature', 'hide_signature', 'fallback' },
+        ['<Tab>']     = { 'snippet_forward', 'accept', 'fallback' },
+        ['<C-x>']     = { 'hide_documentation', 'show_documentation', 'fallback' },
+        ['<C-d>']     = { 'scroll_documentation_down', 'fallback' },
+        ['<C-u>']     = { 'scroll_documentation_up', 'fallback' },
+        ['<C-c>']     = { 'hide', 'fallback' },
         ['<C-space>'] = { 'show', 'fallback' },
       },
       completion = {
