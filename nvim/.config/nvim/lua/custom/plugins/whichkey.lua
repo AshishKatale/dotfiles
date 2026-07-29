@@ -120,8 +120,13 @@ M.config = function(_, setup)
     { '<leader>bY', '<cmd>%y+<cr>',            desc = 'Copy buffer' },
     { '<leader>bb', utils.scratch_buffer,      desc = 'Scratch Pad' },
     {
+      '<leader>bo',
+      function() require('snacks').picker.recent() end,
+      desc = 'Old Files'
+    },
+    {
       '<leader>b ',
-      '<cmd>%s/\\s\\+$//e | echo "Trimmed trailing whitespaces!"<cr>',
+      '<cmd>%s/\\s\\+$//e | echo "Trimmed trailing whitespaces!" | noh<cr>',
       desc = 'Trim trailing spaces'
     },
     {
@@ -232,11 +237,6 @@ M.config = function(_, setup)
       '<leader>sp',
       function() require('snacks').picker.pickers() end,
       desc = 'Select Picker'
-    },
-    {
-      '<leader>so',
-      function() require('snacks').picker.recent() end,
-      desc = 'Old Files'
     },
     {
       '<leader>sh',
