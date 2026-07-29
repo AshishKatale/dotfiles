@@ -223,6 +223,7 @@ nnoremap <leader>qG :clast<CR>
 nnoremap <leader>tn :set number! relativenumber!<CR>
 nnoremap <leader>tN :set nonumber norelativenumber<CR>
 nnoremap <leader>tc :ColorColumnToggle<CR>
+nnoremap <leader>tC :set cursorline!<CR>
 nnoremap <leader>to :OpacityToggle<CR>
 nnoremap <leader>tw :set wrap!<CR>
 nnoremap <leader>tl :set list!<CR>

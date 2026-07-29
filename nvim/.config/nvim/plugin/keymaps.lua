@@ -32,6 +32,10 @@ map({ 'n', 't' }, '<C-Right>', '<cmd>vertical resize +2<cr>', { silent = true })
 map({ 'n' }, '<S-l>', '<cmd>lua vim.cmd.bn({count=vim.v.count})<cr>', { silent = true })
 map({ 'n' }, '<S-h>', '<cmd>lua vim.cmd.bp({count=vim.v.count})<cr>', { silent = true })
 
+-- incremental selection
+map({ 'v' }, '<S-l>', 'in', { remap = true })
+map({ 'v' }, '<S-h>', 'an', { remap = true })
+
 -- Press jk fast to enter normal mode
 map({ 'i' }, 'jk', '<ESC>', { silent = true })
 map({ 'v', 's' }, 'ii', '<ESC>', { silent = true })
