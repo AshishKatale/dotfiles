@@ -6,28 +6,29 @@ local M = {
   end,
   priority = 999,
   dependencies = {
-    'arkav/lualine-lsp-progress'
+    {
+      'linrongbin16/lsp-progress.nvim',
+      config = function()
+        require('lsp-progress').setup({
+          max_size = 80,
+          spin_update_time = 250,
+          event = 'LspProgressUpdate',
+          spinner = { '󰪞 ', '󰪟 ', '󰪠 ', '󰪠 ', '󰪢 ', '󰪣 ', '󰪤 ', '󰪥 ' },
+          format = function(client_messages)
+            return client_messages[#client_messages] or ''
+          end,
+        })
+        vim.api.nvim_create_autocmd('User', {
+          pattern = 'LspProgressUpdate',
+          callback = function() require('lualine').refresh() end,
+          group = vim.api.nvim_create_augroup('lualine_augroup', { clear = true }),
+        })
+      end
+    }
   },
 }
 
 M.opts = function()
-  local lsp_progress = {
-    'lsp_progress',
-    colors = {
-      percentage      = '#18A2FE',
-      title           = '#F28B25',
-      message         = '#18A2FE',
-      spinner         = '#FFD602',
-      lsp_client_name = '#F28B25',
-      use             = true,
-    },
-    display_components = {
-      { 'title', 'percentage' },
-      'lsp_client_name', 'spinner'
-    },
-    spinner_symbols = { '󰪞 ', '󰪟 ', '󰪠 ', '󰪠 ', '󰪢 ', '󰪣 ', '󰪤 ', '󰪥 ' },
-  }
-
   -- override theme colors
   local lualine_theme = vim.tbl_deep_extend('force', require 'lualine.themes.auto', {
     normal = {
@@ -86,14 +87,23 @@ M.opts = function()
       },
       lualine_c = {},
       lualine_x = {
-        lsp_progress,
+        {
+          function() return require('lsp-progress').progress() end,
+          color = { fg = '#F28B25' }
+        },
         {
           require('lazy.status').updates,
           cond = require('lazy.status').has_updates,
           color = { fg = '#F28B25' },
         },
       },
-      lualine_y = { 'encoding', 'filetype', 'progress' },
+      lualine_y = {
+        function()
+          local lsps = #vim.lsp.get_clients({ bufnr = 0 })
+          return lsps > 0 and ' ' .. lsps or ''
+        end,
+        'encoding', 'filetype', 'progress'
+      },
       lualine_z = { 'location' }
     },
     inactive_sections = {
