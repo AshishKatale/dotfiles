@@ -219,6 +219,11 @@ M.config = function(_, setup)
       desc = 'Find Manpage'
     },
     {
+      '<leader>so',
+      function() require('snacks').picker.recent() end,
+      desc = 'Old Files'
+    },
+    {
       '<leader>sr',
       function() require('snacks').picker.lsp_references() end,
       desc = 'LSP References'

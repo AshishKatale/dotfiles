@@ -14,6 +14,28 @@ local M = {
           spin_update_time = 250,
           event = 'LspProgressUpdate',
           spinner = { '󰪞 ', '󰪟 ', '󰪠 ', '󰪠 ', '󰪢 ', '󰪣 ', '󰪤 ', '󰪥 ' },
+          series_format = function(title, message, percentage, _done)
+            local builder = {}
+            local has_title = false
+            local has_message = false
+            if type(title) == 'string' and string.len(title) > 0 then
+              table.insert(builder, title)
+              has_title = true
+            end
+            if type(message) == 'string' and string.len(message) > 0 then
+              table.insert(builder, message)
+              has_message = true
+            end
+            if percentage and (has_title or has_message) then
+              table.insert(builder, string.format('{} %.0f%% ', percentage)) -- keep {} as placeholder
+            end
+            return table.concat(builder, ' ')
+          end,
+          client_format = function(client_name, spinner, series_messages)
+            if #series_messages > 0 then
+              return series_messages[1]:gsub('{}', '[' .. client_name .. ']') .. spinner -- replace {} with server name
+            end
+          end,
           format = function(client_messages)
             return client_messages[#client_messages] or ''
           end,
