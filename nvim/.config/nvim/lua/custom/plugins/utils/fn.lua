@@ -91,6 +91,10 @@ M.toggle_diagnostic = function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end
 
+M.toggle_document_color = function()
+  vim.lsp.document_color.enable(not vim.lsp.document_color.is_enabled())
+end
+
 M.toggle_color_column = function()
   vim.wo.colorcolumn = (vim.wo.colorcolumn == '81') and '' or '81'
 end

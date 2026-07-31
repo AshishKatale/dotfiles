@@ -39,8 +39,8 @@ local function configure_lsp_features(client, bufnr)
     vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
   end
 
-  if client.server_capabilities.colorProvider then
-    vim.lsp.document_color.enable(false, { bufnr = bufnr })
+  if client:supports_method('textDocument/documentColor') then
+    vim.lsp.document_color.enable(true, { bufnr = bufnr, client_id = client.name }, { style = 'virtual' })
   end
 
   if client and client.name == 'clangd' then
@@ -132,6 +132,16 @@ local function set_lsp_keymaps(bufnr)
         end
       end,
       desc = 'Focus diagnostic',
+      buffer = bufnr
+    },
+    {
+      'grc',
+      function()
+        if vim.lsp.document_color.is_enabled({ bufnr = bufnr }) then
+          vim.lsp.document_color.color_presentation()
+        end
+      end,
+      desc = 'Color presentation',
       buffer = bufnr
     },
   })
