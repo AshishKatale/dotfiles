@@ -9,8 +9,18 @@ return {
 
   opts_extend = { 'sources.default' },
   opts = function()
+    local disabled_filetypes = {
+      'dapui_scopes', 'dapui_stacks', 'dapui_watches',
+      'dapui_breakpoints', 'dapui_console', 'dap-repl',
+    }
+
     return {
       fuzzy = { implementation = 'prefer_rust_with_warning' },
+
+      -- disable blink for disabled_filetypes
+      enabled = function()
+        return not vim.list_contains(disabled_filetypes, vim.bo.filetype)
+      end,
 
       appearance = {
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'

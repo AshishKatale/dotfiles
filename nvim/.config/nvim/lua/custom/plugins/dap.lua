@@ -28,6 +28,35 @@ return {
         floating = {
           max_width = 100,
           border = 'rounded'
+        },
+        icons = {
+          collapsed = '',
+          current_frame = '',
+          expanded = ''
+        },
+        layouts = {
+          {
+            elements = {
+              { id = 'scopes',      size = 0.25 },
+              { id = 'breakpoints', size = 0.25 },
+              { id = 'stacks',      size = 0.25 },
+              { id = 'watches',     size = 0.25 }
+            },
+            position = 'left',
+            size = 0.32
+          },
+          {
+            elements = {
+              { id = 'repl',    size = 0.5 },
+              { id = 'console', size = 0.5 }
+            },
+            position = 'bottom',
+            size = 0.25
+          }
+        },
+        render = {
+          indent = 2,
+          max_value_lines = 64
         }
       })
 
