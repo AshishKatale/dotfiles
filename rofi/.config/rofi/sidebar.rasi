@@ -6,7 +6,7 @@ configuration {
 }
 
 * {
-  bg-col:       #11111B;
+  bg-col:       #11111E;
   bg-col-light: #313244;
   fg-col:       #cdd6f4;
   fg-col2:      #89b4fa;

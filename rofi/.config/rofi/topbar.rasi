@@ -1,12 +1,12 @@
 * {
-  bg-col:           #11111B;
+  bg-col:           #11111E;
   bg-col-light:     #313244;
   fg-col:           #cdd6f4;
   fg-col2:          #89b4fa;
   border-col:       #6c7086;
   border-color:     #6c7086;
   text-color:       #cdd6f4;
-  background-color: #11111B;
+  background-color: #11111E;
 
   font:             "JetBrainsMono Nerd Font Bold 9";
 }

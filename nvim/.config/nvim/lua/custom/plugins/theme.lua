@@ -71,8 +71,17 @@ M.config = function(_, opts)
   end
 
   if vim.g._usr_opacity then
+    vim.cmd('hi Normal guibg=NONE')
+  else
     vim.cmd([[
-      hi Normal guibg=NONE
+        hi! Normal guibg=#10111E
+        hi! NormalFloat guibg=#10111E
+        hi! TreesitterContext guibg=#181828
+        hi! TreesitterContextLineNumber guibg=#181828
+    ]])
+  end
+
+  vim.cmd([[
       hi LineNr guibg=NONE
       hi CursorLineNr guibg=NONE
       hi SignColumn guibg=NONE
@@ -92,8 +101,7 @@ M.config = function(_, opts)
       hi! link qfLineNr LspInlayHint
       hi! link LazyDimmed LspInlayHint
       hi! link LazyProp LspInlayHint
-    ]])
-  end
+  ]])
 end
 
 return M

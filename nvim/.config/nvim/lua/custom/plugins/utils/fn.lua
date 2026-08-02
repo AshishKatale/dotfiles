@@ -62,8 +62,8 @@ end
 M.toggle_opacity = function()
   if vim.g._usr_opacity then
     vim.cmd([[
-        hi! Normal guibg=#11111B
-        hi! NormalFloat guibg=#11111B
+        hi! Normal guibg=#10111E
+        hi! NormalFloat guibg=#10111E
         hi! TreesitterContext guibg=#181828
         hi! TreesitterContextLineNumber guibg=#181828
       ]])
