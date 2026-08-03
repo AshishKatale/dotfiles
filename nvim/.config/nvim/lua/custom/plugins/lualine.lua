@@ -86,7 +86,6 @@ M.opts = function()
     inactive = {
       a = { bg = '#373737', fg = '#18A1FD' },
       b = { bg = '#373737', fg = '#18A1FD' },
-      z = { bg = '#0A7ACA', fg = '#11111E', gui = 'bold' },
     },
   })
 
