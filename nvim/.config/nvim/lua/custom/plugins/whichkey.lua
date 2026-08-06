@@ -304,11 +304,6 @@ M.config = function(_, setup)
     { '<localleader>',   group = 'Local Leader' },
     { '<localleader>\\', '<cmd>tabnew term://$SHELL<cr>', desc = 'Terminal tab' },
     {
-      '<localleader>-',
-      function() utils.toggle_term('float') end,
-      desc = 'Terminal bottom'
-    },
-    {
       '<localleader>_',
       function() utils.toggle_term('bottom') end,
       desc = 'Terminal bottom'
@@ -316,27 +311,28 @@ M.config = function(_, setup)
     {
       '<localleader>|',
       function() utils.toggle_term('right') end,
-      desc = 'Terminal bottom'
+      desc = 'Terminal right'
     },
 
     { '<C-k>', group = 'Control-K' },
     {
       mode = { 'n' },
       { '<C-k>l', utils.set_filetype, desc = 'Set Filetype' },
+      { '<C-k>t', vim.cmd.tabclose,   desc = 'Close tab' },
       {
         '<C-k><C-x>',
         function() require('snacks').bufdelete.all() end,
-        desc = 'Delete All Buffers'
+        desc = 'Delete all buffers'
       },
       {
         '<C-k>X',
         function() require('snacks').bufdelete.other() end,
-        desc = 'Delete All Other Buffers'
+        desc = 'Delete other buffers'
       },
       {
         '<C-k>x',
         function() require('snacks').bufdelete.delete() end,
-        desc = 'Delete Buffer'
+        desc = 'Delete buffer'
       },
     }
   })

@@ -98,6 +98,12 @@ return {
     },
 
     zen = {
+      win = {
+        style = 'zen',
+        wo = {
+          colorcolumn = ''
+        }
+      },
       toggles = {
         dim = false,
         git_signs = false,
