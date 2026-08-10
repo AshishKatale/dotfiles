@@ -39,6 +39,7 @@ M.toggle_term = function(position, cwd, cmd, title)
       auto_close = true,
       cwd = cwd,
       win = {
+        zindex = 1000,
         title = title,
         title_pos = 'center',
         position = 'float',
