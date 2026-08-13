@@ -115,6 +115,9 @@ prompt() {
     local RP=""
     local P=""
 
+    print -Pn '\e]133;A\e\\' # emmit osc 133 signal to mark start of the prompt
+                             # nvim uses this to locate prompt line in :term
+
     if [ -z $EXIT_CODE ]; then
         local EXIT_COLOR="46" # green
         local EXIT_ICON=" "
@@ -165,8 +168,6 @@ zle -N zle-line-finish
 zle -N zle-keymap-select
 
 precmd() {
-    print -Pn '\e]133;A\e\\' # emmit osc 133 signal to mark start of the prompt
-                             # nvim uses this to locate prompt line in :term
     prompt
 }
 

@@ -52,7 +52,7 @@ return {
         multiline_context = 10,   -- extra lines that will be re-evaluated when changing a line
         before = '',              -- "fg" or "bg" or empty
         keyword = 'wide',         -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty.
-        after = 'fg',             -- "fg" or "bg" or empty
+        after = '',               -- "fg" or "bg" or empty
         pattern = {               -- pattern or table of patterns, used for highlighting (vim regex)
           [[.*\s(KEYWORDS):\s.*]],
         },

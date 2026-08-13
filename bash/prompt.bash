@@ -118,12 +118,13 @@ __powerline() {
     }
 
     ps1() {
+        local SAVE_EXIT_CODE="$?"
         printf '\e]133;A\e\\'; # emmit osc 133 signal to mark start of the prompt
                                # nvim uses this to locate prompt line in :term
 
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly.
-        if [ "$?" -eq "0" ]; then
+        if [ "$SAVE_EXIT_CODE" -eq "0" ]; then
             local BG_EXIT="$BG_GREEN"
             local FG_EXIT="$FG_GREEN"
         else
