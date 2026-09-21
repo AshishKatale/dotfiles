@@ -20,7 +20,7 @@ map({ 'i', 'n', 'v' }, '<Down>', '<Nop>', { silent = true })
 map({ 'i', 'n', 'v' }, '<Left>', '<Nop>', { silent = true })
 map({ 'i', 'n', 'v' }, '<Right>', '<Nop>', { silent = true })
 
-map({ 'n' }, 'J', 'mzJ`z', { silent = true })
+map({ 'n' }, 'J', 'mzJ`z<cmd>delmark z<cr>', { silent = true })
 
 -- Resize with arrow
 map({ 'n', 't' }, '<c-up>', '<cmd>resize +2<cr>', { silent = true })

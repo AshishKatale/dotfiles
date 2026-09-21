@@ -334,6 +334,7 @@ M.config = function(_, setup)
         function() require('snacks').bufdelete.delete() end,
         desc = 'Delete buffer'
       },
+      { '<C-k><C-r>', '<cmd>restart<cr>', desc = 'Restart' },
     }
   })
 end
