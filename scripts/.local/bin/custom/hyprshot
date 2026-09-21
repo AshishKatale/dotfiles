@@ -317,7 +317,7 @@ function args() {
   fi
 }
 
-if [ -z $1 ]; then
+if [ -z $1 ] || pgrep slurp; then
   Help
   exit
 fi
