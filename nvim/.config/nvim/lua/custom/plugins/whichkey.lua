@@ -285,9 +285,18 @@ M.config = function(_, setup)
     { '<leader>to', utils.toggle_opacity,             desc = 'Background opacity' },
     { '<leader>ti', utils.toggle_indent_guides,       desc = 'Indent guides' },
     { '<leader>tl', utils.toggle_list_chars,          desc = 'List chars' },
-    { '<leader>tn', utils.toggle_number,              desc = 'Line numbers' },
     { '<leader>tF', utils.toggle_format_on_save,      desc = 'Format on Save' },
     { '<leader>t|', utils.toggle_color_column,        desc = 'Color column' },
+    {
+      '<leader>tn',
+      function() utils.toggle_number(false) end,
+      desc = 'Line numbers'
+    },
+    {
+      '<leader>tN',
+      function() utils.toggle_number(true) end,
+      desc = 'Relative line numbers'
+    },
     {
       '<leader>tt',
       function() require('treesitter-context').toggle() end,

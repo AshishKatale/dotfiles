@@ -100,8 +100,10 @@ M.toggle_color_column = function()
   vim.wo.colorcolumn = (vim.wo.colorcolumn == '81') and '' or '81'
 end
 
-M.toggle_number = function()
-  if vim.wo.number then
+M.toggle_number = function(relative)
+  if relative then
+    vim.wo.number, vim.wo.relativenumber = true, not vim.wo.relativenumber
+  elseif vim.wo.number then
     vim.wo.number, vim.wo.relativenumber = false, false
   else
     vim.wo.number, vim.wo.relativenumber = true, true
